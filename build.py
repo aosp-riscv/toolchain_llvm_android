@@ -361,6 +361,34 @@ def build_libcxx(stage2_install, clang_version):
                 shutil.copy2(os.path.join(libcxx_libs, f), libcxx_install)
 
 
+def build_libcxx_host_i686(stage2_install, clang_version):
+    libcxx_env = dict(ORIG_ENV)
+
+    libcxx_defines = base_cmake_defines()
+    libcxx_defines['CMAKE_C_COMPILER'] = os.path.join(stage2_install, 'bin',
+                                                   'clang')
+    libcxx_defines['CMAKE_CXX_COMPILER'] = os.path.join(stage2_install, 'bin',
+                                                     'clang++')
+
+    # Install 32-bit libc++ into ${stage2-install}/lib
+    libcxx_defines['CMAKE_INSTALL_PREFIX'] = stage2_install
+    libcxx_defines['LIBCXX_LIBDIR_SUFFIX'] = ''
+
+    cflags = ['--target=i686-linux-gnu', "-march=i686"]
+    libcxx_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
+    libcxx_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
+
+    libcxx_cmake_path = utils.llvm_path('projects', 'libcxx')
+    libcxx_path = utils.out_path('lib', 'libcxx-i686-host')
+
+    rm_cmake_cache(libcxx_path)
+    invoke_cmake(
+        out_path=libcxx_path,
+        defines=libcxx_defines,
+        env=libcxx_env,
+        cmake_path=libcxx_cmake_path)
+
+
 def build_crts(stage2_install, clang_version):
     llvm_config = os.path.join(stage2_install, 'bin', 'llvm-config')
     # Now build compiler-rt for each arch
@@ -800,6 +828,7 @@ def build_runtimes(stage2_install):
     # Bug: http://b/64037266. `strtod_l` is missing in NDK r15. This will break
     # libcxx build.
     # build_libcxx(stage2_install, version)
+    build_libcxx_host_i686(stage2_install, version)
     build_asan_test(stage2_install)
 
 
