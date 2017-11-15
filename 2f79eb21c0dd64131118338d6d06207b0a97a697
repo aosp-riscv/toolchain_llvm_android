@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6396d433_a58856fe",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-11-15T09:00:04Z",
+      "side": 1,
+      "message": "Sounds good. I can refactor this later to make it more clear.",
+      "parentUuid": "fb335b25_44a71e74",
+      "revId": "2f79eb21c0dd64131118338d6d06207b0a97a697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22812f6b_e25780bc",
         "filename": "create_map_file.sh",
         "patchSetId": 1
