@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55756c62_db98a02e",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-11-15T02:26:48Z",
+      "side": 1,
+      "message": "You can use clang_resource_dir(version, arch) and move this inside your loop. Note that you still have to prepend the stage_2_install, but it is a bit more convenient.",
+      "revId": "2f79eb21c0dd64131118338d6d06207b0a97a697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22812f6b_e25780bc",
+        "filename": "create_map_file.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-11-15T02:26:48Z",
+      "side": 1,
+      "message": "Is it possible to switch this to use python directly? You can still call nm, and probably replace the awk with something nicer too. This would also let us just import the script and run it as a function from build.py to generate the map file.",
+      "revId": "2f79eb21c0dd64131118338d6d06207b0a97a697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
