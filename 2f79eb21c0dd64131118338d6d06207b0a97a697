@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fb335b25_44a71e74",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2017-11-15T03:40:04Z",
+      "side": 1,
+      "message": "clang_resource_dir returns lib64/clang/\u003cver\u003e/lib/linux/\u003carch\u003e.\n\nhowever, the asan libs are under lib64/clang/\u003cver\u003e/lib/linux. \n\nSo I gave \u0027\u0027 to arch and keep the statement outside of the loop.",
+      "parentUuid": "55756c62_db98a02e",
+      "revId": "2f79eb21c0dd64131118338d6d06207b0a97a697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "22812f6b_e25780bc",
         "filename": "create_map_file.sh",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "2f79eb21c0dd64131118338d6d06207b0a97a697",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9672054a_24df8e72",
+        "filename": "create_map_file.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2017-11-15T03:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22812f6b_e25780bc",
+      "revId": "2f79eb21c0dd64131118338d6d06207b0a97a697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
