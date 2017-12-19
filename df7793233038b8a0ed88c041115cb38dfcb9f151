@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60c44a42_c2749b93",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-19T06:00:31Z",
+      "side": 1,
+      "message": "Can you mention where the warning is triggered?",
+      "revId": "df7793233038b8a0ed88c041115cb38dfcb9f151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e1f01a_3bc8f23c",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-19T06:00:31Z",
+      "side": 1,
+      "message": "This comment is now stale.",
+      "revId": "df7793233038b8a0ed88c041115cb38dfcb9f151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "000181d2_d55bac14",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-19T06:00:31Z",
+      "side": 1,
+      "message": "We should attempt to refactor the whole i686-v-i386 difference.  The arch_from_triple() call below has the exact opposite transformation (for the destination instead of the source).",
+      "revId": "df7793233038b8a0ed88c041115cb38dfcb9f151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db5a27b1_f635a21e",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-19T06:00:31Z",
+      "side": 1,
+      "message": "Indent 4 spaces.",
+      "revId": "df7793233038b8a0ed88c041115cb38dfcb9f151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
