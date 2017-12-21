@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "983cebab_1ac74708",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-21T18:47:24Z",
+      "side": 1,
+      "message": "Bug: 68397894",
+      "revId": "18bd296a3a9078db2f80797a12eb0220e329020a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
