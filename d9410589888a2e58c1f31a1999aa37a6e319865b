@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94c37199_202d3456",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-23T00:06:28Z",
+      "side": 1,
+      "message": "We can use -march\u003di686.  This is the way to get i686 codegen (and that the triple is ineffective), as per https://reviews.llvm.org/D26764.",
+      "range": {
+        "startLine": 553,
+        "startChar": 50,
+        "endLine": 553,
+        "endChar": 51
+      },
+      "revId": "d9410589888a2e58c1f31a1999aa37a6e319865b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b99f01dd_66868475",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-23T00:06:28Z",
+      "side": 1,
+      "message": "I think we should wait for srhines@ to have a look, in case he has any objections.  This is not regressive - the i686 asan shared runtime in the current prebuilts also links against libstdc++.so.\n\nThis is all complicated by the single-target-only behavior of asan.  The x86_64 libasan quietly links against the just-built libc++.so, which is still incorrect when used by a host module on the platform.\n\nAFAICT, the shared objects (or host sanitizer runtimes) are not exported to Soong, but rather get included implicitly when host sanitization is on.  This is something we should tighten up as well - get all dependences via soong and include just the libraries that we need.",
+      "revId": "d9410589888a2e58c1f31a1999aa37a6e319865b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
