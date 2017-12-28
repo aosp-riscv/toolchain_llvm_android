@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa3e17c9_5b0bf807",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-28T01:38:34Z",
+      "side": 1,
+      "message": "This\u0027d pass a CMake variable.  Instead, we want to add \u0027-DDISPATCH_NOESCAPE\u0027 to CMAKE_C_FLAGS.",
+      "range": {
+        "startLine": 721,
+        "startChar": 30,
+        "endLine": 721,
+        "endChar": 47
+      },
+      "revId": "2668756b429dc842a9fa2adcf25b0a0a48b059cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
