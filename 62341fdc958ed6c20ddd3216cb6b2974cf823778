@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "807e919b_bbdcf760",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2017-12-28T01:52:41Z",
+      "side": 1,
+      "message": "Overwriting seems fine because these flags aren\u0027t setting anywhere else in stage1 and stage2 builds.",
+      "revId": "62341fdc958ed6c20ddd3216cb6b2974cf823778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
