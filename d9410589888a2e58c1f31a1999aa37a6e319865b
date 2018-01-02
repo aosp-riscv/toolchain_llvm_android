@@ -39,6 +39,24 @@
       "revId": "d9410589888a2e58c1f31a1999aa37a6e319865b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3f2658b_57a91cc8",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2018-01-02T23:56:50Z",
+      "side": 1,
+      "message": "Why is linking against just built libc++ incorrect? Is it because the rest of the platform is linked against libstdc++?\n\nThe implicit dependencies are IMHO a good thing. Libclang_rt.* are part of the toolchain. Clang driver knows how to link them correctly. Currently we duplicate this knowledge in soong for target builds. Ideally, just -fsanitize\u003daddress in the link flags should do the right thing (AFAIK, it does already).",
+      "parentUuid": "b99f01dd_66868475",
+      "revId": "d9410589888a2e58c1f31a1999aa37a6e319865b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
