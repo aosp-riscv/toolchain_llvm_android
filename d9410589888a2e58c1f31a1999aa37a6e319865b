@@ -57,6 +57,24 @@
       "revId": "d9410589888a2e58c1f31a1999aa37a6e319865b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "975dacec_454f9dd3",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-01-03T00:05:46Z",
+      "side": 1,
+      "message": "Platform build uses libc++ from external/libcxx.  This can cause ABI differences between the libc++ at runtime to be different than the one used during build.  We don\u0027t have a clear way of handling this without explicitly updating the platform libcxx every time the compiler get updated.\n\nI mentioned cleaning up implicit dependencies for the sake of consistency (one way or the other).",
+      "parentUuid": "c3f2658b_57a91cc8",
+      "revId": "d9410589888a2e58c1f31a1999aa37a6e319865b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
