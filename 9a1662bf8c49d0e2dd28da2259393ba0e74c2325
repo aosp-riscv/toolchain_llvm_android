@@ -22,6 +22,30 @@
       "revId": "9a1662bf8c49d0e2dd28da2259393ba0e74c2325",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66244902_416b0f04",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-01-22T23:14:04Z",
+      "side": 1,
+      "message": "No, the script is actually robust in this case. Yi manually downloaded the prebuilts and ran manual commands (and forgot to unzip the right darwin binaries). That\u0027s how we ended up with the wrong manifest there. Everything is ok. :)",
+      "parentUuid": "3f9d577c_258565c2",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 42
+      },
+      "revId": "9a1662bf8c49d0e2dd28da2259393ba0e74c2325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
