@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f9d577c_258565c2",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-01-22T23:11:09Z",
+      "side": 1,
+      "message": "Yi\u0027s original CL (http://aosp/594857) did not have an empty commit.  Rather, clang-4556391 is just the manifest.  For some reason, extract_package() didn\u0027t write anything, but still returned without error.  So the shutil.copy() below copied the manifest file to the file clang-4556391.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 42
+      },
+      "revId": "9a1662bf8c49d0e2dd28da2259393ba0e74c2325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
