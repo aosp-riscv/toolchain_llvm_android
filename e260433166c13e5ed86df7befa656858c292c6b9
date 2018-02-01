@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9be54094_bae9a25d",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-02-01T17:59:13Z",
+      "side": 1,
+      "message": "Actually it is necessary as there is no parentheses around the entire expression. Without the \u0027\\\u0027, this was a syntax error. I figured it looked cleaner than wrapping parentheses around the whole expression.",
+      "parentUuid": "c9932d17_2bf13876",
+      "range": {
+        "startLine": 588,
+        "startChar": 78,
+        "endLine": 588,
+        "endChar": 79
+      },
+      "revId": "e260433166c13e5ed86df7befa656858c292c6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6297475c_255c1d49",
         "filename": "build.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "e260433166c13e5ed86df7befa656858c292c6b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9ad0601_0961538b",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-02-01T17:59:13Z",
+      "side": 1,
+      "message": "Actually this is a carryover from the original CL. The way that CLANG_VENDOR works is that it just gets jammed into an existing format string. Without the space, this string would bump up directly against the next part of the version information. The truth is that not many people set CLANG_VENDOR, or this might be more clever about automatically inserting the leading/trailing whitespace in the constructed string.",
+      "parentUuid": "6297475c_255c1d49",
+      "range": {
+        "startLine": 589,
+        "startChar": 41,
+        "endLine": 589,
+        "endChar": 42
+      },
+      "revId": "e260433166c13e5ed86df7befa656858c292c6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
