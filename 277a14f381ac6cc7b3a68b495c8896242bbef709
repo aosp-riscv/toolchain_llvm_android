@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "44c8d0f2_8c780a24",
+        "filename": "build.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-02-06T23:57:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5c876ef_44b85068",
+      "range": {
+        "startLine": 124,
+        "startChar": 18,
+        "endLine": 124,
+        "endChar": 25
+      },
+      "revId": "277a14f381ac6cc7b3a68b495c8896242bbef709",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e389a839_b13242e5",
         "filename": "build.py",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-06T21:15:40Z",
       "side": 1,
       "message": "Does version.short_version() work here?  Using that can avoid changes during every update.",
+      "range": {
+        "startLine": 957,
+        "startChar": 15,
+        "endLine": 957,
+        "endChar": 18
+      },
+      "revId": "277a14f381ac6cc7b3a68b495c8896242bbef709",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b257fdc6_c14bcdfd",
+        "filename": "build.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-02-06T23:57:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e389a839_b13242e5",
       "range": {
         "startLine": 957,
         "startChar": 15,
