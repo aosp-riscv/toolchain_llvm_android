@@ -69,6 +69,24 @@
       "revId": "28e4d399506269e8346518dfc29769666053bbee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbd5f8a9_83b6cadc",
+        "filename": "build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-02-13T19:51:07Z",
+      "side": 1,
+      "message": "I think Steve is suggesting that we take this change out to a separate CL and submit it before merging the updates to the source.",
+      "parentUuid": "46a2544d_71f7c8ce",
+      "revId": "28e4d399506269e8346518dfc29769666053bbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
