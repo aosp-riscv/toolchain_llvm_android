@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5809728b_2b37f3af",
+        "filename": "build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-02-13T00:39:21Z",
+      "side": 1,
+      "message": "Could we separate this part of the CL out from the actual update?",
+      "revId": "28e4d399506269e8346518dfc29769666053bbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a240d7d5_3c013510",
+        "filename": "build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-02-13T00:39:21Z",
+      "side": 1,
+      "message": "This also seems like it could/should be separated out from the update.",
+      "revId": "28e4d399506269e8346518dfc29769666053bbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
