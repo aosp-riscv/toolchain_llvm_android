@@ -87,6 +87,24 @@
       "revId": "28e4d399506269e8346518dfc29769666053bbee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97155f13_36182791",
+        "filename": "build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-02-13T20:10:01Z",
+      "side": 1,
+      "message": "Okay, I have another CL for this change only.\nI will rebase this one after that change is merged.",
+      "parentUuid": "dbd5f8a9_83b6cadc",
+      "revId": "28e4d399506269e8346518dfc29769666053bbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
