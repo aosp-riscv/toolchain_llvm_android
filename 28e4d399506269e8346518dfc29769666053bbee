@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d01d58c1_ff3624c4",
+        "filename": "build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-02-13T19:48:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5809728b_2b37f3af",
+      "revId": "28e4d399506269e8346518dfc29769666053bbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a240d7d5_3c013510",
         "filename": "build.py",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2018-02-13T00:39:21Z",
       "side": 1,
       "message": "This also seems like it could/should be separated out from the update.",
+      "revId": "28e4d399506269e8346518dfc29769666053bbee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46a2544d_71f7c8ce",
+        "filename": "build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-02-13T19:48:34Z",
+      "side": 1,
+      "message": "This was suggested by Pirama earlier.",
+      "parentUuid": "a240d7d5_3c013510",
       "revId": "28e4d399506269e8346518dfc29769666053bbee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
