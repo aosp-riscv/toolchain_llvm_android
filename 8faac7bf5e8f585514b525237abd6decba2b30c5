@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c669d46b_4d03c31d",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-02-22T18:45:16Z",
+      "side": 1,
+      "message": "I see the links in out/stage2-install/bin.  Does it help to just add these to necessary_bin_files (line 959)?",
+      "range": {
+        "startLine": 856,
+        "startChar": 17,
+        "endLine": 856,
+        "endChar": 49
+      },
+      "revId": "8faac7bf5e8f585514b525237abd6decba2b30c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
