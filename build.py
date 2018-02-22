@@ -852,6 +852,12 @@ def install_wrappers(llvm_install_path):
     clangxx_path = os.path.join(bin_path, 'clang++')
     clang_tidy_path = os.path.join(bin_path, 'clang-tidy')
 
+    # Create links to lld.
+    for name in ['ld.lld', 'ld64.lld', 'lld-link']:
+      lld_path = os.path.join(bin_path, name)
+      utils.remove(lld_path)
+      os.symlink('lld', lld_path)
+
     # Rename clang and clang++ to clang.real and clang++.real.
     # clang and clang-tidy may already be moved by this script if we use a
     # prebuilt clang. So we only move them if clang.real and clang-tidy.real
