@@ -682,8 +682,40 @@ def build_llvm_for_windows(targets,
         extra_defines=windows_extra_defines)
 
 
+def host_gcc_toolchain_flags():
+    def formatFlags(flags, **values):
+        flagsStr = ' '.join(flags)
+        flagsStr = flagsStr.format(**values)
+        return flagsStr.split(' ')
+
+    if utils.host_is_darwin():
+        raise Exception
+    else:
+        gccRoot = utils.android_path('prebuilts/gcc', utils.build_os_type(),
+                                     'host/x86_64-linux-glibc2.15-4.8')
+        gccTriple = 'x86_64-linux'
+        gccVersion = '4.8'
+
+        cflags = ['--gcc-toolchain={gccRoot}',
+                  '--sysroot={gccRoot}/sysroot',
+                  '-B{gccRoot}/{gccTriple}/bin',
+                  ]
+        ldflags = ['-B{gccRoot}/lib/gcc/{gccTriple}/{gccVersion}',
+                   '-L{gccRoot}/lib/gcc/{gccTriple}/{gccVersion}',
+                   '-L{gccRoot}/{gccTriple}/lib64',
+                   ]
+
+        cflags = formatFlags(cflags, gccRoot=gccRoot, gccTriple=gccTriple,
+                             gccVersion=gccVersion)
+        ldflags = formatFlags(ldflags, gccRoot=gccRoot, gccTriple=gccTriple,
+                             gccVersion=gccVersion)
+        return cflags, ldflags
+
+
 def build_stage1(stage1_install, build_name, build_llvm_tools=False):
     # Build/install the stage 1 toolchain
+    cflags, ldflags = host_gcc_toolchain_flags()
+
     stage1_path = utils.out_path('stage1')
     stage1_targets = 'X86'
 
@@ -708,10 +740,8 @@ def build_stage1(stage1_install, build_name, build_llvm_tools=False):
 
     # ... and point CMake to the libc++.so from the prebuilts.  Install an rpath
     # to prevent linking with the newly-built libc++.so
-    ldflags = ['-Wl,-rpath,' + clang_prebuilt_lib_dir()]
-    stage1_extra_defines['CMAKE_EXE_LINKER_FLAGS'] = ' '.join(ldflags)
-    stage1_extra_defines['CMAKE_SHARED_LINKER_FLAGS'] = ' '.join(ldflags)
-    stage1_extra_defines['CMAKE_MODULE_LINKER_FLAGS'] = ' '.join(ldflags)
+    ldflags.append('-L' + clang_prebuilt_lib_dir())
+    ldflags.append('-Wl,-rpath,' + clang_prebuilt_lib_dir())
 
     # Make libc++.so a symlink to libc++.so.x instead of a linker script that
     # also adds -lc++abi.  Statically link libc++abi to libc++ so it is not
@@ -732,6 +762,14 @@ def build_stage1(stage1_install, build_name, build_llvm_tools=False):
     # anyway.
     stage1_extra_defines['COMPILER_RT_BUILD_LIBFUZZER'] = 'OFF'
 
+    # Set the compiler and linker flags
+    stage1_extra_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
+    stage1_extra_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
+
+    stage1_extra_defines['CMAKE_EXE_LINKER_FLAGS'] = ' '.join(ldflags)
+    stage1_extra_defines['CMAKE_SHARED_LINKER_FLAGS'] = ' '.join(ldflags)
+    stage1_extra_defines['CMAKE_MODULE_LINKER_FLAGS'] = ' '.join(ldflags)
+
     build_llvm(
         targets=stage1_targets,
         build_dir=stage1_path,
@@ -749,6 +787,8 @@ def build_stage2(stage1_install,
                  debug_build=False,
                  build_instrumented=False,
                  profdata_file=None):
+    cflags, ldflags = host_gcc_toolchain_flags()
+
     # TODO(srhines): Build LTO plugin (Chromium folks say ~10% perf speedup)
 
     # Build/install the stage2 toolchain
@@ -762,6 +802,7 @@ def build_stage2(stage1_install,
     stage2_extra_defines['LLVM_BUILD_RUNTIME'] = 'ON'
     stage2_extra_defines['LLVM_ENABLE_LIBCXX'] = 'ON'
     stage2_extra_defines['SANITIZER_ALLOW_CXXABI'] = 'OFF'
+    stage2_extra_defines['LLVM_TOOL_OPENMP_BUILD'] = 'OFF'
 
     # Don't build libfuzzer, since it's broken on Darwin and we don't need it
     # anyway.
@@ -817,8 +858,17 @@ def build_stage2(stage1_install,
     # the newly-built libc++ may override this because of the rpath pointing to
     # $ORIGIN/../lib64.  That'd be fine because both libraries are built from
     # the same sources.
+    ldflags.append('-L' + os.path.join(stage1_install, 'lib64'))
     stage2_extra_env = dict()
     stage2_extra_env['LD_LIBRARY_PATH'] = os.path.join(stage1_install, 'lib64')
+
+    # Set the compiler and linker flags
+    stage2_extra_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
+    stage2_extra_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
+
+    stage2_extra_defines['CMAKE_EXE_LINKER_FLAGS'] = ' '.join(ldflags)
+    stage2_extra_defines['CMAKE_SHARED_LINKER_FLAGS'] = ' '.join(ldflags)
+    stage2_extra_defines['CMAKE_MODULE_LINKER_FLAGS'] = ' '.join(ldflags)
 
     build_llvm(
         targets=stage2_targets,
