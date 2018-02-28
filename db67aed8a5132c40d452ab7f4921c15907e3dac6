@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15b9dcd2_1cb3e155",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-02-28T09:59:34Z",
+      "side": 1,
+      "message": "Android Studio supports only 10.10 as the minimum, so I think 10.9 is safe enough. I am not sure why the platform still uses 10.8.",
+      "revId": "db67aed8a5132c40d452ab7f4921c15907e3dac6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
