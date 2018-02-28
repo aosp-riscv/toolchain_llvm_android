@@ -46,6 +46,14 @@ def check_call(cmd, *args, **kwargs):
     subprocess.check_call(cmd, *args, **kwargs)
 
 
+def check_output(cmd, *args, **kwargs):
+    """subprocess.check_output with logging."""
+    logger().info('check_output:%s %s',
+                  datetime.datetime.now().strftime("%H:%M:%S"),
+                  subprocess.list2cmdline(cmd))
+    return subprocess.check_output(cmd, *args, **kwargs)
+
+
 def install_file(src, dst):
     """Proxy for shutil.copy2 with logging and dry-run support."""
     import shutil
@@ -689,7 +697,24 @@ def host_gcc_toolchain_flags():
         return flagsStr.split(' ')
 
     if utils.host_is_darwin():
-        raise Exception
+        xcrun_command = ['xcrun', '--show-sdk-path']
+        macSdkRoot = (check_output(xcrun_command)).strip()
+        macMinVersion = '10.9'
+
+        cflags = ['-isysroot={macSdkRoot}',
+                  '-mmacosx-version-min={macMinVersion}',
+                  '-DMACOSX_DEPLOYMENT_TARGET={macMinVersion}',
+                  ]
+        ldflags = ['-isysroot={macSdkRoot}',
+                   '-Wl,-syslibroot,{macSdkRoot}',
+                   '-mmacosx-version-min={macMinVersion}',
+                   ]
+
+        cflags = formatFlags(cflags, macSdkRoot=macSdkRoot,
+                             macMinVersion=macMinVersion)
+        ldflags = formatFlags(ldflags, macSdkRoot=macSdkRoot,
+                              macMinVersion=macMinVersion)
+        return cflags, ldflags
     else:
         gccRoot = utils.android_path('prebuilts/gcc', utils.build_os_type(),
                                      'host/x86_64-linux-glibc2.15-4.8')
@@ -708,7 +733,7 @@ def host_gcc_toolchain_flags():
         cflags = formatFlags(cflags, gccRoot=gccRoot, gccTriple=gccTriple,
                              gccVersion=gccVersion)
         ldflags = formatFlags(ldflags, gccRoot=gccRoot, gccTriple=gccTriple,
-                             gccVersion=gccVersion)
+                              gccVersion=gccVersion)
         return cflags, ldflags
 
 
