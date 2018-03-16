@@ -129,7 +129,7 @@ def support_headers():
 
 # This is the baseline stable version of Clang to start our stage-1 build.
 def clang_prebuilt_version():
-    return 'clang-4393122'
+    return 'clang-4639204'
 
 
 def clang_prebuilt_base_dir():
@@ -206,6 +206,8 @@ def base_cmake_defines():
 
     defines['CMAKE_BUILD_TYPE'] = 'Release'
     defines['LLVM_ENABLE_ASSERTIONS'] = 'OFF'
+    # https://github.com/android-ndk/ndk/issues/574 - Don't depend on libtinfo.
+    defines['LLVM_ENABLE_TERMINFO'] = 'OFF'
     defines['LLVM_ENABLE_THREADS'] = 'OFF'
     defines['LLVM_LIBDIR_SUFFIX'] = '64'
     defines['LLVM_VERSION_PATCH'] = android_version.patch_level
