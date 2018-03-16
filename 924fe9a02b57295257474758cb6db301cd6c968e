@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74459653_539abaed",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-03-16T01:12:29Z",
+      "side": 1,
+      "message": "Is this intended?",
+      "revId": "924fe9a02b57295257474758cb6db301cd6c968e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
