@@ -1,0 +1,8 @@
+Verified+1: Chih-hung Hsieh <chh@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Submitted-by: Chih-hung Hsieh <chh@google.com>
+Submitted-at: Mon, 19 Mar 2018 20:44:57 +0000
+Reviewed-on: https://android-review.googlesource.com/585866
+Project: toolchain/llvm_android
+Branch: refs/heads/master
