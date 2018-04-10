@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c51a62d_83e28dbe",
+        "filename": "test_compiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-04-10T20:58:40Z",
+      "side": 1,
+      "message": "I believe these can now be removed.  I\u0027ll do so in a follow-up CL (after submitting the current merge).",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 47
+      },
+      "revId": "a731da74e2e22bdea06fc489ed2e9b9e522ad20e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
