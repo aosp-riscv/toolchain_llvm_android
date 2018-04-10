@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d9ce9f1_44c4b109",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-04-10T23:19:58Z",
+      "side": 1,
+      "message": "There are no other warnings besides this in AOSP (there is no clang-errors.log in the latest presubmit run).  There might be new ones in internal branches.",
+      "range": {
+        "startLine": 12,
+        "startChar": 23,
+        "endLine": 12,
+        "endChar": 45
+      },
+      "revId": "edfccf81bae24b0f8ddabceb18b314e4125eceed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
