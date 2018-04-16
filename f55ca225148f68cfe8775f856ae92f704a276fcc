@@ -1,0 +1,9 @@
+Verified+1: Pavel Labath <labath@google.com>
+Code-Review+2: Pavel Labath <labath@google.com>
+Autosubmit+1: Pavel Labath <labath@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Mon, 16 Apr 2018 11:44:37 +0000
+Reviewed-on: https://android-review.googlesource.com/662481
+Project: toolchain/llvm_android
+Branch: refs/heads/master
