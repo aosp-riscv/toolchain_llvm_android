@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Build-Cop-Override+1: Filip Pavlis <pavlis@google.com>
+Submitted-by: Filip Pavlis <pavlis@google.com>
+Submitted-at: Thu, 26 Apr 2018 11:30:32 +0000
+Reviewed-on: https://android-review.googlesource.com/672891
+Project: toolchain/llvm_android
+Branch: refs/heads/master
