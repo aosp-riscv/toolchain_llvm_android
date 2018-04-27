@@ -1,0 +1,8 @@
+Code-Review+2: Stephen Hines <srhines@google.com>
+Verified+1: Pirama Arumuga Nainar <pirama@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Pirama Arumuga Nainar <pirama@google.com>
+Submitted-at: Fri, 27 Apr 2018 20:41:58 +0000
+Reviewed-on: https://android-review.googlesource.com/673630
+Project: toolchain/llvm_android
+Branch: refs/heads/master
