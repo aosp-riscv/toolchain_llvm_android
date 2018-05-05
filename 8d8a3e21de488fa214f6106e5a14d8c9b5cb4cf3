@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bbff937_c60d2f54",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-05T00:19:43Z",
+      "side": 1,
+      "message": "Should we name it --dry-run for consistency with similar options to git, patch, etc?",
+      "range": {
+        "startLine": 48,
+        "startChar": 11,
+        "endLine": 48,
+        "endChar": 14
+      },
+      "revId": "8d8a3e21de488fa214f6106e5a14d8c9b5cb4cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccb5ec9e_395d3037",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-05T00:19:43Z",
+      "side": 1,
+      "message": "Should we sync even during dry-run?  If not, get_commit_hash() below may fail.",
+      "revId": "8d8a3e21de488fa214f6106e5a14d8c9b5cb4cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
