@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9857167c_f57b4133",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-07T17:17:36Z",
+      "side": 1,
+      "message": "Out-of-scope nit: We don\u0027t need jobs here since we\u0027re doing repo sync for one project.  Uploaded http://aosp/679971.",
+      "range": {
+        "startLine": 57,
+        "startChar": 43,
+        "endLine": 57,
+        "endChar": 47
+      },
+      "revId": "f77568b04d55cd77efcb4ab697091e0c9bc0586e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

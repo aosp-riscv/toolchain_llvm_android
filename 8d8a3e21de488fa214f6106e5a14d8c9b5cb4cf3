@@ -81,6 +81,24 @@
       "revId": "8d8a3e21de488fa214f6106e5a14d8c9b5cb4cf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb4fcbb5_33fbc933",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-07T17:17:36Z",
+      "side": 1,
+      "message": "I understood the motivation for \u0027--dry-run\u0027 to be for a dry run when doing a merge using the script.  In that scenario, a \u0027repo sync\u0027 here is necessary.\n\nInstead, if this is just for testing the script, I guess skipping the sync will be faster.",
+      "parentUuid": "ceabb1e6_bce81751",
+      "revId": "8d8a3e21de488fa214f6106e5a14d8c9b5cb4cf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
