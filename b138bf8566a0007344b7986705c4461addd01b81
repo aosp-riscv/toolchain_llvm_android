@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06ebeba4_5be22368",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-05-09T07:45:22Z",
+      "side": 1,
+      "message": "It might be more interesting to refactor this as a function that takes a dry_run parameter. It could then log the output on all runs, but only execute it on non-dry_run cases. It also would simplify the logic in these sections.",
+      "revId": "b138bf8566a0007344b7986705c4461addd01b81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee5e98c6_627baf68",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-05-09T07:45:22Z",
+      "side": 1,
+      "message": "Can we not try to reapply these directly from this script? Ahead of time logging of what is still pending could help, in case there is a merge conflict that needs manual intervention.",
+      "revId": "b138bf8566a0007344b7986705c4461addd01b81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
