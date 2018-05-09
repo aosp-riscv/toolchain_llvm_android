@@ -33,6 +33,24 @@
       "revId": "b138bf8566a0007344b7986705c4461addd01b81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b28f88e_0500bd49",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2018-05-09T17:56:17Z",
+      "side": 1,
+      "message": "I was going to address that in another CL. I\u0027m thinking of making this an interactive process.",
+      "parentUuid": "ee5e98c6_627baf68",
+      "revId": "b138bf8566a0007344b7986705c4461addd01b81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
