@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "34ea6a6f_cd43a072",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-05-09T18:02:09Z",
+      "side": 1,
+      "message": "This can be done separately as well, but I am just pointing it out as a way to simplify the logic.",
+      "parentUuid": "06ebeba4_5be22368",
+      "revId": "b138bf8566a0007344b7986705c4461addd01b81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ee5e98c6_627baf68",
         "filename": "merge_from_upstream.py",
         "patchSetId": 2
@@ -51,6 +69,24 @@
       "revId": "b138bf8566a0007344b7986705c4461addd01b81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6ee2822_e2424d7d",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-05-09T18:02:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9b28f88e_0500bd49",
+      "revId": "b138bf8566a0007344b7986705c4461addd01b81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
