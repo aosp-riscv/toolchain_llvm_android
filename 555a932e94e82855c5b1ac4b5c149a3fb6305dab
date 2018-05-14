@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77a195ab_0f887f74",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1204,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-14T23:27:43Z",
+      "side": 1,
+      "message": "Since this essentially makes --use-lld the only option, we can remove the option altogether.",
+      "revId": "555a932e94e82855c5b1ac4b5c149a3fb6305dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
