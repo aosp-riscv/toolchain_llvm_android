@@ -1201,7 +1201,7 @@ def parse_args():
     parser.add_argument(
         '--use-lld',
         action='store_true',
-        default=False,
+        default=True,
         help='Use lld for linking (only affects stage2)')
 
     parser.add_argument(
