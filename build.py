@@ -763,6 +763,7 @@ def build_stage1(stage1_install, build_name, build_llvm_tools=False):
 
     stage1_extra_defines = dict()
     stage1_extra_defines['LLVM_BUILD_RUNTIME'] = 'ON'
+    stage1_extra_defines['LLVM_ENABLE_LLD'] = 'ON'
     stage1_extra_defines['CLANG_ENABLE_ARCMT'] = 'OFF'
     stage1_extra_defines['CLANG_ENABLE_STATIC_ANALYZER'] = 'OFF'
     stage1_extra_defines['CMAKE_C_COMPILER'] = os.path.join(
@@ -824,7 +825,6 @@ def build_stage2(stage1_install,
                  stage2_install,
                  stage2_targets,
                  build_name,
-                 use_lld=False,
                  enable_assertions=False,
                  debug_build=False,
                  build_instrumented=False,
@@ -843,15 +843,13 @@ def build_stage2(stage1_install,
     stage2_extra_defines['CMAKE_CXX_COMPILER'] = stage2_cxx
     stage2_extra_defines['LLVM_BUILD_RUNTIME'] = 'ON'
     stage2_extra_defines['LLVM_ENABLE_LIBCXX'] = 'ON'
+    stage2_extra_defines['LLVM_ENABLE_LLD'] = 'ON'
     stage2_extra_defines['SANITIZER_ALLOW_CXXABI'] = 'OFF'
     stage2_extra_defines['LIBOMP_ENABLE_SHARED'] = 'FALSE'
 
     # Don't build libfuzzer, since it's broken on Darwin and we don't need it
     # anyway.
     stage2_extra_defines['COMPILER_RT_BUILD_LIBFUZZER'] = 'OFF'
-
-    if use_lld:
-        stage2_extra_defines['LLVM_ENABLE_LLD'] = 'ON'
 
     if enable_assertions:
         stage2_extra_defines['LLVM_ENABLE_ASSERTIONS'] = 'ON'
@@ -1199,12 +1197,6 @@ def parse_args():
         '--build-name', default='dev', help='Release name for the package.')
 
     parser.add_argument(
-        '--use-lld',
-        action='store_true',
-        default=False,
-        help='Use lld for linking (only affects stage2)')
-
-    parser.add_argument(
         '--enable-assertions',
         action='store_true',
         default=False,
@@ -1277,8 +1269,6 @@ def main():
     windows32_install = utils.out_path('windows-i386-install')
     windows64_install = utils.out_path('windows-x86-install')
 
-    # TODO(pirama): Once we have a set of prebuilts with lld, pass use_lld for
-    # stage1 as well.
     if do_build:
         for install_dir in (stage2_install, windows32_install,
                             windows64_install):
@@ -1299,7 +1289,7 @@ def main():
                                long_version)
 
         build_stage2(stage1_install, stage2_install, STAGE2_TARGETS,
-                     args.build_name, args.use_lld, args.enable_assertions,
+                     args.build_name, args.enable_assertions,
                      args.debug, instrumented, profdata)
 
     if do_build and utils.host_is_linux():
