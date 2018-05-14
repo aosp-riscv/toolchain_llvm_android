@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f23db36_df013eee",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-14T23:34:55Z",
+      "side": 1,
+      "message": "IIUC, this is also called from test_compiler.py.  Make sure that the removal of \u0027use_lld\u0027 doesn\u0027t break it.",
+      "range": {
+        "startLine": 824,
+        "startChar": 4,
+        "endLine": 824,
+        "endChar": 16
+      },
+      "revId": "0be9ed18c27b00728c1f4c0f94f6a6030d567bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
