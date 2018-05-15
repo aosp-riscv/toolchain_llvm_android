@@ -1,0 +1,9 @@
+Verified+1: Yi Kong <yikong@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Submitted-by: Yi Kong <yikong@google.com>
+Submitted-at: Tue, 15 May 2018 18:42:06 +0000
+Reviewed-on: https://android-review.googlesource.com/685995
+Project: toolchain/llvm_android
+Branch: refs/heads/master
