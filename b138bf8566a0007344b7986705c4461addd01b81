@@ -1,0 +1,7 @@
+Code-Review+2: Stephen Hines <srhines@google.com>
+Verified+1: Yi Kong <yikong@google.com>
+Submitted-by: Yi Kong <yikong@google.com>
+Submitted-at: Tue, 15 May 2018 22:54:13 +0000
+Reviewed-on: https://android-review.googlesource.com/681643
+Project: toolchain/llvm_android
+Branch: refs/heads/master
