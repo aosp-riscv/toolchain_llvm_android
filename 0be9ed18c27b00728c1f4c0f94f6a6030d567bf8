@@ -22,6 +22,30 @@
       "revId": "0be9ed18c27b00728c1f4c0f94f6a6030d567bf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "682d25fe_8c01064e",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2018-05-15T00:00:28Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "6f23db36_df013eee",
+      "range": {
+        "startLine": 824,
+        "startChar": 4,
+        "endLine": 824,
+        "endChar": 16
+      },
+      "revId": "0be9ed18c27b00728c1f4c0f94f6a6030d567bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
