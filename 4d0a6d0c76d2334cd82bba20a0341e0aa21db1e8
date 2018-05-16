@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d90db101_8289b18e",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-05-16T18:11:44Z",
+      "side": 1,
+      "message": "I think you can delete this stale comment too, if we are building with LTO now.",
+      "revId": "4d0a6d0c76d2334cd82bba20a0341e0aa21db1e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
