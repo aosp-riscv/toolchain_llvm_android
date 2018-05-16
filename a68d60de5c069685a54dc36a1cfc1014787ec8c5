@@ -16,6 +16,24 @@
       "revId": "a68d60de5c069685a54dc36a1cfc1014787ec8c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f3310d5_b3b79c4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-05-16T18:17:19Z",
+      "side": 1,
+      "message": "It\u0027s not just native-host though. This should speed up all builds using the compiler, so I would almost rather see \"m vs. m (with LTO compiler)\" for the speedup.",
+      "parentUuid": "b26569e2_ffa69062",
+      "revId": "a68d60de5c069685a54dc36a1cfc1014787ec8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
