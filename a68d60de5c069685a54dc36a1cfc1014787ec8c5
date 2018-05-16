@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b26569e2_ffa69062",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-16T18:16:06Z",
+      "side": 1,
+      "message": "Can you also document the changes in size of the toolchain and build-time of the toolchain?\n\nAlso, instead of just dex2oat, you can try \u0027m native-host\u0027 to build all native modules.",
+      "revId": "a68d60de5c069685a54dc36a1cfc1014787ec8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
