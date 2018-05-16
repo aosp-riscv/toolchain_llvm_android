@@ -34,6 +34,24 @@
       "revId": "a68d60de5c069685a54dc36a1cfc1014787ec8c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7968a11b_1b119e98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-16T18:34:15Z",
+      "side": 1,
+      "message": "Aah, right.  I was thinking \u0027m native\u0027 but I think that\u0027ll still build for Windows.  So just \u0027m\u0027 should work.",
+      "parentUuid": "6f3310d5_b3b79c4a",
+      "revId": "a68d60de5c069685a54dc36a1cfc1014787ec8c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
