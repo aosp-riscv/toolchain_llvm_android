@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04e16574_55726ab6",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-22T18:09:56Z",
+      "side": 1,
+      "message": "It might be useful to separate out the merge-from-upstream and the reapply-cherry-picks functionality so we can do one independently of the other.\n\nBut I can\u0027t make a strong case/argument for it.  So I\u0027m ok to defer and add in the future if necessary.",
+      "revId": "d5e27cf9aa26a589cd22ed8eafa9489997eeab6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1bc30b4c_6e518c14",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-22T18:09:56Z",
+      "side": 1,
+      "message": "FYI to other reviewers: At first, I thought the prompts below should include something about the commit being reapplied (SHA or commit line).  But this command prints the commit message in its entirety.",
+      "revId": "d5e27cf9aa26a589cd22ed8eafa9489997eeab6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b541c481_f4bca7e4",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-22T18:09:56Z",
+      "side": 1,
+      "message": "I echo Steve\u0027s comment from the earlier CL - it\u0027d be cleaner to extract the dry_run checks into a helper function.",
+      "revId": "d5e27cf9aa26a589cd22ed8eafa9489997eeab6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
