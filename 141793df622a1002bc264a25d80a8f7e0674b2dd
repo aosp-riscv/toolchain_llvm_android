@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "267de357_3905118e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-30T23:04:18Z",
+      "side": 1,
+      "message": "eliminate redundant",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 23
+      },
+      "revId": "141793df622a1002bc264a25d80a8f7e0674b2dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dda2260_990a3876",
+        "filename": "utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-05-30T23:04:18Z",
+      "side": 1,
+      "message": "Use os.path.basename()",
+      "range": {
+        "startLine": 93,
+        "startChar": 27,
+        "endLine": 93,
+        "endChar": 45
+      },
+      "revId": "141793df622a1002bc264a25d80a8f7e0674b2dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
