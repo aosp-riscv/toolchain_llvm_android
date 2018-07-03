@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "867a6d02_cefe7f4a",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-07-03T23:16:08Z",
+      "side": 1,
+      "message": "All of this block is what fixes the iconv.h issue. A sysroot alone is not sufficient to make the build hermetic (which makes me pretty sad about how CMake actually works).",
+      "revId": "6401fc5930df808b4c06c6e20c246061ee6264f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
