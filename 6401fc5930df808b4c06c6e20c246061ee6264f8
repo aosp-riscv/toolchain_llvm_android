@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "838e7783_22566b5d",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-07-03T23:33:57Z",
+      "side": 1,
+      "message": "I think we should be creating two sysroots - one for the platform and one for the base API level.  See android_api() and ndk_path() above.",
+      "range": {
+        "startLine": 212,
+        "startChar": 65,
+        "endLine": 212,
+        "endChar": 75
+      },
+      "revId": "6401fc5930df808b4c06c6e20c246061ee6264f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87b232c3_a72cd902",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-07-03T23:33:57Z",
+      "side": 1,
+      "message": "In relation to my comment in create_sysroots(), we should pick the right sysroot based on the \u0027platform\u0027 flag.",
+      "range": {
+        "startLine": 314,
+        "startChar": 8,
+        "endLine": 314,
+        "endChar": 15
+      },
+      "revId": "6401fc5930df808b4c06c6e20c246061ee6264f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66c5fa0f_f3f46daf",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-07-03T23:33:57Z",
+      "side": 1,
+      "message": "These should be set in cross_compile_configs(), so no need to redefine.",
+      "revId": "6401fc5930df808b4c06c6e20c246061ee6264f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "867a6d02_cefe7f4a",
         "filename": "build.py",
         "patchSetId": 2
