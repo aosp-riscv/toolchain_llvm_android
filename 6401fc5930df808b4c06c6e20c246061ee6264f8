@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a962b455_cadc2b92",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-07-04T00:20:05Z",
+      "side": 1,
+      "message": "You\u0027re right. I missed this. I can try to get it producing multiple sysroots.",
+      "parentUuid": "838e7783_22566b5d",
+      "range": {
+        "startLine": 212,
+        "startChar": 65,
+        "endLine": 212,
+        "endChar": 75
+      },
+      "revId": "6401fc5930df808b4c06c6e20c246061ee6264f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "87b232c3_a72cd902",
         "filename": "build.py",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f58f74f4_2955f533",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-07-04T00:20:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "87b232c3_a72cd902",
+      "range": {
+        "startLine": 314,
+        "startChar": 8,
+        "endLine": 314,
+        "endChar": 15
+      },
+      "revId": "6401fc5930df808b4c06c6e20c246061ee6264f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "66c5fa0f_f3f46daf",
         "filename": "build.py",
         "patchSetId": 2
@@ -59,6 +107,24 @@
       "writtenOn": "2018-07-03T23:33:57Z",
       "side": 1,
       "message": "These should be set in cross_compile_configs(), so no need to redefine.",
+      "revId": "6401fc5930df808b4c06c6e20c246061ee6264f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75907844_6c1555d7",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-07-04T00:20:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "66c5fa0f_f3f46daf",
       "revId": "6401fc5930df808b4c06c6e20c246061ee6264f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
