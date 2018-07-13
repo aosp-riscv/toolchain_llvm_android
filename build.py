@@ -308,8 +308,10 @@ def cross_compile_configs(stage2_install, platform=False):
         ldflags = [
             '-L' + toolchain_builtins, '-Wl,-z,defs', '-L' + libcxx_libs,
             '-L' + toolchain_lib,
-            '--sysroot=%s' % sysroot_libs
+            '--sysroot=%s' % sysroot_libs,
+            '-fuse-ld=lld',
         ]
+
         defines['CMAKE_EXE_LINKER_FLAGS'] = ' '.join(ldflags)
         defines['CMAKE_SHARED_LINKER_FLAGS'] = ' '.join(ldflags)
         defines['CMAKE_MODULE_LINKER_FLAGS'] = ' '.join(ldflags)
@@ -745,6 +747,7 @@ def host_gcc_toolchain_flags(is_32_bit=False):
         ldflags = ['-B' + gccLibDir,
                    '-L' + gccLibDir,
                    '-L' + gccBuiltinDir,
+                   '-fuse-ld=lld',
                    ]
 
         cflags = formatFlags(cflags, gccRoot=gccRoot, gccTriple=gccTriple,
