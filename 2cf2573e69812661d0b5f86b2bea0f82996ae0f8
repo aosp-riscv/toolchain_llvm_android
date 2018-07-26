@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86108467_3f47c008",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-07-26T20:55:40Z",
+      "side": 1,
+      "message": "The variable will be passed to every CMake build, including Linux and runtimes for the target.  We don\u0027t need/use Xray right now, but I think we should continue building what already works.  So it\u0027d be better to pass this only for Darwin (utils.host_is_darwin()).",
+      "revId": "2cf2573e69812661d0b5f86b2bea0f82996ae0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
