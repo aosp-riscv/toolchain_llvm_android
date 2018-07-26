@@ -16,6 +16,24 @@
       "revId": "2cf2573e69812661d0b5f86b2bea0f82996ae0f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64bbc357_dcb7bcd3",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-07-26T20:58:00Z",
+      "side": 1,
+      "message": "I thought it better to be consistent. Plus, we can just revert this once we switch to a newer Mac builder.",
+      "parentUuid": "86108467_3f47c008",
+      "revId": "2cf2573e69812661d0b5f86b2bea0f82996ae0f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
