@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d651bdc_b0d5c079",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1014807
+      },
+      "writtenOn": "2018-08-15T10:50:39Z",
+      "side": 1,
+      "message": "Just wonder if this is intentional?  I am surprised because in r328903 LLVM_RELEASE_VERSION was 7.0.2 and in r333878 LLVM_RELEASE_VERSION becomes 7.0.1.",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "020919473e06a02ebd8102e0b28eecd0e4e65637",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
