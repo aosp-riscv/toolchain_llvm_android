@@ -22,6 +22,30 @@
       "revId": "020919473e06a02ebd8102e0b28eecd0e4e65637",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2511149_ea2eda15",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-08-15T14:37:49Z",
+      "side": 1,
+      "message": "Yes, the 7.0.2 was a mistake. Note that this number really shouldn\u0027t be used. We wanted a small way to tell these apart, but the svn revision is what should really be used.",
+      "parentUuid": "9d651bdc_b0d5c079",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "020919473e06a02ebd8102e0b28eecd0e4e65637",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
