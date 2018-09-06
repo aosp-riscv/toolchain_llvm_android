@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73612b8e_30095e9c",
+        "filename": "android_version.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-09-06T16:11:41Z",
+      "side": 1,
+      "message": "r338537 bumped the major version to 8.  So we should reset patch_level to 1.",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "c395b53cabf8a524b7da8e23b3e38b8097f4b3c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "753cd830_83e2402b",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-09-06T16:11:41Z",
+      "side": 1,
+      "message": "Created b/114214479 to investigate.",
+      "revId": "c395b53cabf8a524b7da8e23b3e38b8097f4b3c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
