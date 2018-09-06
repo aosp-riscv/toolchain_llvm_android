@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9c5a014_2168df11",
+        "filename": "android_version.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-09-06T19:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73612b8e_30095e9c",
+      "range": {
+        "startLine": 18,
+        "startChar": 15,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "c395b53cabf8a524b7da8e23b3e38b8097f4b3c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "753cd830_83e2402b",
         "filename": "build.py",
         "patchSetId": 2
@@ -39,6 +63,24 @@
       "revId": "c395b53cabf8a524b7da8e23b3e38b8097f4b3c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e053c4c8_42c39293",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-09-06T19:59:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "753cd830_83e2402b",
+      "revId": "c395b53cabf8a524b7da8e23b3e38b8097f4b3c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
