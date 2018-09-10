@@ -250,7 +250,7 @@ def test_device(android_base, clang_version, device, max_jobs, clean_output,
         target = 'aosp_' + target + '-eng'
     try:
         build_target(android_base, clang_version, target, max_jobs,
-                     redirect_stderr, with_tidy)
+                     redirect_stderr, with_tidy, None)
         if flashall_path is None:
             bin_path = os.path.join(android_base, 'out', 'host',
                                     utils.build_os_type(), 'bin')
