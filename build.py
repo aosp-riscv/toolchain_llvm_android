@@ -1392,6 +1392,8 @@ def main():
     windows32_install = utils.out_path('windows-i386-install')
     windows64_install = utils.out_path('windows-x86-install')
 
+    utils.this_shall_not_pass()
+
     if do_build:
         for install_dir in (stage2_install, windows32_install,
                             windows64_install):
