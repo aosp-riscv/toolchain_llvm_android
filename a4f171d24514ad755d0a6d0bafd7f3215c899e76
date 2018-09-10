@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b2e14d0_c89fc7a1",
+        "filename": "test_compiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-09-10T19:21:10Z",
+      "side": 1,
+      "message": "This utility should move to utils.py (along with check_output, and check_call).  I\u0027ll refactor this in a subsequent CL.",
+      "range": {
+        "startLine": 322,
+        "startChar": 10,
+        "endLine": 322,
+        "endChar": 27
+      },
+      "revId": "a4f171d24514ad755d0a6d0bafd7f3215c899e76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
