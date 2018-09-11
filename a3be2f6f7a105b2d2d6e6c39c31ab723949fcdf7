@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41ee4fc9_2f8d671c",
+        "filename": "test_compiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-09-11T18:01:23Z",
+      "side": 1,
+      "message": "I think a better fix is to set the default value for \u0027profiler\u0027 to None in build_target()\u0027s signature.",
+      "range": {
+        "startLine": 253,
+        "startChar": 49,
+        "endLine": 253,
+        "endChar": 53
+      },
+      "revId": "a3be2f6f7a105b2d2d6e6c39c31ab723949fcdf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
