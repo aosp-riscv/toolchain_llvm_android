@@ -1,0 +1,7 @@
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Verified+1: Yi Kong <yikong@google.com>
+Submitted-by: Yi Kong <yikong@google.com>
+Submitted-at: Thu, 13 Sep 2018 23:09:53 +0000
+Reviewed-on: https://android-review.googlesource.com/752550
+Project: toolchain/llvm_android
+Branch: refs/heads/master
