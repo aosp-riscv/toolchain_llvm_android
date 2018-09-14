@@ -1026,6 +1026,10 @@ def build_stage2(stage1_install,
     stage2_extra_env = dict()
     stage2_extra_env['LD_LIBRARY_PATH'] = os.path.join(stage1_install, 'lib64')
 
+    # Remove GOMA from our environment for building stage2, since it is using
+    # a non-GOMA compiler (from stage1) to do the compilation.
+    stage2_extra_env['USE_GOMA'] = 'false'
+
     # Set the compiler and linker flags
     stage2_extra_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
     stage2_extra_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
