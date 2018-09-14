@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47001af3_3e85ffad",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-09-14T22:20:44Z",
+      "side": 1,
+      "message": "Why not fix the long lines?  Maybe run pyformat now - when I don\u0027t think we have large changes in flight.",
+      "range": {
+        "startLine": 17,
+        "startChar": 49,
+        "endLine": 17,
+        "endChar": 62
+      },
+      "revId": "debbf467ad320484a255276853ca33fb12a5f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
