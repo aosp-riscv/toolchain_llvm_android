@@ -22,6 +22,30 @@
       "revId": "debbf467ad320484a255276853ca33fb12a5f8ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18cf3a53_ada00e85",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-09-15T00:22:46Z",
+      "side": 1,
+      "message": "After offline discussion, it might be best to disable this warning for the whole file.  The alternative is to clutter the code with lint comments.\n\nIt\u0027ll also be good to setup pyformat as an upload hook.  We can setup line limits there (and get further consistency in the style).",
+      "parentUuid": "47001af3_3e85ffad",
+      "range": {
+        "startLine": 17,
+        "startChar": 49,
+        "endLine": 17,
+        "endChar": 62
+      },
+      "revId": "debbf467ad320484a255276853ca33fb12a5f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
