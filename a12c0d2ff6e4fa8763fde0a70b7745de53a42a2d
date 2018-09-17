@@ -16,6 +16,24 @@
       "revId": "a12c0d2ff6e4fa8763fde0a70b7745de53a42a2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "873a3e15_7c22ea5f",
+        "filename": "utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2018-09-17T21:37:20Z",
+      "side": 1,
+      "message": "I misunderstood the Python documentation about \"exception won\u0027t be caught.\" It should raise an exception here. Changed to IOError with detailed information.",
+      "parentUuid": "ef48a1d1_6aca6426",
+      "revId": "a12c0d2ff6e4fa8763fde0a70b7745de53a42a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
