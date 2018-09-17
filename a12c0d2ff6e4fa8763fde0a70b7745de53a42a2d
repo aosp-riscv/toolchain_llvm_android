@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef48a1d1_6aca6426",
+        "filename": "utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-09-17T20:00:44Z",
+      "side": 1,
+      "message": "what happens now if this fails, and then we end up calling func(path) again below?",
+      "revId": "a12c0d2ff6e4fa8763fde0a70b7745de53a42a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
