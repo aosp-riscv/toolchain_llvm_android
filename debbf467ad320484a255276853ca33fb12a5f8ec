@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a146133_76f6fb1b",
+        "filename": "utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2018-09-17T19:28:57Z",
+      "side": 0,
+      "message": "This is removed since onerror function\u0027s exception won\u0027t be caught.",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 13
+      },
+      "revId": "debbf467ad320484a255276853ca33fb12a5f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
