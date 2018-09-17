@@ -34,6 +34,24 @@
       "revId": "a12c0d2ff6e4fa8763fde0a70b7745de53a42a2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c2dbbb2_7396ee82",
+        "filename": "utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2018-09-17T23:06:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "873a3e15_7c22ea5f",
+      "revId": "a12c0d2ff6e4fa8763fde0a70b7745de53a42a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
