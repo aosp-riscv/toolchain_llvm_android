@@ -373,6 +373,7 @@ def main():
             if not result and not args.keep_going:
                 break
 
+    return
 
 if __name__ == '__main__':
     main()
