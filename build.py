@@ -1445,8 +1445,8 @@ def main():
                      args.build_name, args.enable_assertions,
                      args.debug, args.no_lto, instrumented, profdata)
 
-    if do_build and utils.host_is_linux():
-        build_runtimes(stage2_install)
+    # if do_build and utils.host_is_linux():
+    #     build_runtimes(stage2_install)
 
     if do_build and need_windows:
         # Build single-stage clang for Windows
