@@ -1394,6 +1394,7 @@ def parse_args():
 
 
 def main():
+    raise RuntimeError("Fail build.py")
     args = parse_args()
     do_build = not args.skip_build
     do_package = not args.skip_package
