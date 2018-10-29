@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b42c2ae1_23f12f2c",
+        "filename": "kernel-boot-tests/arm64.boot-test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2018-10-29T23:15:15Z",
+      "side": 1,
+      "message": "Neat! I didn\u0027t know about -u.  Thanks for the tips!",
+      "parentUuid": "22c8105f_616db483",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "4d45f7c925909cfe57324cfbc210d2d00cfe25db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56e841dd_147f9176",
         "filename": "kernel-boot-tests/arm64.build-kernel.sh",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "4d45f7c925909cfe57324cfbc210d2d00cfe25db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a341a733_a169c5b2",
+        "filename": "kernel-boot-tests/arm64.build-kernel.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2018-10-29T23:15:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56e841dd_147f9176",
+      "revId": "4d45f7c925909cfe57324cfbc210d2d00cfe25db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
