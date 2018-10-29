@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f76ead4b_eea92995",
+        "filename": "test_compiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-10-29T20:36:53Z",
+      "side": 1,
+      "message": "Can we remove -Wno-error\u003dreturn-std-move-in-c++11 now that it\u0027s suppressed in soong?",
+      "revId": "9dbd3af66dc11af557afb6b119bb5489a8bf9407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
