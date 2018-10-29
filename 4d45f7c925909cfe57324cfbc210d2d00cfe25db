@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22c8105f_616db483",
+        "filename": "kernel-boot-tests/arm64.boot-test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2018-10-29T22:37:41Z",
+      "side": 1,
+      "message": "nit: is it OK if the user doesn\u0027t pass $1?\n\nIf not (and you don\u0027t intend to make use of $undefined_variable\u003d\u003d\u0027\u0027 elsewhere here), might want to set -u, as well",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "4d45f7c925909cfe57324cfbc210d2d00cfe25db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56e841dd_147f9176",
+        "filename": "kernel-boot-tests/arm64.build-kernel.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2018-10-29T22:37:41Z",
+      "side": 1,
+      "message": "Does defconfig (or specifying a new compiler, even if it may be at the same path) also implicitly clean out old build artifacts? If not, should we clean them here, as well?",
+      "revId": "4d45f7c925909cfe57324cfbc210d2d00cfe25db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
