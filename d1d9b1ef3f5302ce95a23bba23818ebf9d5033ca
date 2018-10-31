@@ -22,6 +22,30 @@
       "revId": "d1d9b1ef3f5302ce95a23bba23818ebf9d5033ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5876d2b4_bc526ac4",
+        "filename": "kernel-boot-tests/arm64.build-kernel.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2018-10-31T21:12:40Z",
+      "side": 1,
+      "message": "heh, an external contributor also wasn\u0027t happy with this: https://github.com/ClangBuiltLinux/continuous-integration/commit/f0d6140a923b78c258654696758cc7de929bcc34",
+      "parentUuid": "730cce4d_fccfe7b1",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 4
+      },
+      "revId": "d1d9b1ef3f5302ce95a23bba23818ebf9d5033ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
