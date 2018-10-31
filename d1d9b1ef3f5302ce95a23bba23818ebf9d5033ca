@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "730cce4d_fccfe7b1",
+        "filename": "kernel-boot-tests/arm64.build-kernel.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2018-10-31T21:04:11Z",
+      "side": 1,
+      "message": "`cd ..` is more obvious",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 4
+      },
+      "revId": "d1d9b1ef3f5302ce95a23bba23818ebf9d5033ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
