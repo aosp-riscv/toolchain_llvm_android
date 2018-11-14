@@ -15,5 +15,6 @@
 # limitations under the License.
 #
 
+# Somehow if patch_level is '5', linked files in stage2/bin are much larger.
 patch_level = '4'
-svn_revision = 'r344140'
+svn_revision = 'r346389'
