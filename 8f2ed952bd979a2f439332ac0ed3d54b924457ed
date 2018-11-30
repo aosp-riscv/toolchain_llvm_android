@@ -16,6 +16,24 @@
       "revId": "8f2ed952bd979a2f439332ac0ed3d54b924457ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "109bf64e_1fb41549",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-11-30T22:39:35Z",
+      "side": 1,
+      "message": "When I tried that the editor was open, but the Change-Id was not automatically inserted after I close the editor.",
+      "parentUuid": "238251f3_497f155b",
+      "revId": "8f2ed952bd979a2f439332ac0ed3d54b924457ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
