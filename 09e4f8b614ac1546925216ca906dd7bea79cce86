@@ -16,6 +16,24 @@
       "revId": "09e4f8b614ac1546925216ca906dd7bea79cce86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50907503_2a95d129",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2018-11-30T20:32:48Z",
+      "side": 0,
+      "message": "Turns out that it\u0027s only not needed when building for the platform because android_support provides a definition of posix_memalign that\u0027s needed by the NDK libc++. In the new version of the patch I\u0027ve brought back the -landroid_support but only when targeting NDK.",
+      "parentUuid": "d16997e0_d73ae5e5",
+      "revId": "09e4f8b614ac1546925216ca906dd7bea79cce86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
