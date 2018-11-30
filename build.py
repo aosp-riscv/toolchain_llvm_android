@@ -255,6 +255,30 @@ def create_sysroots():
                 dest_usr_lib64 = os.path.join(dest_usr, 'lib64')
                 shutil.copytree(arch_lib64_path, dest_usr_lib64, symlinks=True)
 
+            if platform:
+                # Create a stub library for the platform's libc++.
+                platform_stubs = utils.out_path('platform_stubs/' + arch)
+                check_create_path(platform_stubs)
+                libdir = dest_usr_lib64 if arch == 'x86_64' else dest_usr_lib
+                with open(platform_stubs + '/libc++.c', 'w') as f:
+                    f.write('''
+void __cxa_atexit() {}
+void __cxa_demangle() {}
+void __cxa_finalize() {}
+void __dynamic_cast() {}
+void _ZTIN10__cxxabiv117__class_type_infoE() {}
+void _ZTIN10__cxxabiv120__si_class_type_infoE() {}
+void _ZTIN10__cxxabiv121__vmi_class_type_infoE() {}
+void _ZTISt9type_info() {}
+''')
+                check_call([utils.out_path('stage2-install/bin/clang'),
+                            '--target=' + target,
+                            '-fuse-ld=lld', '-nostdlib', '-shared',
+                            '-Wl,-soname,libc++.so',
+                            '-o', libdir + '/libc++.so',
+                            platform_stubs + '/libc++.c'])
+                with open(libdir + '/libc++abi.so', 'w') as f:
+                    f.write('INPUT(-lc++)')
 
 def rm_cmake_cache(cacheDir):
     for dirpath, dirs, files in os.walk(cacheDir): # pylint: disable=not-an-iterable
@@ -367,7 +391,7 @@ def cross_compile_configs(stage2_install, platform=False):
                                               llvm_triple)
 
         ldflags = [
-            '-L' + toolchain_builtins, '-Wl,-z,defs', '-L' + libcxx_libs,
+            '-L' + toolchain_builtins, '-Wl,-z,defs',
             '-L' + toolchain_lib,
             '-fuse-ld=lld',
             '-Wl,--gc-sections',
@@ -460,7 +484,7 @@ def build_crts(stage2_install, clang_version):
     llvm_config = os.path.join(stage2_install, 'bin', 'llvm-config')
     # Now build compiler-rt for each arch
     for (arch, llvm_triple, crt_defines,
-         cflags) in cross_compile_configs(stage2_install): # pylint: disable=not-an-iterable
+         cflags) in cross_compile_configs(stage2_install, True): # pylint: disable=not-an-iterable
         logger().info('Building compiler-rt for %s', arch)
         crt_path = utils.out_path('lib', 'clangrt-' + arch)
         crt_install = os.path.join(stage2_install, 'lib64', 'clang',
@@ -488,9 +512,7 @@ def build_crts(stage2_install, clang_version):
 
         crt_defines['SANITIZER_CXX_ABI'] = 'libcxxabi'
         if arch == 'arm':
-            crt_defines['SANITIZER_COMMON_LINK_LIBS'] = '-latomic -landroid_support'
-        else:
-            crt_defines['SANITIZER_COMMON_LINK_LIBS'] = '-landroid_support'
+            crt_defines['SANITIZER_COMMON_LINK_LIBS'] = '-latomic'
         crt_defines['COMPILER_RT_HWASAN_WITH_INTERCEPTORS'] = 'OFF'
 
         crt_defines.update(base_cmake_defines())
