@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "dedaaaef_f2c4b39e",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-11-30T22:50:04Z",
+      "side": 1,
+      "message": "Just a nit, feel free to ignore: Should we print a message here asking to remove the \u0027Change-ID\u0027?  Maybe change the yes_or_no() to:\n  \u0027Reapply change and open editor to remove Change-ID?\u0027",
+      "revId": "8f2ed952bd979a2f439332ac0ed3d54b924457ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "238251f3_497f155b",
         "filename": "merge_from_upstream.py",
         "patchSetId": 1
@@ -34,6 +51,24 @@
       "revId": "8f2ed952bd979a2f439332ac0ed3d54b924457ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25f08148_d033b462",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-11-30T22:50:04Z",
+      "side": 1,
+      "message": "Ok, thanks for checking.",
+      "parentUuid": "109bf64e_1fb41549",
+      "revId": "8f2ed952bd979a2f439332ac0ed3d54b924457ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
