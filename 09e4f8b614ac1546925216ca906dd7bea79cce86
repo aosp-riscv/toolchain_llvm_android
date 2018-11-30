@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d16997e0_d73ae5e5",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 0,
+      "message": "Am I reading this correctly in that libandroid_support was never needed? What API level is this building for?",
+      "revId": "09e4f8b614ac1546925216ca906dd7bea79cce86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "880943cf_65d7065a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 1,
+      "message": "Just to be clear, that\u0027s not actually what\u0027s happening, right? This is linking against a minimal stub of libc++ for the platform libraries only?",
+      "revId": "0a060603e4658b64d719672a21fc9ffe92244cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71960405_adb53bcb",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 1,
+      "message": "Not your code, so just a note to the other reviewers, why isn\u0027t this just:\n\n    for is_platform in (False, True):",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 52
+      },
+      "revId": "0a060603e4658b64d719672a21fc9ffe92244cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06450ab5_671f8103",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 1,
+      "message": "os.path.join",
+      "range": {
+        "startLine": 260,
+        "startChar": 48,
+        "endLine": 260,
+        "endChar": 72
+      },
+      "revId": "0a060603e4658b64d719672a21fc9ffe92244cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eeb59791_bc6f0a71",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 1,
+      "message": "os.path.join",
+      "range": {
+        "startLine": 263,
+        "startChar": 26,
+        "endLine": 263,
+        "endChar": 53
+      },
+      "revId": "0a060603e4658b64d719672a21fc9ffe92244cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "846738c2_d127ce4a",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 1,
+      "message": "textwrap.dedent(\"\"\"\\\n     void __cxa_atexit() {}\n     void __cxa_demangle() {}\n     ...\n\"\"\")",
+      "range": {
+        "startLine": 264,
+        "startChar": 28,
+        "endLine": 273,
+        "endChar": 3
+      },
+      "revId": "0a060603e4658b64d719672a21fc9ffe92244cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e796ccbf_f42f96a5",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 1,
+      "message": "os.path.join",
+      "range": {
+        "startLine": 278,
+        "startChar": 34,
+        "endLine": 278,
+        "endChar": 55
+      },
+      "revId": "0a060603e4658b64d719672a21fc9ffe92244cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "510a9650_ca66f01d",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 1,
+      "message": "os.path.join",
+      "range": {
+        "startLine": 279,
+        "startChar": 28,
+        "endLine": 279,
+        "endChar": 56
+      },
+      "revId": "0a060603e4658b64d719672a21fc9ffe92244cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a97a1e6_a0eff97a",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-11-30T07:52:35Z",
+      "side": 1,
+      "message": "os.path.join",
+      "range": {
+        "startLine": 280,
+        "startChar": 26,
+        "endLine": 280,
+        "endChar": 50
+      },
+      "revId": "0a060603e4658b64d719672a21fc9ffe92244cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
