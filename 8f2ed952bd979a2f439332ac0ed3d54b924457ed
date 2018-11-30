@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "238251f3_497f155b",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-11-30T19:56:31Z",
+      "side": 1,
+      "message": "https://git-scm.com/docs/git-cherry-pick: \u0027git cherry-pick -e\u0027 will open up the editor to allow editing commit message.  Should we just use that instead?",
+      "revId": "8f2ed952bd979a2f439332ac0ed3d54b924457ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
