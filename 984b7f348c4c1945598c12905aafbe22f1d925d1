@@ -16,6 +16,24 @@
       "revId": "984b7f348c4c1945598c12905aafbe22f1d925d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "951b7ff0_9880cecc",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-12-05T23:53:27Z",
+      "side": 1,
+      "message": "Duh, I didn\u0027t realize Dan already reviewed this patch.",
+      "parentUuid": "7aeac7a6_3190d3e9",
+      "revId": "984b7f348c4c1945598c12905aafbe22f1d925d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
