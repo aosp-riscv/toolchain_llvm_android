@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aeac7a6_3190d3e9",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-12-05T23:46:33Z",
+      "side": 1,
+      "message": "danalbert@: FYI - the compiler-rt runtimes need to be copied during an NDK import just like libomp and libfuzzer.",
+      "revId": "984b7f348c4c1945598c12905aafbe22f1d925d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
