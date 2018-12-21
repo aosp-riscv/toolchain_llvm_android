@@ -449,6 +449,13 @@ def create_hwasan_symlink(stage2_install, clang_version):
     os.symlink('libclang_rt.hwasan-aarch64-android.a',
                lib_dir + 'libclang_rt.hwasan_static-aarch64-android.a')
 
+def create_asan_symlink(stage2_install, clang_version):
+    lib_dir = os.path.join(stage2_install,
+                           clang_resource_dir(clang_version.long_version(), ''))
+    for arch in ('aarch64', 'arm', 'i686', 'x86_64'):
+        os.symlink('libclang_rt.asan-{}-android.a'.format(arch),
+                   lib_dir + 'libclang_rt.asan_static-{}-android.a'.format(arch))
+
 def build_libcxx(stage2_install, clang_version):
     for (arch, llvm_triple, libcxx_defines,
          cflags) in cross_compile_configs(stage2_install): # pylint: disable=not-an-iterable
@@ -1126,6 +1133,7 @@ def build_runtimes(stage2_install):
     # build_libcxx(stage2_install, version)
     build_asan_test(stage2_install)
     build_sanitizer_map_files(stage2_install, version)
+    create_asan_symlink(stage2_install, version)
     create_hwasan_symlink(stage2_install, version)
 
 def install_wrappers(llvm_install_path):
