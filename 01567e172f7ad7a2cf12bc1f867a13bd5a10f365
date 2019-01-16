@@ -22,6 +22,30 @@
       "revId": "01567e172f7ad7a2cf12bc1f867a13bd5a10f365",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f0eebd3_d142f08d",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-01-16T19:04:56Z",
+      "side": 0,
+      "message": "We should really change this to use the latest prebuilts from prebuilts/clang/host/{linux,darwin}-x86.",
+      "parentUuid": "d0e7c901_c4ecf466",
+      "range": {
+        "startLine": 141,
+        "startChar": 18,
+        "endLine": 141,
+        "endChar": 26
+      },
+      "revId": "01567e172f7ad7a2cf12bc1f867a13bd5a10f365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
