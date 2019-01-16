@@ -46,6 +46,30 @@
       "revId": "01567e172f7ad7a2cf12bc1f867a13bd5a10f365",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f7209d6_ed4385cf",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-01-16T19:08:04Z",
+      "side": 0,
+      "message": "We really don\u0027t want it scraping the prebuilts dir, in case we put a set of prebuilts in there for testing that are actually broken (or for use in testing something else).",
+      "parentUuid": "6f0eebd3_d142f08d",
+      "range": {
+        "startLine": 141,
+        "startChar": 18,
+        "endLine": 141,
+        "endChar": 26
+      },
+      "revId": "01567e172f7ad7a2cf12bc1f867a13bd5a10f365",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
