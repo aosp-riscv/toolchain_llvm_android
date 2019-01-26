@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b097079_191a0aca",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2019-01-26T00:48:17Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \"--no-build windows\" i.e. \"--no-build \u003cspace\u003e windows\"\n\nbuild.py: error: unrecognized arguments: --no-build-windows",
+      "range": {
+        "startLine": 21,
+        "startChar": 32,
+        "endLine": 21,
+        "endChar": 50
+      },
+      "revId": "50b034042dc13a8db5ebbaf3b0490cdc05d6a31b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
