@@ -22,6 +22,30 @@
       "revId": "50b034042dc13a8db5ebbaf3b0490cdc05d6a31b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c53ecf3_34d536da",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-01-26T02:07:34Z",
+      "side": 1,
+      "message": "We changed the syntax for this at some point, but nobody updated this README.md. The build.py script will tell you the correct syntax though. I uploaded a fix at https://android-review.googlesource.com/c/toolchain/llvm_android/+/886419.",
+      "parentUuid": "3b097079_191a0aca",
+      "range": {
+        "startLine": 21,
+        "startChar": 32,
+        "endLine": 21,
+        "endChar": 50
+      },
+      "revId": "50b034042dc13a8db5ebbaf3b0490cdc05d6a31b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
