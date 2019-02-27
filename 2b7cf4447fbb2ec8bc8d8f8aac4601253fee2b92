@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acc57fe0_a7fa8132",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-02-27T22:59:04Z",
+      "side": 1,
+      "message": "unused?",
+      "range": {
+        "startLine": 777,
+        "startChar": 4,
+        "endLine": 777,
+        "endChar": 10
+      },
+      "revId": "2b7cf4447fbb2ec8bc8d8f8aac4601253fee2b92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
