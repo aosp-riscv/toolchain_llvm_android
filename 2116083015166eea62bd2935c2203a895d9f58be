@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc0f861e_c80eed66",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-02-27T23:38:45Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "2116083015166eea62bd2935c2203a895d9f58be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3782f99_e3009802",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-02-27T23:38:45Z",
+      "side": 1,
+      "message": "Extra line",
+      "revId": "2116083015166eea62bd2935c2203a895d9f58be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
