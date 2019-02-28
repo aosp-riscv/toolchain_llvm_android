@@ -1,0 +1,8 @@
+Verified+1: Pirama Arumuga Nainar <pirama@google.com>
+Code-Review+2: Yi Kong <yikong@google.com>
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Pirama Arumuga Nainar <pirama@google.com>
+Submitted-at: Thu, 28 Feb 2019 02:12:46 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/914534
+Project: toolchain/llvm_android
+Branch: refs/heads/master
