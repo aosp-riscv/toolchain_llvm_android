@@ -35,6 +35,8 @@ DEFAULT_TIDY_CHECKS = ('*', '-readability-*', '-google-readability-*',
 # before we fix those warnings.
 DISABLED_WARNINGS = [
     '-Wno-error=defaulted-function-deleted',
+    '-Wstring-plus-int',
+    '-fsplit-lto-unit',
 ]
 
 
