@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7050ee7d_dee540f8",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-03-02T00:01:16Z",
+      "side": 1,
+      "message": "Should we set it to 1?  In the past, we never seem to have set it to 0 (probably to avoid conflicting with upstream versions?)",
+      "revId": "b69fb2b67d3d24abbcf2bdccc2020650c882c884",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
