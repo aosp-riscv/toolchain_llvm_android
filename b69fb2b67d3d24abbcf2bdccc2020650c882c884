@@ -34,6 +34,24 @@
       "revId": "b69fb2b67d3d24abbcf2bdccc2020650c882c884",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58fb2225_06f524e8",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-03-02T00:08:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a3f5dc2_f4ae708c",
+      "revId": "b69fb2b67d3d24abbcf2bdccc2020650c882c884",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
