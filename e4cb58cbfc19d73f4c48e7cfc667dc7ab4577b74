@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2db5498_3cabb5d3",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-03-05T21:50:20Z",
+      "side": 1,
+      "message": "I\u0027d forgotten to switch this to a \u0027return\u0027 after some printf debugging.",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 9
+      },
+      "revId": "e4cb58cbfc19d73f4c48e7cfc667dc7ab4577b74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
