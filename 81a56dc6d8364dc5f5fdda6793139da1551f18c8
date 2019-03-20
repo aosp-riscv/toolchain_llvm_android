@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd3feaac_8afd71fa",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-03-20T22:06:02Z",
+      "side": 1,
+      "message": "Change this to \u0027r353983b\u0027 as well.",
+      "range": {
+        "startLine": 19,
+        "startChar": 16,
+        "endLine": 19,
+        "endChar": 23
+      },
+      "revId": "81a56dc6d8364dc5f5fdda6793139da1551f18c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
