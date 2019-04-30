@@ -574,70 +574,6 @@ def build_crts(stage2_install, clang_version, ndk_cxx=False):
                 shutil.copy2(os.path.join(src_dir, f), os.path.join(dst_dir, f))
 
 
-def build_libfuzzers(stage2_install, clang_version, ndk_cxx=False):
-    llvm_config = os.path.join(stage2_install, 'bin', 'llvm-config')
-
-    for (arch, llvm_triple, libfuzzer_defines, cflags) in cross_compile_configs( # pylint: disable=not-an-iterable
-            stage2_install, platform=(not ndk_cxx)):
-        logger().info('Building libfuzzer for %s (ndk_cxx? %s)', arch, ndk_cxx)
-
-        libfuzzer_path = utils.out_path('lib', 'libfuzzer-' + arch)
-        if ndk_cxx:
-            libfuzzer_path += '-ndk-cxx'
-
-        libfuzzer_defines['ANDROID'] = '1'
-        libfuzzer_defines['LLVM_CONFIG_PATH'] = llvm_config
-
-        cflags.extend('-isystem ' + d for d in libcxx_header_dirs(ndk_cxx))
-
-        libfuzzer_defines['CMAKE_ASM_FLAGS'] = ' '.join(cflags)
-        libfuzzer_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
-        libfuzzer_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
-        if ndk_cxx:
-          libfuzzer_defines['CMAKE_CXX_FLAGS'] += ' -stdlib=libstdc++'
-
-        # lib/Fuzzer/CMakeLists.txt does not call cmake_minimum_required() to
-        # set a minimum version.  Explicitly request a policy that'll pass
-        # CMAKE_*_LINKER_FLAGS to the trycompile() step.
-        libfuzzer_defines['CMAKE_POLICY_DEFAULT_CMP0056'] = 'NEW'
-
-        libfuzzer_cmake_path = utils.llvm_path('projects', 'compiler-rt')
-        libfuzzer_env = dict(ORIG_ENV)
-        rm_cmake_cache(libfuzzer_path)
-        invoke_cmake(
-            out_path=libfuzzer_path,
-            defines=libfuzzer_defines,
-            env=libfuzzer_env,
-            cmake_path=libfuzzer_cmake_path,
-            target='fuzzer',
-            install=False)
-        # We need to install libfuzzer manually.
-        sarch = arch
-        if sarch == 'i386':
-            sarch = 'i686'
-        static_lib_filename = 'libclang_rt.fuzzer-' + sarch + '-android.a'
-        static_lib = os.path.join(libfuzzer_path, 'lib', 'linux', static_lib_filename)
-        triple_arch = arch_from_triple(llvm_triple)
-        if ndk_cxx:
-            lib_subdir = os.path.join('runtimes_ndk_cxx', triple_arch)
-        else:
-            lib_subdir = clang_resource_dir(clang_version.long_version(),
-                                            triple_arch)
-        lib_dir = os.path.join(stage2_install, lib_subdir)
-
-        check_create_path(lib_dir)
-        shutil.copy2(static_lib, os.path.join(lib_dir, 'libFuzzer.a'))
-
-    # Install libfuzzer headers.
-    header_src = utils.llvm_path('projects', 'compiler-rt', 'lib', 'fuzzer')
-    header_dst = os.path.join(stage2_install, 'prebuilt_include', 'llvm', 'lib',
-                              'Fuzzer')
-    check_create_path(header_dst)
-    for f in os.listdir(header_src):
-        if f.endswith('.h') or f.endswith('.def'):
-            shutil.copy2(os.path.join(header_src, f), header_dst)
-
-
 def build_libcxxabi(stage2_install, build_arch):
     # Normalize arm64/aarch64
     if build_arch == 'arm64':
@@ -755,7 +691,8 @@ def build_crts_host_i686(stage2_install, clang_version):
     crt_defines['CMAKE_INSTALL_PREFIX'] = crt_install
     crt_defines['SANITIZER_CXX_ABI'] = 'libstdc++'
 
-    crt_defines['COMPILER_RT_BUILD_LIBFUZZER'] = 'OFF'
+    if utils.host_is_darwin():
+        crt_defines['COMPILER_RT_BUILD_LIBFUZZER'] = 'OFF'
 
     # Set the compiler and linker flags
     crt_defines['CMAKE_ASM_FLAGS'] = ' '.join(cflags)
@@ -1150,9 +1087,9 @@ def build_stage1(stage1_install, build_name, build_llvm_tools=False):
     if utils.host_is_darwin():
         stage1_extra_defines['LLVM_BUILD_EXTERNAL_COMPILER_RT'] = 'ON'
 
-    # Don't build libfuzzer, since it's broken on Darwin and we don't need it
-    # anyway.
-    stage1_extra_defines['COMPILER_RT_BUILD_LIBFUZZER'] = 'OFF'
+        # Don't build libfuzzer, since it's broken on Darwin and we don't need it
+        # anyway.
+        stage1_extra_defines['COMPILER_RT_BUILD_LIBFUZZER'] = 'OFF'
 
     # Set the compiler and linker flags
     stage1_extra_defines['CMAKE_ASM_FLAGS'] = ' '.join(cflags)
@@ -1202,17 +1139,18 @@ def build_stage2(stage1_install,
 
     update_cmake_sysroot_flags(stage2_extra_defines, host_sysroot())
 
-    if not utils.host_is_darwin():
+    if utils.host_is_darwin():
+        # Don't build libfuzzer, since it's broken on Darwin and we don't need
+        # it anyway.
+        stage2_extra_defines['COMPILER_RT_BUILD_LIBFUZZER'] = 'OFF'
+
+    else:
         stage2_extra_defines['LLVM_ENABLE_LLD'] = 'ON'
 
         # lld, lto and pgo instrumentation doesn't work together
         # http://b/79419131
         if not build_instrumented and not no_lto:
             stage2_extra_defines['LLVM_ENABLE_LTO'] = 'Thin'
-
-    # Don't build libfuzzer, since it's broken on Darwin and we don't need it
-    # anyway.
-    stage2_extra_defines['COMPILER_RT_BUILD_LIBFUZZER'] = 'OFF'
 
     if enable_assertions:
         stage2_extra_defines['LLVM_ENABLE_ASSERTIONS'] = 'ON'
@@ -1294,8 +1232,6 @@ def build_runtimes(stage2_install):
     build_crts(stage2_install, version)
     build_crts(stage2_install, version, ndk_cxx=True)
     build_crts_host_i686(stage2_install, version)
-    build_libfuzzers(stage2_install, version)
-    build_libfuzzers(stage2_install, version, ndk_cxx=True)
     build_libomp(stage2_install, version)
     build_libomp(stage2_install, version, ndk_cxx=True)
     # Bug: http://b/64037266. `strtod_l` is missing in NDK r15. This will break
