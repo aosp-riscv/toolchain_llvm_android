@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fb9a9c3_b5fab268",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1002068
+      },
+      "writtenOn": "2019-05-07T12:56:12Z",
+      "side": 1,
+      "message": "The extra \"-pc\" vendor bit in the x86_64 triple is a bit inconsistent here.",
+      "revId": "80800fcfe8a06b815fe0bcab36399185074b2cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f053e4c_22c9f27a",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1002068
+      },
+      "writtenOn": "2019-05-07T12:56:12Z",
+      "side": 1,
+      "message": "I think `WINVER` isn\u0027t necessary to set (I haven\u0027t run into a need to set it so far). The llvm cmake files also end up adding `_FILE_OFFSET_BITS\u003d64` so I don\u0027t think that one is strictly necessary.",
+      "revId": "80800fcfe8a06b815fe0bcab36399185074b2cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ce7c527_036f03b2",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1002068
+      },
+      "writtenOn": "2019-05-07T12:56:12Z",
+      "side": 1,
+      "message": "General heads up regarding this; in latest mingw-w64 trunk we\u0027ve made it possible to request this with `-D_UCRT`, to avoid having to touch raw msvcrt version numbers. (We also made it possible to set the less misformed version 0xE00 instead of 0x1400 - both should work going forward.)",
+      "revId": "80800fcfe8a06b815fe0bcab36399185074b2cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba8382cb_1e9d2766",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1002068
+      },
+      "writtenOn": "2019-05-07T12:56:12Z",
+      "side": 1,
+      "message": "Specifying both `-lucrt` and `-lucrtbase` is a bit redundant. The former links against the api-ms-win-crt-*.dll, while the latter links against ucrtbase.dll. The total set of symbols exported by both of them should be pretty much equivalent.\n\nWhen linking with MSVC, you in practice end up linking against api-ms-win-crt*.dll, so -lucrt should be the one which is most consistent with that.",
+      "revId": "80800fcfe8a06b815fe0bcab36399185074b2cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
