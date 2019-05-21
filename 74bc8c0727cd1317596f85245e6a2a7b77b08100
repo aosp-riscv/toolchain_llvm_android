@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bdc224dc_8209a2f7",
+        "filename": "update-binutils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-05-21T21:05:08Z",
+      "side": 1,
+      "message": "I\u0027ll do that in a follow-up CL.",
+      "parentUuid": "ab4d2c91_9fcccceb",
+      "revId": "74bc8c0727cd1317596f85245e6a2a7b77b08100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ebab6f8_6fc4b448",
         "filename": "update-binutils.py",
         "patchSetId": 2
@@ -39,6 +57,30 @@
       "revId": "74bc8c0727cd1317596f85245e6a2a7b77b08100",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d74874b4_802f2a0b",
+        "filename": "update-binutils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-05-21T21:05:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ebab6f8_6fc4b448",
+      "range": {
+        "startLine": 69,
+        "startChar": 36,
+        "endLine": 69,
+        "endChar": 48
+      },
+      "revId": "74bc8c0727cd1317596f85245e6a2a7b77b08100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
