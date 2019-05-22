@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f704a51_ee3274f9",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-05-22T00:33:10Z",
+      "side": 1,
+      "message": "Does the Clang driver use the libclang_rt.fuzzer.* library when linking now?  If so, we can remove the runtimes_ndk_cxx/*/libFuzzer.a (in the future - not necessarily with this CL).  We can also remove the platform libFuzzer.a once Soong recognizes the new name.",
+      "range": {
+        "startLine": 623,
+        "startChar": 10,
+        "endLine": 623,
+        "endChar": 33
+      },
+      "revId": "d08bced208e50a2e29f9f9fa75701df36ea9a1ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "106489d4_fa065d52",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-05-22T00:33:10Z",
+      "side": 1,
+      "message": "Does this now build properly on Darwin?",
+      "revId": "d08bced208e50a2e29f9f9fa75701df36ea9a1ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
