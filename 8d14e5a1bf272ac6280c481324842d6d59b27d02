@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5fcfe6d_5015eb8e",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-05-24T20:11:43Z",
+      "side": 1,
+      "message": "You have the logic reversed - we need this \u0027OFF\u0027 for Darwin and \u0027ON\u0027 otherwise.",
+      "revId": "8d14e5a1bf272ac6280c481324842d6d59b27d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
