@@ -16,6 +16,24 @@
       "revId": "8d14e5a1bf272ac6280c481324842d6d59b27d02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "413a7a0a_235004bb",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-24T20:54:45Z",
+      "side": 1,
+      "message": "Oops, thanks!",
+      "parentUuid": "f5fcfe6d_5015eb8e",
+      "revId": "8d14e5a1bf272ac6280c481324842d6d59b27d02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
