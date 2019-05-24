@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "de1804f2_ebb7dc48",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-24T20:07:23Z",
+      "side": 1,
+      "message": "The clang driver does, but the Android build tree explicitly directly links against libFuzzer.a during device builds. I\u0027m upstreaming host libFuzzer patches soon, they\u0027ll exercise the libclang_rt.fuzzer* libraries, but it\u0027s not through the clang driver (rather, through ldflags).\n\nI intend to deprecate the use of the libFuzzer.a path, but I don\u0027t want to break libFuzzer-for-device on the next toolchain release. Will deprecate/delete when both the toolchain and android-master are stable and in-sync.",
+      "parentUuid": "3f704a51_ee3274f9",
+      "range": {
+        "startLine": 623,
+        "startChar": 10,
+        "endLine": 623,
+        "endChar": 33
+      },
+      "revId": "d08bced208e50a2e29f9f9fa75701df36ea9a1ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "106489d4_fa065d52",
         "filename": "build.py",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "d08bced208e50a2e29f9f9fa75701df36ea9a1ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48fcb48b_c431e869",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2019-05-24T20:07:23Z",
+      "side": 1,
+      "message": "libFuzzer is not supported on Darwin, have disabled it here for that specific host.",
+      "parentUuid": "106489d4_fa065d52",
+      "revId": "d08bced208e50a2e29f9f9fa75701df36ea9a1ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
