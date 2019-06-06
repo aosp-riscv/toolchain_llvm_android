@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c69d9a2_d57d7c2f",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-06-06T09:54:47Z",
+      "side": 1,
+      "message": "You need to edit android_version.py. I suggest bumping it to v4, and marking it as the \u0027d\u0027 build.",
+      "revId": "f6fc84eded2030c617a8c03a7a7ec1e67fba461a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10d325bf_997ca603",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-06-06T09:54:47Z",
+      "side": 1,
+      "message": "This is sufficient for now, but we really should refactor this to have llvm_path be the top-level monorepo path, and then suffix it with the subdirs as necessary.",
+      "revId": "f6fc84eded2030c617a8c03a7a7ec1e67fba461a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f62863c_624ae7c1",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-06-06T09:54:47Z",
+      "side": 1,
+      "message": "Stray whitespace?",
+      "revId": "f6fc84eded2030c617a8c03a7a7ec1e67fba461a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "446eaae1_e1d7994f",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-06-06T09:54:47Z",
+      "side": 1,
+      "message": "I\u0027m surprised that this is the exact same as for stage1. In that case, this can also probably be hoisted out into some common setup.",
+      "revId": "f6fc84eded2030c617a8c03a7a7ec1e67fba461a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
