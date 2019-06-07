@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "510afc32_09afcc86",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-07T23:06:00Z",
+      "side": 1,
+      "message": "probably want a newline here",
+      "revId": "feb62e7892ef79f296e2dfc8fae135572ea6e883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
