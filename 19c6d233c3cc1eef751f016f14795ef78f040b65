@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c2198f2a_d9b0874e",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-10T18:24:38Z",
+      "side": 1,
+      "message": "Good catch, it was not.  I suspect this was left behind; then I found our OOT patch for libfuzzer. Removed/done.",
+      "parentUuid": "c7685bd9_b77aec7b",
+      "revId": "19c6d233c3cc1eef751f016f14795ef78f040b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74c34fe6_23edff78",
         "filename": "build.py",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "19c6d233c3cc1eef751f016f14795ef78f040b65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0277688_0f27036f",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-10T18:24:38Z",
+      "side": 1,
+      "message": "ditto.",
+      "parentUuid": "74c34fe6_23edff78",
+      "revId": "19c6d233c3cc1eef751f016f14795ef78f040b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1b40d8e6_e20cbdfc",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-10T18:24:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26c1afe8_22265011",
+      "revId": "19c6d233c3cc1eef751f016f14795ef78f040b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a6288a6_c15869fc",
         "filename": "build.py",
         "patchSetId": 5
@@ -64,6 +118,24 @@
       "writtenOn": "2019-06-08T00:42:59Z",
       "side": 1,
       "message": "I think we only need licenses from the monorepo from now on.  So this should be a singleton/string: \u0027llvm-project\u0027.",
+      "revId": "19c6d233c3cc1eef751f016f14795ef78f040b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5c2025d_ade2055e",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-10T18:24:38Z",
+      "side": 1,
+      "message": "So llvm-project/llvm, llvm-project/clang, etc. all have their own LICENSE.TXT files.  They differ in the dates of copyright.  Should we still include them all, or just one?",
+      "parentUuid": "0a6288a6_c15869fc",
       "revId": "19c6d233c3cc1eef751f016f14795ef78f040b65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
