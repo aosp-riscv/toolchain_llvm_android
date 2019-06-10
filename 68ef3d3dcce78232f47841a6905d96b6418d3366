@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47f349d0_a77bf22e",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-10T22:34:48Z",
+      "side": 1,
+      "message": "In addition to \u0027compiler-rt\u0027 like I mentioned in the other comment, we should also include clang-tools-extra (for clang-tiday) and openmp (for host-side openmp).",
+      "range": {
+        "startLine": 1124,
+        "startChar": 71,
+        "endLine": 1124,
+        "endChar": 72
+      },
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02fd947a_5e50f0a6",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-10T22:34:48Z",
+      "side": 1,
+      "message": "In addition to removing non-necessary binaries here, we should also verify that everything in necessary_bin_files is present.  This can be done in a future CL.",
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
