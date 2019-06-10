@@ -139,6 +139,24 @@
       "revId": "19c6d233c3cc1eef751f016f14795ef78f040b65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e389ff08_92cfb922",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-10T20:12:06Z",
+      "side": 1,
+      "message": "You\u0027re right.  We should be checking llvm-project/\u003cproject\u003e for each \u003cproject\u003e in this list.",
+      "parentUuid": "e5c2025d_ade2055e",
+      "revId": "19c6d233c3cc1eef751f016f14795ef78f040b65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
