@@ -25,6 +25,53 @@
     },
     {
       "key": {
+        "uuid": "938ec075_bc409672",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-10T22:44:11Z",
+      "side": 1,
+      "message": "I guess clang-tools-extra doesn\u0027t need its own entry and I forgot that we don\u0027t build openmp for the host.  So we only need compiler-rt.",
+      "parentUuid": "47f349d0_a77bf22e",
+      "range": {
+        "startLine": 1124,
+        "startChar": 71,
+        "endLine": 1124,
+        "endChar": 72
+      },
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e53aa809_f30cbba2",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-10T22:44:11Z",
+      "side": 1,
+      "message": "I think these can now be removed as well.  But can be done in a follow-up CL.",
+      "range": {
+        "startLine": 1142,
+        "startChar": 0,
+        "endLine": 1143,
+        "endChar": 58
+      },
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02fd947a_5e50f0a6",
         "filename": "build.py",
         "patchSetId": 6
@@ -39,6 +86,24 @@
       "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d57c08ab_0195a104",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-10T22:44:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02fd947a_5e50f0a6",
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
