@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "5c6fb622_0214530b",
+        "filename": "build.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1507,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-11T20:46:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2ed8911_276bc2c2",
+      "range": {
+        "startLine": 1507,
+        "startChar": 7,
+        "endLine": 1507,
+        "endChar": 33
+      },
+      "revId": "af57c659528159dfa2926ff912ddd0fd4d43cc99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3bb4a82c_9930561a",
         "filename": "build.py",
         "patchSetId": 8
@@ -59,6 +83,30 @@
       "writtenOn": "2019-06-11T19:34:18Z",
       "side": 1,
       "message": "Just delete this.  This is covered by your TODO to check for files in lib/.",
+      "range": {
+        "startLine": 1531,
+        "startChar": 7,
+        "endLine": 1531,
+        "endChar": 33
+      },
+      "revId": "af57c659528159dfa2926ff912ddd0fd4d43cc99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03a2b487_97bc14b9",
+        "filename": "build.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1531,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-11T20:46:12Z",
+      "side": 1,
+      "message": "Done.\n\nLooks like scan-build and scan-view are also not produced for windows.",
+      "parentUuid": "3bb4a82c_9930561a",
       "range": {
         "startLine": 1531,
         "startChar": 7,
@@ -91,6 +139,30 @@
       "revId": "af57c659528159dfa2926ff912ddd0fd4d43cc99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b9ee6d3_15609691",
+        "filename": "build.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1553,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-11T20:46:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c8c7ec_7cb57961",
+      "range": {
+        "startLine": 1553,
+        "startChar": 6,
+        "endLine": 1553,
+        "endChar": 11
+      },
+      "revId": "af57c659528159dfa2926ff912ddd0fd4d43cc99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
