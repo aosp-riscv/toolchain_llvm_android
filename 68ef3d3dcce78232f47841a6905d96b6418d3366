@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4933a17f_e1652163",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-11T17:58:20Z",
+      "side": 1,
+      "message": "Done anyways. Please review.",
+      "parentUuid": "e53aa809_f30cbba2",
+      "range": {
+        "startLine": 1142,
+        "startChar": 0,
+        "endLine": 1143,
+        "endChar": 58
+      },
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02fd947a_5e50f0a6",
         "filename": "build.py",
         "patchSetId": 6
@@ -104,6 +128,24 @@
       "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db4a4f2d_89df49e8",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-11T17:58:20Z",
+      "side": 1,
+      "message": "I added a simple loop for this anyways. Please triple check it.\n\nNote that the list contains llvm-addr2line which isn\u0027t built and LLVMgold which isn\u0027t in the bin/ dir.",
+      "parentUuid": "d57c08ab_0195a104",
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
