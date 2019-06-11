@@ -146,6 +146,24 @@
       "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29571bcd_fa97c434",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-11T18:11:55Z",
+      "side": 1,
+      "message": "Looks like windows builds also don\u0027t produce clang-9.exe (but they do produce clang.exe and clang++.exe)",
+      "parentUuid": "db4a4f2d_89df49e8",
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
