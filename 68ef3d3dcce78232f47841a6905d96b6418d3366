@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "b8d8aa1b_65736e9d",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-11T21:14:24Z",
+      "side": 1,
+      "message": "This is likely the only AI left: to include compiler-rt for stage2.",
+      "parentUuid": "938ec075_bc409672",
+      "range": {
+        "startLine": 1124,
+        "startChar": 71,
+        "endLine": 1124,
+        "endChar": 72
+      },
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e53aa809_f30cbba2",
         "filename": "build.py",
         "patchSetId": 6
@@ -182,6 +206,24 @@
       "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a121465f_d4e26d80",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-11T21:14:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d287fe77_a3feb2d8",
+      "revId": "68ef3d3dcce78232f47841a6905d96b6418d3366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
