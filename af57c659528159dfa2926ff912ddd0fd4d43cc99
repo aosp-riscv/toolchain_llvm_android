@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c31d0161_888b06e9",
+        "filename": "build.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-11T21:09:50Z",
+      "side": 1,
+      "message": "I think LLVM_ENABLED_PROJECTS means \"should I build lld from source?\" while LLVM_ENABLED_PROJECTS means \"should I try to use lld to link during the build?\" so I don\u0027t think anything needs to change here? Please triple check.",
+      "parentUuid": "138351c7_5b23d962",
+      "range": {
+        "startLine": 1145,
+        "startChar": 4,
+        "endLine": 1146,
+        "endChar": 54
+      },
+      "revId": "af57c659528159dfa2926ff912ddd0fd4d43cc99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a2ed8911_276bc2c2",
         "filename": "build.py",
         "patchSetId": 8
