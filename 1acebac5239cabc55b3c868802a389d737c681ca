@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f8f97626_46c0c9ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-13T00:11:12Z",
+      "side": 1,
+      "message": "This is fine because it\u0027s a local build.  The build server will pass an actual build number to build.py.",
+      "range": {
+        "startLine": 15,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "1acebac5239cabc55b3c868802a389d737c681ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
