@@ -1,0 +1,10 @@
+Verified+1: Nick Desaulniers <ndesaulniers@google.com>
+Code-Review+1: Nick Desaulniers <ndesaulniers@google.com>
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Pirama Arumuga Nainar <pirama@google.com>
+Submitted-at: Thu, 13 Jun 2019 15:34:45 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/982376
+Project: toolchain/llvm_android
+Branch: refs/heads/master
