@@ -7,8 +7,12 @@ but, unlike it, ASan
 
 * detects overflows on stack and global objects
 * does not detect uninitialized reads and memory leaks
-* is much faster (2-3x slowdown compared to Valgrind’s 20-100x)
+* is much faster (2-3x slowdown compared to Valgrindâs 20-100x)
 * has less memory overhead
+
+
+
+
 
 This document describes how to build and run parts of Android platform
 with AddressSanitizer.
