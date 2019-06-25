@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a38057ac_81878369",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-25T23:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9207259f_c1bbe377",
+      "range": {
+        "startLine": 716,
+        "startChar": 8,
+        "endLine": 716,
+        "endChar": 22
+      },
+      "revId": "bbd47e1a64fcdf2530c75c60a0bbc6c70f27e681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "880a7e1a_07d95303",
         "filename": "build.py",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "bbd47e1a64fcdf2530c75c60a0bbc6c70f27e681",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70ca5c5e_7db46d4f",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-06-25T23:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "880a7e1a_07d95303",
+      "revId": "bbd47e1a64fcdf2530c75c60a0bbc6c70f27e681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
