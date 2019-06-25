@@ -713,6 +713,7 @@ def build_libomp(stage2_install, clang_version, ndk_cxx=False):
         libomp_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags) + ' -stdlib=libstdc++'
         libomp_defines['LIBOMP_ENABLE_SHARED'] = 'FALSE'
         libomp_defines['OPENMP_ENABLE_LIBOMPTARGET'] = 'FALSE'
+        libomp_defines['LLVM_ENABLE_PROJECTS'] = 'openmp'
 
         # Minimum version for OpenMP's CMake is too low for the CMP0056 policy
         # to be ON by default.
