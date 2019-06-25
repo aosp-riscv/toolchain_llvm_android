@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9207259f_c1bbe377",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-25T22:10:49Z",
+      "side": 1,
+      "message": "This is not necessary because we\u0027re doing a standalone openmp build (see cmake_path in lne 729).",
+      "range": {
+        "startLine": 716,
+        "startChar": 8,
+        "endLine": 716,
+        "endChar": 22
+      },
+      "revId": "bbd47e1a64fcdf2530c75c60a0bbc6c70f27e681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "880a7e1a_07d95303",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-06-25T22:10:49Z",
+      "side": 1,
+      "message": "Add openmp here.  Or alternately, append to this only for stage2.\n\nThis also builds openmp for the host.  Host openmp is not usable right now but this\u0027ll be needed in the future to fulfill a request from the nnapi team for host openmp support.",
+      "revId": "bbd47e1a64fcdf2530c75c60a0bbc6c70f27e681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
