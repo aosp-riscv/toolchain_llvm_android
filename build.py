@@ -1207,6 +1207,7 @@ def build_stage2(stage1_install,
     stage2_extra_defines['LLVM_ENABLE_LIBCXX'] = 'ON'
     stage2_extra_defines['SANITIZER_ALLOW_CXXABI'] = 'OFF'
     stage2_extra_defines['LIBOMP_ENABLE_SHARED'] = 'FALSE'
+    stage2_extra_defines['CLANG_DEFAULT_LINKER'] = 'lld'
 
     update_cmake_sysroot_flags(stage2_extra_defines, host_sysroot())
 
