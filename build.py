@@ -530,7 +530,10 @@ def build_crts(stage2_install, clang_version, ndk_cxx=False):
         # personality routine warnings caused by r309226.
         # crt_defines['COMPILER_RT_ENABLE_WERROR'] = 'ON'
 
-        cflags.append('-isystem ' + support_headers())
+        # Skip implicit C++ headers and explicitly include C++ header paths.
+        cflags.append('-nostdinc++')
+        cflags.extend('-isystem ' + d for d in libcxx_header_dirs(ndk_cxx))
+
         cflags.append('-funwind-tables')
 
         crt_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
@@ -1202,7 +1205,7 @@ def build_stage2(stage1_install,
     stage2_path = utils.out_path('stage2')
 
     stage2_extra_defines = get_shared_extra_defines()
-    stage2_extra_defines['LLVM_ENABLE_PROJECTS'] += ';openmp'
+    stage2_extra_defines['LLVM_ENABLE_PROJECTS'] += ';clang-tools-extra;openmp'
     stage2_extra_defines['CMAKE_C_COMPILER'] = stage2_cc
     stage2_extra_defines['CMAKE_CXX_COMPILER'] = stage2_cxx
     stage2_extra_defines['LLVM_ENABLE_LIBCXX'] = 'ON'
