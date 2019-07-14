@@ -98,15 +98,15 @@ def pgo_profdata_file(profdata_file):
 
 
 def ndk_base():
-    ndk_version = 'r16'
+    ndk_version = 'r20'
     return utils.android_path('toolchain/prebuilts/ndk', ndk_version)
 
 
 def android_api(arch, platform=False):
     if platform:
-        return '26'
+        return '29'
     elif arch in ['arm', 'i386', 'x86']:
-        return '14'
+        return '16'
     else:
         return '21'
 
@@ -424,12 +424,17 @@ def cross_compile_configs(stage2_install, platform=False):
             libcxx_libs = os.path.join(ndk_base(), 'sources', 'cxx-stl',
                                        'llvm-libc++', 'libs')
             if ndk_arch == 'arm':
-                libcxx_libs = os.path.join(libcxx_libs, 'armeabi')
+                libcxx_libs = os.path.join(libcxx_libs, 'armeabi-v7a')
             elif ndk_arch == 'arm64':
                 libcxx_libs = os.path.join(libcxx_libs, 'arm64-v8a')
             else:
                 libcxx_libs = os.path.join(libcxx_libs, ndk_arch)
             ldflags += ['-L', libcxx_libs]
+
+            # Explicitly select the correct libc++.so version
+            ldflags += ['-nostdlib++']
+            ldflags += ['-l:libc++.a.' + android_api(arch)]
+            ldflags += ['-ldl']
 
         defines['CMAKE_EXE_LINKER_FLAGS'] = ' '.join(ldflags)
         defines['CMAKE_SHARED_LINKER_FLAGS'] = ' '.join(ldflags)
@@ -549,7 +554,7 @@ def build_crts(stage2_install, clang_version, ndk_cxx=False):
         libs = []
         if arch == 'arm':
             libs += ['-latomic']
-        if ndk_cxx:
+        if android_api(arch) < 21:
             libs += ['-landroid_support']
         crt_defines['SANITIZER_COMMON_LINK_LIBS'] = ' '.join(libs)
         if not ndk_cxx:
