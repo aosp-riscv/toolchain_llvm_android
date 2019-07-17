@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eee1ea28_86f387c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-17T23:47:54Z",
+      "side": 1,
+      "message": "29",
+      "range": {
+        "startLine": 9,
+        "startChar": 44,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "547257b0e0992219abb0284fae97cf187d26b80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42cf8979_04070bb0",
+        "filename": "build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-17T23:47:54Z",
+      "side": 1,
+      "message": "Why do we need libdl?",
+      "revId": "547257b0e0992219abb0284fae97cf187d26b80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
