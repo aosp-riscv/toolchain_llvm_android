@@ -57,6 +57,24 @@
       "revId": "547257b0e0992219abb0284fae97cf187d26b80f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40315a03_2296b8b4",
+        "filename": "build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-18T00:22:45Z",
+      "side": 1,
+      "message": "Previously did the driver pass -ldl when we didn\u0027t pass -nostdlib++?",
+      "parentUuid": "c46644bc_81a29541",
+      "revId": "547257b0e0992219abb0284fae97cf187d26b80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
