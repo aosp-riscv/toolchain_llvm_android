@@ -39,6 +39,24 @@
       "revId": "547257b0e0992219abb0284fae97cf187d26b80f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c46644bc_81a29541",
+        "filename": "build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-07-18T00:18:47Z",
+      "side": 1,
+      "message": "We\u0027re explicitly linking in libc++.a.16 even its unneeded, thus we have to also link its dependency, libdl.",
+      "parentUuid": "42cf8979_04070bb0",
+      "revId": "547257b0e0992219abb0284fae97cf187d26b80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
