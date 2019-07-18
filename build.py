@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# pylint: disable=not-callable, relative-import, line-too-long
+# pylint: disable=not-callable, relative-import, line-too-long, no-else-return
 
 import argparse
 import datetime
@@ -104,11 +104,11 @@ def ndk_base():
 
 def android_api(arch, platform=False):
     if platform:
-        return '26'
+        return 26
     elif arch in ['arm', 'i386', 'x86']:
-        return '14'
+        return 14
     else:
-        return '21'
+        return 21
 
 
 def ndk_path(arch, platform=False):
@@ -440,7 +440,7 @@ def cross_compile_configs(stage2_install, platform=False):
             debug_prefix_flag(),
             '--target=%s' % llvm_triple,
             '-B%s' % toolchain_bin,
-            '-D__ANDROID_API__=%s' % android_api(arch, platform=platform),
+            '-D__ANDROID_API__=' + android_api(arch, platform=platform),
             '-ffunction-sections',
             '-fdata-sections',
             extra_flags,
