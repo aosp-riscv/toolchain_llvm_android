@@ -299,7 +299,7 @@ def create_sysroots():
                     # created.  Build it for the current arch and copy it to
                     # <libdir>.
                     out_dir = build_libcxxabi(utils.out_path('stage2-install'), arch)
-                    out_path = utils.out_path(out_dir, 'lib', 'libc++abi.a')
+                    out_path = utils.out_path(out_dir, 'lib64', 'libc++abi.a')
                     shutil.copy2(out_path, os.path.join(libdir))
 
 
@@ -384,6 +384,7 @@ def cross_compile_configs(stage2_install, platform=False):
 
     cc = os.path.join(stage2_install, 'bin', 'clang')
     cxx = os.path.join(stage2_install, 'bin', 'clang++')
+    llvm_config = os.path.join(stage2_install, 'bin', 'llvm-config')
 
     for (arch, ndk_arch, toolchain_path, llvm_triple, extra_flags) in configs:
         toolchain_root = utils.android_path('prebuilts/gcc',
@@ -394,6 +395,7 @@ def cross_compile_configs(stage2_install, platform=False):
         defines = {}
         defines['CMAKE_C_COMPILER'] = cc
         defines['CMAKE_CXX_COMPILER'] = cxx
+        defines['LLVM_CONFIG_PATH'] = llvm_config
 
         # Include the directory with libgcc.a to the linker search path.
         toolchain_builtins = os.path.join(
@@ -838,8 +840,10 @@ def windows_cflags():
 
 
 def build_libs_for_windows(libname,
+                           toolchain_dir,
                            enable_assertions,
                            install_dir):
+    print('#######building ' + libname + ', install dir: ' + install_dir)
 
     cflags, ldflags = host_gcc_toolchain_flags('windows-x86')
 
@@ -848,9 +852,13 @@ def build_libs_for_windows(libname,
     cmake_defines = dict()
     cmake_defines['CMAKE_SYSTEM_NAME'] = 'Windows'
     cmake_defines['CMAKE_C_COMPILER'] = os.path.join(
-        clang_prebuilt_bin_dir(), 'clang')
+        toolchain_dir, 'bin', 'clang')
     cmake_defines['CMAKE_CXX_COMPILER'] = os.path.join(
-        clang_prebuilt_bin_dir(), 'clang++')
+        toolchain_dir, 'bin', 'clang++')
+    cmake_defines['LLVM_CONFIG_PATH'] = os.path.join(
+        toolchain_dir, 'bin', 'llvm-config')
+    # To prevent cmake from checking libstdcxx version.
+    cmake_defines['LLVM_ENABLE_LIBCXX'] = 'ON'
 
     windows_sysroot = utils.android_path('prebuilts', 'gcc', 'linux-x86', 'host',
                                          'x86_64-w64-mingw32-4.8',
@@ -872,7 +880,7 @@ def build_libs_for_windows(libname,
         # into install_dir only during libcxx's install step.  But use the
         # library from install_dir.
         cmake_defines['LIBCXX_CXX_ABI_INCLUDE_PATHS'] = utils.llvm_path('libcxxabi', 'include')
-        cmake_defines['LIBCXX_CXX_ABI_LIBRARY_PATH'] = os.path.join(install_dir, 'lib')
+        cmake_defines['LIBCXX_CXX_ABI_LIBRARY_PATH'] = os.path.join(install_dir, 'lib64')
 
         # Disable libcxxabi visibility annotations since we're only building it
         # statically.
@@ -906,7 +914,7 @@ def build_libs_for_windows(libname,
                  install=True)
 
 
-def build_llvm_for_windows(stage1_install,
+def build_llvm_for_windows(toolchain_install,
                            targets,
                            enable_assertions,
                            build_dir,
@@ -915,18 +923,21 @@ def build_llvm_for_windows(stage1_install,
 
     # Build and install libcxxabi and libcxx and use them to build Clang.
     build_libs_for_windows('libcxxabi',
+                           toolchain_install,
                            enable_assertions,
                            install_dir)
 
     build_libs_for_windows('libcxx',
+                           toolchain_install,
                            enable_assertions,
                            install_dir)
 
     # Write a NATIVE.cmake in windows_path that contains the compilers used
     # to build native tools such as llvm-tblgen and llvm-config.  This is
     # used below via the CMake variable CROSS_TOOLCHAIN_FLAGS_NATIVE.
-    cc = os.path.join(stage1_install, 'bin', 'clang')
-    cxx = os.path.join(stage1_install, 'bin', 'clang++')
+    cc = os.path.join(toolchain_install, 'bin', 'clang')
+    cxx = os.path.join(toolchain_install, 'bin', 'clang++')
+
     check_create_path(build_dir)
     native_cmake_file_path = os.path.join(build_dir, 'NATIVE.cmake')
     native_cmake_text = ('set(CMAKE_C_COMPILER {cc})\n'
@@ -1015,8 +1026,6 @@ def build_llvm_for_windows(stage1_install,
     windows_extra_defines['CMAKE_MODULE_LINKER_FLAGS'] = ' '.join(ldflags)
 
     windows_extra_env = dict()
-    if USE_GOMA_FOR_STAGE1:
-        windows_extra_env['USE_GOMA'] = 'true'
 
     build_llvm(
         targets=targets,
@@ -1735,7 +1744,7 @@ def main():
 
         windows64_path = utils.out_path('windows-x86-64')
         build_llvm_for_windows(
-            stage1_install=stage1_install,
+            toolchain_install=stage2_install,
             targets=STAGE2_TARGETS,
             enable_assertions=args.enable_assertions,
             build_dir=windows64_path,
