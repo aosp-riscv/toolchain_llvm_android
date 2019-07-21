@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a4bf312_f947b3e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-21T02:11:25Z",
+      "side": 1,
+      "message": "Thanks for identifying the issue and fixing it.  The following commit message is more appropriate, based on my understanding:\n\nUse just-built llvm-config when building runtimes\n\nPreviously, we were using the system llvm-config.  Also,\n1. Use stage1 binaries to build windows libraries (libcxx, libcxxabi).\n2. New llvm-config installs libs to lib64/.  Change paths accordingly.\n\nTest: ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "e41e43260088cce8e9c165fedca887bf47865c32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
