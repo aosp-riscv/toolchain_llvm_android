@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0de019f8_aca71521",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-22T22:59:21Z",
+      "side": 1,
+      "message": "It looks like the libraries here are also in ${real_libcxx_libs}/..  Maybe it\u0027s cleaner to use those instead?  Just leave a todo here and we can figure it out later.",
+      "revId": "88a60f70d4b8787e71db354c7570f278ba5e3248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc9f233e_eed7a6db",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-22T22:59:21Z",
+      "side": 1,
+      "message": "Before r20, it was only necessary for compiler-rt and was added in build_crts().  Is it needed for openmp or fuzzer now?  If so, can we stop adding this a second time in build_crts()?",
+      "revId": "88a60f70d4b8787e71db354c7570f278ba5e3248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
