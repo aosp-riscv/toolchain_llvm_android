@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f04f1bc5_56ca4800",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1208,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-23T04:41:43Z",
+      "side": 1,
+      "message": "This should be a no-op right?  The packaging function already checks that clang-tidy exists.  Anyway, it\u0027s still good to be explicit here.",
+      "revId": "6e0eac69b910dd96506b27e22e80e67cbc7b754f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
