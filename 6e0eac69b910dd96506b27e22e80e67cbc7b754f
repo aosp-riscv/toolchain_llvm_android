@@ -16,6 +16,24 @@
       "revId": "6e0eac69b910dd96506b27e22e80e67cbc7b754f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "616dce66_7e6027d2",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1208,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-07-23T06:27:24Z",
+      "side": 1,
+      "message": "No, clang-tidy won\u0027t be built if clang-tools-extra is not enabled (It was recently moved to that repo).",
+      "parentUuid": "f04f1bc5_56ca4800",
+      "revId": "6e0eac69b910dd96506b27e22e80e67cbc7b754f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
