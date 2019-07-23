@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "47f71297_50e20727",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-07-23T02:21:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0de019f8_aca71521",
+      "revId": "88a60f70d4b8787e71db354c7570f278ba5e3248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc9f233e_eed7a6db",
         "filename": "build.py",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2019-07-22T22:59:21Z",
       "side": 1,
       "message": "Before r20, it was only necessary for compiler-rt and was added in build_crts().  Is it needed for openmp or fuzzer now?  If so, can we stop adding this a second time in build_crts()?",
+      "revId": "88a60f70d4b8787e71db354c7570f278ba5e3248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "795fe31a_c1e0cff0",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-07-23T02:21:03Z",
+      "side": 1,
+      "message": "I built again and they don\u0027t actually need libandroid_support... Removed.",
+      "parentUuid": "dc9f233e_eed7a6db",
       "revId": "88a60f70d4b8787e71db354c7570f278ba5e3248",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
