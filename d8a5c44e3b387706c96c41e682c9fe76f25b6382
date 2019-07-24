@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f11ccb4_8749432d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-24T04:23:16Z",
+      "side": 1,
+      "message": "\"Use libcxx to build native tools (llvm-tblgen etc) for Windows toolchain\"",
+      "revId": "d8a5c44e3b387706c96c41e682c9fe76f25b6382",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
