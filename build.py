@@ -1531,6 +1531,8 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True):
         'clang-' + version.major_version() + ext,
         'scan-build' + ext,
         'scan-view' + ext,
+        # For testing on Windows, DO NOT SUBMIT
+        'LLVMgold' + shlib_ext,
     ]
     non_windows_bin_blacklist = [
         'LLVMgold' + shlib_ext,
