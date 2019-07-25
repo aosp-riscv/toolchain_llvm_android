@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef81caed_aefc063e",
+        "filename": "build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-25T05:21:51Z",
+      "side": 1,
+      "message": "is_windows32 can be removed.  32-bit windows prebuilts are not needed anymore.",
+      "range": {
+        "startLine": 1445,
+        "startChar": 24,
+        "endLine": 1445,
+        "endChar": 36
+      },
+      "revId": "81c043f5c582ccfe660e45e43065f6ba41bb0be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "365e1b55_56bfd4a1",
+        "filename": "build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-25T05:21:51Z",
+      "side": 1,
+      "message": "LLVMgold.dll also depends on libwinpthread-1.dll so this should be copied to lib64 as well.",
+      "revId": "81c043f5c582ccfe660e45e43065f6ba41bb0be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71d8609b_1b368c92",
+        "filename": "build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-25T05:21:51Z",
+      "side": 1,
+      "message": "This as well.",
+      "revId": "81c043f5c582ccfe660e45e43065f6ba41bb0be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
