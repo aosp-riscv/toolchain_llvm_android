@@ -232,7 +232,7 @@ def build_target(android_base, clang_version, target, max_jobs, redirect_stderr,
     modulesList = ' '.join(modules)
     print 'Start building target %s and modules %s.' % (target, modulesList)
     subprocess.check_call(
-        ['/bin/bash', '-c', 'make ' + jobs + ' ' + modulesList],
+        ['/bin/bash', '-c', 'm ' + jobs + ' ' + modulesList],
         cwd=android_base,
         env=env)
 
