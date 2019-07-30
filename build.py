@@ -1527,7 +1527,12 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True):
         'scan-view' + ext,
     ]
 
-    windows_bin_blacklist = [
+    windows_extra_bin_files = [
+        'clang-cl' + ext,
+        'llvm-lib' + ext,
+    ]
+
+    windows_blacklist_bin_files = [
         'clang-' + version.major_version() + ext,
         'scan-build' + ext,
         'scan-view' + ext,
@@ -1543,6 +1548,11 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True):
     bin_dir = os.path.join(install_dir, 'bin')
     lib_dir = os.path.join(install_dir, 'lib64')
 
+    if is_windows:
+        necessary_bin_files += windows_extra_bin_files
+        for f in windows_blacklist_bin_files:
+            necessary_bin_files.remove(f)
+
     bin_files = os.listdir(bin_dir)
     for bin_filename in bin_files:
         binary = os.path.join(bin_dir, bin_filename)
@@ -1555,8 +1565,6 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True):
 
     # FIXME: check that all libs under lib64/clang/<version>/ are created.
     for necessary_bin_file in necessary_bin_files:
-        if is_windows and necessary_bin_file in windows_bin_blacklist:
-            continue
         if not os.path.isfile(os.path.join(bin_dir, necessary_bin_file)):
             raise RuntimeError('Did not find %s in %s' % (necessary_bin_file, bin_dir))
 
