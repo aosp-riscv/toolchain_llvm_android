@@ -22,7 +22,7 @@ import os
 import shutil
 import subprocess
 
-import build
+import do_build as build
 import compiler_wrapper
 import utils
 
