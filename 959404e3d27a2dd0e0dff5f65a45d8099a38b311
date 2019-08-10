@@ -1,0 +1,8 @@
+Code-Review+2: Haibo Huang <hhb@google.com>
+Autosubmit+1: Haibo Huang <hhb@google.com>
+Presubmit-Ready+1: Haibo Huang <hhb@google.com>
+Submitted-by: Haibo Huang <hhb@google.com>
+Submitted-at: Sat, 10 Aug 2019 20:03:35 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1100177
+Project: toolchain/llvm_android
+Branch: refs/heads/master
