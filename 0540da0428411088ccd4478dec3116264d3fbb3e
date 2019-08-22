@@ -16,6 +16,24 @@
       "revId": "0540da0428411088ccd4478dec3116264d3fbb3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f959470_49606760",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2019-08-22T01:06:02Z",
+      "side": 1,
+      "message": "They are for GDB in NDK. :)",
+      "parentUuid": "873a2770_43cc4452",
+      "revId": "0540da0428411088ccd4478dec3116264d3fbb3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
