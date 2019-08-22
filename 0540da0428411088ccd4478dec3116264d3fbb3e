@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "873a2770_43cc4452",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-08-22T01:04:43Z",
+      "side": 1,
+      "message": "Can you also mention where this\u0027ll get used?  I presume this is for lldb?",
+      "revId": "0540da0428411088ccd4478dec3116264d3fbb3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
