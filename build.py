@@ -20,6 +20,7 @@ import argparse
 import datetime
 import glob
 import logging
+import multiprocessing
 import os
 import shutil
 import string
@@ -1256,6 +1257,46 @@ def build_stage1(stage1_install, build_name, build_llvm_tools=False):
         extra_env=stage1_extra_env)
 
 
+def build_autoconf(toolchain_install, src_path, build_directory):
+    """Builds autoconf based project."""
+    working_directory = os.path.join(build_directory, 'build')
+    install_directory = os.path.join(build_directory, 'install')
+    check_create_path(working_directory)
+    check_create_path(install_directory)
+
+    configure_args = [
+        os.path.join(src_path, 'configure'),
+        '--prefix=' + install_directory,
+    ]
+
+    cflags, ldflags = host_gcc_toolchain_flags(utils.build_os_type())
+    cflags.append('-fPIC')
+    cflags.append('--sysroot=' + host_sysroot())
+
+    cc = os.path.join(toolchain_install, 'bin', 'clang')
+    cxx = os.path.join(toolchain_install, 'bin', 'clang++')
+    env = {
+        'CC': ' '.join([cc] + cflags + ldflags),
+        'CXX': ' '.join([cxx, '-stdlib=libc++'] + cflags + ldflags),
+    }
+    check_call(configure_args, cwd=working_directory, env=env)
+
+    make_args = ['make', '-j' + str(multiprocessing.cpu_count())]
+    check_call(make_args, cwd=working_directory)
+
+    install_args = ['make', 'install']
+    check_call(install_args, cwd=working_directory)
+
+    return install_directory
+
+
+def build_libedit(stage1_install):
+    libedit_src = utils.android_path('external', 'libedit')
+    build_directory = utils.out_path('lib', 'libedit')
+    return build_autoconf(stage1_install,
+                          libedit_src, build_directory)
+
+
 def build_stage2(stage1_install,
                  stage2_install,
                  stage2_targets,
@@ -1281,10 +1322,14 @@ def build_stage2(stage1_install,
     stage2_extra_defines['LIBOMP_ENABLE_SHARED'] = 'FALSE'
 
     # lldb flags
-    stage2_extra_defines['LLDB_DISABLE_LIBEDIT'] = 'ON'
     stage2_extra_defines['LLDB_DISABLE_PYTHON'] = 'ON'
-    stage2_extra_defines['LLDB_DISABLE_CURSES'] = 'ON'
     stage2_extra_defines['LLDB_NO_DEBUGSERVER'] = 'ON'
+    stage2_extra_defines['LLDB_DISABLE_LIBEDIT'] = 'OFF'
+    stage2_extra_defines['LLDB_DISABLE_CURSES'] = 'OFF'
+
+    libedit_path = build_libedit(stage1_install)
+    stage2_extra_defines['libedit_INCLUDE_DIRS'] = os.path.join(libedit_path, 'include')
+    stage2_extra_defines['libedit_LIBRARIES'] = os.path.join(libedit_path, 'lib', 'libedit.a')
 
     update_cmake_sysroot_flags(stage2_extra_defines, host_sysroot())
 
