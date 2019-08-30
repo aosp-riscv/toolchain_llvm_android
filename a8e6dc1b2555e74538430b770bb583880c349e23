@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "0b68c808_008a0a15",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2019-08-30T21:54:19Z",
+      "side": 1,
+      "message": "Wait does that mean we can have a new build server, by simply bumping up that number? Let\u0027s change to at least 10.12 then... We had many problem in old macOS before...",
+      "parentUuid": "2121f13b_4e88d3ec",
+      "revId": "a8e6dc1b2555e74538430b770bb583880c349e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90ac69ec_ab6306b9",
         "filename": "build.py",
         "patchSetId": 3
