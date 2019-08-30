@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90ac69ec_ab6306b9",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-08-30T20:32:53Z",
+      "side": 1,
+      "message": "Is this already the default value?",
+      "range": {
+        "startLine": 1329,
+        "startChar": 26,
+        "endLine": 1329,
+        "endChar": 46
+      },
+      "revId": "a8e6dc1b2555e74538430b770bb583880c349e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
