@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "dfbd75b2_a542328d",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-30T21:11:49Z",
+      "side": 1,
+      "message": "I was a bit worried that we were still building on ancient 10.8 machines, but https://cs.corp.google.com/piper///depot/google3/configs/wireless/android/busytown/platform/aosp/aosp.gcl?l\u003d685 shows that we are building on a 10.10 machine. One drawback of doing this, however, is that our tools now won\u0027t work on anything older than 10.9. https://developer.android.com/studio says that they only work on 10.10+, so maybe we should even bump this to 10.10 (which is what the builders are).",
+      "revId": "a8e6dc1b2555e74538430b770bb583880c349e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "90ac69ec_ab6306b9",
         "filename": "build.py",
         "patchSetId": 3
@@ -19,6 +36,23 @@
         "endLine": 1329,
         "endChar": 46
       },
+      "revId": "a8e6dc1b2555e74538430b770bb583880c349e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d677e9ae_0b1e4b56",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-30T21:11:49Z",
+      "side": 1,
+      "message": "This is off by default, as is the one above.",
       "revId": "a8e6dc1b2555e74538430b770bb583880c349e23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
