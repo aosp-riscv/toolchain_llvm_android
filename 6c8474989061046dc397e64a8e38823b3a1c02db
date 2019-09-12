@@ -46,6 +46,30 @@
       "revId": "6c8474989061046dc397e64a8e38823b3a1c02db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d17176a_47fbd1e3",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-12T22:41:52Z",
+      "side": 1,
+      "message": "I think the linter is pretty new, and isn\u0027t intended to be blocking. I still appreciate it catching this though. This is the first time I noticed it, probably because I don\u0027t review a lot of Python that would have issues like that.",
+      "parentUuid": "03c653c5_5e068824",
+      "range": {
+        "startLine": 131,
+        "startChar": 16,
+        "endLine": 131,
+        "endChar": 21
+      },
+      "revId": "6c8474989061046dc397e64a8e38823b3a1c02db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
