@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64e68a6d_c456f556",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-12T22:22:46Z",
+      "side": 1,
+      "message": "The linter is correct that this shouldn\u0027t have an \u0027s\u0027.",
+      "range": {
+        "startLine": 131,
+        "startChar": 16,
+        "endLine": 131,
+        "endChar": 21
+      },
+      "revId": "6c8474989061046dc397e64a8e38823b3a1c02db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
