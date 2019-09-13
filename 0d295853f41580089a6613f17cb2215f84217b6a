@@ -1,0 +1,8 @@
+Autosubmit+1: Dan Albert <danalbert@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 13 Sep 2019 00:59:10 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1121083
+Project: toolchain/llvm_android
+Branch: refs/heads/master
