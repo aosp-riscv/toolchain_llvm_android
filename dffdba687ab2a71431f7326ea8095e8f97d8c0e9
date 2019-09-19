@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "15c5ad83_d1b4f16c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T19:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c199254b_cac8c82a",
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56107798_baafd3e4",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30a16353_348a31ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T19:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56107798_baafd3e4",
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "99acde17_aedcb464",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T19:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d16acde8_ec7d0ee4",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c3fdef2_301f2650",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "83e7aa63_d6cd96b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T19:56:47Z",
+      "side": 1,
+      "message": "Do we need to support URLs? (See other comment)",
+      "parentUuid": "1c3fdef2_301f2650",
+      "range": {
+        "startLine": 26,
+        "startChar": 61,
+        "endLine": 26,
+        "endChar": 71
+      },
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ad6cac1a_a5c3ddb5",
         "filename": "update_kernel_toolchain.py",
         "patchSetId": 2
@@ -93,6 +177,30 @@
       "writtenOn": "2019-09-19T19:03:19Z",
       "side": 1,
       "message": "number/URL\n\nSince you aren\u0027t parsing this as an integer, it should just work.",
+      "range": {
+        "startLine": 68,
+        "startChar": 26,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "922cca83_02c814a5",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T19:56:47Z",
+      "side": 1,
+      "message": "What\u0027s the format for `BUG: ` tags? I don\u0027t think I\u0027ve seen URL used before? Just\n\nBUG: 1324\n\nI could force this to be an int; I think argparse supports formatting.",
+      "parentUuid": "ad6cac1a_a5c3ddb5",
       "range": {
         "startLine": 68,
         "startChar": 26,
