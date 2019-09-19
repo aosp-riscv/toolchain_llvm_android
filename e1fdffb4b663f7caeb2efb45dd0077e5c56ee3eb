@@ -57,6 +57,30 @@
       "revId": "e1fdffb4b663f7caeb2efb45dd0077e5c56ee3eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d09cfa6_238d6bbb",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T23:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f83b19b9_fe1cae89",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 14
+      },
+      "revId": "e1fdffb4b663f7caeb2efb45dd0077e5c56ee3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
