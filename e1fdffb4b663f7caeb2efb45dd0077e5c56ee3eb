@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "340e0252_cd179be5",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T19:57:59Z",
+      "side": 1,
+      "message": "for updating common kernels, I expect this to fail as we don\u0027t pin compiler revisions.  In a follow up CL, I\u0027d be happy to add a command line option to skip this, or simply not barf if no revision is found.",
+      "revId": "e1fdffb4b663f7caeb2efb45dd0077e5c56ee3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
