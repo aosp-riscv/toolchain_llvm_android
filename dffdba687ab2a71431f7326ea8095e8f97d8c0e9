@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c199254b_cac8c82a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-19T19:03:19Z",
+      "side": 1,
+      "message": "Could we include a command or link here for how to get this too?",
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56107798_baafd3e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-19T19:03:19Z",
+      "side": 1,
+      "message": "Probably worth just putting the basic repo command here too.",
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d16acde8_ec7d0ee4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-19T19:03:19Z",
+      "side": 1,
+      "message": "$(AOSP_DIR) from your fresh checkout above",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c3fdef2_301f2650",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-19T19:03:19Z",
+      "side": 1,
+      "message": "Our upload script was recently updated to allow both buganizer numbers as well as full URLs (https://android-review.googlesource.com/c/toolchain/llvm_android/+/1121083). That is helpful for when the bug comes from github or another place.",
+      "range": {
+        "startLine": 26,
+        "startChar": 61,
+        "endLine": 26,
+        "endChar": 71
+      },
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad6cac1a_a5c3ddb5",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-19T19:03:19Z",
+      "side": 1,
+      "message": "number/URL\n\nSince you aren\u0027t parsing this as an integer, it should just work.",
+      "range": {
+        "startLine": 68,
+        "startChar": 26,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
