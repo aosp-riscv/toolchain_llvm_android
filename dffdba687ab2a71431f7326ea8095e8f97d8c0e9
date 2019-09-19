@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "a49fd91e_34e800e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-19T20:04:05Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/platform/prebuilts/clang/host/linux-x86/+/1121103 is an example showing URL instead of number. Personally I hate the bug number only version of these, as it makes them unclickable from a terminal. Even with numbers, I tend to turn them into http://b/12345.",
+      "parentUuid": "83e7aa63_d6cd96b0",
+      "range": {
+        "startLine": 26,
+        "startChar": 61,
+        "endLine": 26,
+        "endChar": 71
+      },
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ad6cac1a_a5c3ddb5",
         "filename": "update_kernel_toolchain.py",
         "patchSetId": 2
@@ -201,6 +225,30 @@
       "side": 1,
       "message": "What\u0027s the format for `BUG: ` tags? I don\u0027t think I\u0027ve seen URL used before? Just\n\nBUG: 1324\n\nI could force this to be an int; I think argparse supports formatting.",
       "parentUuid": "ad6cac1a_a5c3ddb5",
+      "range": {
+        "startLine": 68,
+        "startChar": 26,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "dffdba687ab2a71431f7326ea8095e8f97d8c0e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a35ac68e_8fdb831a",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-19T20:04:05Z",
+      "side": 1,
+      "message": "Please don\u0027t force this to be an int.",
+      "parentUuid": "922cca83_02c814a5",
       "range": {
         "startLine": 68,
         "startChar": 26,
