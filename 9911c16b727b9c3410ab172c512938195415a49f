@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80d62fd6_27bbf89a",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-09-24T22:36:26Z",
+      "side": 1,
+      "message": "These two new lines are redundant now that we don\u0027t need separators between projects.",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 13
+      },
+      "revId": "9911c16b727b9c3410ab172c512938195415a49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5a38fb4_c75caae1",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-09-24T22:36:26Z",
+      "side": 1,
+      "message": "The regex needs to be updated to match the new style, \u0027llvm-svn:(\\d+)\u0027",
+      "range": {
+        "startLine": 189,
+        "startChar": 26,
+        "endLine": 189,
+        "endChar": 39
+      },
+      "revId": "9911c16b727b9c3410ab172c512938195415a49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
