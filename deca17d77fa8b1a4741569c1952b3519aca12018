@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c721e2c5_2a195090",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-09-25T21:43:32Z",
+      "side": 1,
+      "message": "Potentially no return at the end of the function. Raise an exception here?",
+      "revId": "deca17d77fa8b1a4741569c1952b3519aca12018",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
