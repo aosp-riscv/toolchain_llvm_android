@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02f28f9b_03a3c7bc",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-25T17:58:16Z",
+      "side": 1,
+      "message": "@Yi, wasn\u0027t sure if I should reverse the list based on the comment on L165?",
+      "revId": "ce8f228829ce12fb33930f34f8433f62bb2631ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
