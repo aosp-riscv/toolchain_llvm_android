@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e4564fff_5593b6b1",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-25T17:57:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f9c0623_29dbfab5",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 0
+      },
+      "revId": "9911c16b727b9c3410ab172c512938195415a49f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5a38fb4_c75caae1",
         "filename": "merge_from_upstream.py",
         "patchSetId": 4
