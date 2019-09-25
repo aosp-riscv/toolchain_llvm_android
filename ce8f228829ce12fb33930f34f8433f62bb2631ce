@@ -16,6 +16,24 @@
       "revId": "ce8f228829ce12fb33930f34f8433f62bb2631ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74b1bc8b_6f8b6183",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-25T21:23:32Z",
+      "side": 1,
+      "message": "yep, we should scan without reversing. I will remove this.",
+      "parentUuid": "02f28f9b_03a3c7bc",
+      "revId": "ce8f228829ce12fb33930f34f8433f62bb2631ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
