@@ -1572,6 +1572,18 @@ def get_package_install_path(host, package_name):
     return utils.out_path('install', host, package_name)
 
 
+def install_lldb_for_windows(install_dir):
+    # Python package path is not correctly set when cross compiling. Move it to
+    # the right place.
+    shutil.move(os.path.join(install_dir, 'lib/python2.7/site-packages'),
+                os.path.join(install_dir, 'lib/site-packages'))
+    shutil.rmtree(os.path.join(install_dir, 'lib/python2.7'))
+    # Installs python for lldb.
+    python_dll = utils.android_path('prebuilts', 'python',
+                                    'windows-x86', 'x64', 'python27.dll')
+    shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
+
+
 def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_tar=True):
     is_windows = host == 'windows-x86-64'
     is_linux = host == 'linux-x86'
@@ -1637,6 +1649,7 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
     }
 
     if is_windows:
+        install_lldb_for_windows(install_dir)
         windows_blacklist_bin_files = {
             'clang-' + version.major_version() + ext,
             'scan-build' + ext,
@@ -1644,6 +1657,7 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
         }
         windows_additional_bin_files = {
             'liblldb' + shlib_ext,
+            'python27' + shlib_ext
         }
         necessary_bin_files -= windows_blacklist_bin_files
         necessary_bin_files |= windows_additional_bin_files
