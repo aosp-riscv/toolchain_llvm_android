@@ -1,0 +1,7 @@
+Code-Review+2: Yi Kong <yikong@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Haibo Huang <hhb@google.com>
+Submitted-at: Wed, 25 Sep 2019 05:22:19 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1127584
+Project: toolchain/llvm_android
+Branch: refs/heads/master
