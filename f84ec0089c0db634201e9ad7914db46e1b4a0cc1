@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "97cec8d1_f85c31c0",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1439,
+      "author": {
+        "id": 1573856
+      },
+      "writtenOn": "2019-10-11T18:38:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8141ec_8d5cffeb",
+      "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aebc62a1_6c93a786",
         "filename": "build.py",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2b7b741_ebe68f0e",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1573856
+      },
+      "writtenOn": "2019-10-11T18:38:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aebc62a1_6c93a786",
+      "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4538b12f_687b8d9a",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1573856
+      },
+      "writtenOn": "2019-10-11T18:38:40Z",
+      "side": 1,
+      "message": "Not needed anymore as I use subprocess.check_call.",
+      "parentUuid": "5712c596_85c09dfd",
+      "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d58c1309_4e9902b6",
         "filename": "build.py",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0edb91a2_2af95c91",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1450,
+      "author": {
+        "id": 1573856
+      },
+      "writtenOn": "2019-10-11T18:38:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d58c1309_4e9902b6",
+      "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
