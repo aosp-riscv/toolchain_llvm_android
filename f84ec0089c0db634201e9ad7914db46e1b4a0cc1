@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc8141ec_8d5cffeb",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1439,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2019-10-11T18:31:51Z",
+      "side": 1,
+      "message": "please line this up with the ( on the prev line",
+      "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aebc62a1_6c93a786",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2019-10-11T18:31:51Z",
+      "side": 1,
+      "message": "why not subprocess.check_call(wrapper_build_cmd)?\n\nif os.system is necessary, please pipes.quote the args",
+      "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5712c596_85c09dfd",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2019-10-11T18:31:51Z",
+      "side": 1,
+      "message": "biggest nit in the world: please remove the trailing space :)",
+      "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d58c1309_4e9902b6",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1450,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2019-10-11T18:31:51Z",
+      "side": 1,
+      "message": "nit: needs another space",
+      "revId": "f84ec0089c0db634201e9ad7914db46e1b4a0cc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
