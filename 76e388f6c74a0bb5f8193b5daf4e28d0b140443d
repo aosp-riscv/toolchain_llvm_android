@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6da28aa0_3e9ac4f2",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1436,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-10-11T20:31:56Z",
+      "side": 1,
+      "message": "Rather than needing to touch so many lines, does it make sense to have this emitted at some fixed out/ location? Perhaps create out/compiler_wrapper/compiler_wrapper (or maybe just the single output file in out/) so that we can inspect/retain that, and just copy from there? This just comes from my dislike of changes that force extra indentation (because of how much harder it is to look at git history in a terminal).",
+      "revId": "76e388f6c74a0bb5f8193b5daf4e28d0b140443d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09690603_0061c702",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-10-11T20:31:56Z",
+      "side": 1,
+      "message": "This should just be check_call() here, which logs the command for us.",
+      "range": {
+        "startLine": 1442,
+        "startChar": 8,
+        "endLine": 1442,
+        "endChar": 19
+      },
+      "revId": "76e388f6c74a0bb5f8193b5daf4e28d0b140443d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1526e61c_1e3896e9",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1467,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-10-11T20:31:56Z",
+      "side": 1,
+      "message": "I should probably be fixing these up as install_file() instead, so that they are also logged. There\u0027s a lot of that kind of cleanup that I\u0027ll do after your CLs land (so that we don\u0027t conflict unintentionally).",
+      "revId": "76e388f6c74a0bb5f8193b5daf4e28d0b140443d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
