@@ -25,6 +25,7 @@ import os
 import shutil
 import string
 import subprocess
+import tempfile
 import textwrap
 import utils
 
@@ -1432,33 +1433,41 @@ def build_runtimes(stage2_install):
     create_hwasan_symlink(stage2_install, version)
 
 def install_wrappers(llvm_install_path):
-    wrapper_path = utils.android_path('toolchain', 'llvm_android',
-                                      'compiler_wrapper.py')
-    bisect_path = utils.android_path('toolchain', 'llvm_android',
-                                     'bisect_driver.py')
-    bin_path = os.path.join(llvm_install_path, 'bin')
-    clang_path = os.path.join(bin_path, 'clang')
-    clangxx_path = os.path.join(bin_path, 'clang++')
-    clang_tidy_path = os.path.join(bin_path, 'clang-tidy')
+    with tempfile.NamedTemporaryFile() as wrapper_file:
+        wrapper_path = wrapper_file.name
+        wrapper_build_script = utils.android_path('external', 'toolchain-utils',
+                                                  'compiler_wrapper', 'build.py')
+        # Note: The build script automatically determines the architecture
+        # based on the host.
+        subprocess.check_call([wrapper_build_script, '--config=android',
+                               '--use_ccache=false',
+                               '--use_llvm_next=false',
+                               '--output_file=' + wrapper_path])
+        bisect_path = utils.android_path('toolchain', 'llvm_android',
+                                         'bisect_driver.py')
+        bin_path = os.path.join(llvm_install_path, 'bin')
+        clang_path = os.path.join(bin_path, 'clang')
+        clangxx_path = os.path.join(bin_path, 'clang++')
+        clang_tidy_path = os.path.join(bin_path, 'clang-tidy')
 
-    # Rename clang and clang++ to clang.real and clang++.real.
-    # clang and clang-tidy may already be moved by this script if we use a
-    # prebuilt clang. So we only move them if clang.real and clang-tidy.real
-    # doesn't exist.
-    if not os.path.exists(clang_path + '.real'):
-        shutil.move(clang_path, clang_path + '.real')
-    if not os.path.exists(clang_tidy_path + '.real'):
-        shutil.move(clang_tidy_path, clang_tidy_path + '.real')
-    utils.remove(clang_path)
-    utils.remove(clangxx_path)
-    utils.remove(clang_tidy_path)
-    utils.remove(clangxx_path + '.real')
-    os.symlink('clang.real', clangxx_path + '.real')
+        # Rename clang and clang++ to clang.real and clang++.real.
+        # clang and clang-tidy may already be moved by this script if we use a
+        # prebuilt clang. So we only move them if clang.real and clang-tidy.real
+        # doesn't exist.
+        if not os.path.exists(clang_path + '.real'):
+            shutil.move(clang_path, clang_path + '.real')
+        if not os.path.exists(clang_tidy_path + '.real'):
+            shutil.move(clang_tidy_path, clang_tidy_path + '.real')
+        utils.remove(clang_path)
+        utils.remove(clangxx_path)
+        utils.remove(clang_tidy_path)
+        utils.remove(clangxx_path + '.real')
+        os.symlink('clang.real', clangxx_path + '.real')
 
-    shutil.copy2(wrapper_path, clang_path)
-    shutil.copy2(wrapper_path, clangxx_path)
-    shutil.copy2(wrapper_path, clang_tidy_path)
-    install_file(bisect_path, bin_path)
+        shutil.copy2(wrapper_path, clang_path)
+        shutil.copy2(wrapper_path, clangxx_path)
+        shutil.copy2(wrapper_path, clang_tidy_path)
+        install_file(bisect_path, bin_path)
 
 
 # Normalize host libraries (libLLVM, libclang, libc++, libc++abi) so that there
