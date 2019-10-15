@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7026908_0e6cf3a1",
+        "filename": "build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-10-15T21:52:05Z",
+      "side": 1,
+      "message": "Add another newline here please, since this separates 2 functions.",
+      "revId": "7d9c1b4a00abae4749544b91bb746d5bfafd6e45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
