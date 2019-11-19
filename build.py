@@ -1869,6 +1869,55 @@ def parse_args():
     return parser.parse_args()
 
 
+def setup_sources():
+    # Copy sources to out/llvm-sources and apply patches in
+    # toolchain/llvm_android/patches
+    copy_from = utils.llvm_path()
+    copy_to = utils.out_path('llvm-project')
+    if os.path.isdir(copy_to):
+        shutil.rmtree(copy_to)
+    if os.path.exists(copy_to):
+        raise RuntimeError('{} exists'.format(copy_to))
+    try:
+        subprocess.check_call([
+            'git', 'clone',
+            'https://android.googlesource.com/toolchain/llvm-project',
+            '-b', 'upstream-master',
+            copy_to
+        ])
+        logger().info('git clone of aosp/upstream-master passed')
+    except:
+        logger().info('git clone of aosp/upstream-master failed')
+        raise Exception
+
+
+    patch_dir = utils.android_path('toolchain', 'llvm_android', 'patches')
+    for patch_name in os.listdir(patch_dir):
+        patch_filename = os.path.join(patch_dir, patch_name)
+        logger().info('Applying patch ' + patch_filename)
+        subprocess.check_output([
+            'patch', '-i', patch_filename, '-p', '1', '-d', copy_to])
+
+    try:
+        subprocess.check_output([
+            'git', '--git-dir={}/.git'.format(copy_to), 'show',
+            'e114ebb90f2cc6b86a630ada495012252eeaefe2',
+            '--', 'lld/ELF/Writer.cpp'
+        ])
+        logger().info('git show passed for SHA in aosp/master-legacy')
+    except:
+        logger().info('git show failed for SHA in aosp/master-legacy')
+
+    try:
+        subprocess.check_output([
+            'git', '--git-dir={}/.git'.format(copy_to), 'show',
+            'ea1db31d20a74e5025a86b0df49163d5bfecb67b'
+        ])
+        logger().info('git show passed for SHA in aosp/upstream-master')
+    except:
+        logger().info('git show failed for SHA in aosp/upstream-master')
+
+
 def main():
     args = parse_args()
     do_build = not args.skip_build
@@ -1884,6 +1933,9 @@ def main():
     verbosity = min(args.verbose, len(log_levels) - 1)
     log_level = log_levels[verbosity]
     logging.basicConfig(level=log_level)
+
+    setup_sources()
+    raise Exception # Not really tested beyond this
 
     stage1_install = utils.out_path('stage1-install')
     stage2_install = utils.out_path('stage2-install')
