@@ -1,0 +1,26 @@
+From 0d842bcdd27d54827f2b863a3e874ed96a2fcf3a Mon Sep 17 00:00:00 2001
+From: Pirama Arumuga Nainar <pirama@google.com>
+Date: Mon, 18 Nov 2019 17:40:32 -0800
+Subject: NFC Whitespace change
+
+Change-Id: Id8476d51cf1f3da89d5d3bb4bb33e655f0a99a3c
+---
+ llvm/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/llvm/CMakeLists.txt b/llvm/CMakeLists.txt
+index 678f1a74bdd..ba2f42c07b3 100644
+--- a/llvm/CMakeLists.txt
++++ b/llvm/CMakeLists.txt
+@@ -61,7 +61,7 @@ endif()
+ # one for llvm+clang+... using the same sources.
+ set(LLVM_ALL_PROJECTS "clang;clang-tools-extra;compiler-rt;debuginfo-tests;libclc;libcxx;libcxxabi;libunwind;lld;lldb;llgo;openmp;parallel-libs;polly;pstl")
+ set(LLVM_ENABLE_PROJECTS "" CACHE STRING
+-	"Semicolon-separated list of projects to build (${LLVM_ALL_PROJECTS}), or \"all\".")
++  "Semicolon-separated list of projects to build (${LLVM_ALL_PROJECTS}), or \"all\".")
+ if( LLVM_ENABLE_PROJECTS STREQUAL "all" )
+   set( LLVM_ENABLE_PROJECTS ${LLVM_ALL_PROJECTS})
+ endif()
+-- 
+2.24.0.432.g9d3f5f5b63-goog
+
