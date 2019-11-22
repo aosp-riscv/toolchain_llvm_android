@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37e471a4_b387563a",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-11-22T22:32:53Z",
+      "side": 0,
+      "message": "So this can be found in `repo info`, but it\u0027s hard to tell which \"Project\" is the relevant kernel source dir.  Maybe it should be a command line flag? Surely there\u0027s a better way to find this in an automated fashion; I\u0027m lazy and don\u0027t want to specify more command line flags.",
+      "revId": "e42bf9202f017f0f31c1deb2ac3afb73317dd66a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

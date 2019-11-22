@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c3c1f28_12e5c354",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-11-22T22:32:53Z",
+      "side": 1,
+      "message": "send me a patch with just this hunk and I\u0027ll +2.",
+      "revId": "e8293a2bf46068c05f0b35a103af5b97bc5d763d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
