@@ -39,7 +39,7 @@ class KernelToolchainUpdater():
         self.parse_args()
         self.get_clang_versions()
         self.get_clang_sha()
-        self.kernel_dir = path.join(self.kernel_tree, "private", "msm-google")
+        self.kernel_dir = path.join(self.kernel_tree, "common")
         self.repo_dir = path.join(self.kernel_tree, ".repo", "manifests")
         self.topic = path.basename(self.kernel_tree) + "_" + self.clang_revision
 
@@ -128,7 +128,7 @@ Bug: %s
         green_print("Pushing manifest change")
         output = subprocess.check_output(["repo", "--no-pager", "info"],
                                          cwd=self.repo_dir)
-        repo_branch = output.split("\n")[0].split(" ")[2]
+        repo_branch = output.split("\n")[1].split(" ")[3].split("/")[2]
         command = "git push origin HEAD:refs/for/%s -o topic=%s" % (repo_branch,
                                                                     self.topic)
         if self.dry_run or self.no_push:
@@ -176,7 +176,7 @@ Bug: %s
         remote = subprocess.check_output(["git", "--no-pager", "remote"],
                                          cwd=self.kernel_dir).strip()
         for project in ET.parse(xml_path).iter("project"):
-            if (project.get("path") == "private/msm-google"):
+            if (project.get("path") == "common"):
                 command = "git push %s HEAD:refs/for/%s -o topic=%s" % (
                     remote, project.get("revision"), self.topic)
                 if self.dry_run or self.no_push:
