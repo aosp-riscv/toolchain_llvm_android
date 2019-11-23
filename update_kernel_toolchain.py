@@ -107,8 +107,13 @@ class KernelToolchainUpdater():
             try:
                 element = ET.fromstring(line)
                 if is_clang_project(element):
-                    line = re.sub("revision=\"[0-9a-z]+\"",
-                                  "revision=\"%s\"" % self.clang_sha, line)
+                    if element.get("revision"):
+                        line = re.sub("revision=\"[0-9a-z]+\"",
+                                      "revision=\"%s\"" % self.clang_sha, line)
+                    else:
+                        # no revision? no problem
+                        line = re.sub("name=\"([-\/\w]+)\"",
+                                      "name=\"\g<1>\" revision=\"%s\"" % self.clang_sha, line)
             except ET.ParseError:
                 pass
             finally:
