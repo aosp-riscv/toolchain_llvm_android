@@ -16,6 +16,24 @@
       "revId": "16ac01038d35374cf458addbffd97848befa18d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13380c19_0597e975",
+        "filename": "test/platform/run_windows_tests.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-11-25T23:46:45Z",
+      "side": 1,
+      "message": "Yes, that\u0027s the plan.  I want to eventually switch to Python and clean this up a bit and probably set it up in pre/post-submit testing.\n\nI uploaded it here from the x20 location so it\u0027s easier to maintain until I can clean this up.",
+      "parentUuid": "fc6a80f9_40a9c49f",
+      "revId": "16ac01038d35374cf458addbffd97848befa18d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
