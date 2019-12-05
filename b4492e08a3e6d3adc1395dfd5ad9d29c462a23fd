@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3501cb0_346c7e59",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-12-05T17:17:43Z",
+      "side": 1,
+      "message": "7 formal parameters is pushing it, consider defining and then constructing an object for all of these parameters.",
+      "revId": "b4492e08a3e6d3adc1395dfd5ad9d29c462a23fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
