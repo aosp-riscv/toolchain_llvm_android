@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "204cf28c_84d5289f",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-12-06T21:18:44Z",
+      "side": 1,
+      "message": "how about removing the global, and just using a properly scoped local variable?",
+      "revId": "b3bd23d86913c6ed623887fca9f13bef8ed885f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
