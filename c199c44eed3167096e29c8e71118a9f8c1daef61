@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a205e2d1_31a2cf27",
+        "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2019-12-09T23:40:36Z",
+      "side": 1,
+      "message": "That\u0027s assuming upstream clang built into `which clang-10`, but it could be clang-9 from older versions. I usually just /bin/rm bin/clang.real ; cp `which clang` clang.real",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 36
+      },
+      "revId": "c199c44eed3167096e29c8e71118a9f8c1daef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca6ff6ee_a483da10",
+        "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2019-12-09T23:40:36Z",
+      "side": 1,
+      "message": "lib64/clang",
+      "range": {
+        "startLine": 28,
+        "startChar": 67,
+        "endLine": 28,
+        "endChar": 72
+      },
+      "revId": "c199c44eed3167096e29c8e71118a9f8c1daef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "276d878b_a904f46a",
+        "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2019-12-09T23:40:36Z",
+      "side": 1,
+      "message": "some tests would take a long time to rebuild from scratch;\nusually we can find the compile+link commands from verbose.log.gz file\nand only do those steps without removing $OUT",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 24
+      },
+      "revId": "c199c44eed3167096e29c8e71118a9f8c1daef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
