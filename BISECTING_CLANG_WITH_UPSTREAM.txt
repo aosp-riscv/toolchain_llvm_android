@@ -1,0 +1,46 @@
+Quick notes on how to bisect Android platform builds with a clang binary built
+from an upstream LLVM tree.
+
+
+1. Copy the upstream clang binary
+
+$ cd $ANDROID_BUILD_TOP/prebuilts/clang/host/linux-x86/<clang dir>
+$ cp `which clang-10` bin/clang.real
+
+(This needs to be done at every bisect point.)
+
+2. Symlink lib/clang to lib64/clang
+
+Upstream clang will typically look for a relative path to headers like stddef.h:
+https://clang.llvm.org/docs/FAQ.html#id3
+
+$ cd $ANDROID_BUILD_TOP/prebuilts/clang/host/linux-x86/<clang dir>/lib
+$ ln -s ../lib64/clang clang
+
+3. Symlink lib64/clang/<upstream version> to current version
+
+Again related to header search is that clang will look into
+<clang dir>/lib/<version number> where the version number is something like
+10.0.0 for upstream and 10.0.1 for AOSP clang. You'll want to symlink the
+version your upstream clang is looking for to the version in the Android
+prebuilt tree.
+
+$ cd $ANDROID_BUILD_TOP/prebuilts/clang/host/linux-x86/<clang dir>/lib64
+$ ln -s 10.0.1 9.0.0
+$ ln -s 10.0.1 10.0.0
+
+(would allow for you to bisect between upstream clang 10 and upstream clang 9).
+
+4. Adjust unknown compiler flags in build/soong/cc/config/clang.go
+
+As new warnings are added to clang, you may need to enable or disable them
+in $ANDROID_BUILD_TOP/build/soong/cc/config/clang.go (new warnings aren't
+recognized in older clang versions).
+
+(This may need to be done at each bisection point.)
+
+
+
+
+From here, you'll probably want to removing $OUT and rebuilding
+android/rerunning tests.
