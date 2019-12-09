@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "62373e46_7f635b5e",
+        "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2019-12-09T23:58:43Z",
+      "side": 1,
+      "message": "You can override LLVM_VERSION_MAJOR/LLVM_VERSION_MINOR/LLVM_VERSION_PATCH in CMake to avoid the whole complexity due to different version string.",
+      "parentUuid": "a205e2d1_31a2cf27",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 36
+      },
+      "revId": "c199c44eed3167096e29c8e71118a9f8c1daef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca6ff6ee_a483da10",
         "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
         "patchSetId": 2
