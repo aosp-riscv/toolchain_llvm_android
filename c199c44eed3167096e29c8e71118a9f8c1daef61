@@ -72,6 +72,23 @@
     },
     {
       "key": {
+        "uuid": "30f484a8_c40ae880",
+        "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-12-10T22:31:12Z",
+      "side": 1,
+      "message": "We should probably just pass \"-w\" or \"-Wno-error\" very late in the top-level build system. Bisection isn\u0027t about figuring out warning fixes. It\u0027s about doing builds and testing them out.",
+      "revId": "c199c44eed3167096e29c8e71118a9f8c1daef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "276d878b_a904f46a",
         "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
         "patchSetId": 2
