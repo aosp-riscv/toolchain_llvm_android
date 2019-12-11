@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9a2cf752_d49ce722",
+        "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2019-12-11T00:15:53Z",
+      "side": 1,
+      "message": "Yes, or by creating a wrapper script named \"clang\" that passes \"-w\".\n\nI personally use a script that creates such wrapper scripts and automates the other steps to build Android with ToT LLVM. It is available here:\nhttps://github.com/pcc/llvm-project/blob/android/llvm/utils/frankendroid",
+      "parentUuid": "30f484a8_c40ae880",
+      "revId": "c199c44eed3167096e29c8e71118a9f8c1daef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "276d878b_a904f46a",
         "filename": "BISECTING_CLANG_WITH_UPSTREAM.txt",
         "patchSetId": 2
