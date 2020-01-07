@@ -1,0 +1,9 @@
+Code-Review+1: Kousik Kumar <kousikk@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Yi Kong <yikong@google.com>
+Submitted-at: Tue, 07 Jan 2020 22:52:11 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1198918
+Project: toolchain/llvm_android
+Branch: refs/heads/master
