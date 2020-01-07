@@ -22,6 +22,30 @@
       "revId": "c8079c8776d7f46275cd43495d9fef07dc321ab2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1ead42a_6e490612",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-01-07T22:22:06Z",
+      "side": 1,
+      "message": "The way I reasoned about keeping it in the \"bin\" directory is this:\n\nThere could be other clients / other toolchains (rust comes to mind) for which we will choose to follow a similar model. Having the \"remote_toolchain_inputs\" file live alongside the binary is and then have it point to relative paths is a more straight-forward interface than assuming that \"remote_toolchain_inputs\" file lives in \"clang++/../remote_toolchain_inputs\".\n\nLet me know if you disagree though.",
+      "parentUuid": "d9e883d7_c276bdbd",
+      "range": {
+        "startLine": 141,
+        "startChar": 40,
+        "endLine": 141,
+        "endChar": 45
+      },
+      "revId": "c8079c8776d7f46275cd43495d9fef07dc321ab2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
