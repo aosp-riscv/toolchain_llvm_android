@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9e883d7_c276bdbd",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-01-07T22:13:20Z",
+      "side": 1,
+      "message": "Could we keep this in the top-level dir for this toolchain rather than the bin/ directory? I am not a fan of keeping this in the bin/ dir unless there is a very good reason (since it isn\u0027t a binary).",
+      "range": {
+        "startLine": 141,
+        "startChar": 40,
+        "endLine": 141,
+        "endChar": 45
+      },
+      "revId": "c8079c8776d7f46275cd43495d9fef07dc321ab2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
