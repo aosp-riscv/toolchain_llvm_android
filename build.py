@@ -1229,10 +1229,7 @@ def build_stage1(stage1_install, build_name, build_llvm_tools=False):
         stage1_extra_defines['LIBCXX_ENABLE_STATIC_ABI_LIBRARY'] = 'ON'
 
     # Do not build compiler-rt for Darwin.  We don't ship host (or any
-    # prebuilt) runtimes for Darwin anyway.  Attempting to build these will
-    # fail compilation of lib/builtins/atomic_*.c that only get built for
-    # Darwin and fail compilation due to us using the bionic version of
-    # stdatomic.h.
+    # prebuilt) runtimes for Darwin anyway.
     if utils.host_is_darwin():
         stage1_extra_defines['LLVM_BUILD_EXTERNAL_COMPILER_RT'] = 'ON'
 
@@ -1384,10 +1381,7 @@ def build_stage2(stage1_install,
         stage2_extra_defines['LIBCXX_ENABLE_ABI_LINKER_SCRIPT'] = 'OFF'
 
     # Do not build compiler-rt for Darwin.  We don't ship host (or any
-    # prebuilt) runtimes for Darwin anyway.  Attempting to build these will
-    # fail compilation of lib/builtins/atomic_*.c that only get built for
-    # Darwin and fail compilation due to us using the bionic version of
-    # stdatomic.h.
+    # prebuilt) runtimes for Darwin anyway.
     if utils.host_is_darwin():
         stage2_extra_defines['LLVM_BUILD_EXTERNAL_COMPILER_RT'] = 'ON'
 
@@ -1736,21 +1730,6 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
         remove_static_libraries(lib_dir)
         install_wrappers(install_dir)
         normalize_llvm_host_libs(install_dir, host, version)
-
-
-    # Next, we copy over stdatomic.h and bits/stdatomic.h from bionic.
-    libc_include_path = utils.android_path('bionic', 'libc', 'include')
-    resdir_top = os.path.join(lib_dir, 'clang')
-    header_path = os.path.join(resdir_top, version.long_version(), 'include')
-
-    stdatomic_path = utils.android_path(libc_include_path, 'stdatomic.h')
-    install_file(stdatomic_path, header_path)
-
-    bits_install_path = os.path.join(header_path, 'bits')
-    if not os.path.isdir(bits_install_path):
-        os.mkdir(bits_install_path)
-    bits_stdatomic_path = utils.android_path(libc_include_path, 'bits', 'stdatomic.h')
-    install_file(bits_stdatomic_path, bits_install_path)
 
 
     # Install license files as NOTICE in the toolchain install dir.
