@@ -22,6 +22,30 @@
       "revId": "43e3ad05b08d7fdfb24dff9b7501936f67f7f11f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d628fcf7_933ae94c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-01-16T19:45:59Z",
+      "side": 1,
+      "message": "I tried git describe --all --contains, but it depends on existing tag. We now only set the new tag in non-dry-run mode and after the decision of reapply list. Is there other git describe flag to use?\n\nI am thinking about using the log of aosp/upstream-master like:\ngit log --first-parent --oneline 4e8231b5cf0..aosp/upstream-master\nIf a cherry pick sha is not in that list, it is after 4e8231b5cf0 and should be reapplied.",
+      "parentUuid": "13ff63f6_e05f6706",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 78
+      },
+      "revId": "43e3ad05b08d7fdfb24dff9b7501936f67f7f11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
