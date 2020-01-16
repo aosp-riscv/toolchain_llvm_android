@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13ff63f6_e05f6706",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-01-16T10:23:27Z",
+      "side": 1,
+      "message": "This can be automated. You can run `git describe` on the SHA, it should print the nearest tag before the change. If it\u0027s a cherrypicked change, this should print the previous merge tag.",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 78
+      },
+      "revId": "43e3ad05b08d7fdfb24dff9b7501936f67f7f11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
