@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "047d900e_74a6e35f",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-01-16T23:06:11Z",
+      "side": 0,
+      "message": "I tried that if we skip `git fetch aosp`, and it\u0027s the first time checking out llvm-toolchain,\n`git log aosp/upstream-master` can\u0027t be found.",
+      "range": {
+        "startLine": 156,
+        "startChar": 26,
+        "endLine": 156,
+        "endChar": 61
+      },
+      "revId": "6cef931fbe4dd283cc7a81591170c40b7f4b12f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
