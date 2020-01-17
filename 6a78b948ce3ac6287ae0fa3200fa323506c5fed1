@@ -22,6 +22,30 @@
       "revId": "6a78b948ce3ac6287ae0fa3200fa323506c5fed1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6951bce5_b40feb38",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-01-17T01:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46f7e521_060ae5bd",
+      "range": {
+        "startLine": 35,
+        "startChar": 9,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "6a78b948ce3ac6287ae0fa3200fa323506c5fed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

@@ -22,6 +22,30 @@
       "revId": "6cef931fbe4dd283cc7a81591170c40b7f4b12f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d824f197_2fa21309",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-01-17T01:40:15Z",
+      "side": 0,
+      "message": "Done. Now calls git fetch in get_upstream_commits.",
+      "parentUuid": "047d900e_74a6e35f",
+      "range": {
+        "startLine": 156,
+        "startChar": 26,
+        "endLine": 156,
+        "endChar": 61
+      },
+      "revId": "6cef931fbe4dd283cc7a81591170c40b7f4b12f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
