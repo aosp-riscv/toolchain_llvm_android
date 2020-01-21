@@ -793,6 +793,7 @@ def build_lldb_server(stage2_install, clang_version, ndk_cxx=False):
         lldb_defines['LLVM_TABLEGEN'] = os.path.join(stage2_install, 'bin', 'llvm-tblgen')
         lldb_defines['CLANG_TABLEGEN'] = os.path.join(stage2_install, '..', 'stage2', 'bin', 'clang-tblgen')
         lldb_defines['LLDB_TABLEGEN'] = os.path.join(stage2_install, '..', 'stage2', 'bin', 'lldb-tblgen')
+        lldb_defines['LLDB_DISABLE_LIBEDIT'] = 'ON'
         lldb_defines['LLVM_DEFAULT_TARGET_TRIPLE'] = llvm_triple
         lldb_defines['LLVM_HOST_TRIPLE'] = llvm_triple
         lldb_defines['LLVM_TARGET_ARCH'] = arch
@@ -1052,6 +1053,14 @@ def build_llvm_for_windows(stage1_install,
                                          'x86_64-w64-mingw32')
     update_cmake_sysroot_flags(windows_extra_defines, windows_sysroot)
 
+    # HACK for b/148155084:
+    # Newer llvm/lldb configuration rules add -std=c++14 by default
+    # and it implies __STRICT_ANSI__. When cross compile with sysroot
+    # prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32,
+    # the math.h file defines global hypot and other functions only when
+    # __STRICT_ANSI__ is not defined. So we undefine __STRICT_ANSI__.
+    windows_extra_defines['LLDB_PYTHON_UNDEF_STRICT_ANSI'] = 'ON'
+
     # Set CMake path, toolchain file for native compilation (to build tablegen
     # etc).  Also disable libfuzzer build during native compilation.
     windows_extra_defines['CROSS_TOOLCHAIN_FLAGS_NATIVE'] = \
@@ -1283,6 +1292,8 @@ def set_lldb_flags(install_dir, host, defines, env):
     elif host == 'windows-x86':
         defines['PYTHON_HOME'] = utils.android_path('prebuilts', 'python', host, 'x64')
     defines['LLDB_RELOCATABLE_PYTHON'] = 'ON'
+    defines['LLDB_DISABLE_CURSES'] = 'ON'
+    defines['LLDB_DISABLE_LIBEDIT'] = 'ON'
 
     if host == 'darwin-x86':
         defines['LLDB_NO_DEBUGSERVER'] = 'ON'
@@ -1418,26 +1429,44 @@ def build_stage2(stage1_install,
         extra_env=stage2_extra_env)
 
 
-def build_runtimes(stage2_install):
-    create_sysroots()
+def build_runtimes(stage2_install, args):
+    if args.skip_sysroots:
+        logger().info('Skip libcxxabi and other sysroot libraries')
+    else:
+        create_sysroots()
     version = extract_clang_version(stage2_install)
-    build_crts(stage2_install, version)
-    build_crts(stage2_install, version, ndk_cxx=True)
-    # 32-bit host crts are not needed for Darwin
-    if utils.host_is_linux():
-        build_crts_host_i686(stage2_install, version)
-    build_libfuzzers(stage2_install, version)
-    build_libfuzzers(stage2_install, version, ndk_cxx=True)
-    build_libomp(stage2_install, version)
-    build_libomp(stage2_install, version, ndk_cxx=True)
-    build_libomp(stage2_install, version, ndk_cxx=True, is_shared=True)
-    build_lldb_server(stage2_install, version, ndk_cxx=True)
+    if args.skip_compiler_rt:
+        logger().info('Skip compiler-rt')
+    else:
+        build_crts(stage2_install, version)
+        build_crts(stage2_install, version, ndk_cxx=True)
+        # 32-bit host crts are not needed for Darwin
+        if utils.host_is_linux():
+            build_crts_host_i686(stage2_install, version)
+    if args.skip_libfuzzers:
+        logger().info('Skip libfuzzers')
+    else:
+        build_libfuzzers(stage2_install, version)
+        build_libfuzzers(stage2_install, version, ndk_cxx=True)
+    if args.skip_libomp:
+        logger().info('Skip libomp')
+    else:
+        build_libomp(stage2_install, version)
+        build_libomp(stage2_install, version, ndk_cxx=True)
+        build_libomp(stage2_install, version, ndk_cxx=True, is_shared=True)
+    if args.skip_lldb:
+        logger().info('Skip lldb server')
+    else:
+        build_lldb_server(stage2_install, version, ndk_cxx=True)
     # Bug: http://b/64037266. `strtod_l` is missing in NDK r15. This will break
     # libcxx build.
     # build_libcxx(stage2_install, version)
-    build_asan_test(stage2_install)
-    build_sanitizer_map_files(stage2_install, version)
-    create_hwasan_symlink(stage2_install, version)
+    if args.skip_asan:
+        logger().info('Skip asan test, map, symlink')
+    else:
+        build_asan_test(stage2_install)
+        build_sanitizer_map_files(stage2_install, version)
+        create_hwasan_symlink(stage2_install, version)
 
 def install_wrappers(llvm_install_path):
     wrapper_path = utils.out_path('llvm_android_wrapper')
@@ -1482,9 +1511,13 @@ def install_wrappers(llvm_install_path):
 # is just one library, whose SONAME entry matches the actual name.
 def normalize_llvm_host_libs(install_dir, host, version):
     if host == 'linux-x86':
-        libs = {'libLLVM': 'libLLVM-{version}svn.so',
-                'libclang': 'libclang.so.{version}svn',
-                'libclang_cxx': 'libclang_cxx.so.{version}svn',
+        libs = {'libLLVM': 'libLLVM-{version}git.so',
+                'libclang': 'libclang.so.{version}git',
+                'libclang_cxx': 'libclang_cxx.so.{version}git',
+                # how about libLTO.so.10svn  libRemarks.so.10svn,
+                # liblldb.so.10.0.1svn
+                # liblldb.so.10svn -> liblldb.so.10.0.1svn
+                # liblldbIntelFeatures.so.10svn
                 'libc++': 'libc++.so.{version}',
                 'libc++abi': 'libc++abi.so.{version}'
                }
@@ -1594,23 +1627,33 @@ def get_package_install_path(host, package_name):
     return utils.out_path('install', host, package_name)
 
 
+def remove_if_exist(file_path):
+    if os.path.exists(file_path) or os.path.islink(file_path):
+        os.remove(file_path)
+
+
 def install_lldb_for_windows(install_dir):
     # Python package path is not correctly set when cross compiling.
     # Moves them to the right place before upstream fixes it.
     site_packages_dir = os.path.join(install_dir, 'lib/site-packages')
+
     shutil.move(os.path.join(install_dir, 'lib/python2.7/site-packages'),
                 site_packages_dir)
     shutil.rmtree(os.path.join(install_dir, 'lib/python2.7'))
-    os.remove(os.path.join(site_packages_dir, 'lldb', '_lldb.so'))
+
+    remove_if_exist(os.path.join(site_packages_dir, 'lldb', '_lldb.so'))
+    remove_if_exist(os.path.join(site_packages_dir, 'lldb', '_lldb.pyd'))
     os.symlink('../../../bin/liblldb.dll',
                os.path.join(site_packages_dir, 'lldb', '_lldb.pyd'))
-    os.remove(os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper'))
+    remove_if_exist(os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper'))
+    remove_if_exist(os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper.exe'))
     os.symlink('../../../bin/lldb-argdumper.exe',
                os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper.exe'))
 
     # Installs python for lldb.
     python_dll = utils.android_path('prebuilts', 'python',
                                     'windows-x86', 'x64', 'python27.dll')
+    remove_if_exist(os.path.join(install_dir, 'bin', 'python27.dll'))
     shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
 
 
@@ -1847,6 +1890,59 @@ def parse_args():
         default=False,
         help='Don\'t strip binaries/libraries')
 
+    # skip_stage1 is set to quickly reproduce stage2 failures
+    parser.add_argument(
+        '--skip-stage1',
+        action='store_true',
+        default=False,
+        help='Skip the stage1 build')
+
+    # skip_stage2 is set to quickly reproduce runtime failures
+    parser.add_argument(
+        '--skip-stage2',
+        action='store_true',
+        default=False,
+        help='Skip the stage2 build')
+
+    # skip_runtimes is set to skip recompilation of libraries
+    parser.add_argument(
+        '--skip-runtimes',
+        action='store_true',
+        default=False,
+        help='Skip the runtime libraries')
+
+    # Finer controls to skip only some runtime libraries
+    parser.add_argument(
+        '--skip-sysroots',
+        action='store_true',
+        default=False,
+        help='Skip the sysroot libraries')
+    parser.add_argument(
+        '--skip-compiler-rt',
+        action='store_true',
+        default=False,
+        help='Skip the compiler-rt libraries, including libcxxabi')
+    parser.add_argument(
+        '--skip-libfuzzers',
+        action='store_true',
+        default=False,
+        help='Skip the libfuzzer libraries')
+    parser.add_argument(
+        '--skip-libomp',
+        action='store_true',
+        default=False,
+        help='Skip the libomp libraries')
+    parser.add_argument(
+        '--skip-asan',
+        action='store_true',
+        default=False,
+        help='Skip the sanitizer libraries')
+    parser.add_argument(
+        '--skip-lldb',
+        action='store_true',
+        default=False,
+        help='Skip the lldb server libraries')
+
     parser.add_argument(
         '--no-build',
         action=CommaSeparatedListAction,
@@ -1866,6 +1962,9 @@ def parse_args():
 def main():
     args = parse_args()
     do_build = not args.skip_build
+    do_stage1 = not args.skip_stage1
+    do_stage2 = not args.skip_stage2
+    do_runtimes = not args.skip_runtimes
     do_package = not args.skip_package
     do_strip = not args.no_strip
     do_strip_host_package = do_strip and not args.debug
@@ -1879,6 +1978,9 @@ def main():
     log_level = log_levels[verbosity]
     logging.basicConfig(level=log_level)
 
+    logger().info('do_build=%r do_stage1=%r do_stage2=%r do_runtimes=%r do_package=%r need_windows=%r' %
+                  (do_build, do_stage1, do_stage2, do_runtimes, do_package, need_windows))
+
     stage1_install = utils.out_path('stage1-install')
     stage2_install = utils.out_path('stage2-install')
     windows64_install = utils.out_path('windows-x86-64-install')
@@ -1887,11 +1989,12 @@ def main():
     instrumented = utils.host_is_linux() and args.build_instrumented
     # Windows libs are built with stage1 toolchain. llvm-config is required.
     stage1_build_llvm_tools = instrumented or (do_build and need_windows)
-    build_stage1(stage1_install, args.build_name,
-                 build_llvm_tools=stage1_build_llvm_tools)
+    if do_stage1:
+        build_stage1(stage1_install, args.build_name,
+                     build_llvm_tools=stage1_build_llvm_tools)
 
     if do_build and need_host:
-        if os.path.exists(stage2_install):
+        if os.path.exists(stage2_install) and do_stage2:
             utils.rm_tree(stage2_install)
 
         profdata_filename = pgo_profdata_filename()
@@ -1902,12 +2005,13 @@ def main():
             raise RuntimeError('Profdata file does not exist for ' +
                                profdata_filename)
 
-        build_stage2(stage1_install, stage2_install, STAGE2_TARGETS,
-                     args.build_name, args.enable_assertions,
-                     args.debug, args.no_lto, instrumented, profdata)
+        if do_stage2:
+            build_stage2(stage1_install, stage2_install, STAGE2_TARGETS,
+                         args.build_name, args.enable_assertions,
+                         args.debug, args.no_lto, instrumented, profdata)
 
-        if utils.host_is_linux():
-            build_runtimes(stage2_install)
+        if utils.host_is_linux() and do_runtimes:
+            build_runtimes(stage2_install, args)
 
     if do_build and need_windows:
         if os.path.exists(windows64_install):
