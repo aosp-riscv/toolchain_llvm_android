@@ -45,6 +45,14 @@ DISABLED_WARNINGS = [
     '-Wno-error=incomplete-setjmp-declaration',
     '-Wno-error=pointer-compare',
     '-Wno-error=reorder-init-list',
+    "-Wno-error=bitwise-conditional-parentheses",
+    "-Wno-error=bool-operation",
+    "-Wno-error=deprecated-volatile",
+    "-Wno-error=int-in-bool-context",
+    "-Wno-error=invalid-partial-specialization",
+    "-Wno-error=sizeof-array-div",
+    "-Wno-error=tautological-bitwise-compare",
+    "-Wno-error=tautological-overlap-compare",
 ]
 
 
@@ -210,6 +218,11 @@ def build_target(android_base, clang_version, target, max_jobs, redirect_stderr,
         value = value.strip()
         env[key] = value
 
+    # Set ALLOW_NINJA_ENV so that soong propagates environment variables to
+    # Ninja.  We use it for disabling warnings in the compiler wrapper and for
+    # setting path to write PGO profiles.
+    env['ALLOW_NINJA_ENV'] = 'true'
+
     if redirect_stderr:
         redirect_key = compiler_wrapper.STDERR_REDIRECT_KEY
         if 'DIST_DIR' in env:
@@ -239,11 +252,9 @@ def build_target(android_base, clang_version, target, max_jobs, redirect_stderr,
         modules = ['libc', 'libLLVM_android-host64']
 
         # Set the environment variable specifying where the profile file gets
-        # written.  Also set ALLOW_NINJA_ENV so that soong propagates this
-        # variable to the toolchain.
+        # written.
         key, val = profiler.getProfileFileEnvVar()
         env[key] = val
-        env['ALLOW_NINJA_ENV'] = 'true'
 
     modulesList = ' '.join(modules)
     print 'Start building target %s and modules %s.' % (target, modulesList)
