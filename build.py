@@ -789,6 +789,7 @@ def build_lldb_server(stage2_install, clang_version, ndk_cxx=False):
         lldb_defines['LLVM_TABLEGEN'] = os.path.join(stage2_install, 'bin', 'llvm-tblgen')
         lldb_defines['CLANG_TABLEGEN'] = os.path.join(stage2_install, '..', 'stage2', 'bin', 'clang-tblgen')
         lldb_defines['LLDB_TABLEGEN'] = os.path.join(stage2_install, '..', 'stage2', 'bin', 'lldb-tblgen')
+        lldb_defines['LLDB_DISABLE_LIBEDIT'] = 'ON'
         lldb_defines['LLVM_DEFAULT_TARGET_TRIPLE'] = llvm_triple
         lldb_defines['LLVM_HOST_TRIPLE'] = llvm_triple
         lldb_defines['LLVM_TARGET_ARCH'] = arch
@@ -1048,6 +1049,14 @@ def build_llvm_for_windows(stage1_install,
                                          'x86_64-w64-mingw32')
     update_cmake_sysroot_flags(windows_extra_defines, windows_sysroot)
 
+    # HACK for b/148155084:
+    # Newer llvm/lldb configuration rules add -std=c++14 by default
+    # and it implies __STRICT_ANSI__. When cross compile with sysroot
+    # prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32,
+    # the math.h file defines global hypot and other functions only when
+    # __STRICT_ANSI__ is not defined. So we undefine __STRICT_ANSI__.
+    windows_extra_defines['LLDB_PYTHON_UNDEF_STRICT_ANSI'] = 'ON'
+
     # Set CMake path, toolchain file for native compilation (to build tablegen
     # etc).  Also disable libfuzzer build during native compilation.
     windows_extra_defines['CROSS_TOOLCHAIN_FLAGS_NATIVE'] = \
@@ -1279,6 +1288,8 @@ def set_lldb_flags(install_dir, host, defines, env):
     elif host == 'windows-x86':
         defines['PYTHON_HOME'] = utils.android_path('prebuilts', 'python', host, 'x64')
     defines['LLDB_RELOCATABLE_PYTHON'] = 'ON'
+    defines['LLDB_DISABLE_CURSES'] = 'ON'
+    defines['LLDB_DISABLE_LIBEDIT'] = 'ON'
 
     if host == 'darwin-x86':
         defines['LLDB_NO_DEBUGSERVER'] = 'ON'
@@ -1487,9 +1498,13 @@ def install_wrappers(llvm_install_path):
 # is just one library, whose SONAME entry matches the actual name.
 def normalize_llvm_host_libs(install_dir, host, version):
     if host == 'linux-x86':
-        libs = {'libLLVM': 'libLLVM-{version}svn.so',
-                'libclang': 'libclang.so.{version}svn',
-                'libclang_cxx': 'libclang_cxx.so.{version}svn',
+        libs = {'libLLVM': 'libLLVM-{version}git.so',
+                'libclang': 'libclang.so.{version}git',
+                'libclang_cxx': 'libclang_cxx.so.{version}git',
+                # how about libLTO.so.10svn  libRemarks.so.10svn,
+                # liblldb.so.10.0.1svn
+                # liblldb.so.10svn -> liblldb.so.10.0.1svn
+                # liblldbIntelFeatures.so.10svn
                 'libc++': 'libc++.so.{version}',
                 'libc++abi': 'libc++abi.so.{version}'
                }
@@ -1599,23 +1614,33 @@ def get_package_install_path(host, package_name):
     return utils.out_path('install', host, package_name)
 
 
+def remove_if_exist(file_path):
+    if os.path.exists(file_path) or os.path.islink(file_path):
+        os.remove(file_path)
+
+
 def install_lldb_for_windows(install_dir):
     # Python package path is not correctly set when cross compiling.
     # Moves them to the right place before upstream fixes it.
     site_packages_dir = os.path.join(install_dir, 'lib/site-packages')
+
     shutil.move(os.path.join(install_dir, 'lib/python2.7/site-packages'),
                 site_packages_dir)
     shutil.rmtree(os.path.join(install_dir, 'lib/python2.7'))
-    os.remove(os.path.join(site_packages_dir, 'lldb', '_lldb.so'))
+
+    remove_if_exist(os.path.join(site_packages_dir, 'lldb', '_lldb.so'))
+    remove_if_exist(os.path.join(site_packages_dir, 'lldb', '_lldb.pyd'))
     os.symlink('../../../bin/liblldb.dll',
                os.path.join(site_packages_dir, 'lldb', '_lldb.pyd'))
-    os.remove(os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper'))
+    remove_if_exist(os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper'))
+    remove_if_exist(os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper.exe'))
     os.symlink('../../../bin/lldb-argdumper.exe',
                os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper.exe'))
 
     # Installs python for lldb.
     python_dll = utils.android_path('prebuilts', 'python',
                                     'windows-x86', 'x64', 'python27.dll')
+    remove_if_exist(os.path.join(install_dir, 'bin', 'python27.dll'))
     shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
 
 
