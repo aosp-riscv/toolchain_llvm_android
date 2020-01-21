@@ -1,0 +1,38 @@
+From 00334787398f8bb40477dc19a01eec86651c7c58 Mon Sep 17 00:00:00 2001
+From: Chih-Hung Hsieh <chh@google.com>
+Date: Thu, 23 Jan 2020 14:12:41 -0800
+Subject: [PATCH] Add LLDB_PYTHON_UNDEF_STRICT_ANSI config variable
+
+Set this variable to work around cross compilation errors
+when -std=c++14 and old mingw32 math.h are used.
+
+Bug: 148155084
+Change-Id: Ie65de17e277a99e961cca36287b0164e029e2e05
+---
+ .../Plugins/ScriptInterpreter/Python/CMakeLists.txt    | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/lldb/source/Plugins/ScriptInterpreter/Python/CMakeLists.txt b/lldb/source/Plugins/ScriptInterpreter/Python/CMakeLists.txt
+index 6febb038578..c398624889a 100644
+--- a/lldb/source/Plugins/ScriptInterpreter/Python/CMakeLists.txt
++++ b/lldb/source/Plugins/ScriptInterpreter/Python/CMakeLists.txt
+@@ -3,6 +3,16 @@ if(NOT LLDB_PYTHON_RELATIVE_PATH)
+ endif()
+ add_definitions(-DLLDB_PYTHON_RELATIVE_LIBDIR="${LLDB_PYTHON_RELATIVE_PATH}")
+ 
++# Newer llvm/lldb configuration rules add -std=c++14 by default
++# and it implies __STRICT_ANSI__. When cross compile with sysroot
++# with x86_64 mingw32 math.h file, it defines global hypot and other
++# functions only when __STRICT_ANSI__ is not defined.
++# But some python header files still depend on those global hypot
++# functions available only in non-STRICT_ANSI mode.
++if(LLDB_PYTHON_UNDEF_STRICT_ANSI)
++  add_definitions(-U__STRICT_ANSI__)
++endif()
++
+ add_lldb_library(lldbPluginScriptInterpreterPython PLUGIN
+   PythonDataObjects.cpp
+   PythonReadline.cpp
+-- 
+2.25.0.341.g760bfbb309-goog
+
