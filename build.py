@@ -1049,6 +1049,14 @@ def build_llvm_for_windows(stage1_install,
                                          'x86_64-w64-mingw32')
     update_cmake_sysroot_flags(windows_extra_defines, windows_sysroot)
 
+    # HACK for b/148155084:
+    # Newer llvm/lldb configuration rules add -std=c++14 by default
+    # and it implies __STRICT_ANSI__. When cross compile with sysroot
+    # prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32,
+    # the math.h file defines global hypot and other functions only when
+    # __STRICT_ANSI__ is not defined. So we undefine __STRICT_ANSI__.
+    windows_extra_defines['LLDB_PYTHON_UNDEF_STRICT_ANSI'] = 'ON'
+
     # Set CMake path, toolchain file for native compilation (to build tablegen
     # etc).  Also disable libfuzzer build during native compilation.
     windows_extra_defines['CROSS_TOOLCHAIN_FLAGS_NATIVE'] = \
@@ -1488,9 +1496,9 @@ def install_wrappers(llvm_install_path):
 # is just one library, whose SONAME entry matches the actual name.
 def normalize_llvm_host_libs(install_dir, host, version):
     if host == 'linux-x86':
-        libs = {'libLLVM': 'libLLVM-{version}svn.so',
-                'libclang': 'libclang.so.{version}svn',
-                'libclang_cxx': 'libclang_cxx.so.{version}svn',
+        libs = {'libLLVM': 'libLLVM-{version}git.so',
+                'libclang': 'libclang.so.{version}git',
+                'libclang_cxx': 'libclang_cxx.so.{version}git',
                 'libc++': 'libc++.so.{version}',
                 'libc++abi': 'libc++abi.so.{version}'
                }
@@ -1600,26 +1608,6 @@ def get_package_install_path(host, package_name):
     return utils.out_path('install', host, package_name)
 
 
-def install_lldb_for_windows(install_dir):
-    # Python package path is not correctly set when cross compiling.
-    # Moves them to the right place before upstream fixes it.
-    site_packages_dir = os.path.join(install_dir, 'lib/site-packages')
-    shutil.move(os.path.join(install_dir, 'lib/python2.7/site-packages'),
-                site_packages_dir)
-    shutil.rmtree(os.path.join(install_dir, 'lib/python2.7'))
-    os.remove(os.path.join(site_packages_dir, 'lldb', '_lldb.so'))
-    os.symlink('../../../bin/liblldb.dll',
-               os.path.join(site_packages_dir, 'lldb', '_lldb.pyd'))
-    os.remove(os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper'))
-    os.symlink('../../../bin/lldb-argdumper.exe',
-               os.path.join(site_packages_dir, 'lldb', 'lldb-argdumper.exe'))
-
-    # Installs python for lldb.
-    python_dll = utils.android_path('prebuilts', 'python',
-                                    'windows-x86', 'x64', 'python27.dll')
-    shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
-
-
 def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_tar=True):
     is_windows = host == 'windows-x86-64'
     is_linux = host == 'linux-x86'
@@ -1686,7 +1674,10 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
     }
 
     if is_windows:
-        install_lldb_for_windows(install_dir)
+        # Installs python for lldb.
+        python_dll = utils.android_path('prebuilts', 'python',
+                                        'windows-x86', 'x64', 'python27.dll')
+        shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
         windows_blacklist_bin_files = {
             'clang-' + version.major_version() + ext,
             'scan-build' + ext,
@@ -1694,7 +1685,7 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
         }
         windows_additional_bin_files = {
             'liblldb' + shlib_ext,
-            'python27' + shlib_ext
+            'python27' + shlib_ext,
         }
         necessary_bin_files -= windows_blacklist_bin_files
         necessary_bin_files |= windows_additional_bin_files
@@ -1922,7 +1913,7 @@ def parse_args():
     parser.add_argument(
         '--build-llvm-next',
         action='store_true',
-        default=False,
+        default=True,
         help='Build next LLVM revision (android_version.py:svn_revision_next)')
 
     return parser.parse_args()
