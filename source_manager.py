@@ -46,6 +46,7 @@ def apply_patches(source_dir, svn_version, patch_json, patch_dir):
         '--patch_metadata_file', patch_json,
         '--filesdir_path', patch_dir,
         '--src_path', source_dir,
+        '--use_src_head', 'true',
         '--failure_mode', 'fail'
     ]
 
