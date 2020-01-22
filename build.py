@@ -378,7 +378,7 @@ def cross_compile_configs(stage2_install, platform=False, static=False):
          'arm-linux-android', '-march=armv7-a'),
         ('aarch64', 'arm64',
          'aarch64/aarch64-linux-android-4.9/aarch64-linux-android',
-         'aarch64-linux-android', ''),
+         'aarch64-linux-android', '-mbranch-protection=standard'),
         ('x86_64', 'x86_64',
          'x86/x86_64-linux-android-4.9/x86_64-linux-android',
          'x86_64-linux-android', ''),
