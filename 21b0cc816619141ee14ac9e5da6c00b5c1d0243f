@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7449a07c_5a5eb462",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-24T17:22:57Z",
+      "side": 1,
+      "message": "Could we use \u0027--skip\u003d\u003clist\u003e\u0027 similar to \u0027--no-build\u003d\u003clinux/windows\u003e\u0027?\n\nI don\u0027t think we could use \u0027--no-build\u0027 because this \u0027--skip\u0027 assumes that some of the skipped components have already been built earlier (esp. stage1 and stage2 builds).  We should also clarify this in the help string for this flag.",
+      "revId": "21b0cc816619141ee14ac9e5da6c00b5c1d0243f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
