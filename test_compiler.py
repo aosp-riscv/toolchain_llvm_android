@@ -287,7 +287,7 @@ def test_device(android_base, clang_version, device, max_jobs, clean_output,
     return result
 
 
-def build_clang(instrumented=False, pgo=True):
+def build_clang(args, instrumented=False, pgo=True):
     stage1_install = utils.out_path('stage1-install')
     stage2_install = utils.out_path('stage2-install')
 
@@ -308,7 +308,7 @@ def build_clang(instrumented=False, pgo=True):
         build_name='dev',
         build_instrumented=instrumented,
         profdata_file=profdata)
-    build.build_runtimes(stage2_install)
+    build.build_runtimes(stage2_install, args)
 
     build.package_toolchain(
         stage2_install,
@@ -365,7 +365,7 @@ def main():
         clang_version = build.extract_clang_version(clang_path)
     else:
         clang_path, clang_version = build_clang(
-            instrumented=args.profile, pgo=(not args.no_pgo))
+            args, instrumented=args.profile, pgo=(not args.no_pgo))
     link_clang(args.android_path, clang_path)
 
     if args.build_only:
