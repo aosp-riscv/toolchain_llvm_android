@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1a24247_e355983e",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-27T19:20:23Z",
+      "side": 1,
+      "message": "nit: \u0027args is not None\u0027 is the idiomatic way to check against None: https://www.python.org/dev/peps/pep-0008/#programming-recommendations.  LGTM otherwise.",
+      "range": {
+        "startLine": 1422,
+        "startChar": 7,
+        "endLine": 1422,
+        "endChar": 19
+      },
+      "revId": "7301f3a4c416acfbd46ca7c16a9b373802cd1815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
