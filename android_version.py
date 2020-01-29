@@ -17,3 +17,4 @@
 
 patch_level = '1'
 svn_revision = 'r370808'
+svn_revision_next = 'r370808'
