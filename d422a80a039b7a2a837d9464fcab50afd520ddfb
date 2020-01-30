@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "3dce019c_8beaf7a5",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-30T19:21:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db2db7f2_976c43aa",
+      "range": {
+        "startLine": 1958,
+        "startChar": 29,
+        "endLine": 1958,
+        "endChar": 38
+      },
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4a894ac_288d493b",
         "filename": "source_manager.py",
         "patchSetId": 5
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "20aa049c_3480313a",
+        "filename": "source_manager.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-30T19:21:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4a894ac_288d493b",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89f18723_815c7d24",
         "filename": "source_manager.py",
         "patchSetId": 5
@@ -85,6 +133,30 @@
       "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d04aae37_33b8e3d7",
+        "filename": "source_manager.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-30T19:21:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89f18723_815c7d24",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 23
+      },
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
