@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbb522da_6fc71fd1",
+        "filename": "android_version.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-30T01:40:14Z",
+      "side": 1,
+      "message": "The current patch files don\u0027t include the changes for the \u0027b\u0027 build - so leaving this at r370808.  Also ATM, I haven\u0027t nailed the proper process for managing respins if we do file-based patches for the llvm-toolchain branch.   That is still TBD.",
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
