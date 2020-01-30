@@ -16,6 +16,29 @@
       "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89f18723_815c7d24",
+        "filename": "source_manager.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-01-30T16:41:20Z",
+      "side": 1,
+      "message": "Why not just rename the tmp_source_dir tree?",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 23
+      },
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
