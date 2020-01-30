@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "db2db7f2_976c43aa",
+        "filename": "build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-01-30T18:04:34Z",
+      "side": 1,
+      "message": "repeated \u0027only\u0027",
+      "range": {
+        "startLine": 1958,
+        "startChar": 29,
+        "endLine": 1958,
+        "endChar": 38
+      },
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4a894ac_288d493b",
+        "filename": "source_manager.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-01-30T18:04:34Z",
+      "side": 1,
+      "message": "could use a shorter name: _same_llvm_dirs or _same_dirs",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89f18723_815c7d24",
         "filename": "source_manager.py",
         "patchSetId": 5
