@@ -157,6 +157,30 @@
       "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a64a9df5_f1278dec",
+        "filename": "source_manager.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-01-31T05:17:42Z",
+      "side": 1,
+      "message": "Does this trigger a full rebuild or an incremental build?\n\nIf it does trigger full rebuild, maybe rsync the source trees to prevent voiding the sources?",
+      "parentUuid": "d04aae37_33b8e3d7",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 23
+      },
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
