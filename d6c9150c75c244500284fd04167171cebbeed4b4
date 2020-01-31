@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a95d4bb_47902949",
+        "filename": "source_manager.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-01-31T20:18:21Z",
+      "side": 1,
+      "message": "This diff fails with my local source tree due to unfound link files under .git.\nI think it should have -x .git parameter or the .git directory should not be copied.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 41
+      },
+      "revId": "d6c9150c75c244500284fd04167171cebbeed4b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
