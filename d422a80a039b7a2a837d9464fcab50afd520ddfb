@@ -181,6 +181,30 @@
       "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c220b52a_4f246413",
+        "filename": "source_manager.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-03T21:24:14Z",
+      "side": 1,
+      "message": "This does an incremental build.  shutils.copytree seems to preserve file metadata such as creation time.\n\nHowever, this does have odd interactions with Ninja.  For e.g., if a patch file was removed from PATCHES.json, the sources modified by the patch get updated with an older creation/modification time.  Ninja does not trigger recompiles for such sources.\n\nI\u0027m trying a solution with rsync to fix this (the patch I\u0027m working on now does not seem to do incremental builds so attempting to fix that).",
+      "parentUuid": "a64a9df5_f1278dec",
+      "range": {
+        "startLine": 101,
+        "startChar": 15,
+        "endLine": 101,
+        "endChar": 23
+      },
+      "revId": "d422a80a039b7a2a837d9464fcab50afd520ddfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
