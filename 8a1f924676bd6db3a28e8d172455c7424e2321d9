@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "544dad24_e33e80f3",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-02-04T16:52:23Z",
+      "side": 1,
+      "message": "if is_linux:",
+      "revId": "8a1f924676bd6db3a28e8d172455c7424e2321d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
