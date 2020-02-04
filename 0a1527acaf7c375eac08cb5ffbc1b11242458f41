@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d18f0ea9_f8255c09",
+        "filename": "build.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 1957,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-04T23:26:05Z",
+      "side": 1,
+      "message": "build_llvm_next argument should be args.build_llvm_next :) That specifies whether toolchain/llvm-project is checked to a newer revision than the current stable revision.",
+      "revId": "0a1527acaf7c375eac08cb5ffbc1b11242458f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a81da6c_c6040be8",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-04T23:26:05Z",
+      "side": 1,
+      "message": "This should ideally be the revision that introduced the conflict when cherry-picking v1 of that patch.  Ok for now since we are not planning to ever bisect between 370808 and 377782.",
+      "range": {
+        "startLine": 263,
+        "startChar": 25,
+        "endLine": 263,
+        "endChar": 31
+      },
+      "revId": "0a1527acaf7c375eac08cb5ffbc1b11242458f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
