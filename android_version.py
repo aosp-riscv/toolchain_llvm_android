@@ -15,6 +15,6 @@
 # limitations under the License.
 #
 
-patch_level = '2'
-svn_revision = 'r370808b'
-svn_revision_next = 'r370808'
+patch_level = '3'
+svn_revision = 'r377782'
+svn_revision_next = 'r377782'
