@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f157ceaa_18214b22",
+        "filename": "build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 1908,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-04T20:31:34Z",
+      "side": 1,
+      "message": "This isn\u0027t the right way to turn patching on.  This should be used only in the yet-to-be-created llvm-toolchain-testing branch.  Set patch_souces\u003dTrue in the call to source_manager.setup_sources.",
+      "revId": "fb8d9ffea0cacecdff9636ec8e5bd40303777272",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71d2c2a0_1edbbc58",
+        "filename": "build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 1944,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-04T20:31:34Z",
+      "side": 1,
+      "message": "Set this to True and remove the comment above that patches are only used with --build-llvm-next.\n\nOnce we\u0027ve moved to the new scheme, we could remove the parameter altogether.",
+      "range": {
+        "startLine": 1944,
+        "startChar": 47,
+        "endLine": 1944,
+        "endChar": 67
+      },
+      "revId": "fb8d9ffea0cacecdff9636ec8e5bd40303777272",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
