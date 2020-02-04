@@ -46,6 +46,30 @@
       "revId": "ba9cb28c7d992519931a98857d9b1728e68f7ab3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcbf7724_dda52d63",
+        "filename": "source_manager.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-02-04T04:08:39Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t know that 😊",
+      "parentUuid": "119aec9d_f04cc6f6",
+      "range": {
+        "startLine": 130,
+        "startChar": 32,
+        "endLine": 130,
+        "endChar": 37
+      },
+      "revId": "ba9cb28c7d992519931a98857d9b1728e68f7ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
