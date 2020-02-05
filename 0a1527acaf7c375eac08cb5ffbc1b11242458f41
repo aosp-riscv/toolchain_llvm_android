@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8afa437e_4649d887",
+        "filename": "android_version.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-02-05T19:52:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74ff9cc7_2ad6c6e9",
+      "range": {
+        "startLine": 20,
+        "startChar": 21,
+        "endLine": 20,
+        "endChar": 28
+      },
+      "revId": "0a1527acaf7c375eac08cb5ffbc1b11242458f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d18f0ea9_f8255c09",
         "filename": "build.py",
         "patchSetId": 13
@@ -78,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "01ae05c3_51793952",
+        "filename": "build.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 1957,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-02-05T19:52:54Z",
+      "side": 1,
+      "message": "Done, also remove the patch_sources parameter. It\u0027s always true.",
+      "parentUuid": "0e9873ef_06900c7b",
+      "revId": "0a1527acaf7c375eac08cb5ffbc1b11242458f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb9c64d6_c3ce7cae",
         "filename": "patches/PATCHES.json",
         "patchSetId": 13
@@ -92,6 +134,24 @@
       "revId": "0a1527acaf7c375eac08cb5ffbc1b11242458f41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ddb1e14_41172c96",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-02-05T19:52:54Z",
+      "side": 1,
+      "message": "This one is included, because its end_version is 378841 \u003e 377822.\nI\u0027m assuming that 378841 is correct.",
+      "parentUuid": "fb9c64d6_c3ce7cae",
+      "revId": "0a1527acaf7c375eac08cb5ffbc1b11242458f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
