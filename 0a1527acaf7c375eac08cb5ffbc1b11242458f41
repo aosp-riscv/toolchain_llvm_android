@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8c94c49d_81cbdb92",
+        "filename": "build.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 1957,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-02-05T01:54:08Z",
+      "side": 1,
+      "message": "If this is args.build_llvm_next, I will need to set that flag to default true to run with current TH tests, right?\nDo you plan to have the case with (build_llvm_next !\u003d patch_sources)?",
+      "parentUuid": "d18f0ea9_f8255c09",
+      "revId": "0a1527acaf7c375eac08cb5ffbc1b11242458f41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8a81da6c_c6040be8",
         "filename": "patches/PATCHES.json",
         "patchSetId": 13
