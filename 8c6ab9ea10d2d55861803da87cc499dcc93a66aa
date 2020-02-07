@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d73eb10_535fe3db",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-07T01:29:46Z",
+      "side": 1,
+      "message": "Delete this.  No need to refer to the bug if there is no pending action beyond this change.",
+      "range": {
+        "startLine": 772,
+        "startChar": 20,
+        "endLine": 772,
+        "endChar": 33
+      },
+      "revId": "8c6ab9ea10d2d55861803da87cc499dcc93a66aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
