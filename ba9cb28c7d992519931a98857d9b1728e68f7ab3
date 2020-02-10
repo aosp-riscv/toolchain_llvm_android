@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dfd434ac_69114dae",
+        "filename": "source_manager.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-10T21:42:01Z",
+      "side": 1,
+      "message": "Good point - changed in https://android-review.googlesource.com/c/toolchain/llvm_android/+/1231554.",
+      "parentUuid": "a99d3079_c1e6c49a",
+      "range": {
+        "startLine": 121,
+        "startChar": 13,
+        "endLine": 121,
+        "endChar": 56
+      },
+      "revId": "ba9cb28c7d992519931a98857d9b1728e68f7ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dfcb23aa_8f5217d5",
         "filename": "source_manager.py",
         "patchSetId": 9
