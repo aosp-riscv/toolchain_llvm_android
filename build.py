@@ -1693,6 +1693,10 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
         'scan-view',
     }
 
+    if is_linux:
+        necessary_bin_files.add('remote_toolchain_inputs')
+        script_bins.add('remote_toolchain_inputs'),
+
     bin_dir = os.path.join(install_dir, 'bin')
     lib_dir = os.path.join(install_dir, 'lib64')
 
