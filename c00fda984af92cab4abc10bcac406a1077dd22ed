@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "829f40f5_50806f49",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-10T19:28:08Z",
+      "side": 1,
+      "message": "Renamed this global variable and STAGE2_TARGETS as well.",
+      "parentUuid": "19b7d884_925e193d",
+      "revId": "c00fda984af92cab4abc10bcac406a1077dd22ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c261eee6_443aa97e",
         "filename": "build.py",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-02-10T18:53:10Z",
       "side": 1,
       "message": "Does BPF matter here? We won\u0027t build runtimes for it, and it might be important to just have it available anyways for debugging.",
+      "revId": "c00fda984af92cab4abc10bcac406a1077dd22ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30b374cb_ae873dc3",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1974,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-10T19:28:08Z",
+      "side": 1,
+      "message": "Added BPF as it\u0027s backend has \u003c30 sources + TD files.",
+      "parentUuid": "c261eee6_443aa97e",
       "revId": "c00fda984af92cab4abc10bcac406a1077dd22ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
