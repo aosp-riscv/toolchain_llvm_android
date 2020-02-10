@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19b7d884_925e193d",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-02-10T18:53:10Z",
+      "side": 1,
+      "message": "stage1_targets \u003d STAGE1_TARGETS\n\nWe might as well use the global variable (although maybe changing the name of that to BASE_TARGETS or something like that. I also realize that this is not going to work if someone is using a non-x86 host, but then again, I don\u0027t think our build works for that right now anyways.",
+      "revId": "c00fda984af92cab4abc10bcac406a1077dd22ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c261eee6_443aa97e",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1974,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-02-10T18:53:10Z",
+      "side": 1,
+      "message": "Does BPF matter here? We won\u0027t build runtimes for it, and it might be important to just have it available anyways for debugging.",
+      "revId": "c00fda984af92cab4abc10bcac406a1077dd22ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
