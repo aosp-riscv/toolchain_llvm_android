@@ -1662,6 +1662,7 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
         'llvm-size' + ext,
         'llvm-strings' + ext,
         'llvm-strip' + ext,
+        'remote_toolchain_inputs',
         'llvm-symbolizer' + ext,
         'sancov' + ext,
         'sanstats' + ext,
