@@ -45,6 +45,54 @@
       "revId": "1ddf18da5afad584b19775a20e1a3c3a6d8cb4e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baa196dd_bce0a058",
+        "filename": "source_manager.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-10T23:46:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e494711_1167a5a0",
+      "range": {
+        "startLine": 57,
+        "startChar": 37,
+        "endLine": 57,
+        "endChar": 50
+      },
+      "revId": "1ddf18da5afad584b19775a20e1a3c3a6d8cb4e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd339526_1ac6db4f",
+        "filename": "source_manager.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-10T23:46:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e98f10e_9b90c103",
+      "range": {
+        "startLine": 57,
+        "startChar": 38,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "1ddf18da5afad584b19775a20e1a3c3a6d8cb4e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
