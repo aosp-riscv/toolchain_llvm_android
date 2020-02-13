@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Chih-hung Hsieh <chh@google.com>
+Autosubmit+1: Chih-hung Hsieh <chh@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Submitted-by: Chih-hung Hsieh <chh@google.com>
+Submitted-at: Thu, 13 Feb 2020 22:19:30 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1235466
+Project: toolchain/llvm_android
+Branch: refs/heads/master
