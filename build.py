@@ -1291,14 +1291,16 @@ def set_lldb_flags(install_dir, host, defines, env):
     defines['SWIG_EXECUTABLE'] = os.path.join(swig_root, 'bin', 'swig')
     env['SWIG_LIB'] = os.path.join(swig_root, 'share', 'swig', '3.0.12')
 
+    python_ver = '3.8'
     if host != 'darwin-x86':
         defines['PYTHON_EXECUTABLE'] = utils.android_path('prebuilts', 'python',
-                                        'linux-x86', 'bin', 'python2.7')
+                                        'linux-x86', 'bin', 'python' + python_ver)
 
     if host == 'linux-x86':
         python_root = utils.android_path('prebuilts', 'python', host)
-        defines['PYTHON_LIBRARY'] = os.path.join(python_root, 'lib', 'libpython2.7.so')
-        defines['PYTHON_INCLUDE_DIR'] = os.path.join(python_root, 'include', 'python2.7')
+        defines['PYTHON_LIBRARY'] = os.path.join(python_root, 'lib',
+                                                 'libpython{}.so'.format(python_ver))
+        defines['PYTHON_INCLUDE_DIR'] = os.path.join(python_root, 'include', 'python' + python_ver)
     elif host == 'windows-x86':
         defines['PYTHON_HOME'] = utils.android_path('prebuilts', 'python', host, 'x64')
     defines['LLDB_RELOCATABLE_PYTHON'] = 'ON'
@@ -1717,11 +1719,11 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
         if BUILD_LLDB:
             # Installs python for lldb.
             python_dll = utils.android_path('prebuilts', 'python',
-                                            'windows-x86', 'x64', 'python27.dll')
+                                            'windows-x86', 'x64', 'python38.dll')
             shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
             windows_additional_bin_files = {
                 'liblldb' + shlib_ext,
-                'python27' + shlib_ext
+                'python38' + shlib_ext
             }
             necessary_bin_files |= windows_additional_bin_files
 
