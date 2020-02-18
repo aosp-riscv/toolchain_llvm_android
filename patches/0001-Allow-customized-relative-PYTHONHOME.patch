@@ -1,0 +1,123 @@
+From 71106b9bbc7026f0cd0b0eb71614f7657e642d38 Mon Sep 17 00:00:00 2001
+From: Haibo Huang <hhb@google.com>
+Date: Mon, 17 Feb 2020 20:47:59 -0800
+Subject: [PATCH] Allow customized relative PYTHONHOME
+
+Summary:
+This change allows a hard coded relative PYTHONHOME setting. So that
+python can easily be packaged together with lldb.
+
+The change includes:
+1. Extend LLDB_RELOCATABLE_PYTHON to all platforms. It defaults to ON
+for platforms other than Windows, to keep the behavior compatible.
+2. Allows to customize LLDB_PYTHON_HOME. But still defaults to
+PYTHON_HOME.
+3. LLDB_PYTHON_HOME can be a path relative to liblldb. If it is
+relative, we will resolve it before send it to Py_DecodeLocale.
+
+Change-Id: Ib141ad1867f5768d707338104bd1fe690541f2b3
+---
+ lldb/cmake/modules/LLDBConfig.cmake           | 26 ++++++++++------
+ .../Python/ScriptInterpreterPython.cpp        | 31 ++++++++++++++++---
+ 2 files changed, 44 insertions(+), 13 deletions(-)
+
+diff --git a/lldb/cmake/modules/LLDBConfig.cmake b/lldb/cmake/modules/LLDBConfig.cmake
+index 54c6283d0f4..72a1841c7fe 100644
+--- a/lldb/cmake/modules/LLDBConfig.cmake
++++ b/lldb/cmake/modules/LLDBConfig.cmake
+@@ -43,10 +43,16 @@ elseif(IOS)
+   set(default_disable_python ON)
+ endif()
+ 
++if(CMAKE_SYSTEM_NAME MATCHES "Windows")
++  set(default_relocatable_python OFF)
++else()
++  set(default_relocatable_python ON)
++endif()
++
+ option(LLDB_DISABLE_PYTHON "Disable Python scripting integration." ${default_disable_python})
+ option(LLDB_DISABLE_CURSES "Disable Curses integration." ${default_disable_curses})
+ option(LLDB_DISABLE_LIBEDIT "Disable the use of editline." ${default_disable_libedit})
+-option(LLDB_RELOCATABLE_PYTHON "Use the PYTHONHOME environment variable to locate Python." OFF)
++option(LLDB_RELOCATABLE_PYTHON "Use the PYTHONHOME environment variable to locate Python." {default_relocatable_python})
+ option(LLDB_USE_SYSTEM_SIX "Use six.py shipped with system and do not install a copy of it" OFF)
+ option(LLDB_USE_ENTITLEMENTS "When codesigning, use entitlements if available" ON)
+ option(LLDB_BUILD_FRAMEWORK "Build LLDB.framework (Darwin only)" OFF)
+@@ -283,20 +289,22 @@ endfunction(find_python_libs_windows)
+ # Call find_python_libs_windows ahead of the rest of the python configuration.
+ # It's possible that it won't find a python installation and will then set
+ # LLDB_DISABLE_PYTHON to ON.
+-if (NOT LLDB_DISABLE_PYTHON AND "${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
+-  find_python_libs_windows()
+-endif()
+-
+ if (NOT LLDB_DISABLE_PYTHON)
+   if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
+-    if (NOT LLDB_RELOCATABLE_PYTHON)
+-      file(TO_CMAKE_PATH "${PYTHON_HOME}" LLDB_PYTHON_HOME)
+-      add_definitions( -DLLDB_PYTHON_HOME="${LLDB_PYTHON_HOME}" )
+-    endif()
++    find_python_libs_windows()
+   else()
+     find_package(PythonInterp REQUIRED)
+     find_package(PythonLibs REQUIRED)
+   endif()
++endif()
++
++if (NOT LLDB_DISABLE_PYTHON)
++  if (NOT LLDB_RELOCATABLE_PYTHON)
++    set(LLDB_PYTHON_HOME "${PYTHON_HOME}" CACHE STRING
++      "Path to use as PYTHONHONE in lldb. If a relative path is specified, \
++      it will be resolved at runtime relative to liblldb directory.")
++    add_definitions( -DLLDB_PYTHON_HOME="${LLDB_PYTHON_HOME}" )
++  endif()
+ 
+   if (NOT CMAKE_CROSSCOMPILING)
+     string(REPLACE "." ";" pythonlibs_version_list ${PYTHONLIBS_VERSION_STRING})
+diff --git a/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp b/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
+index 5ed01cf4793..b8bf509d29f 100644
+--- a/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
++++ b/lldb/source/Plugins/ScriptInterpreter/Python/ScriptInterpreterPython.cpp
+@@ -267,12 +267,35 @@ private:
+   void InitializePythonHome() {
+ #if defined(LLDB_PYTHON_HOME)
+ #if PY_MAJOR_VERSION >= 3
+-    size_t size = 0;
+-    static wchar_t *g_python_home = Py_DecodeLocale(LLDB_PYTHON_HOME, &size);
++    typedef const wchar_t* str_type;
+ #else
+-    static char g_python_home[] = LLDB_PYTHON_HOME;
++    typedef char* str_type;
+ #endif
+-    Py_SetPythonHome(g_python_home);
++    static str_type g_python_home = []() -> str_type {
++      const char *lldb_python_home = LLDB_PYTHON_HOME;
++      const char *absolute_python_home = nullptr;
++      llvm::SmallString<64> path;
++      if (llvm::sys::path::is_absolute(lldb_python_home)) {
++        absolute_python_home = lldb_python_home;
++      } else {
++        FileSpec spec = HostInfo::GetShlibDir();
++        if (!spec)
++          return nullptr;
++        spec.GetPath(path);
++        llvm::sys::path::append(path, lldb_python_home);
++        llvm::sys::path::remove_dots(path, /* remove_dot_dots = */ true);
++        absolute_python_home = path.c_str();
++      }
++#if PY_MAJOR_VERSION >= 3
++      size_t size = 0;
++      return Py_DecodeLocale(absolute_python_home, &size);
++#else
++      return strdup(absolute_python_home);
++#endif
++    }();
++    if (g_python_home != nullptr) {
++      Py_SetPythonHome(g_python_home);
++    }
+ #else
+ #if defined(__APPLE__) && PY_MAJOR_VERSION == 2 && PY_MINOR_VERSION == 7
+     // For Darwin, the only Python version supported is the one shipped in the
+-- 
+2.25.0.265.gbab2e86ba0-goog
+
