@@ -1274,14 +1274,16 @@ def set_lldb_flags(install_dir, host, defines, env):
     defines['SWIG_EXECUTABLE'] = os.path.join(swig_root, 'bin', 'swig')
     env['SWIG_LIB'] = os.path.join(swig_root, 'share', 'swig', '3.0.12')
 
+    python_ver = '3.8'
     if host != 'darwin-x86':
         defines['PYTHON_EXECUTABLE'] = utils.android_path('prebuilts', 'python',
-                                        'linux-x86', 'bin', 'python2.7')
+                                        'linux-x86', 'bin', 'python' + python_ver)
 
     if host == 'linux-x86':
         python_root = utils.android_path('prebuilts', 'python', host)
-        defines['PYTHON_LIBRARY'] = os.path.join(python_root, 'lib', 'libpython2.7.so')
-        defines['PYTHON_INCLUDE_DIR'] = os.path.join(python_root, 'include', 'python2.7')
+        defines['PYTHON_LIBRARY'] = os.path.join(python_root, 'lib',
+                                                 'libpython{}.so'.format(python_ver))
+        defines['PYTHON_INCLUDE_DIR'] = os.path.join(python_root, 'include', 'python' + python_ver)
     elif host == 'windows-x86':
         defines['PYTHON_HOME'] = utils.android_path('prebuilts', 'python', host, 'x64')
     defines['LLDB_RELOCATABLE_PYTHON'] = 'ON'
