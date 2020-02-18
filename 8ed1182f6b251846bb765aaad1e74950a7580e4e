@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f316b77_b3c0c193",
+        "filename": "build.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-02-18T21:59:27Z",
+      "side": 1,
+      "message": "This should use the b build now, so that we can delete the original one.",
+      "range": {
+        "startLine": 142,
+        "startChar": 18,
+        "endLine": 142,
+        "endChar": 25
+      },
+      "revId": "8ed1182f6b251846bb765aaad1e74950a7580e4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
