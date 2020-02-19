@@ -16,6 +16,29 @@
       "revId": "6054830ea67bd12991bf56acf249f79c8429ccf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e56ecb3_2282c6fe",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-02-19T04:57:03Z",
+      "side": 1,
+      "message": "This seems hacky... Conditionally append the LLVM_ENABLE_PROJECTS line would be much clearer.",
+      "range": {
+        "startLine": 1032,
+        "startChar": 0,
+        "endLine": 1040,
+        "endChar": 9
+      },
+      "revId": "6054830ea67bd12991bf56acf249f79c8429ccf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
