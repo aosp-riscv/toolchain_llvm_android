@@ -49,6 +49,10 @@ ANDROID_TARGETS = 'AArch64;ARM;BPF;X86'
 # We were using 10.8, but we need 10.9 to use ~type_info() from libcxx.
 MAC_MIN_VERSION = '10.9'
 
+# TODO (Pirama): Put all the build options in a global so it's easy to refer to
+# them instead of plumbing flags through function parameters.
+DO_LLDB = False
+
 def logger():
     """Returns the module level logger."""
     return logging.getLogger(__name__)
@@ -1022,11 +1026,18 @@ def build_llvm_for_windows(stage1_install,
     native_cmake_file_path = os.path.join(build_dir, 'NATIVE.cmake')
     native_cmake_text = ('set(CMAKE_C_COMPILER {cc})\n'
                          'set(CMAKE_CXX_COMPILER {cxx})\n'
-                         'set(LLVM_ENABLE_PROJECTS "clang;lldb" CACHE STRING "" FORCE)\n'
-                         'set(LLDB_DISABLE_PYTHON "ON" CACHE STRING "" FORCE)\n'
-                         'set(LLDB_DISABLE_CURSES "ON" CACHE STRING "" FORCE)\n'
-                         'set(LLDB_DISABLE_LIBEDIT "ON" CACHE STRING "" FORCE)\n'
+                         'set(LLVM_ENABLE_PROJECTS "clang" CACHE STRING "" FORCE)\n'
                         ).format(cc=cc, cxx=cxx)
+
+    if DO_LLDB:
+        native_cmake_text = native_cmake_text.replace(
+            'LLVM_ENABLE_PROJECTS "clang"',
+            'LLVM_ENABLE_PROJECTS "clang;lldb"')
+        native_cmake_text += (
+            'set(LLDB_DISABLE_PYTHON "ON" CACHE STRING "" FORCE)\n'
+            'set(LLDB_DISABLE_CURSES "ON" CACHE STRING "" FORCE)\n'
+            'set(LLDB_DISABLE_LIBEDIT "ON" CACHE STRING "" FORCE)\n'
+        )
 
     with open(native_cmake_file_path, 'w') as native_cmake_file:
         native_cmake_file.write(native_cmake_text)
@@ -1047,7 +1058,7 @@ def build_llvm_for_windows(stage1_install,
     # Use libc++ for Windows.
     windows_extra_defines['LLVM_ENABLE_LIBCXX'] = 'ON'
 
-    windows_extra_defines['LLVM_ENABLE_PROJECTS'] = 'clang;clang-tools-extra;lld;lldb'
+    windows_extra_defines['LLVM_ENABLE_PROJECTS'] = 'clang;clang-tools-extra;lld'
 
     windows_sysroot = utils.android_path('prebuilts', 'gcc', 'linux-x86',
                                          'host', 'x86_64-w64-mingw32-4.8',
@@ -1072,7 +1083,11 @@ def build_llvm_for_windows(stage1_install,
 
     windows_extra_env = dict()
 
-    set_lldb_flags(install_dir, 'windows-x86', windows_extra_defines, windows_extra_env)
+    if DO_LLDB:
+        windows_extra_defines['LLVM_ENABLE_PROJECTS'] += ';lldb'
+        set_lldb_flags(install_dir, 'windows-x86', windows_extra_defines,
+                       windows_extra_env)
+
     cflags.append('-DMS_WIN64')
 
     cxxflags = list(cflags)
@@ -1319,7 +1334,7 @@ def build_stage2(stage1_install,
     stage2_extra_defines = get_shared_extra_defines()
     stage2_extra_env = dict()
 
-    stage2_extra_defines['LLVM_ENABLE_PROJECTS'] += ';clang-tools-extra;openmp;lldb'
+    stage2_extra_defines['LLVM_ENABLE_PROJECTS'] += ';clang-tools-extra;openmp'
     stage2_extra_defines['CMAKE_C_COMPILER'] = stage2_cc
     stage2_extra_defines['CMAKE_CXX_COMPILER'] = stage2_cxx
     stage2_extra_defines['LLVM_ENABLE_LIBCXX'] = 'ON'
@@ -1327,8 +1342,10 @@ def build_stage2(stage1_install,
     stage2_extra_defines['OPENMP_ENABLE_OMPT_TOOLS'] = 'FALSE'
     stage2_extra_defines['LIBOMP_ENABLE_SHARED'] = 'FALSE'
 
-    set_lldb_flags(stage2_install, utils.build_os_type(), stage2_extra_defines,
-                   stage2_extra_env)
+    if DO_LLDB:
+        stage2_extra_defines['LLVM_ENABLE_PROJECTS'] += ';lldb'
+        set_lldb_flags(stage2_install, utils.build_os_type(),
+                       stage2_extra_defines, stage2_extra_env)
 
     update_cmake_sysroot_flags(stage2_extra_defines, host_sysroot())
 
@@ -1640,8 +1657,6 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
         'ld64.lld' + ext,
         'lld' + ext,
         'lld-link' + ext,
-        'lldb' + ext,
-        'lldb-argdumper' + ext,
         'llvm-addr2line' + ext,
         'llvm-ar' + ext,
         'llvm-as' + ext,
@@ -1670,22 +1685,30 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
         'scan-view' + ext,
     }
 
+    if DO_LLDB:
+        necessary_bin_files.update({
+            'lldb-argdumper' + ext,
+            'lldb' + ext,
+        })
+
     if is_windows:
-        # Installs python for lldb.
-        python_dll = utils.android_path('prebuilts', 'python',
-                                        'windows-x86', 'x64', 'python27.dll')
-        shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
         windows_blacklist_bin_files = {
             'clang-' + version.major_version() + ext,
             'scan-build' + ext,
             'scan-view' + ext,
         }
-        windows_additional_bin_files = {
-            'liblldb' + shlib_ext,
-            'python27' + shlib_ext
-        }
         necessary_bin_files -= windows_blacklist_bin_files
-        necessary_bin_files |= windows_additional_bin_files
+
+        if DO_LLDB:
+            # Installs python for lldb.
+            python_dll = utils.android_path('prebuilts', 'python',
+                                            'windows-x86', 'x64', 'python27.dll')
+            shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
+            windows_additional_bin_files = {
+                'liblldb' + shlib_ext,
+                'python27' + shlib_ext
+            }
+            necessary_bin_files |= windows_additional_bin_files
 
     # scripts that should not be stripped
     script_bins = {
@@ -1783,15 +1806,15 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
 
 
 def parse_args():
-    known_platforms = ('linux', 'windows')
-    known_platforms_str = ', '.join(known_platforms)
+    known_components = ('linux', 'windows', 'lldb')
+    known_components_str = ', '.join(known_components)
 
     # Simple argparse.Action to allow comma-separated values (e.g.
     # --option=val1,val2)
     class CommaSeparatedListAction(argparse.Action):
         def __call__(self, parser, namespace, values, option_string):
             for value in values.split(','):
-                if value not in known_platforms:
+                if value not in known_components:
                     error = '\'{}\' invalid.  Choose from {}'.format(
                         value, known_platforms)
                     raise argparse.ArgumentError(self, error)
@@ -1903,18 +1926,13 @@ def parse_args():
         action='store_true',
         default=False,
         help='Skip the sanitizer libraries')
-    parser.add_argument(
-        '--skip-lldb',
-        action='store_true',
-        default=False,
-        help='Skip the lldb server libraries')
 
     parser.add_argument(
         '--no-build',
         action=CommaSeparatedListAction,
         default=list(),
-        help='Don\'t build toolchain for specified platforms.  Choices: ' + \
-            known_platforms_str)
+        help='Don\'t build toolchain components or platforms.  Choices: ' + \
+            known_components_str)
 
     parser.add_argument(
         '--check-pgo-profile',
@@ -1940,6 +1958,10 @@ def main():
     do_package = not args.skip_package
     do_strip = not args.no_strip
     do_strip_host_package = do_strip and not args.debug
+
+    # TODO (Pirama): Avoid using global statement
+    global DO_LLDB
+    DO_LLDB = 'lldb' not in args.no_build
 
     need_host = utils.host_is_darwin() or ('linux' not in args.no_build)
     need_windows = utils.host_is_linux() and \
