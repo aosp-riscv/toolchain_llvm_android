@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b614ca62_dd8732b3",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-19T16:34:35Z",
+      "side": 1,
+      "message": "Happy to address any post-submit comments in a followup.",
+      "parentUuid": "0a927967_f1c4ef60",
+      "revId": "6054830ea67bd12991bf56acf249f79c8429ccf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e56ecb3_2282c6fe",
         "filename": "build.py",
         "patchSetId": 2
