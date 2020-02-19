@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a927967_f1c4ef60",
+        "filename": "build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-19T04:52:35Z",
+      "side": 1,
+      "message": "Not sure what the best practice is in Python re: global variables but since build.py has evolved in a procedural paradigm, globals for flags seems like an acceptable evil to me.",
+      "revId": "6054830ea67bd12991bf56acf249f79c8429ccf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
