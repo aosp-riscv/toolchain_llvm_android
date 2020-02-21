@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67edf64d_377b5ecb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-02-21T21:19:13Z",
+      "side": 1,
+      "message": "-Wno-error",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "0f193afaeba9c31f65d6b6fc57c4609c45346897",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
