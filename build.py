@@ -790,7 +790,6 @@ def build_lldb_server(toolchain, clang_version, ndk_cxx=False):
         lldb_defines['LLVM_ENABLE_PROJECTS'] = 'clang;lldb'
 
         lldb_defines['LLVM_ENABLE_LIBCXX'] = 'ON'
-        lldb_defines['CMAKE_SYSTEM_NAME'] = 'Android'
         lldb_defines['CMAKE_CROSSCOMPILING'] = 'True'
         lldb_defines['LLVM_TABLEGEN'] = os.path.join(toolchain, 'bin', 'llvm-tblgen')
         lldb_defines['CLANG_TABLEGEN'] = os.path.join(toolchain, '..', 'stage2', 'bin', 'clang-tblgen')
@@ -798,6 +797,10 @@ def build_lldb_server(toolchain, clang_version, ndk_cxx=False):
         lldb_defines['LLVM_DEFAULT_TARGET_TRIPLE'] = llvm_triple
         lldb_defines['LLVM_HOST_TRIPLE'] = llvm_triple
         lldb_defines['LLVM_TARGET_ARCH'] = arch
+
+        lldb_defines['CMAKE_SYSTEM_NAME'] = 'Android'
+        # Inhibit all of CMake's own NDK handling code.
+        lldb_defines['CMAKE_SYSTEM_VERSION'] = '1'
 
         lldb_env = dict(ORIG_ENV)
 
@@ -1285,7 +1288,7 @@ def set_lldb_flags(install_dir, host, defines, env):
                                                  'libpython{}.so'.format(python_ver))
         defines['PYTHON_INCLUDE_DIR'] = os.path.join(python_root, 'include', 'python' + python_ver)
     elif host == 'windows-x86':
-        defines['PYTHON_HOME'] = utils.android_path('prebuilts', 'python', host, 'x64')
+        defines['PYTHON_HOME'] = utils.android_path('prebuilts', 'python', host)
     defines['LLDB_RELOCATABLE_PYTHON'] = 'ON'
 
     if host == 'darwin-x86':
@@ -1675,7 +1678,7 @@ def package_toolchain(build_dir, build_name, host, dist_dir, strip=True, create_
     if is_windows:
         # Installs python for lldb.
         python_dll = utils.android_path('prebuilts', 'python',
-                                        'windows-x86', 'x64', 'python27.dll')
+                                        'windows-x86', 'python38.dll')
         shutil.copy(python_dll, os.path.join(install_dir, 'bin'))
         windows_blacklist_bin_files = {
             'clang-' + version.major_version() + ext,
