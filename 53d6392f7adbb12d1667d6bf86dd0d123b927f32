@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "323342bf_faaf824b",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-02-24T23:58:57Z",
+      "side": 1,
+      "message": "Can you set this value to \u0027BUILD_LLVM_NEXT\u0027?  (Global from top of the file and initialized in main()).",
+      "range": {
+        "startLine": 1503,
+        "startChar": 55,
+        "endLine": 1503,
+        "endChar": 60
+      },
+      "revId": "53d6392f7adbb12d1667d6bf86dd0d123b927f32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
