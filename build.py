@@ -199,8 +199,12 @@ def cmake_bin_path():
     return os.path.join(cmake_prebuilt_bin_dir(), 'cmake')
 
 
+def ninja_prebuilt_bin_dir():
+    return utils.android_path('prebuilts/ninja', utils.build_os_type())
+
+
 def ninja_bin_path():
-    return os.path.join(cmake_prebuilt_bin_dir(), 'ninja')
+    return os.path.join(ninja_prebuilt_bin_dir(), 'ninja')
 
 
 def check_create_path(path):
