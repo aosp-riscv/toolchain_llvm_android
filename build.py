@@ -1113,6 +1113,11 @@ def build_llvm_for_windows(stage1_install,
     ldflags.extend((
         '-Wl,--dynamicbase',
         '-Wl,--nxcompat',
+        # libmingwex defines long double functions that are incompatible with
+        # those from msvcrt or ucrt, so it must be linked before the OS import
+        # libs. (mingw uses an 80-bit long double, while msvc uses a 64-bit long
+        # double.)
+        '-lmingwex',
         # Use ucrt to find locale functions needed by libc++.
         '-lucrt', '-lucrtbase',
         # Use static-libgcc to avoid runtime dependence on libgcc_eh.
