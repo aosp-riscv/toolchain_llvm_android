@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "827a410b_909ab25f",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1302,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-04T16:55:15Z",
+      "side": 1,
+      "message": "But the cmake definition is different (PYTHON_EXECUTABLE vs Python3_EXECUTABLE). It is more complex to be smart...\n\nThe upstream is still changing this frequently. Maybe we can unify them in the next version.",
+      "parentUuid": "0eccea6e_6d6b6d23",
+      "revId": "1b74f4c7d1165ec44dc48b6bd3fde27f6631c2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "868a5c0f_3994b1ab",
         "filename": "build.py",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "1b74f4c7d1165ec44dc48b6bd3fde27f6631c2be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f404faa_2902c916",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1305,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-04T16:55:15Z",
+      "side": 1,
+      "message": "Windows uses different layout, build system and everything.",
+      "parentUuid": "868a5c0f_3994b1ab",
+      "revId": "1b74f4c7d1165ec44dc48b6bd3fde27f6631c2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "1b74f4c7d1165ec44dc48b6bd3fde27f6631c2be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d02d50e2_40487ff5",
+        "filename": "build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-04T16:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64eebe8c_882a393f",
+      "range": {
+        "startLine": 1313,
+        "startChar": 13,
+        "endLine": 1313,
+        "endChar": 29
+      },
+      "revId": "1b74f4c7d1165ec44dc48b6bd3fde27f6631c2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
