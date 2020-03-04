@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2255bc8_ada64915",
+        "filename": "build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-04T04:15:12Z",
+      "side": 1,
+      "message": "nit: We could pull this to a global tuple (\u00273\u0027, \u00278\u0027) and reuse it in package_toolchain as well.",
+      "revId": "05bdb629505843afa8141e3f7721cd86cfc27e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
