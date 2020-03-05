@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8e4ec72_b6e8a40c",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-03-05T06:28:55Z",
+      "side": 1,
+      "message": "Luckily, we had no other \u00279\u0027 patch_level for 9.0, so this works. We need to figure out a better strategy for the future though.",
+      "revId": "7271ca4ae20d62ce3177e650a5ff484c0b4ebcfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1662fce5_23f5a419",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-03-05T06:28:55Z",
+      "side": 1,
+      "message": "In the past, we suffixed with an incrementing integer, which I think is better for keeping things understandable.",
+      "revId": "7271ca4ae20d62ce3177e650a5ff484c0b4ebcfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
