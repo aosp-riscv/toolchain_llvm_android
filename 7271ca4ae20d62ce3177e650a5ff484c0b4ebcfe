@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "77e29102_98a2f02b",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-03-05T10:06:04Z",
+      "side": 1,
+      "message": "I\u0027ll stick with that for now, but we might want the ability to bump it in these cases.",
+      "parentUuid": "8e67a2a1_e737a26c",
+      "revId": "7271ca4ae20d62ce3177e650a5ff484c0b4ebcfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1662fce5_23f5a419",
         "filename": "android_version.py",
         "patchSetId": 1
