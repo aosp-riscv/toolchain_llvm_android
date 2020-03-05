@@ -1036,6 +1036,10 @@ def build_llvm_for_windows(stage1_install,
 
     if BUILD_LLDB:
         native_cmake_text += (
+            'set(LLDB_ENABLE_PYTHON "OFF" CACHE STRING "" FORCE)\n'
+            'set(LLDB_ENABLE_CURSES "OFF" CACHE STRING "" FORCE)\n'
+            'set(LLDB_ENABLE_LIBEDIT "OFF" CACHE STRING "" FORCE)\n'
+            # TODO: Remove the following on or after r380035.
             'set(LLDB_DISABLE_PYTHON "ON" CACHE STRING "" FORCE)\n'
             'set(LLDB_DISABLE_CURSES "ON" CACHE STRING "" FORCE)\n'
             'set(LLDB_DISABLE_LIBEDIT "ON" CACHE STRING "" FORCE)\n'
@@ -1296,6 +1300,7 @@ def set_lldb_flags(install_dir, host, defines, env):
     env['SWIG_LIB'] = os.path.join(swig_root, 'share', 'swig', '3.0.12')
 
     python_root = get_python_dir(host)
+    defines['LLDB_ENABLE_PYTHON'] = 'ON'
     if host == 'linux-x86':
         defines['PYTHON_LIBRARY'] = os.path.join(python_root, 'lib', 'libpython3.8.so')
         defines['PYTHON_INCLUDE_DIR'] = os.path.join(python_root, 'include', 'python3.8')
