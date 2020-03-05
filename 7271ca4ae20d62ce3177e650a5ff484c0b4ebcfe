@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8e67a2a1_e737a26c",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-03-05T08:30:28Z",
+      "side": 1,
+      "message": "Last time we didn\u0027t update patch_level for post branch versions.",
+      "parentUuid": "d8e4ec72_b6e8a40c",
+      "revId": "7271ca4ae20d62ce3177e650a5ff484c0b4ebcfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1662fce5_23f5a419",
         "filename": "android_version.py",
         "patchSetId": 1
