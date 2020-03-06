@@ -1,0 +1,6 @@
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Submitted-by: Haibo Huang <hhb@google.com>
+Submitted-at: Fri, 06 Mar 2020 21:06:00 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1251649
+Project: toolchain/llvm_android
+Branch: refs/heads/master
