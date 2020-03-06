@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18f7b705_c40a7dd5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-06T21:17:21Z",
+      "side": 1,
+      "message": "Please also update the commit message.",
+      "revId": "9853335f5ff45095a319123bf308b9aad65e352b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
