@@ -22,6 +22,7 @@ import os
 import shutil
 import string
 import subprocess
+import sys
 
 import android_version
 import utils
@@ -35,8 +36,7 @@ def apply_patches(source_dir, svn_version, patch_json, patch_dir):
     """
 
     patch_manager_cmd = [
-        utils.android_path('prebuilts', 'build-tools', utils.build_os_type(),
-                           'bin', 'py3-cmd'),
+        sys.executable,
         utils.android_path('external', 'toolchain-utils', 'llvm_tools',
                           'patch_manager.py'),
         '--svn_version', svn_version,
