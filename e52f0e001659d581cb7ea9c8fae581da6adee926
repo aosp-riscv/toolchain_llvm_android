@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a2bcde7_ce4650e5",
+        "filename": "build3.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-06T18:10:57Z",
+      "side": 1,
+      "message": "Why add this to PATH?  Can\u0027t we directly invoke $python_bin/python3?",
+      "revId": "e52f0e001659d581cb7ea9c8fae581da6adee926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
