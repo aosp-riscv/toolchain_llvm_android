@@ -16,6 +16,24 @@
       "revId": "e52f0e001659d581cb7ea9c8fae581da6adee926",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fd31f36_446c402d",
+        "filename": "build3.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-06T18:16:05Z",
+      "side": 1,
+      "message": "I guess that also work if we set PYTHONHOME correctly. But I saw NDK simply adds to PATH so I did the same here.",
+      "parentUuid": "4a2bcde7_ce4650e5",
+      "revId": "e52f0e001659d581cb7ea9c8fae581da6adee926",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
