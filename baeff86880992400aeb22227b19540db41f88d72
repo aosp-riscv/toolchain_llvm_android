@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b7cce9c_299e4853",
+        "filename": "build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-07T18:50:41Z",
+      "side": 1,
+      "message": "It will copy .git under prebuilts/python, thus making a sub git project when updating compiler:\nINFO:__main__:check_call: git add clang-r377782c\nwarning: adding embedded git repository: clang-r377782c/python3\nhint: You\u0027ve added another git repository inside your current repository.\nhint: Clones of the outer repository will not contain the contents of\nhint: the embedded repository and will not know how to obtain it.\nhint: If you meant to add a submodule, use:\nhint: \nhint: \tgit submodule add \u003curl\u003e clang-r377782c/python3\nhint: \nhint: If you added this path by mistake, you can remove it from the\nhint: index with:\nhint: \nhint: \tgit rm --cached clang-r377782c/python3\nhint: \nhint: See \"git help submodule\" for more information.",
+      "range": {
+        "startLine": 1333,
+        "startChar": 11,
+        "endLine": 1333,
+        "endChar": 19
+      },
+      "revId": "baeff86880992400aeb22227b19540db41f88d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
