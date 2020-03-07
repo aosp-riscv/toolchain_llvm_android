@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7df2184a_330b49e5",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-03-07T00:52:14Z",
+      "side": 1,
+      "message": "Maybe -lpthread can also be omitted?\n\nIf we want to do that, though, it could be a later patch:\n\nhttps://github.com/llvm/llvm-project/blob/fa7cd549d604bfd8f9dce5d649a19720cbc39cca/clang/lib/Driver/ToolChains/MinGW.cpp#L258-L259",
+      "revId": "0afb0ad4635e1060eadd33071cb5c6b4290c34bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
