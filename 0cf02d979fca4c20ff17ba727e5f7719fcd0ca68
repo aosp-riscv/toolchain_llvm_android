@@ -1,0 +1,7 @@
+Presubmit-Ready+1: Haibo Huang <hhb@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Submitted-by: Haibo Huang <hhb@google.com>
+Submitted-at: Sat, 07 Mar 2020 01:29:18 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1253067
+Project: toolchain/llvm_android
+Branch: refs/heads/master
