@@ -16,6 +16,24 @@
       "revId": "0afb0ad4635e1060eadd33071cb5c6b4290c34bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a46665e_380eec37",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-07T20:26:59Z",
+      "side": 1,
+      "message": "The snippet is guarded by OPT_pthread (-pthread option).  So we\u0027d need either \u0027-lpthread\u0027 or \u0027-pthread\u0027.  It makes sense to use \u0027-pthread\u0027 so it gets added in the order encoded in the driver.  I\u0027ll do so in a followup.",
+      "parentUuid": "7df2184a_330b49e5",
+      "revId": "0afb0ad4635e1060eadd33071cb5c6b4290c34bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
