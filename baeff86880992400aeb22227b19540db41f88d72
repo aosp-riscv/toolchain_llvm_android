@@ -22,6 +22,30 @@
       "revId": "baeff86880992400aeb22227b19540db41f88d72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dafddc16_9b1bbbdc",
+        "filename": "build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-09T20:28:18Z",
+      "side": 1,
+      "message": "Thanks! Sent aosp/1254048",
+      "parentUuid": "1b7cce9c_299e4853",
+      "range": {
+        "startLine": 1333,
+        "startChar": 11,
+        "endLine": 1333,
+        "endChar": 19
+      },
+      "revId": "baeff86880992400aeb22227b19540db41f88d72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
