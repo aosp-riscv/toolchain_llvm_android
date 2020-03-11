@@ -58,13 +58,6 @@ def llvm_path(*args):
     return out_path('llvm-project', *args)
 
 
-def build_os_type():
-    if sys.platform.startswith('linux'):
-        return 'linux-x86'
-    else:
-        return 'darwin-x86'
-
-
 def host_is_linux():
     return build_os_type() == 'linux-x86'
 
