@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "993a249e_a1a39cb7",
+        "filename": "hosts.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-12T17:56:50Z",
+      "side": 1,
+      "message": "python3",
+      "range": {
+        "startLine": 1,
+        "startChar": 15,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "e2d32781a9761bf813f2c4cad822b9184b379550",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
