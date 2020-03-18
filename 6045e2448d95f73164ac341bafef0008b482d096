@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03a30b51_e14e776b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T23:33:13Z",
+      "side": 1,
+      "message": "Before finally submitting this, please add a slightly longer description of the change.  This is not a little refactoring 😊",
+      "range": {
+        "startLine": 7,
+        "startChar": 24,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16d8dbe8_7fb7c187",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T23:33:13Z",
+      "side": 1,
+      "message": "We should set an svn_revision property here instead of keeping track of build_llvm_next.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 25
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "575e9bbe_cdea7075",
+        "filename": "do_build.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1208,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T23:33:13Z",
+      "side": 1,
+      "message": "It seems awkward to me that we need to aware to extend the base class\u0027s cmake_defines.  Is there a better way to compose this?\n\n(Unless there are alternatives, I\u0027m going to accept this idiom, so marking this comment as resolved).",
+      "range": {
+        "startLine": 1208,
+        "startChar": 0,
+        "endLine": 1208,
+        "endChar": 39
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c95ca96_22bc037b",
+        "filename": "toolchains.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T23:33:13Z",
+      "side": 1,
+      "message": "The Toolchain hierarchy is very useful.  It needs a slight tweak though because we have two different purposes for it:\n1. ClangToolchain \u003c- to represent a clang-rXYZ prebuilt or a stage1 or stage2 toolchain.\n\n2. Another class to represent a target being built.  This should handle the GCC sysroots, target triples etc.  This class would get used for both the host and device (for building runtimes).  This class can be called TargetConfiguration or something similar.  We can have further subclasses {Android,Darwin,Linux,Windows}Configuration.\n\n(1) should have methods like cc() and cxx() below.\n(2) should have the compiler and linker flags.\n\nWe should start with just the LinuxConfiguration and DarwinConfiguration for this CL.",
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d67d11bf_a8b8cf76",
+        "filename": "toolchains.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T23:33:13Z",
+      "side": 1,
+      "message": "This should only be needed for stage1 right?  This makes me wonder if the LLVMBuilder instances also need to be able to configure cflags/ldflags.",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 37
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b493e8f_8c9be977",
+        "filename": "utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T23:33:13Z",
+      "side": 1,
+      "message": "I don\u0027t see the utility in logging the invocation time for a command.  Is there any particular motivation?  If we want to find the time taken for a command, we should log that more explicitly.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 63
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

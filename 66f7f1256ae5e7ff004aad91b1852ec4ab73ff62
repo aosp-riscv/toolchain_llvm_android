@@ -155,6 +155,24 @@
     },
     {
       "key": {
+        "uuid": "9bc27309_bf356b83",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T23:33:13Z",
+      "side": 1,
+      "message": "I think pyformat-ted lines shouldn\u0027t make it too long.\n\nOTOH, marking these as properties avoids superfluous \u0027self.\u0027 prefixes.  Let\u0027s use properties now, unless other reviewers have a different preference.",
+      "parentUuid": "f6d1a334_cc7ef443",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ed70371_2342faac",
         "filename": "merge_from_upstream.py",
         "patchSetId": 6
@@ -187,6 +205,24 @@
       "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7956d9d_657b39a0",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T23:33:13Z",
+      "side": 1,
+      "message": "Oh wait, my bad - sorry.  I thought the debug messages were added as part of this CL.\n\nThese were pre-exisiting ones and should migrate to print() function calls as a part of a separate CL.",
+      "parentUuid": "e43d1737_7076a39a",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
