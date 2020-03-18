@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6982d1a3_0c9c00f1",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-18T19:41:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8cc5c9a_58d77dd8",
+      "range": {
+        "startLine": 1200,
+        "startChar": 8,
+        "endLine": 1201,
+        "endChar": 62
+      },
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50a206f0_8742a663",
         "filename": "do_build.py",
         "patchSetId": 6
@@ -36,6 +60,24 @@
       "writtenOn": "2020-03-18T18:06:11Z",
       "side": 1,
       "message": "When we use these classes everywhere, we should set *_TARGETS to be lists to begin with.",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5b7806e_9839d00c",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-18T19:41:08Z",
+      "side": 1,
+      "message": "Agreed but it is difficult to change currently.",
+      "parentUuid": "50a206f0_8742a663",
       "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "5dfce3f8_986622cb",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-18T19:41:08Z",
+      "side": 1,
+      "message": "\"compile\" time available information can be static members. That makes things easier.\n\nBut dynamic information is difficult to go into static members. They have to be parameters.\n\nIn general all things derived from args have to be parameters. Other things should be static members.",
+      "parentUuid": "83a8cfbb_6e54a720",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ed70371_2342faac",
         "filename": "merge_from_upstream.py",
         "patchSetId": 6
@@ -73,6 +133,24 @@
       "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e43d1737_7076a39a",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-18T19:41:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ed70371_2342faac",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
