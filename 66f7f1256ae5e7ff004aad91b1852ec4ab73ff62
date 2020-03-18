@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8cc5c9a_58d77dd8",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T18:06:11Z",
+      "side": 1,
+      "message": "Should this go in LLVMBuilder?  Even if we don\u0027t set it currently, we should be doing so for all LLVM builds (windows, linux, darwin).",
+      "range": {
+        "startLine": 1200,
+        "startChar": 8,
+        "endLine": 1201,
+        "endChar": 62
+      },
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50a206f0_8742a663",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1206,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T18:06:11Z",
+      "side": 1,
+      "message": "When we use these classes everywhere, we should set *_TARGETS to be lists to begin with.",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83a8cfbb_6e54a720",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T18:06:11Z",
+      "side": 1,
+      "message": "Is there a rationale for some settings to be constructor options and others to be static member initializations?  Should we pick one style and be consistent?",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ed70371_2342faac",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T18:06:11Z",
+      "side": 1,
+      "message": "These debug messages can be removed.",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
