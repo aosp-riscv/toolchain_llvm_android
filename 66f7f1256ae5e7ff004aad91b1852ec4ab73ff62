@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "ffbe02e6_2c27d9d8",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-18T21:51:07Z",
+      "side": 1,
+      "message": "\u003e In general all things derived from args have to be parameters. Other things should be static members.\n\nIn the next couple of lines, build_llvm_tools and debug are set from args but as static members instead of constructor parameters.  Should we change them?",
+      "parentUuid": "5dfce3f8_986622cb",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ed70371_2342faac",
         "filename": "merge_from_upstream.py",
         "patchSetId": 6
