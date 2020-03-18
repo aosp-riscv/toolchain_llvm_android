@@ -137,6 +137,24 @@
     },
     {
       "key": {
+        "uuid": "f6d1a334_cc7ef443",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-18T22:12:15Z",
+      "side": 1,
+      "message": "Oh sorry I thought you mean the ones defined in Stage1Builder definitions.\n\nYes we should unify this. I slightly prefer property setting because that won\u0027t make one statement too long. But let me know if you have a different idea.",
+      "parentUuid": "ffbe02e6_2c27d9d8",
+      "revId": "66f7f1256ae5e7ff004aad91b1852ec4ab73ff62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ed70371_2342faac",
         "filename": "merge_from_upstream.py",
         "patchSetId": 6
