@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74d8bc5c_6263d8ab",
+        "filename": "constants.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-19T18:44:20Z",
+      "side": 1,
+      "message": "now we are using clang-r377782c.",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "402f43ed5732dfccec1039ca086f3f201fef2d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b972c827_9034bab2",
+        "filename": "do_build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 2005,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-19T18:44:20Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 2005,
+        "startChar": 0,
+        "endLine": 2005,
+        "endChar": 8
+      },
+      "revId": "402f43ed5732dfccec1039ca086f3f201fef2d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

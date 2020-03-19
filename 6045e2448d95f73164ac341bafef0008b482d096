@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d35ff5ea_95087650",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-19T18:44:20Z",
+      "side": 1,
+      "message": "I see, it\u0027s an interesting way of designing classes. Do you mind adding comments describing the design and how we should use it?\n\nI also want to confirm which fields are necessary, and which fields are optional. In my understanding:\n1) If we give a default value to variable, child class is optional to change it.\n2) If we only give type but not default value, child class or class instance must assign a value to it. otherwise abort if that variable is used.\n\nFor not implemented property get function, why not replace it with typed variable without default value, like changing:\n\n    @property\n    def llvm_projects(self) -\u003e List[str]:\n        \"\"\"The LLVM projects to build.\"\"\"\n        raise NotImplementedError\n\ninto:\n  llvm_projects: List[str]\n\nThey have the same effect (abort when used without child implementation). and child class has a freedom to implement it using a variable assignment or a property function.",
+      "parentUuid": "0eb503fa_ad9d2b4d",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9
@@ -201,6 +225,30 @@
       "side": 1,
       "message": "This is using pathlib.Path. It overrides \u0027/\u0027 operator to be os.path.join().",
       "parentUuid": "a4e499a6_9e2aed87",
+      "range": {
+        "startLine": 174,
+        "startChar": 42,
+        "endLine": 174,
+        "endChar": 46
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2f787f1_9a955c7c",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-19T18:44:20Z",
+      "side": 1,
+      "message": "I see. Sorry for not realizing it.",
+      "parentUuid": "79946082_1f6e5973",
       "range": {
         "startLine": 174,
         "startChar": 42,
