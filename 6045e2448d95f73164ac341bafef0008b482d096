@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "be034f98_677ff5f4",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-19T19:34:09Z",
+      "side": 1,
+      "message": "For problem 1, surely constructor is also the standard way to go.",
+      "parentUuid": "125480b6_57f1fd7f",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9
