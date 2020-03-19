@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "41a2474b_aabf792d",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-19T20:36:54Z",
+      "side": 1,
+      "message": "For problem 1, I think current way in a) is good enough, and b) and c) are extra work with no obvious benefit.\nFor problem 2, I agree with you. And to save some code, I also think NotImplemented property function can be replaced by variable with only definition.",
+      "parentUuid": "be034f98_677ff5f4",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9
