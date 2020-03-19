@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c5a343b3_520d6e9d",
+        "filename": "constants.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-19T19:29:08Z",
+      "side": 1,
+      "message": "Merged.",
+      "parentUuid": "74d8bc5c_6263d8ab",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 22,
+        "endChar": 45
+      },
+      "revId": "402f43ed5732dfccec1039ca086f3f201fef2d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b972c827_9034bab2",
         "filename": "do_build.py",
         "patchSetId": 12
@@ -45,6 +69,30 @@
       "revId": "402f43ed5732dfccec1039ca086f3f201fef2d22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "873dac4c_ef0895e6",
+        "filename": "do_build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 2005,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-19T19:29:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b972c827_9034bab2",
+      "range": {
+        "startLine": 2005,
+        "startChar": 0,
+        "endLine": 2005,
+        "endChar": 8
+      },
+      "revId": "402f43ed5732dfccec1039ca086f3f201fef2d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

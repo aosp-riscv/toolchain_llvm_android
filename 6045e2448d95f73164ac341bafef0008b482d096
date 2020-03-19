@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "125480b6_57f1fd7f",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-19T19:29:08Z",
+      "side": 1,
+      "message": "Yes are these two problems I\u0027m not quite sure about. Suggestions are welcome.\n\n1. For the properties child classes have to set, how do we enforce it?\n\na) Current way: \"define\" it but don\u0027t initialize it. The definition actually does nothing. So when the field is used, an AttributeError will be raised \u0027X\u0027 object has no attribute \u0027y\u0027.\n\nb) Maybe have a validate() function everywhere and have the framework invoke them in the future? That requires more work everywhere.\n\nc) Refactor everything into a @property method. This is verbose then just set a variable.\n\n\n2. What should be a variable, and what should be @property method.\n\nI always prefer plaint variable because it is easier to override in subclasses. The thing is that sometimes child class need some \"logic\" to decide it. E.g. stage1 will build ANDROID_TARGETS if debug else BASE_TARGETS. The decision may based on runtime information (like args.debug) so that class level initializer or @staticmethod won\u0027t work.",
+      "parentUuid": "d35ff5ea_95087650",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9
