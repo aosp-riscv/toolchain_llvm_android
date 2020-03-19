@@ -216,6 +216,30 @@
     },
     {
       "key": {
+        "uuid": "54362fbc_78df283d",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-19T21:35:38Z",
+      "side": 1,
+      "message": "It is thought of as an advantage of python comparing to java. That you can use a member variable, and later replace it with property functions when some logic is needed. No need to use getter and setter functions in the first place.",
+      "parentUuid": "02f5327b_cb471faf",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9
