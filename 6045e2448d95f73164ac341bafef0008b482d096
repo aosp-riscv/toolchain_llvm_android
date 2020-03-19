@@ -168,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "6d3499a8_2cca73a8",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-19T21:21:26Z",
+      "side": 1,
+      "message": "Replacing NotImplemented with variable may work (surprising for me). But semantically it is wrong. A variable can be assigned to, but @property is readonly. If we define something as variable in parent class but override it to @property function, we actually change the interface.\n\nA side benefit is that pylint can correctly recognize NotImplemented as abstract function, and requires them to be implemented in child class.",
+      "parentUuid": "41a2474b_aabf792d",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9
