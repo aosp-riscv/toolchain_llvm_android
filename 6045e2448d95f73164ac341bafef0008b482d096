@@ -192,6 +192,30 @@
     },
     {
       "key": {
+        "uuid": "02f5327b_cb471faf",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-19T21:29:38Z",
+      "side": 1,
+      "message": "This is really interesting. @property provides a grammar sugar for a function call. The function even have a self parameter. Instead a variable is just a plaint variable. So in some sense we can override a variable with a function?\n\nThat means when python interpreter saw a.val, it has to look up the *runtime* instance to decide what to do? Hmm I kind of know why python is inefficient. 😊\n\nAt this point I don\u0027t know whether this is an abuse or an idiomatic python...",
+      "parentUuid": "6d3499a8_2cca73a8",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9
