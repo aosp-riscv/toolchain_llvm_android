@@ -384,6 +384,30 @@
     },
     {
       "key": {
+        "uuid": "c7556bc8_34b6bede",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-20T20:42:02Z",
+      "side": 1,
+      "message": "should it be a bug to mypy, similar to https://github.com/python/mypy/issues/5836?",
+      "parentUuid": "2634dfaa_1d9573db",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9
