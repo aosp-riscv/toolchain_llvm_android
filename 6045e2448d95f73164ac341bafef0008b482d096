@@ -288,6 +288,30 @@
     },
     {
       "key": {
+        "uuid": "fe473af0_d76a4adc",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T19:48:36Z",
+      "side": 1,
+      "message": "This doesn\u0027t pass type checking:\n\ntoolchains.py:39: error: Signature of \"cc\" incompatible with supertype \"Toolchain\"\ntoolchains.py:43: error: Signature of \"cxx\" incompatible with supertype \"Toolchain\"\ntoolchains.py:47: error: Signature of \"lib_path\" incompatible with supertype \"Toolchain\"\nconfigs.py:43: error: Signature of \"cflags\" incompatible with supertype \"Config\"\nconfigs.py:49: error: Signature of \"ldflags\" incompatible with supertype \"Config\"\nconfigs.py:76: error: Signature of \"sysroot\" incompatible with supertype \"Config\"\nconfigs.py:112: error: Signature of \"sysroot\" incompatible with supertype \"Config\"\n\nMaybe we should still use NotImplemented?",
+      "parentUuid": "ff62dcc7_4cd3923b",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 8
+      },
+      "revId": "6045e2448d95f73164ac341bafef0008b482d096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e7862a8_8d5298f0",
         "filename": "builders.py",
         "patchSetId": 9

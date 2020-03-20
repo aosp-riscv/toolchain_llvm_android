@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "75f3cdad_0c4d95ca",
+        "filename": "builders.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T19:48:36Z",
+      "side": 1,
+      "message": "Renamed to target_os and just returns self.config.target_os.",
+      "parentUuid": "c7b611f5_daf23b94",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 41
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd837b8d_3e46cdb1",
         "filename": "configs.py",
         "patchSetId": 14
@@ -45,6 +69,30 @@
       "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50fdc949_849e02e0",
+        "filename": "configs.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T19:48:36Z",
+      "side": 1,
+      "message": "Actually this should be the target_os and CMakeBuilder should not have a different target_os setting? Changed it that way.",
+      "parentUuid": "bd837b8d_3e46cdb1",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 20
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "19fbe0ac_a23cabd2",
+        "filename": "configs.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T19:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f83e48ed_a98323d3",
+      "range": {
+        "startLine": 37,
+        "startChar": 26,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca12558c_4aae0e4b",
         "filename": "configs.py",
         "patchSetId": 14
@@ -91,6 +163,30 @@
       "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b87b99df_17735255",
+        "filename": "configs.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T19:48:36Z",
+      "side": 1,
+      "message": "Since it is only used once, a property is easier.\n\nMaybe we can add a constructor to set it in the future? Let\u0027s discuss more when we get to it. I\u0027m happy to refactor again if necessary.",
+      "parentUuid": "ca12558c_4aae0e4b",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 27
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "d6d7a264_e0410c58",
+        "filename": "do_build.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T19:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3739d82b_11df1e6c",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 15
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a8fe188_43bbef4b",
         "filename": "toolchains.py",
         "patchSetId": 14
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "5f2058e8_40f22287",
+        "filename": "toolchains.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T19:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a8fe188_43bbef4b",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 27
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d649d54d_8767926c",
         "filename": "toolchains.py",
         "patchSetId": 14
@@ -160,6 +304,30 @@
       "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bc26817_50daf5a1",
+        "filename": "toolchains.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T19:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d649d54d_8767926c",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
