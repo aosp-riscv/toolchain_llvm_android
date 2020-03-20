@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7b611f5_daf23b94",
+        "filename": "builders.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T05:33:17Z",
+      "side": 1,
+      "message": "Do we need this property?  This is a global constant/config.  If we want this class\u0027s operation to be self contained, I\u0027d name this as a \"Target/TargetOS\" property.\n\nWe should also initialize it to hosts.build_host() in LLVMBuilder.  Presumably, we\u0027ll subclass this when building compiler-rt, lldb etc. for the device.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 41
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd837b8d_3e46cdb1",
+        "filename": "configs.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T05:33:17Z",
+      "side": 1,
+      "message": "Move this to _BaseConfig as it is only needed when building for a host build.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 20
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f83e48ed_a98323d3",
+        "filename": "configs.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T05:33:17Z",
+      "side": 1,
+      "message": "\"Base configuration when building for the host\"",
+      "range": {
+        "startLine": 37,
+        "startChar": 26,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca12558c_4aae0e4b",
+        "filename": "configs.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T05:33:17Z",
+      "side": 1,
+      "message": "This should move to _BaseConfig as we also build for 32-bit on Darwin.\n\nThis is one place where having singletons is awkward.  It\u0027d be best to create two instances of this class with is_32_bit set to true and false.  In the current setting, we probably need Linux32Config to be a subclass of LinuxConfig but with just this property set to false.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 27
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3739d82b_11df1e6c",
+        "filename": "do_build.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T05:33:17Z",
+      "side": 1,
+      "message": "I think this can be deleted now.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 15
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a8fe188_43bbef4b",
+        "filename": "toolchains.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T05:33:17Z",
+      "side": 1,
+      "message": "This seems unnecessary/unused.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 27
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d649d54d_8767926c",
+        "filename": "toolchains.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T05:33:17Z",
+      "side": 1,
+      "message": "Should we need the host as a separate property here?  It\u0027s only needed for clang_prebult_path() and is always going to be build_host.  We\u0027re only ever going to run a toolchain for the current build_host.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "84c36db6a3fe943c4df2a8328e7a37ea926fa116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
