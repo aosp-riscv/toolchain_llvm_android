@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78893367_8ba7905c",
+        "filename": "configs.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T20:34:42Z",
+      "side": 1,
+      "message": "gcc_root?\n\nThis seems similar to LinuxConfig.  As a followup, we can move this to _GccConfig.  I imagine a similar pattern will be used for the devices as well.",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 8
+      },
+      "revId": "e5b22f42e1a9a44a225f159eadf123d1be68d880",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9978eef4_b9aa3a3c",
+        "filename": "configs.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-20T20:34:42Z",
+      "side": 1,
+      "message": "These probably need to be fixed for Windows. (Just FYI - could be done in a followup).",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 124,
+        "endChar": 26
+      },
+      "revId": "e5b22f42e1a9a44a225f159eadf123d1be68d880",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
