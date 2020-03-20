@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "75ac3e6c_6e6a9340",
+        "filename": "configs.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-20T21:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78893367_8ba7905c",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 8
+      },
+      "revId": "e5b22f42e1a9a44a225f159eadf123d1be68d880",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9978eef4_b9aa3a3c",
         "filename": "configs.py",
         "patchSetId": 17
