@@ -17,7 +17,7 @@
 
 from pathlib import Path
 import os
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set
 
 import android_version
 import configs
@@ -60,8 +60,8 @@ class CMakeBuilder(Builder):
     @property
     def cmake_defines(self) -> Dict[str, str]:
         """CMake defines."""
-        cflags = self.config.cflags + self.additional_cflags
-        ldflags = self.config.ldflags + self.additional_ldflags
+        cflags = self.config.cflags + self.cflags
+        ldflags = self.config.ldflags + self.ldflags
         cflags_str = ' '.join(cflags)
         ldflags_str = ' '.join(ldflags)
         defines: Dict[str, str] = {
@@ -91,14 +91,14 @@ class CMakeBuilder(Builder):
         return defines
 
     @property
-    def additional_cflags(self) -> List[str]:
+    def cflags(self) -> List[str]:
         """Additional cflags to use."""
         return []
 
     @property
-    def additional_ldflags(self) -> List[str]:
+    def ldflags(self) -> List[str]:
         """Additional ldflags to use."""
-        return []
+        return [f'-L{self.toolchain.lib_dir}']
 
     @property
     def env(self) -> Dict[str, str]:
@@ -141,17 +141,16 @@ class LLVMBuilder(CMakeBuilder):
 
     src_dir: Path = paths.LLVM_PATH / 'llvm'
     build_name: str
-    svn_revision: bool
-    llvm_projects: List[str]
-    llvm_targets: List[str]
+    svn_revision: str
+    llvm_projects: Set[str]
+    llvm_targets: Set[str]
 
     @property
     def cmake_defines(self) -> Dict[str, str]:
         defines = super().cmake_defines
 
+        print(self.llvm_projects)
         defines['LLVM_ENABLE_PROJECTS'] = ';'.join(self.llvm_projects)
-
-        defines['LLVM_ENABLE_ASSERTIONS'] = 'OFF'
         # https://github.com/android-ndk/ndk/issues/574 - Don't depend on libtinfo.
         defines['LLVM_ENABLE_TERMINFO'] = 'OFF'
         defines['LLVM_ENABLE_THREADS'] = 'ON'
@@ -180,6 +179,10 @@ class LLVMBuilder(CMakeBuilder):
 
         defines['LLVM_BINUTILS_INCDIR'] = str(paths.ANDROID_DIR / 'toolchain' /
                                               'binutils' / 'binutils-2.27' / 'include')
-
         defines['LLVM_ENABLE_LIBCXX'] = 'ON'
+        defines['LLVM_BUILD_RUNTIME'] = 'ON'
+
+        if not self.target_os.is_darwin:
+            defines['LLVM_ENABLE_LLD'] = 'ON'
+
         return defines

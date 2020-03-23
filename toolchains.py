@@ -18,15 +18,21 @@
 from pathlib import Path
 
 import constants
+import functools
 import hosts
 import paths
+import version
 
 class Toolchain:
     """Base toolchain."""
 
     cc: Path  # pylint: disable=invalid-name
     cxx: Path
+    lib_dir: Path
     path: Path
+
+    def get_resource_dir(self, arch: str = '') -> Path:
+        raise NotImplementedError()
 
 
 class _HostToolchain(Toolchain):
@@ -40,6 +46,22 @@ class _HostToolchain(Toolchain):
     def cxx(self) -> Path:  # type: ignore
         return self.path / 'bin' / 'clang++'
 
+    @property
+    def lib_dir(self) -> Path:  # type: ignore
+        return self.path / 'lib64'
+
+    @property
+    def _version_file(self) -> Path:  # type: ignore
+        return self.path / 'include' / 'clang' / 'Basic'/ 'Version.inc'
+
+    @property
+    def _version(self) -> version.Version:
+        return version.Version(self._version_file)
+
+    def get_resource_dir(self, arch: str = '') -> Path:
+        return (self.lib_dir / 'clang' / self._version.long_version() /
+                'lib' / 'linux' / arch)
+
 
 def _clang_prebuilt_path(host: hosts.Host) -> Path:
     """Returns the path to prebuilt clang toolchain."""
@@ -47,7 +69,11 @@ def _clang_prebuilt_path(host: hosts.Host) -> Path:
             host.os_tag / constants.CLANG_PREBUILT_VERSION)
 
 
-class PrebuiltToolchain(_HostToolchain):
-    """A prebuilt toolchain used to build stage1."""
+def build_toolchain_for_path(path: Path) -> Toolchain:
+    toolchain = _HostToolchain()
+    toolchain.path = path
+    return toolchain
 
-    path: Path = _clang_prebuilt_path(hosts.build_host())
+
+def get_prebuilt_toolchain() -> Toolchain:
+    return build_toolchain_for_path(_clang_prebuilt_path(hosts.build_host()))
