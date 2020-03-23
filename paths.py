@@ -26,3 +26,7 @@ LLVM_PATH = OUT_DIR / 'llvm-project'
 
 CMAKE_BIN_PATH = ANDROID_DIR / 'prebuilts' / 'cmake' / hosts.build_host().os_tag / 'bin' / 'cmake'
 NINJA_BIN_PATH = ANDROID_DIR / 'prebuilts' / 'ninja' / hosts.build_host().os_tag / 'ninja'
+
+SWIG_ROOT = ANDROID_DIR / 'prebuilts' / 'swig' / hosts.build_host().os_tag
+SWIG_LIB = SWIG_ROOT / 'share' / 'swig' / '3.0.12'
+SWIG_EXECUTABLE = SWIG_ROOT / 'bin' / 'swig'
