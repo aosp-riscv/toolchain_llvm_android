@@ -1,0 +1,7 @@
+Code-Review+2: Haibo Huang <hhb@google.com>
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Haibo Huang <hhb@google.com>
+Submitted-at: Mon, 23 Mar 2020 23:14:43 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1265460
+Project: toolchain/llvm_android
+Branch: refs/heads/master
