@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7f55b0d_1cd1861d",
+        "filename": "do_build.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-24T05:52:58Z",
+      "side": 1,
+      "message": "Should this (or build_lldb in general) go to LLVMBuilder so it can be reused for Windows?",
+      "range": {
+        "startLine": 1337,
+        "startChar": 0,
+        "endLine": 1338,
+        "endChar": 49
+      },
+      "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31271edf_afea8f07",
+        "filename": "do_build.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-24T05:52:58Z",
+      "side": 1,
+      "message": "remove parens",
+      "range": {
+        "startLine": 1380,
+        "startChar": 11,
+        "endLine": 1380,
+        "endChar": 12
+      },
+      "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6159016_05921cc6",
+        "filename": "toolchains.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-24T05:52:58Z",
+      "side": 1,
+      "message": "Restore the \u0027_\u0027 in the function\u0027s name - it\u0027s easier to parse this way.",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
