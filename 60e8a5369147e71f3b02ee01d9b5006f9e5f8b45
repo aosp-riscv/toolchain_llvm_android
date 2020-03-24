@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "9495c642_49dbbb66",
+        "filename": "do_build.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-24T21:21:30Z",
+      "side": 1,
+      "message": "That can be a good idea. Done.",
+      "parentUuid": "54da2998_81ddcbd6",
+      "range": {
+        "startLine": 1337,
+        "startChar": 0,
+        "endLine": 1338,
+        "endChar": 49
+      },
+      "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31271edf_afea8f07",
         "filename": "do_build.py",
         "patchSetId": 9
