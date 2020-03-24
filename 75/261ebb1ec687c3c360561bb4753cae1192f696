@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Haibo Huang <hhb@google.com>
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Code-Review+2: Yabin Cui <yabinc@google.com>
+Submitted-by: Haibo Huang <hhb@google.com>
+Submitted-at: Tue, 24 Mar 2020 23:11:30 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1266899
+Project: toolchain/llvm_android
+Branch: refs/heads/master
