@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e40c6c1_2ef9f669",
+        "filename": "builders.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-24T21:37:09Z",
+      "side": 1,
+      "message": "I\u0027d imagined we\u0027d leave this duplicated until we move Windows to LLVMBuilder in the future but this works too.",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 22
+      },
+      "revId": "d2138fb9fdfb79c316cee9fe38458068634e8756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
