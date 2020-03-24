@@ -1,0 +1,48 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000002098095",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1266877?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "58e97ff8_61ef15c9",
+          "description": "Change to \"patches/cherry/3ec3f62f0a0b1ac13230922c91ffc988c1b1e8d5v2.patch\"",
+          "replacements": [
+            {
+              "path": "patches/cherry/3ec3f62f0a0b1ac13230922c91ffc988c1b1e8d5v2.patch",
+              "range": {
+                "startLine": 4,
+                "startChar": 55,
+                "endLine": 4,
+                "endChar": 61
+              },
+              "replacement": "Attempt"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "44157f60_67cde23e",
+        "filename": "patches/cherry/3ec3f62f0a0b1ac13230922c91ffc988c1b1e8d5v2.patch",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-03-24T23:54:38Z",
+      "side": 1,
+      "message": "Common typo found: \"Attemp\" -- should it be \"Attempt\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line.",
+      "range": {
+        "startLine": 4,
+        "startChar": 55,
+        "endLine": 4,
+        "endChar": 61
+      },
+      "revId": "15d7ef6251e72a3617d181843d7c6a82e78703f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
