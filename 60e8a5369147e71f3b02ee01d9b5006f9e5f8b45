@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "54da2998_81ddcbd6",
+        "filename": "do_build.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-24T19:21:29Z",
+      "side": 1,
+      "message": "Couldn\u0027t we just set build_lldb \u003d False for stage1?",
+      "parentUuid": "9fda5826_05a277a7",
+      "range": {
+        "startLine": 1337,
+        "startChar": 0,
+        "endLine": 1338,
+        "endChar": 49
+      },
+      "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31271edf_afea8f07",
         "filename": "do_build.py",
         "patchSetId": 9
