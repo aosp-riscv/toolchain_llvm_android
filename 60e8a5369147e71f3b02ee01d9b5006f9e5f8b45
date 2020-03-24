@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9fda5826_05a277a7",
+        "filename": "do_build.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-24T19:13:56Z",
+      "side": 1,
+      "message": "But it is not needed for Stage1.\n\nI feel Windows build will be a challenge. Let\u0027s see how much we can dedup that time.\n\nOne idea I\u0027m thinking now is to create separate visitor classes. Maybe call it Package? Each package can append some additional defines / envs. So that we can have a LLDBPackage.\n\nSounds a little bit complicated. Let\u0027s see whether we will need that. The benefit is that similar logic can be together and get reused.",
+      "parentUuid": "b7f55b0d_1cd1861d",
+      "range": {
+        "startLine": 1337,
+        "startChar": 0,
+        "endLine": 1338,
+        "endChar": 49
+      },
+      "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "31271edf_afea8f07",
         "filename": "do_build.py",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e1aa7c99_b0b9790d",
+        "filename": "do_build.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-24T19:13:56Z",
+      "side": 1,
+      "message": "parens are for line continuation. It is more convenient than \\..",
+      "parentUuid": "31271edf_afea8f07",
+      "range": {
+        "startLine": 1380,
+        "startChar": 11,
+        "endLine": 1380,
+        "endChar": 12
+      },
+      "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6159016_05921cc6",
         "filename": "toolchains.py",
         "patchSetId": 9
@@ -68,6 +116,30 @@
       "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97d3cca5_8c5d15dd",
+        "filename": "toolchains.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-24T19:13:56Z",
+      "side": 1,
+      "message": "Sorry this is a search / replace mistake..",
+      "parentUuid": "f6159016_05921cc6",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "60e8a5369147e71f3b02ee01d9b5006f9e5f8b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
