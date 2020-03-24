@@ -1,0 +1,6 @@
+Code-Review+2: Haibo Huang <hhb@google.com>
+Submitted-by: Haibo Huang <hhb@google.com>
+Submitted-at: Tue, 24 Mar 2020 23:16:14 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1267959
+Project: toolchain/llvm_android
+Branch: refs/heads/master
