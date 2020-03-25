@@ -1957,58 +1957,59 @@ def main():
                               (do_build and need_windows) or \
                               args.debug
 
-    stage1 = Stage1Builder()
-    stage1.build_name = args.build_name
-    stage1.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
-    stage1.build_llvm_tools = stage1_build_llvm_tools
-    stage1.debug_stage2 = args.debug
-    if do_stage1:
-        stage1.build()
-    stage1_install = str(stage1.install_dir)
+    if do_build:
+        stage1 = Stage1Builder()
+        stage1.build_name = args.build_name
+        stage1.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
+        stage1.build_llvm_tools = stage1_build_llvm_tools
+        stage1.debug_stage2 = args.debug
+        if do_stage1:
+            stage1.build()
+        stage1_install = str(stage1.install_dir)
 
-    if do_build and need_host:
-        if os.path.exists(stage2_install) and do_stage2:
-            utils.rm_tree(stage2_install)
+        if need_host:
+            if os.path.exists(stage2_install) and do_stage2:
+                utils.rm_tree(stage2_install)
 
-        profdata_filename = pgo_profdata_filename()
-        profdata = pgo_profdata_file(profdata_filename)
-        # Do not use PGO profiles if profdata file doesn't exist unless failure
-        # is explicitly requested via --check-pgo-profile.
-        if profdata is None and args.check_pgo_profile:
-            raise RuntimeError('Profdata file does not exist for ' +
-                               profdata_filename)
+            profdata_filename = pgo_profdata_filename()
+            profdata = pgo_profdata_file(profdata_filename)
+            # Do not use PGO profiles if profdata file doesn't exist unless failure
+            # is explicitly requested via --check-pgo-profile.
+            if profdata is None and args.check_pgo_profile:
+                raise RuntimeError('Profdata file does not exist for ' +
+                                   profdata_filename)
 
-        stage2 = Stage2Builder()
-        stage2.build_name = args.build_name
-        stage2.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
-        stage2.build_lldb = BUILD_LLDB
-        stage2.debug_build = args.debug
-        stage2.enable_assertions = args.enable_assertions
-        stage2.lto = not args.no_lto
-        stage2.build_instrumented = instrumented
-        stage2.profdata_file = Path(profdata) if profdata else None
-        if do_stage2:
-            stage2.build()
-        stage2_install = str(stage2.install_dir)
+            stage2 = Stage2Builder()
+            stage2.build_name = args.build_name
+            stage2.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
+            stage2.build_lldb = BUILD_LLDB
+            stage2.debug_build = args.debug
+            stage2.enable_assertions = args.enable_assertions
+            stage2.lto = not args.no_lto
+            stage2.build_instrumented = instrumented
+            stage2.profdata_file = Path(profdata) if profdata else None
+            if do_stage2:
+                stage2.build()
+            stage2_install = str(stage2.install_dir)
 
-        if hosts.build_host().is_linux and do_runtimes:
-            runtimes_toolchain = stage2_install
-            if args.debug:
-                runtimes_toolchain = stage1_install
-            build_runtimes(runtimes_toolchain, args)
+            if hosts.build_host().is_linux and do_runtimes:
+                runtimes_toolchain = stage2_install
+                if args.debug:
+                    runtimes_toolchain = stage1_install
+                build_runtimes(runtimes_toolchain, args)
 
-    if do_build and need_windows:
-        if os.path.exists(windows64_install):
-            utils.rm_tree(windows64_install)
+        if need_windows:
+            if os.path.exists(windows64_install):
+                utils.rm_tree(windows64_install)
 
-        windows64_path = utils.out_path('windows-x86-64')
-        build_llvm_for_windows(
-            stage1_install=stage1_install,
-            targets=ANDROID_TARGETS,
-            enable_assertions=args.enable_assertions,
-            build_dir=windows64_path,
-            install_dir=windows64_install,
-            build_name=args.build_name)
+            windows64_path = utils.out_path('windows-x86-64')
+            build_llvm_for_windows(
+                stage1_install=stage1_install,
+                targets=ANDROID_TARGETS,
+                enable_assertions=args.enable_assertions,
+                build_dir=windows64_path,
+                install_dir=windows64_install,
+                build_name=args.build_name)
 
     dist_dir = ORIG_ENV.get('DIST_DIR', utils.out_path())
     if do_package and need_host:
