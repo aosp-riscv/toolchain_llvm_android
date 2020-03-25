@@ -89,7 +89,18 @@ class CMakeBuilder(Builder):
         }
         if self.config.sysroot:
             defines['CMAKE_SYSROOT'] = str(self.config.sysroot)
+        if self.config.target_os != hosts.build_host():
+            # Cross compiling
+            defines['CMAKE_SYSTEM_NAME'] = self._get_system_name()
+            defines['CMAKE_SYSTEM_PROCESSOR'] = 'x86_64'
         return defines
+
+    def _get_system_name(self) -> str:
+        return {
+            hosts.Host.Linux: 'Linux',
+            hosts.Host.Darwin: 'Darwin',
+            hosts.Host.Windows: 'Windows',
+        }[self.config.target_os]
 
     @property
     def cflags(self) -> List[str]:
