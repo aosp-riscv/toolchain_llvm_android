@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "221de04d_577a20ed",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1946,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-25T23:12:33Z",
+      "side": 0,
+      "message": "This would break the \u0027--skip-build\u0027 use case where these two variables won\u0027t be initialized.  Instead, we should always setup the builders and call \u0027.build()\u0027 as requested.",
+      "range": {
+        "startLine": 1945,
+        "startChar": 0,
+        "endLine": 1946,
+        "endChar": 64
+      },
+      "revId": "83babc4b6736c5f172b47da5cdc6c14fcaeb9d9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

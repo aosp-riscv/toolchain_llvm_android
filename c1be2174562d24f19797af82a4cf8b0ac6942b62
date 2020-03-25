@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6517b2a6_acd00349",
+        "filename": "builders.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-25T23:12:33Z",
+      "side": 1,
+      "message": "Is _get_cmake_system_name clearer?",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 24
+      },
+      "revId": "c1be2174562d24f19797af82a4cf8b0ac6942b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a025cd38_72f9fcdb",
+        "filename": "builders.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-25T23:12:33Z",
+      "side": 1,
+      "message": "I prefer the prior way where the projects being built were setup once per builder.  Any issues with the old approach?",
+      "range": {
+        "startLine": 221,
+        "startChar": 8,
+        "endLine": 222,
+        "endChar": 37
+      },
+      "revId": "c1be2174562d24f19797af82a4cf8b0ac6942b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cec6ea63_d5d62d90",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-25T23:12:33Z",
+      "side": 1,
+      "message": "remove \u0027proj\u0027 and directly return the set.",
+      "range": {
+        "startLine": 1286,
+        "startChar": 8,
+        "endLine": 1287,
+        "endChar": 19
+      },
+      "revId": "c1be2174562d24f19797af82a4cf8b0ac6942b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
