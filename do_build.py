@@ -1954,7 +1954,7 @@ def main():
     stage1.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
     stage1.build_llvm_tools = stage1_build_llvm_tools
     stage1.debug_stage2 = args.debug
-    if do_stage1:
+    if do_build and do_stage1:
         stage1.build()
     stage1_install = str(stage1.install_dir)
 
