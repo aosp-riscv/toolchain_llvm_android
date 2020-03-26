@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dc274ade_cdefe016",
+        "filename": "builders.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-26T05:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6517b2a6_acd00349",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 24
+      },
+      "revId": "c1be2174562d24f19797af82a4cf8b0ac6942b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a025cd38_72f9fcdb",
         "filename": "builders.py",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "84cff3cc_20228826",
+        "filename": "builders.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-26T05:26:22Z",
+      "side": 1,
+      "message": "No. Just trying to reduce some duplicate..",
+      "parentUuid": "a025cd38_72f9fcdb",
+      "range": {
+        "startLine": 221,
+        "startChar": 8,
+        "endLine": 222,
+        "endChar": 37
+      },
+      "revId": "c1be2174562d24f19797af82a4cf8b0ac6942b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cec6ea63_d5d62d90",
         "filename": "do_build.py",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "c1be2174562d24f19797af82a4cf8b0ac6942b62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "922b6e4f_26a39209",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-26T05:26:22Z",
+      "side": 1,
+      "message": "Can not do that now with lldb.",
+      "parentUuid": "cec6ea63_d5d62d90",
+      "range": {
+        "startLine": 1286,
+        "startChar": 8,
+        "endLine": 1287,
+        "endChar": 19
+      },
+      "revId": "c1be2174562d24f19797af82a4cf8b0ac6942b62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
