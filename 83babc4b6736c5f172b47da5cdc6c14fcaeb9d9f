@@ -22,6 +22,30 @@
       "revId": "83babc4b6736c5f172b47da5cdc6c14fcaeb9d9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d72e945_44857461",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1946,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-03-26T05:28:18Z",
+      "side": 0,
+      "message": "That\u0027s what we did below. --skip-stage2 works now.",
+      "parentUuid": "221de04d_577a20ed",
+      "range": {
+        "startLine": 1945,
+        "startChar": 0,
+        "endLine": 1946,
+        "endChar": 64
+      },
+      "revId": "83babc4b6736c5f172b47da5cdc6c14fcaeb9d9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
