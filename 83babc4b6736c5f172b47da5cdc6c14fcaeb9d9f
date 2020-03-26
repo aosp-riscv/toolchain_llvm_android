@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3b73648c_3d60737d",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1921,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-26T19:24:18Z",
+      "side": 0,
+      "message": "do_stage1 \u003d do_build and not args.skip_stage1.\n\nSame for do_stage2 and do_runtimes below.",
+      "range": {
+        "startLine": 1921,
+        "startChar": 0,
+        "endLine": 1921,
+        "endChar": 36
+      },
+      "revId": "83babc4b6736c5f172b47da5cdc6c14fcaeb9d9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "221de04d_577a20ed",
         "filename": "do_build.py",
         "patchSetId": 4
@@ -46,6 +69,76 @@
       "revId": "83babc4b6736c5f172b47da5cdc6c14fcaeb9d9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de3c5f3c_ab8e5999",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1946,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-26T19:24:18Z",
+      "side": 0,
+      "message": "There\u0027s one more option - --skip-build, which will not attempt to build anything.  It is a coarse-grained than each of the individual skip flags.  Maybe we should use it to gate the other flags.  See my other comments.",
+      "parentUuid": "0d72e945_44857461",
+      "range": {
+        "startLine": 1945,
+        "startChar": 0,
+        "endLine": 1946,
+        "endChar": 64
+      },
+      "revId": "83babc4b6736c5f172b47da5cdc6c14fcaeb9d9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e91f37e_53c24b22",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1969,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-26T19:24:18Z",
+      "side": 0,
+      "message": "remove this.",
+      "range": {
+        "startLine": 1969,
+        "startChar": 7,
+        "endLine": 1969,
+        "endChar": 20
+      },
+      "revId": "83babc4b6736c5f172b47da5cdc6c14fcaeb9d9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8d0f890_334c68a2",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2000,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-26T19:24:18Z",
+      "side": 0,
+      "message": "remove this as well.",
+      "range": {
+        "startLine": 2000,
+        "startChar": 7,
+        "endLine": 2000,
+        "endChar": 19
+      },
+      "revId": "83babc4b6736c5f172b47da5cdc6c14fcaeb9d9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
