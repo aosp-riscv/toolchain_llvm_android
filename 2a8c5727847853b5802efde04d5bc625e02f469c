@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "494686ee_8dd113b1",
+        "filename": "hosts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-26T02:04:51Z",
+      "side": 1,
+      "message": "Should we rename this file now?  How about platforms.py?\n\n(We can do it as a followup as it\u0027s easier to test and review as a standalone CL).",
+      "revId": "2a8c5727847853b5802efde04d5bc625e02f469c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70a2eaed_6b5ba093",
+        "filename": "hosts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-26T02:04:51Z",
+      "side": 1,
+      "message": "Let\u0027s call this as just ndk_arch().",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 19
+      },
+      "revId": "2a8c5727847853b5802efde04d5bc625e02f469c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
