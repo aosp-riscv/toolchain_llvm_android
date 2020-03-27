@@ -45,7 +45,7 @@ def unchecked_call(cmd, *args, **kwargs):
 def check_call(cmd, *args, **kwargs):
     """subprocess.check_call with logging."""
     logger().info('check_call: %s', subprocess.list2cmdline(cmd))
-    subprocess.check_call(cmd, *args, **kwargs)
+    return subprocess.check_call(cmd, *args, **kwargs)
 
 
 class ArgParser(argparse.ArgumentParser):
@@ -59,6 +59,9 @@ class ArgParser(argparse.ArgumentParser):
 
         self.add_argument(
             '-b', '--bug', help='Bug to reference in commit message.')
+
+        self.add_argument(
+            '-br', '--branch', help='Branch to fetch from (or automatic).')
 
         self.add_argument(
             '--use-current-branch', action='store_true',
@@ -215,7 +218,13 @@ def main():
     hosts = ['darwin-x86', 'linux-x86', 'windows-x86']
     clang_pattern = 'clang-*.tar.bz2'
     manifest = 'manifest_{}.xml'.format(args.build)
-    branch = 'aosp-llvm-toolchain'
+
+    branch = args.branch
+    if args.branch == None:
+        o = subprocess.check_output(['git', 'branch', '-av'])
+        branch = o.split(' ')[-1].strip().replace('/', '-')
+
+    logger().info('Using branch: %s', branch)
 
     try:
         if do_fetch:
