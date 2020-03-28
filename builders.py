@@ -16,9 +16,10 @@
 """Builders for different targets."""
 
 from pathlib import Path
+import logging
 import os
 import shutil
-from typing import Dict, List, Optional, Set
+from typing import Callable, Dict, List, Optional, Set
 
 import android_version
 import configs
@@ -30,6 +31,11 @@ import utils
 
 ORIG_ENV = dict(os.environ)
 
+def logger():
+    """Returns the module level logger."""
+    return logging.getLogger(__name__)
+
+
 class Builder:  # pylint: disable=too-few-public-methods
     """Base builder type."""
     name: str = ""
@@ -39,9 +45,42 @@ class Builder:  # pylint: disable=too-few-public-methods
         raise NotImplementedError
 
 
+class BuilderRegistry:
+    """A class to manage existing builders, so that they are discoverable."""
+    _builders: Dict[str, Builder] = dict()
+
+    # A lambda to decide whether we should build or skip a builder."""
+    should_build: Callable[[str], bool]
+
+    @classmethod
+    def build(cls, builder: Builder):
+        """Builds a builder and adds it to the registry."""
+        name = builder.name
+        if name in cls._builders:
+            logger().error("Error: %s is already built.", name)
+        cls._builders[name] = builder
+        if cls.should_build(name):
+            logger().info("Building %s.", name)
+            builder.build()
+        else:
+            logger().info("Skipping %s.", name)
+
+    @classmethod
+    def get(cls, name: str):
+        """Gets the instance of a builder."""
+        return cls._builders[name]
+
+    @classmethod
+    def get_toolchain(cls, name: str):
+        """A specialized get method to get a toolchain by name."""
+        if name == 'prebuilt':
+            return toolchains.get_prebuilt_toolchain()
+        return cls.get(name).built_toolchain()
+
+
 class CMakeBuilder(Builder):
     """Builder for cmake targets."""
-    toolchain: toolchains.Toolchain
+    toolchain_name: str
     config: configs.Config
     src_dir: Path
     remove_cmake_cache: bool = False
@@ -49,6 +88,11 @@ class CMakeBuilder(Builder):
     ninja_target: Optional[str] = None
     install: bool = True
     install_dir: Path
+
+    @property
+    def toolchain(self) -> toolchains.Toolchain:
+        """Returns the toolchain used for this target."""
+        return BuilderRegistry.get_toolchain(self.toolchain_name)
 
     @property
     def target_os(self) -> hosts.Host:
