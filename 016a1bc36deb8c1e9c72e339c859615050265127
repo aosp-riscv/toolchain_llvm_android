@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a20319f6_6ff8a179",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-03-28T04:26:15Z",
+      "side": 1,
+      "message": "I did intend to keep this line in there, since it helps for debugging when things go wrong, and the script isn\u0027t that verbose to start with.",
+      "revId": "016a1bc36deb8c1e9c72e339c859615050265127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
