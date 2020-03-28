@@ -28,6 +28,7 @@ from typing import Dict, List, Optional, Set
 
 import android_version
 import builders
+from builders import BuilderRegistry
 import configs
 import constants
 import hosts
@@ -907,18 +908,18 @@ def build_llvm_for_windows(enable_assertions,
     # Build and install libcxxabi and libcxx and use them to build Clang.
     libcxxabi_builder = LibCxxAbiBuilder()
     libcxxabi_builder.enable_assertions = enable_assertions
-    libcxxabi_builder.build()
+    BuilderRegistry.build(libcxxabi_builder)
 
     libcxx_builder = LibCxxBuilder()
     libcxx_builder.enable_assertions = enable_assertions
-    libcxx_builder.build()
+    BuilderRegistry.build(libcxx_builder)
 
     win_builder = WindowsToolchainBuilder()
     win_builder.build_name = build_name
     win_builder.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
     win_builder.build_lldb = BUILD_LLDB
     win_builder.enable_assertions = enable_assertions
-    win_builder.build()
+    BuilderRegistry.build(win_builder)
 
     return win_builder.install_dir
 
@@ -980,10 +981,10 @@ def get_shared_extra_defines():
 
 class Stage1Builder(builders.LLVMBuilder):
     name: str = 'stage1'
+    toolchain_name: str = 'prebuilt'
     install_dir: Path = paths.OUT_DIR / 'stage1-install'
     build_llvm_tools: bool = False
     debug_stage2: bool = False
-    toolchain: toolchains.Toolchain = toolchains.get_prebuilt_toolchain()
     config: configs.Config = configs.host_config()
 
     @property
@@ -1068,8 +1069,8 @@ def install_lldb_deps(install_dir: Path, host: hosts.Host):
 
 class Stage2Builder(builders.LLVMBuilder):
     name: str = 'stage2'
+    toolchain_name: str = 'stage1'
     install_dir: Path = paths.OUT_DIR / 'stage2-install'
-    toolchain: toolchains.Toolchain = Stage1Builder.built_toolchain()
     config: configs.Config = configs.host_config()
     remove_install_dir: bool = True
     build_lldb: bool = True
@@ -1180,7 +1181,7 @@ class Stage2Builder(builders.LLVMBuilder):
 
 
 class LibCxxBaseBuilder(builders.CMakeBuilder):
-    toolchain: toolchains.Toolchain = Stage1Builder.built_toolchain()
+    toolchain_name: str = 'stage1'
     config: configs.Config = configs.WindowsConfig()
     install_dir: Path = paths.OUT_DIR / 'windows-x86-64-install'
     remove_cmake_cache: bool = True
@@ -1242,7 +1243,7 @@ class LibCxxBuilder(LibCxxBaseBuilder):
         # into install_dir only during libcxx's install step.  But use the
         # library from install_dir.
         defines['LIBCXX_CXX_ABI_INCLUDE_PATHS'] = str(paths.LLVM_PATH / 'libcxxabi' / 'include')
-        defines['LIBCXX_CXX_ABI_LIBRARY_PATH'] = str(LibCxxAbiBuilder.install_dir / 'lib64')
+        defines['LIBCXX_CXX_ABI_LIBRARY_PATH'] = str(BuilderRegistry.get('libcxxabi').install_dir / 'lib64')
         return defines
 
     @property
@@ -1257,7 +1258,7 @@ class LibCxxBuilder(LibCxxBaseBuilder):
 class WindowsToolchainBuilder(builders.LLVMBuilder):
     name: str = 'windows-x86-64'
     install_dir: Path = paths.OUT_DIR / 'windows-x86-64-install'
-    toolchain: toolchains.Toolchain = Stage1Builder.built_toolchain()
+    toolchain_name: str = 'stage1'
     config: configs.Config = configs.WindowsConfig()
     build_lldb: bool = True
 
@@ -1334,7 +1335,7 @@ class WindowsToolchainBuilder(builders.LLVMBuilder):
         # pthread is needed by libgcc_eh.
         ldflags.append('-pthread')
         # Add path to libc++, libc++abi.
-        libcxx_lib = LibCxxBuilder.install_dir / 'lib64'
+        libcxx_lib = BuilderRegistry.get('libcxx').install_dir / 'lib64'
         ldflags.append(f'-L{libcxx_lib}')
         ldflags.append('-Wl,--high-entropy-va')
         ldflags.append(f'-L{paths.WIN_ZLIB_LIB_PATH}')
@@ -1359,7 +1360,7 @@ class WindowsToolchainBuilder(builders.LLVMBuilder):
         # options like visibility annotations, win32 threads etc. because the
         # __generated_config header in the patch captures all the options used when
         # building libc++.
-        cxx_headers = LibCxxBuilder.install_dir / 'include' / 'c++' / 'v1'
+        cxx_headers = BuilderRegistry.get('libcxx').install_dir / 'include' / 'c++' / 'v1'
         cxxflags.append(f'-I{cxx_headers}')
 
         return cxxflags
@@ -1842,6 +1843,10 @@ def parse_args():
         default=False,
         help='Skip the runtime libraries')
 
+    build_group = parser.add_mutually_exclusive_group()
+    build_group.add_argument('--build', nargs='+')
+    build_group.add_argument('--skip', nargs='+')
+
     # Finer controls to skip only some runtime libraries
     parser.add_argument(
         '--skip-sysroots',
@@ -1893,6 +1898,16 @@ def parse_args():
 
 def main():
     args = parse_args()
+    if args.skip:
+        skips = set(args.skip)
+        BuilderRegistry.should_build = lambda name: name not in skips
+    elif args.build:
+        builds = set(args.build)
+        BuilderRegistry.should_build = lambda name: name in builds
+    else:
+        # build all
+        BuilderRegistry.should_build = lambda name: True
+
     do_build = not args.skip_build
     do_stage1 = do_build and not args.skip_stage1
     do_stage2 = do_build and not args.skip_stage2
@@ -1936,7 +1951,7 @@ def main():
     stage1.build_llvm_tools = stage1_build_llvm_tools
     stage1.debug_stage2 = args.debug
     if do_stage1:
-        stage1.build()
+        BuilderRegistry.build(stage1)
     stage1_install = str(stage1.install_dir)
 
     if need_host:
@@ -1958,7 +1973,7 @@ def main():
         stage2.build_instrumented = instrumented
         stage2.profdata_file = Path(profdata) if profdata else None
         if do_stage2:
-            stage2.build()
+            BuilderRegistry.build(stage2)
         stage2_install = str(stage2.install_dir)
 
         if hosts.build_host().is_linux and do_runtimes:
