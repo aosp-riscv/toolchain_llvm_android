@@ -18,17 +18,23 @@
 from pathlib import Path
 import os
 import shutil
-from typing import Dict, List, Optional, Set
+from typing import Callable, Dict, List, Optional, Set
 
 import android_version
 import configs
 import constants
 import hosts
+import logging
 import paths
 import toolchains
 import utils
 
 ORIG_ENV = dict(os.environ)
+
+def logger():
+    """Returns the module level logger."""
+    return logging.getLogger(__name__)
+
 
 class Builder:  # pylint: disable=too-few-public-methods
     """Base builder type."""
@@ -39,9 +45,37 @@ class Builder:  # pylint: disable=too-few-public-methods
         raise NotImplementedError
 
 
+class BuilderRegistry:
+    _builders: Dict[str, Builder] = dict()
+    should_build: Callable[[str], bool]
+
+    @classmethod
+    def build(cls, builder: Builder):
+        name = builder.name
+        if name in cls._builders:
+            logger().error("Error: %s is already built.", name)
+        cls._builders[name] = builder
+        if cls.should_build(name):
+            logger().info("Building %s.", name)
+            builder.build()
+        else:
+            logger().info("Skipping %s.", name)
+
+    @classmethod
+    def get(cls, name: str):
+        return cls._builders[name]
+
+    @classmethod
+    def get_toolchain(cls, name: str):
+        if name == 'prebuilt':
+            return toolchains.get_prebuilt_toolchain()
+        else:
+            return cls.get(name).built_toolchain()
+
+
 class CMakeBuilder(Builder):
     """Builder for cmake targets."""
-    toolchain: toolchains.Toolchain
+    toolchain_name: str 
     config: configs.Config
     src_dir: Path
     remove_cmake_cache: bool = False
@@ -49,6 +83,10 @@ class CMakeBuilder(Builder):
     ninja_target: Optional[str] = None
     install: bool = True
     install_dir: Path
+
+    @property
+    def toolchain(self) -> toolchains.Toolchain:
+        return BuilderRegistry.get_toolchain(self.toolchain_name)
 
     @property
     def target_os(self) -> hosts.Host:
