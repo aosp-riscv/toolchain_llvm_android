@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f41c7f6_3db22b4d",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-03-30T22:05:37Z",
+      "side": 1,
+      "message": "Should this line move up one and just be `elif self.profdata_file:`?",
+      "revId": "956af4acd6480c1467134530b6f206d98af0778d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
