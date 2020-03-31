@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a96df5e8_5fdf3333",
+        "filename": "builders.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-31T23:35:39Z",
+      "side": 1,
+      "message": "The name of this function is incomplete since it also registers the builder.\n\nOne option is to add a constructor to the builders which\u0027d register itself with the registry. \n Then we can retain this name.\n\nAnother option is to rename this - the best I could come up with is \u0027register_and_build\u0027 😐.",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "613b0956_e3ee2c2f",
+        "filename": "builders.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-31T23:35:39Z",
+      "side": 1,
+      "message": "If this check is necessary, we should do it in the builder rather than here.",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 63
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "325ea6c0_dd027fe9",
+        "filename": "builders.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-31T23:35:39Z",
+      "side": 1,
+      "message": "Since this method also depends on toolchains, should we move this as a helper in toolchains.py instead?",
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d6103df_28df0b60",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-31T23:35:39Z",
+      "side": 1,
+      "message": "Is there a reason to import this by name?  If not, let\u0027s just use builders.BuilderRegistry() where needed.",
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6aec696_50ec690e",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1205,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-31T23:35:39Z",
+      "side": 1,
+      "message": "We should rename this to \u0027windows-libcxxabi\u0027 (in a followup CL).  With the new registry, it\u0027s better to be precise with the names.",
+      "range": {
+        "startLine": 1205,
+        "startChar": 12,
+        "endLine": 1205,
+        "endChar": 21
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f67a7f6d_f080a8a6",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1839,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-31T23:35:39Z",
+      "side": 1,
+      "message": "We already have two different mechanisms to control what gets built (--no-build and --skip-*).  So I\u0027m wary of adding a third option to do control different builds.\n\nIf this is not immediately useful to you, I suggest that we first move all the builds to CMakeBuilders and then use BuilderRegistry to consolidate these options.\n\nOTOH, if this is indeed useful to you, I suggest that we remove the \u0027--skip-*\u0027 flags and implement their functionality with \u0027--skip\u003d\u0027.",
+      "range": {
+        "startLine": 1839,
+        "startChar": 0,
+        "endLine": 1839,
+        "endChar": 55
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a0b81fa_ec2617e3",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1840,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-31T23:35:39Z",
+      "side": 1,
+      "message": "Add a help string.\n\nWe should also consider validating the inputs to this option.  It may not be feasible until we move everything to use pre-configured builders so just add a TODO.",
+      "range": {
+        "startLine": 1840,
+        "startChar": 49,
+        "endLine": 1840,
+        "endChar": 50
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dba3a20c_5e152eda",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-03-31T23:35:39Z",
+      "side": 1,
+      "message": "Is it better to push this logic to BuilderRegistry?\n  E.g: BuilderRegistry.set_build_filters(args.build, args.skip)",
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
