@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "718148f7_34722dd8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-01T20:30:49Z",
+      "side": 1,
+      "message": "One other thing that I\u0027d missed earlier - remove this from the commit message.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 0
+      },
+      "revId": "538d6b3921640976da71d3e3548fce49c51bbf68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
