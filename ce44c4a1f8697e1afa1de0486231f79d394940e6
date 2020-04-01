@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "121cd8b5_d2a24a38",
+        "filename": "builders.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-01T00:56:57Z",
+      "side": 1,
+      "message": "How about we go more fancy and use decorator?",
+      "parentUuid": "a96df5e8_5fdf3333",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "613b0956_e3ee2c2f",
         "filename": "builders.py",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "703d9885_f9e30b82",
+        "filename": "builders.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-01T00:56:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "613b0956_e3ee2c2f",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 63
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "325ea6c0_dd027fe9",
         "filename": "builders.py",
         "patchSetId": 6
@@ -62,6 +110,24 @@
       "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb6741b9_d52466b2",
+        "filename": "builders.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-01T00:56:57Z",
+      "side": 1,
+      "message": "That can not be done easily because it will creates a circular dependency:\ntoolchains.py -\u003e BuilderRegistry -\u003e Builder (builders.py) -\u003e toolchains.py\n\nTo solve this I have to move BuilderRegistry to a separate file, and don\u0027t reference Builder there (we lose some typing but should be ok).",
+      "parentUuid": "325ea6c0_dd027fe9",
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "c307876d_63daa7d5",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-01T00:56:57Z",
+      "side": 1,
+      "message": "Now we import from a separate module. Makes more sense to import by name.",
+      "parentUuid": "2d6103df_28df0b60",
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6aec696_50ec690e",
         "filename": "do_build.py",
         "patchSetId": 6
@@ -93,6 +177,30 @@
       "writtenOn": "2020-03-31T23:35:39Z",
       "side": 1,
       "message": "We should rename this to \u0027windows-libcxxabi\u0027 (in a followup CL).  With the new registry, it\u0027s better to be precise with the names.",
+      "range": {
+        "startLine": 1205,
+        "startChar": 12,
+        "endLine": 1205,
+        "endChar": 21
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c7ab6f7_54fb4765",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1205,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-01T00:56:57Z",
+      "side": 1,
+      "message": "That will affect output_dir too. I\u0027ll see how to do it later.",
+      "parentUuid": "b6aec696_50ec690e",
       "range": {
         "startLine": 1205,
         "startChar": 12,
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "af1b4f36_e459db7f",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1839,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-01T00:56:57Z",
+      "side": 1,
+      "message": "In long term I do want to consolidate all skip / build options. But yes they are not useful before we move all the things to builders.\n\nThe problem with current -skip-* options is that, usually I only care one thing. I have to skip all other things instead of just saying \"I want to build this\".\n\nI\u0027ll remove this part for later.",
+      "parentUuid": "f67a7f6d_f080a8a6",
+      "range": {
+        "startLine": 1839,
+        "startChar": 0,
+        "endLine": 1839,
+        "endChar": 55
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a0b81fa_ec2617e3",
         "filename": "do_build.py",
         "patchSetId": 6
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "5be4e992_f2c571ff",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1840,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-01T00:56:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a0b81fa_ec2617e3",
+      "range": {
+        "startLine": 1840,
+        "startChar": 49,
+        "endLine": 1840,
+        "endChar": 50
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dba3a20c_5e152eda",
         "filename": "do_build.py",
         "patchSetId": 6
@@ -165,6 +321,24 @@
       "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bd8b685_5faf170e",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1894,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-01T00:56:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dba3a20c_5e152eda",
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
