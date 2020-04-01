@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb26b315_393d03c3",
+        "filename": "do_build.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-01T18:55:24Z",
+      "side": 1,
+      "message": "This, and similar changes in this file, should just be:\n    BuilderRegistry.get().",
+      "range": {
+        "startLine": 1239,
+        "startChar": 53,
+        "endLine": 1239,
+        "endChar": 78
+      },
+      "revId": "246411012b09d023a29d77c51b9563f288e81a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

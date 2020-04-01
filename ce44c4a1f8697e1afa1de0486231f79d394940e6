@@ -260,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "ff749a8c_b5f07b21",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1839,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-01T18:55:24Z",
+      "side": 1,
+      "message": "Sounds good.  I\u0027m ok if you want to add this before consolidating everything to CMakeBuilder - but let\u0027s remove --skip-* at the same time.",
+      "parentUuid": "af1b4f36_e459db7f",
+      "range": {
+        "startLine": 1839,
+        "startChar": 0,
+        "endLine": 1839,
+        "endChar": 55
+      },
+      "revId": "ce44c4a1f8697e1afa1de0486231f79d394940e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a0b81fa_ec2617e3",
         "filename": "do_build.py",
         "patchSetId": 6
