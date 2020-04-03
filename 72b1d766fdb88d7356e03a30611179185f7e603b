@@ -16,6 +16,24 @@
       "revId": "72b1d766fdb88d7356e03a30611179185f7e603b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f805df02_7e3e9c0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-04-03T23:35:23Z",
+      "side": 1,
+      "message": "I\u0027ll add it, since it needs to be there too, but I plan on spinning this as a \u0027d\u0027 build. I don\u0027t want the kernel folks to be delayed because of this bug.",
+      "parentUuid": "07ce4b25_7f497b5f",
+      "revId": "72b1d766fdb88d7356e03a30611179185f7e603b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
