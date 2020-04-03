@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07ce4b25_7f497b5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-03T23:33:29Z",
+      "side": 1,
+      "message": "Should we also mention b/149839606, for the compiler update?",
+      "revId": "72b1d766fdb88d7356e03a30611179185f7e603b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
