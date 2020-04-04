@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4462724d_8c86caac",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1731,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-04-04T17:16:48Z",
+      "side": 1,
+      "message": "This changes from release to release. Use `version.long_version()` instead.",
+      "range": {
+        "startLine": 1731,
+        "startChar": 44,
+        "endLine": 1731,
+        "endChar": 50
+      },
+      "revId": "8b0865a2a71e800377d6f711d2dad2755ffc0894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
