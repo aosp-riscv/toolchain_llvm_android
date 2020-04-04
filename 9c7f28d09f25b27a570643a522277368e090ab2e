@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69eb6cc8_4f456fb7",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1738,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-04-04T18:42:19Z",
+      "side": 1,
+      "message": "RBE supports listing entire directory in remote_toolchain_inputs? If so, we can just list blacklist_dir, instead of adding individual files separately.",
+      "range": {
+        "startLine": 1738,
+        "startChar": 12,
+        "endLine": 1738,
+        "endChar": 38
+      },
+      "revId": "9c7f28d09f25b27a570643a522277368e090ab2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
