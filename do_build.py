@@ -1725,6 +1725,10 @@ def package_toolchain(build_dir, build_name, host: hosts.Host, dist_dir, strip=T
                             'clang.real\n'
                             'clang++.real\n'
                             '../lib64/libc++.so.1\n'
+                            'lld\n'
+                            'ld64.lld\n'
+                            'ld.lld\n'
+                            '../lib64/clang/10.0.5/lib/linux\n'
                            )
             blacklist_dir = os.path.join('lib64', 'clang', version.long_version(), 'share')
             blacklist_files = os.listdir(os.path.join(install_dir, blacklist_dir))
