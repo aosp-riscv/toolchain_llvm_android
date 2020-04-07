@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db2493d3_74a785a9",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-07T23:50:59Z",
+      "side": 1,
+      "message": "I hope all these explicit should_build() checks can be removed after we move all things to builders.",
+      "range": {
+        "startLine": 1363,
+        "startChar": 0,
+        "endLine": 1363,
+        "endChar": 51
+      },
+      "revId": "3840bd4aeba30e606bd7fb7454cb29a4b0767b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "017289c2_65e10bd2",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-07T23:50:59Z",
+      "side": 1,
+      "message": "--skip-runtime is more like no-build and will never be moved to builder. So I leave this option here.",
+      "range": {
+        "startLine": 1832,
+        "startChar": 0,
+        "endLine": 1832,
+        "endChar": 26
+      },
+      "revId": "3840bd4aeba30e606bd7fb7454cb29a4b0767b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
