@@ -16,7 +16,7 @@
 """A class to manage existing builders, so that they are discoverable."""
 
 import logging
-from typing import Callable, Dict, List, Iterable, Optional
+from typing import Callable, Dict, List, Iterable
 
 
 def logger():
@@ -29,19 +29,32 @@ class BuilderRegistry:
     _builders: Dict[str, object] = dict()
 
     # A lambda to decide whether we should build or skip a builder."""
-    _should_build: Callable[[str], bool] = lambda name: True
+    _filters: List[Callable[[str], bool]] = []
 
     @classmethod
-    def set_builds(cls, builds: Iterable[str]) -> None:
-        """Sets a list of targets to build. Others will be skipped."""
-        skip_set = set(skips)
-        cls._should_build = lambda name: name not in skip_set
+    def add_filter(cls, new_filter: Callable[[str], bool]) -> None:
+        """Adds a filter function. A target will be built if all filters return true."""
+        cls._filters.append(new_filter)
 
     @classmethod
-    def set_skips(cls, skips: Iterable[str]) -> None:
-        """Sets a list of targets to skip. Others will be built."""
+    def add_builds(cls, builds: Iterable[str]) -> None:
+        """Adds a filter to only allow listed targets."""
         build_set = set(builds)
-        cls._should_build = lambda name: name in build_set
+        cls.add_filter(lambda name: name in build_set)
+
+    @classmethod
+    def add_skips(cls, skips: Iterable[str]) -> None:
+        """Adds a filter to not allow listed targets."""
+        skip_set = set(skips)
+        cls.add_filter(lambda name: name not in skip_set)
+
+    @classmethod
+    def should_build(cls, name: str) -> bool:
+        """Tests whether we will build a target."""
+        for filter_func in cls._filters:
+            if not filter_func(name):
+                return False
+        return True
 
     @classmethod
     def register_and_build(cls, function):
@@ -49,7 +62,7 @@ class BuilderRegistry:
         def wrapper(builder, *args, **kwargs) -> None:
             name = builder.name
             cls._builders[name] = builder
-            if cls._should_build(name):
+            if cls.should_build(name):
                 logger().info("Building %s.", name)
                 function(builder, *args, **kwargs)
             else:
