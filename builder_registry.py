@@ -16,7 +16,7 @@
 """A class to manage existing builders, so that they are discoverable."""
 
 import logging
-from typing import Callable, Dict, List, Optional
+from typing import Callable, Dict, List, Iterable, Optional
 
 
 def logger():
@@ -32,17 +32,16 @@ class BuilderRegistry:
     _should_build: Callable[[str], bool] = lambda name: True
 
     @classmethod
-    def set_build_filters(cls, builds: Optional[List[str]], skips: Optional[List[str]]) -> None:
-        """Sets a list of targets to skip, or a list of targets to build."""
-        if skips:
-            skip_set = set(skips)
-            cls._should_build = lambda name: name not in skip_set
-        elif builds:
-            build_set = set(builds)
-            cls._should_build = lambda name: name in build_set
-        else:
-            # build all
-            cls._should_build = lambda name: True
+    def set_builds(cls, builds: Iterable[str]) -> None:
+        """Sets a list of targets to build. Others will be skipped."""
+        skip_set = set(skips)
+        cls._should_build = lambda name: name not in skip_set
+
+    @classmethod
+    def set_skips(cls, skips: Iterable[str]) -> None:
+        """Sets a list of targets to skip. Others will be built."""
+        build_set = set(builds)
+        cls._should_build = lambda name: name in build_set
 
     @classmethod
     def register_and_build(cls, function):

@@ -1817,6 +1817,10 @@ def parse_args():
         default=False,
         help='Don\'t strip binaries/libraries')
 
+    build_group = parser.add_mutually_exclusive_group()
+    build_group.add_argument('--build', nargs='+')
+    build_group.add_argument('--skip', nargs='+')
+
     # skip_stage1 is set to quickly reproduce stage2 failures
     parser.add_argument(
         '--skip-stage1',
