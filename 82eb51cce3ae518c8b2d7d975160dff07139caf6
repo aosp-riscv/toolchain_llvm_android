@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db7b634b_12301ed9",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-04-10T19:38:18Z",
+      "side": 1,
+      "message": "installed",
+      "range": {
+        "startLine": 78,
+        "startChar": 48,
+        "endLine": 78,
+        "endChar": 55
+      },
+      "revId": "82eb51cce3ae518c8b2d7d975160dff07139caf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03bfef43_559570b2",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-04-10T19:38:18Z",
+      "side": 1,
+      "message": "I\u0027m looking at older patches, and I think this is a regression. We used to look for !darwin, but now it is only happening for Linux. LLD should be used for Windows as well. I\u0027m not sure if we should roll that into this CL or do it as a follow-up, though.",
+      "revId": "82eb51cce3ae518c8b2d7d975160dff07139caf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d42addfe_a201b9f9",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-04-10T19:38:18Z",
+      "side": 1,
+      "message": "Same comment here about !darwin.",
+      "revId": "82eb51cce3ae518c8b2d7d975160dff07139caf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
