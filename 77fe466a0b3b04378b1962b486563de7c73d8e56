@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "957313e7_a791b50f",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-04-10T23:32:35Z",
+      "side": 1,
+      "message": "It\u0027s better to set start version to 383902, which shows which compiler update starts to have these patches.",
+      "range": {
+        "startLine": 383,
+        "startChar": 25,
+        "endLine": 383,
+        "endChar": 31
+      },
+      "revId": "77fe466a0b3b04378b1962b486563de7c73d8e56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
