@@ -231,7 +231,7 @@ class LLVMBaseBuilder(CMakeBuilder):  # pylint: disable=abstract-method
         # To prevent cmake from checking libstdcxx version.
         defines['LLVM_ENABLE_LIBCXX'] = 'ON'
 
-        if self._config.target_os.is_linux:
+        if not self._config.target_os.is_darwin:
             defines['LLVM_ENABLE_LLD'] = 'ON'
 
         return defines
@@ -332,9 +332,6 @@ class LLVMBuilder(LLVMBaseBuilder):
         defines['LLVM_BINUTILS_INCDIR'] = str(paths.ANDROID_DIR / 'toolchain' /
                                               'binutils' / 'binutils-2.27' / 'include')
         defines['LLVM_BUILD_RUNTIME'] = 'ON'
-
-        if self._config.target_os.is_linux:
-            defines['LLVM_ENABLE_LLD'] = 'ON'
 
         if self._enable_lldb:
             self.set_lldb_flags(self._config.target_os, defines)
