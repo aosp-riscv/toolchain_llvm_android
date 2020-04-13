@@ -96,7 +96,7 @@ def get_toolchain_by_name(name: str) -> Toolchain:
         return get_prebuilt_toolchain()
     return build_toolchain_for_path(BuilderRegistry.get(name).install_dir)
 
-def get_runtime_toolchain_builder():
+def _get_runtime_toolchain_builder():
     """Gets the builder for the toolchain used to build runtime libs."""
     builder = BuilderRegistry.get('stage2')
     if not builder or builder.build_instrumented or builder.debug_build:
@@ -105,4 +105,4 @@ def get_runtime_toolchain_builder():
 
 def get_runtime_toolchain() -> Toolchain:
     """Gets the toolchain used to build runtime."""
-    return build_toolchain_for_path(get_runtime_toolchain_builder().install_dir)
+    return build_toolchain_for_path(_get_runtime_toolchain_builder().install_dir)
