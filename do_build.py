@@ -1078,10 +1078,12 @@ class LldbServerBuilder(builders.LLVMRuntimeBuilder):
         defines = super().cmake_defines
         # lldb depends on support libraries.
         defines['LLVM_ENABLE_PROJECTS'] = 'clang;lldb'
-        toolchain_build_path = toolchains.get_runtime_toolchain_builder().output_dir
-        defines['LLVM_TABLEGEN'] = str(toolchain_build_path / 'bin' / 'llvm-tblgen')
-        defines['CLANG_TABLEGEN'] = str(toolchain_build_path / 'bin' / 'clang-tblgen')
-        defines['LLDB_TABLEGEN'] = str(toolchain_build_path / 'bin' / 'lldb-tblgen')
+        # In a debug build, lldb-server is compiled by stage1 toolchain.
+        # Since we only have lldb-tblgen in stage2, hardcode to stage2 here.
+        stage2_build_path = BuilderRegistry.get('stage2').output_dir
+        defines['LLVM_TABLEGEN'] = str(stage2_build_path / 'bin' / 'llvm-tblgen')
+        defines['CLANG_TABLEGEN'] = str(stage2_build_path / 'bin' / 'clang-tblgen')
+        defines['LLDB_TABLEGEN'] = str(stage2_build_path / 'bin' / 'lldb-tblgen')
         return defines
 
     def install(self) -> None:
