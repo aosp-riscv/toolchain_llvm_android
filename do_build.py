@@ -24,7 +24,7 @@ import os
 import shutil
 import string
 import textwrap
-from typing import Dict, List, Optional, Set
+from typing import cast, Dict, List, Optional, Set
 
 import android_version
 import builders
@@ -559,88 +559,6 @@ def build_crts(toolchain, clang_version, ndk_cxx=False):
                 shutil.copy2(os.path.join(src_dir, f), os.path.join(dst_dir, f))
 
 
-def build_libfuzzers(toolchain, clang_version, ndk_cxx=False):
-    llvm_config = os.path.join(toolchain, 'bin', 'llvm-config')
-
-    for (arch, llvm_triple, libfuzzer_defines, cflags) in cross_compile_configs( # pylint: disable=not-an-iterable
-            toolchain, platform=(not ndk_cxx)):
-        logger().info('Building libfuzzer for %s (ndk_cxx? %s)', arch.value, ndk_cxx)
-
-        libfuzzer_path = utils.out_path('lib', 'libfuzzer-' + arch.value)
-        if ndk_cxx:
-            libfuzzer_path += '-ndk-cxx'
-
-        libfuzzer_defines['ANDROID'] = '1'
-        libfuzzer_defines['LLVM_CONFIG_PATH'] = llvm_config
-
-        # Skip implicit C++ headers and explicitly include C++ header paths.
-        cflags.append('-nostdinc++')
-        cflags.extend('-isystem ' + d for d in libcxx_header_dirs(ndk_cxx))
-
-        libfuzzer_defines['CMAKE_ASM_FLAGS'] = ' '.join(cflags)
-        libfuzzer_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
-        libfuzzer_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
-
-        # lib/Fuzzer/CMakeLists.txt does not call cmake_minimum_required() to
-        # set a minimum version.  Explicitly request a policy that'll pass
-        # CMAKE_*_LINKER_FLAGS to the trycompile() step.
-        libfuzzer_defines['CMAKE_POLICY_DEFAULT_CMP0056'] = 'NEW'
-
-        libfuzzer_cmake_path = utils.llvm_path('compiler-rt')
-        libfuzzer_env = dict(ORIG_ENV)
-        rm_cmake_cache(libfuzzer_path)
-        invoke_cmake(
-            out_path=libfuzzer_path,
-            defines=libfuzzer_defines,
-            env=libfuzzer_env,
-            cmake_path=libfuzzer_cmake_path,
-            target='fuzzer',
-            install=False)
-        # We need to install libfuzzer manually.
-        if arch == hosts.Arch.I386:
-            sarch = 'i686'
-        else:
-            sarch = arch.value
-        static_lib_filename = 'libclang_rt.fuzzer-' + sarch + '-android.a'
-        static_lib = os.path.join(libfuzzer_path, 'lib', 'linux', static_lib_filename)
-        triple_arch: Arch = hosts.Arch.from_triple(llvm_triple)
-
-        # Install the fuzzer library to the old {arch}/libFuzzer.a path for
-        # backwards compatibility.
-        if ndk_cxx:
-            lib_subdir = os.path.join('runtimes_ndk_cxx', triple_arch.value)
-        else:
-            lib_subdir = clang_resource_dir(clang_version.long_version(),
-                                            triple_arch)
-        lib_dir = os.path.join(toolchain, lib_subdir)
-
-        check_create_path(lib_dir)
-        shutil.copy2(static_lib, os.path.join(lib_dir, 'libFuzzer.a'))
-
-        # Now install under the libclang_rt.fuzzer[...] name as well.
-        if ndk_cxx:
-            #  1. Under runtimes_ndk_cxx
-            dst_dir = os.path.join(toolchain, 'runtimes_ndk_cxx')
-            check_create_path(dst_dir)
-            shutil.copy2(static_lib, os.path.join(dst_dir, static_lib_filename))
-        else:
-            #  2. Under lib64.
-            libfuzzer_install = os.path.join(toolchain, 'lib64', 'clang',
-                                             clang_version.long_version())
-            libfuzzer_install = os.path.join(libfuzzer_install, "lib", "linux")
-            check_create_path(libfuzzer_install)
-            shutil.copy2(static_lib, os.path.join(libfuzzer_install, static_lib_filename))
-
-    # Install libfuzzer headers.
-    header_src = utils.llvm_path('compiler-rt', 'lib', 'fuzzer')
-    header_dst = os.path.join(toolchain, 'prebuilt_include', 'llvm', 'lib',
-                              'Fuzzer')
-    check_create_path(header_dst)
-    for f in os.listdir(header_src):
-        if f.endswith('.h') or f.endswith('.def'):
-            shutil.copy2(os.path.join(header_src, f), header_dst)
-
-
 def build_libcxxabi(toolchain, build_arch: hosts.Arch):
     # TODO: Refactor cross_compile_configs to support per-arch queries in
     # addition to being a generator.
@@ -667,63 +585,6 @@ def build_libcxxabi(toolchain, build_arch: hosts.Arch):
                      cmake_path=utils.llvm_path('libcxxabi'),
                      install=False)
         return out_path
-
-
-def build_libomp(toolchain, clang_version, ndk_cxx=False, is_shared=False):
-
-    for (arch, llvm_triple, libomp_defines, cflags) in cross_compile_configs( # pylint: disable=not-an-iterable
-            toolchain, platform=(not ndk_cxx)):
-
-        logger().info('Building libomp for %s (ndk_cxx? %s)', arch.value, ndk_cxx)
-        # Skip implicit C++ headers and explicitly include C++ header paths.
-        cflags.append('-nostdinc++')
-        cflags.extend('-isystem ' + d for d in libcxx_header_dirs(ndk_cxx))
-
-        cflags.append('-fPIC')
-
-        libomp_path = utils.out_path('lib', 'libomp-' + arch.value)
-        if ndk_cxx:
-            libomp_path += '-ndk-cxx'
-        libomp_path += '-' + ('shared' if is_shared else 'static')
-
-        libomp_defines['ANDROID'] = '1'
-        libomp_defines['CMAKE_BUILD_TYPE'] = 'Release'
-        libomp_defines['CMAKE_ASM_FLAGS'] = ' '.join(cflags)
-        libomp_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
-        libomp_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
-        libomp_defines['OPENMP_ENABLE_LIBOMPTARGET'] = 'FALSE'
-        libomp_defines['OPENMP_ENABLE_OMPT_TOOLS'] = 'FALSE'
-        libomp_defines['LIBOMP_ENABLE_SHARED'] = 'TRUE' if is_shared else 'FALSE'
-
-        # Minimum version for OpenMP's CMake is too low for the CMP0056 policy
-        # to be ON by default.
-        libomp_defines['CMAKE_POLICY_DEFAULT_CMP0056'] = 'NEW'
-
-        libomp_defines.update(base_cmake_defines())
-
-        libomp_cmake_path = utils.llvm_path('openmp')
-        libomp_env = dict(ORIG_ENV)
-        rm_cmake_cache(libomp_path)
-        invoke_cmake(
-            out_path=libomp_path,
-            defines=libomp_defines,
-            env=libomp_env,
-            cmake_path=libomp_cmake_path,
-            install=False)
-
-        # We need to install libomp manually.
-        libname = 'libomp.' + ('so' if is_shared else 'a')
-        src_lib = os.path.join(libomp_path, 'runtime', 'src', libname)
-        triple_arch = hosts.Arch.from_triple(llvm_triple)
-        if ndk_cxx:
-            dst_subdir = os.path.join('runtimes_ndk_cxx', triple_arch.value)
-        else:
-            dst_subdir = clang_resource_dir(clang_version.long_version(),
-                                            triple_arch)
-        dst_dir = os.path.join(toolchain, dst_subdir)
-
-        check_create_path(dst_dir)
-        shutil.copy2(src_lib, os.path.join(dst_dir, libname))
 
 
 def build_crts_host_i686(toolchain, clang_version):
@@ -1059,6 +920,96 @@ class Stage2Builder(builders.LLVMBuilder):
         return defines
 
 
+class LibFuzzerBuilder(builders.LLVMRuntimeBuilder):
+    name: str = 'libfuzzers'
+    src_dir: Path = paths.LLVM_PATH / 'compiler-rt'
+    ninja_target: str = 'fuzzer'
+    remove_cmake_cache: bool = True
+    config_list: List[configs.Config] = (
+        configs.android_configs(platform=True) +
+        configs.android_configs(platform=False)
+    )
+
+    @property
+    def cmake_defines(self) -> Dict[str, str]:
+        defines = super().cmake_defines
+        # lib/Fuzzer/CMakeLists.txt does not call cmake_minimum_required() to
+        # set a minimum version.  Explicitly request a policy that'll pass
+        # CMAKE_*_LINKER_FLAGS to the trycompile() step.
+        defines['CMAKE_POLICY_DEFAULT_CMP0056'] = 'NEW'
+        return defines
+
+    def install_config(self) -> None:
+        # We need to install libfuzzer manually.
+        arch = self._config.target_arch
+        sarch = 'i686' if arch == hosts.Arch.I386 else arch.value
+        static_lib_filename = 'libclang_rt.fuzzer-' + sarch + '-android.a'
+        static_lib = self.output_dir / 'lib' / 'linux' / static_lib_filename
+
+        # Install the fuzzer library to the old {arch}/libFuzzer.a path for
+        # backwards compatibility.
+        lib_dir = self.install_dir
+        lib_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(static_lib, lib_dir / 'libFuzzer.a')
+
+        # Now install under the libclang_rt.fuzzer[...] name as well.
+        # Removes the arch part in install path
+        dst_dir = lib_dir.parents[0]
+        dst_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(static_lib, dst_dir / static_lib_filename)
+
+    def install(self) -> None:
+        # Install libfuzzer headers once for all configs.
+        header_src = self.src_dir / 'lib' / 'fuzzer'
+        header_dst = self.toolchain.path / 'prebuilt_include' / 'llvm' / 'lib' / 'Fuzzer'
+        header_dst.mkdir(parents=True, exist_ok=True)
+        for f in header_src.iterdir():
+            if f.suffix in ('.h', '.def'):
+                shutil.copy2(f, header_dst)
+
+
+class LibOMPBuilder(builders.LLVMRuntimeBuilder):
+    name: str = 'libomp'
+    remove_cmake_cache: bool = True
+    src_dir: Path = paths.LLVM_PATH / 'openmp'
+
+    config_list: List[configs.Config] = (
+        configs.android_configs(platform=True, ext_config={'is_shared': False}) +
+        configs.android_configs(platform=False, ext_config={'is_shared': False}) +
+        configs.android_configs(platform=False, ext_config={'is_shared': True})
+    )
+
+    @property
+    def is_shared(self) -> bool:
+        return cast(Dict[str, bool], self._config.ext_config)['is_shared']
+
+    @property
+    def output_dir(self) -> Path:
+        old_path = super().output_dir
+        suffix = '-shared' if self.is_shared else '-static'
+        return old_path.parent / (old_path.name + suffix)
+
+    @property
+    def cmake_defines(self) -> Dict[str, str]:
+        defines = super().cmake_defines
+        defines['CMAKE_POSITION_INDEPENDENT_CODE'] = 'ON'
+        defines['OPENMP_ENABLE_LIBOMPTARGET'] = 'FALSE'
+        defines['OPENMP_ENABLE_OMPT_TOOLS'] = 'FALSE'
+        defines['LIBOMP_ENABLE_SHARED'] = 'TRUE' if self.is_shared else 'FALSE'
+        # Minimum version for OpenMP's CMake is too low for the CMP0056 policy
+        # to be ON by default.
+        defines['CMAKE_POLICY_DEFAULT_CMP0056'] = 'NEW'
+        return defines
+
+    def install_config(self) -> None:
+        # We need to install libomp manually.
+        libname = 'libomp.' + ('so' if self.is_shared else 'a')
+        src_lib = self.output_dir / 'runtime' / 'src' / libname
+        dst_dir = self.install_dir
+        dst_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src_lib, dst_dir / libname)
+
+
 class LldbServerBuilder(builders.LLVMRuntimeBuilder):
     name: str = 'lldb-server'
     src_dir: Path = paths.LLVM_PATH / 'llvm'
@@ -1088,7 +1039,7 @@ class LldbServerBuilder(builders.LLVMRuntimeBuilder):
         defines['LLDB_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'lldb-tblgen')
         return defines
 
-    def install(self) -> None:
+    def install_config(self) -> None:
         src_path = self.output_dir / 'bin' / 'lldb-server'
         install_dir = self.install_dir / self._config.target_arch.value
         install_dir.mkdir(parents=True, exist_ok=True)
@@ -1265,17 +1216,8 @@ def build_runtimes(toolchain, args=None):
         # 32-bit host crts are not needed for Darwin
         if hosts.build_host().is_linux:
             build_crts_host_i686(toolchain, version)
-    if not BuilderRegistry.should_build('libfuzzers'):
-        logger().info('Skip libfuzzers')
-    else:
-        build_libfuzzers(toolchain, version)
-        build_libfuzzers(toolchain, version, ndk_cxx=True)
-    if not BuilderRegistry.should_build('libomp'):
-        logger().info('Skip libomp')
-    else:
-        build_libomp(toolchain, version)
-        build_libomp(toolchain, version, ndk_cxx=True)
-        build_libomp(toolchain, version, ndk_cxx=True, is_shared=True)
+    LibFuzzerBuilder().build()
+    LibOMPBuilder().build()
     if BUILD_LLDB:
         LldbServerBuilder().build()
     # Bug: http://b/64037266. `strtod_l` is missing in NDK r15. This will break
