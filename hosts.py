@@ -67,6 +67,20 @@ class Arch(enum.Enum):
         return Arch(arch)
 
     @property
+    def llvm_arch(self) -> str:
+        """Converts to llvm triple."""
+        return {
+            Arch.ARM: 'arm',
+            Arch.AARCH64: 'aarch64',
+            Arch.I386: 'i686',
+            Arch.X86_64: 'x86_64',
+        }[self]
+
+    @property
+    def android_triple(self) -> str:
+        return f'{self.llvm_arch}-linux-android'
+
+    @property
     def ndk_arch(self) -> str:
         """Converts to ndk arch."""
         return {
