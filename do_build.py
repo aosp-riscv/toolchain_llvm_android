@@ -1066,10 +1066,6 @@ class LldbServerBuilder(builders.LLVMRuntimeBuilder):
     ninja_target: str = 'lldb-server'
 
     @property
-    def install_dir(self) -> Path:
-        return self.toolchain.path / 'runtimes_ndk_cxx' / self._config.target_arch.value
-
-    @property
     def cflags(self) -> List[str]:
         cflags: List[str] = super().cflags
         # The build system will add '-stdlib=libc++' automatically. Since we
@@ -1090,7 +1086,7 @@ class LldbServerBuilder(builders.LLVMRuntimeBuilder):
 
     def install(self) -> None:
         src_path = self.output_dir / 'bin' / 'lldb-server'
-        install_dir = self.install_dir / self._config.target_arch.value
+        install_dir = self.install_dir
         install_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src_path, install_dir)
 
