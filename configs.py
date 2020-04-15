@@ -186,7 +186,7 @@ class AndroidConfig(_BaseConfig):
     def sysroot(self) -> Optional[Path]:  # type: ignore
         """Returns sysroot path."""
         platform_or_ndk = 'platform' if self.platform else 'ndk'
-        return paths.OUT_DIR / 'sysroots' / platform_or_ndk / self.target_arch.ndk_arch
+        return paths.SYSROOTS / platform_or_ndk / self.target_arch.ndk_arch
 
     @property
     def _toolchain_builtins(self) -> Path:
