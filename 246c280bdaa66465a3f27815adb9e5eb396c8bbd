@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9009f60_e806cc9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-17T05:51:47Z",
+      "side": 1,
+      "message": "Is there any other reason to set CMAKE_SYSTEM_NAME?  If so, could you mention it in the commit message.\n\nIf not, let\u0027s leave the status quo since Clang doesn\u0027t seem to search in \u0027lib/android\u0027 for the runtimes [1].\n\ne.g. clang++ -target aarch64-linux-android -fsanitize\u003daddress foo.cpp -###",
+      "range": {
+        "startLine": 16,
+        "startChar": 22,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb671365_b036ec79",
+        "filename": "configs.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-17T05:51:47Z",
+      "side": 1,
+      "message": "Expand this name to extra_config for clarity.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 14
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5597e0d5_2e21ff8d",
+        "filename": "do_build.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-17T05:51:47Z",
+      "side": 1,
+      "message": "The implementation of this function here conflicts with LLVMRuntimeBuilder.install_dir, which seems to determine where the runtimes end up.\n\nIs this intentional?",
+      "range": {
+        "startLine": 866,
+        "startChar": 8,
+        "endLine": 866,
+        "endChar": 19
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cae6039_6fb807a4",
+        "filename": "toolchains.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-17T05:51:47Z",
+      "side": 1,
+      "message": "Not related to this CL but do we ever envision a different subclass to Toolchain?  If not, this base class seems unnecessary.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 16
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75ef2e78_c53e299a",
+        "filename": "toolchains.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-17T05:51:47Z",
+      "side": 1,
+      "message": "Why is build_path mandatory now?",
+      "range": {
+        "startLine": 62,
+        "startChar": 35,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
