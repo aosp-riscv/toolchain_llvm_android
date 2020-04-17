@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c5a0a97f_8b4b1034",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-17T23:08:52Z",
+      "side": 1,
+      "message": "Removed SYSTEM_NAME",
+      "parentUuid": "b9009f60_e806cc9b",
+      "range": {
+        "startLine": 16,
+        "startChar": 22,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb671365_b036ec79",
         "filename": "configs.py",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "51eafdc1_d45c1716",
+        "filename": "configs.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-17T23:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb671365_b036ec79",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 14
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5597e0d5_2e21ff8d",
         "filename": "do_build.py",
         "patchSetId": 7
@@ -59,6 +107,30 @@
       "writtenOn": "2020-04-17T05:51:47Z",
       "side": 1,
       "message": "The implementation of this function here conflicts with LLVMRuntimeBuilder.install_dir, which seems to determine where the runtimes end up.\n\nIs this intentional?",
+      "range": {
+        "startLine": 866,
+        "startChar": 8,
+        "endLine": 866,
+        "endChar": 19
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f368781_14681396",
+        "filename": "do_build.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-17T23:08:52Z",
+      "side": 1,
+      "message": "It is intentional but since you are asking I feel this may be confusing and should be changed. 😊\n\nCurrently install_dir is used in two ways:\n1. Sets CMAKE_INSTALL_PREFIX for `ninja install` case.\n2. Determines where runtimes end up in manual install case.\n\nMaybe we should have different functions for 2...",
+      "parentUuid": "5597e0d5_2e21ff8d",
       "range": {
         "startLine": 866,
         "startChar": 8,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "9a5aa514_b443e4ff",
+        "filename": "toolchains.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-17T23:08:52Z",
+      "side": 1,
+      "message": "Probably not. Removed.",
+      "parentUuid": "3cae6039_6fb807a4",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 16
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75ef2e78_c53e299a",
         "filename": "toolchains.py",
         "patchSetId": 7
@@ -105,6 +201,30 @@
       "writtenOn": "2020-04-17T05:51:47Z",
       "side": 1,
       "message": "Why is build_path mandatory now?",
+      "range": {
+        "startLine": 62,
+        "startChar": 35,
+        "endLine": 62,
+        "endChar": 51
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51a64f2e_e93af124",
+        "filename": "toolchains.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-17T23:08:52Z",
+      "side": 1,
+      "message": "Because if not, everytime I use it, I get a type error because it can be None.\n\nIt is correct to be optional but `if build_path is not None` everywhere is annoying...\n\nReally wish Python has a ? operator that simply crash if a value is None...",
+      "parentUuid": "75ef2e78_c53e299a",
       "range": {
         "startLine": 62,
         "startChar": 35,
