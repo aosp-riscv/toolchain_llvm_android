@@ -1,0 +1,9 @@
+Verified+1: Yabin Cui <yabinc@google.com>
+Code-Review+2: Nick Desaulniers <ndesaulniers@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Yabin Cui <yabinc@google.com>
+Submitted-at: Fri, 17 Apr 2020 04:31:32 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1287112
+Project: toolchain/llvm_android
+Branch: refs/heads/master
