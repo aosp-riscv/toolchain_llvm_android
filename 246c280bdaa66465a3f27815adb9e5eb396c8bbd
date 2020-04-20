@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "19065cdf_65ab5545",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-20T21:18:27Z",
+      "side": 1,
+      "message": "Since it is generally correct to set CMAKE_SYSTEM_NAME\u003dAndroid (and lldb-server does need it), I removed CMAKE_SYSTEM_NAME just for compiler-rt.",
+      "parentUuid": "c5a0a97f_8b4b1034",
+      "range": {
+        "startLine": 16,
+        "startChar": 22,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "246c280bdaa66465a3f27815adb9e5eb396c8bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb671365_b036ec79",
         "filename": "configs.py",
         "patchSetId": 7
