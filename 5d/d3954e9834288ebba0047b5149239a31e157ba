@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Autosubmit+1: Yi Kong <yikong@google.com>
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 21 Apr 2020 16:12:17 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1290578
+Project: toolchain/llvm_android
+Branch: refs/heads/master
