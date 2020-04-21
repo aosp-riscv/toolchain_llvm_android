@@ -954,8 +954,9 @@ def install_lldb_deps(install_dir: Path, host: hosts.Host):
     dest_py_lib = python_dest_dir / py_lib
     py_lib_rel = os.path.relpath(dest_py_lib, lib_dir)
     os.symlink(py_lib_rel, lib_dir / py_lib.name)
-    if host.is_linux:
-        shutil.copy2(paths.get_libedit_lib(host), lib_dir)
+    if not host.is_windows:
+        libedit_root = BuilderRegistry.get('libedit').install_dir
+        shutil.copy2(paths.get_libedit_lib(libedit_root), lib_dir)
 
 
 class Stage2Builder(builders.LLVMBuilder):
@@ -1062,6 +1063,24 @@ class Stage2Builder(builders.LLVMBuilder):
             defines['LLVM_BUILD_EXTERNAL_COMPILER_RT'] = 'ON'
 
         return defines
+
+
+class LibEditBuilder(builders.AutoconfBuilder):
+    name: str = 'libedit'
+    src_dir: Path = paths.LIBEDIT_SRC_DIR
+    config_list: List[configs.Config] = [configs.host_config()]
+
+
+class SwigBuilder(builders.AutoconfBuilder):
+    name: str = 'swig'
+    src_dir: Path = paths.SWIG_SRC_DIR
+    config_list: List[configs.Config] = [configs.host_config()]
+
+    @property
+    def config_flags(self) -> List[str]:
+        flags = super().config_flags
+        flags.append('--without-pcre')
+        return flags
 
 
 class LldbServerBuilder(builders.LLVMRuntimeBuilder):
@@ -1797,6 +1816,11 @@ def main():
     stage1.build_all_targets = args.debug or instrumented
     stage1.build()
     stage1_install = str(stage1.install_dir)
+
+    if BUILD_LLDB:
+        SwigBuilder().build()
+        if not hosts.build_host().is_windows:
+            LibEditBuilder().build()
 
     if need_host:
         profdata_filename = pgo_profdata_filename()
