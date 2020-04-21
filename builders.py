@@ -17,6 +17,7 @@
 
 from pathlib import Path
 import logging
+import multiprocessing
 import os
 import shutil
 from typing import Dict, List, Optional, Set
@@ -54,14 +55,8 @@ class Builder:  # pylint: disable=too-few-public-methods
     def _build_config(self) -> None:
         raise NotImplementedError()
 
-
-class CMakeBuilder(Builder):
-    """Builder for cmake targets."""
-    config: configs.Config
-    src_dir: Path
-    remove_cmake_cache: bool = False
-    remove_install_dir: bool = False
-    ninja_target: Optional[str] = None
+    def _is_cross_compiling(self) -> bool:
+        return self._config.target_os != hosts.build_host()
 
     @property
     def toolchain(self) -> toolchains.Toolchain:
@@ -69,9 +64,104 @@ class CMakeBuilder(Builder):
         raise NotImplementedError()
 
     @property
-    def target_os(self) -> hosts.Host:
-        """Returns the target platform for this builder."""
-        return self.config.target_os
+    def cflags(self) -> List[str]:
+        """Additional cflags to use."""
+        return []
+
+    @property
+    def cxxflags(self) -> List[str]:
+        """Additional cxxflags to use."""
+        return self.cflags
+
+    @property
+    def ldflags(self) -> List[str]:
+        """Additional ldflags to use."""
+        ldflags = []
+        # When cross compiling, toolchain libs won't work on target arch.
+        if not self._is_cross_compiling():
+            ldflags.append(f'-L{self.toolchain.lib_dir}')
+        return ldflags
+
+    @property
+    def env(self) -> Dict[str, str]:
+        """Environment variables used when building."""
+        return ORIG_ENV
+
+
+class AutoconfBuilder(Builder):
+    """Builder for autoconf targets."""
+    src_dir: Path
+    remove_install_dir: bool = True
+
+    @property
+    def output_dir(self) -> Path:
+        """The path for intermediate results."""
+        return paths.OUT_DIR / 'lib' / (f'{self.name}')
+
+    @property
+    def install_dir(self) -> Path:
+        """Returns the path this target will be installed to."""
+        return paths.OUT_DIR / 'lib' / f'{self.name}-install'
+
+    @property
+    def cflags(self) -> List[str]:
+        cflags = super().cflags
+        cflags.append('-fPIC')
+        cflags.append(f'--sysroot={self._config.sysroot}')
+        cflags.append('-Wno-unused-command-line-argument')
+        if self._config.target_os.is_darwin:
+            cflags.append('-mmacosx-version-min=' + constants.MAC_MIN_VERSION)
+        return []
+
+    @property
+    def cxxflags(self) -> List[str]:
+        cxxflags = super().cxxflags
+        cxxflags.append('-stdlib=libc++')
+        return cxxflags
+
+    @property
+    def toolchain(self) -> toolchains.Toolchain:
+        return toolchains.get_runtime_toolchain()
+
+    def _touch_config_files(self) -> None:
+        """Touches configure files to prevent autoreconf."""
+        files_to_touch = ["aclocal.m4", "configure", "Makefile.am", "Makefile.in"]
+        for file_name in files_to_touch:
+            file_path = self.src_dir / file_name
+            if file_path.is_file():
+                file_path.touch(exist_ok=True)
+
+    def _build_config(self) -> None:
+        logger().info('Building %s for %s', self.name, self._config)
+
+        if self.remove_install_dir and self.install_dir.exists():
+            shutil.rmtree(self.install_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        self._touch_config_files()
+        
+        env = self.env
+        env['CC'] = ' '.join([str(self.toolchain.cc)] + self.cflags + self.ldflags)
+        env['CXX'] = ' '.join([str(self.toolchain.cxx)] + self.cxxflags + self.ldflags)
+
+        config_cmd = [self.src_dir / 'configure', f'--prefix={self.install_dir}']
+        utils.check_call(config_cmd, cwd=self.output_dir, env=env)
+
+        make_cmd = ['make', f'-j{multiprocessing.cpu_count()}']
+        utils.check_call(make_cmd, cwd=self.output_dir)
+
+        self.install()
+
+    def install(self) -> None:
+        install_cmd = ['make', 'install']
+        utils.check_call(install_cmd, cwd=self.output_dir)
+
+
+class CMakeBuilder(Builder):
+    """Builder for cmake targets."""
+    src_dir: Path
+    remove_cmake_cache: bool = False
+    remove_install_dir: bool = False
+    ninja_target: Optional[str] = None
 
     @property
     def install_dir(self) -> Path:
@@ -129,32 +219,7 @@ class CMakeBuilder(Builder):
     def _get_cmake_system_name(self) -> str:
         return self._config.target_os.value.capitalize()
 
-    def _is_cross_compiling(self) -> bool:
-        return self._config.target_os != hosts.build_host()
 
-    @property
-    def cflags(self) -> List[str]:
-        """Additional cflags to use."""
-        return []
-
-    @property
-    def cxxflags(self) -> List[str]:
-        """Additional cxxflags to use."""
-        return self.cflags
-
-    @property
-    def ldflags(self) -> List[str]:
-        """Additional ldflags to use."""
-        ldflags = []
-        # When cross compiling, toolchain libs won't work on target arch.
-        if not self._is_cross_compiling():
-            ldflags.append(f'-L{self.toolchain.lib_dir}')
-        return ldflags
-
-    @property
-    def env(self) -> Dict[str, str]:
-        """Environment variables used when building."""
-        return ORIG_ENV
 
     @staticmethod
     def _rm_cmake_cache(cache_dir: Path):
@@ -242,7 +307,6 @@ class LLVMRuntimeBuilder(LLVMBaseBuilder):  # pylint: disable=abstract-method
 
     @property
     def toolchain(self) -> toolchains.Toolchain:
-        """Returns the toolchain used for this target."""
         return toolchains.get_runtime_toolchain()
 
     @property
@@ -291,18 +355,13 @@ class LLVMBuilder(LLVMBaseBuilder):
     def _enable_lldb(self) -> bool:
         return 'lldb' in self.llvm_projects
 
-    @property
-    def env(self) -> Dict[str, str]:
-        env = super().env
-        if self._enable_lldb:
-            env['SWIG_LIB'] = str(paths.SWIG_LIB)
-        return env
-
     @staticmethod
     def set_lldb_flags(target: hosts.Host, defines: Dict[str, str]) -> None:
         """Sets cmake defines for lldb."""
-        defines['SWIG_EXECUTABLE'] = str(paths.SWIG_EXECUTABLE)
+        swig_executable = BuilderRegistry.get('swig').install_dir / 'bin' / 'swig'
+        defines['SWIG_EXECUTABLE'] = str(swig_executable)
         py_prefix = 'Python3' if target.is_windows else 'PYTHON'
+        defines['LLDB_ENABLE_PYTHON'] = 'ON'
         defines[f'{py_prefix}_LIBRARY'] = str(paths.get_python_lib(target))
         defines[f'{py_prefix}_INCLUDE_DIR'] = str(paths.get_python_include_dir(target))
         defines[f'{py_prefix}_EXECUTABLE'] = str(paths.get_python_executable(hosts.build_host()))
@@ -314,8 +373,10 @@ class LLVMBuilder(LLVMBaseBuilder):
             defines['LLDB_NO_DEBUGSERVER'] = 'ON'
 
         if target.is_linux:
-            defines['libedit_INCLUDE_DIRS'] = str(paths.get_libedit_include_dir(target))
-            defines['libedit_LIBRARIES'] = str(paths.get_libedit_lib(target))
+            libedit_root = BuilderRegistry.get('libedit').install_dir
+            defines['LLDB_ENABLE_LIBEDIT'] = 'ON'
+            defines['LibEdit_INCLUDE_DIRS'] = str(paths.get_libedit_include_dir(libedit_root))
+            defines['LibEdit_LIBRARIES'] = str(paths.get_libedit_lib(libedit_root))
 
     @property
     def cmake_defines(self) -> Dict[str, str]:
