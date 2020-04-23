@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "104651bc_62c1e66d",
+        "filename": "source_manager.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-04-23T06:08:31Z",
+      "side": 1,
+      "message": "The Darwin builders are probably still using HFS+; will they error when given `-c` argument?",
+      "range": {
+        "startLine": 80,
+        "startChar": 67,
+        "endLine": 80,
+        "endChar": 71
+      },
+      "revId": "742589fd5832f5c07122672ae8106a26cc42a11d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
