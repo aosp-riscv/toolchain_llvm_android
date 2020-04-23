@@ -22,6 +22,30 @@
       "revId": "742589fd5832f5c07122672ae8106a26cc42a11d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b4a2083_255c035c",
+        "filename": "source_manager.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-23T22:37:56Z",
+      "side": 1,
+      "message": "Yes likely... And mac don\u0027t have a way to fallback. Maybe I can catch the exception and fallback?\n\nOr another idea: copy by hard link. COW when patching. And implement our own rsync by comparing inode. This avoids most copies, just to complicated to implement 😊",
+      "parentUuid": "104651bc_62c1e66d",
+      "range": {
+        "startLine": 80,
+        "startChar": 67,
+        "endLine": 80,
+        "endChar": 71
+      },
+      "revId": "742589fd5832f5c07122672ae8106a26cc42a11d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
