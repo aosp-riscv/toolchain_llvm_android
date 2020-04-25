@@ -16,6 +16,24 @@
       "revId": "362106a6bf996f6ddb37d65b9a03a436f7b30ec7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ea86f81_f736b252",
+        "filename": "do_test_compiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-25T05:09:12Z",
+      "side": 1,
+      "message": "aosp/1296045 has the fix.",
+      "parentUuid": "ce92909e_a6a4c7e5",
+      "revId": "362106a6bf996f6ddb37d65b9a03a436f7b30ec7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
