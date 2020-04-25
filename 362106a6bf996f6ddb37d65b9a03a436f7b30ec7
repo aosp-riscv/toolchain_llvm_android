@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce92909e_a6a4c7e5",
+        "filename": "do_test_compiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-25T05:03:56Z",
+      "side": 1,
+      "message": "Looks like the script also has to import \u0027toolchains\u0027:\n\nTraceback (most recent call last):\nFile \"/buildbot/src/android/master-plus-llvm/toolchain/llvm_android/do_test_compiler.py\", line 429, in \u003cmodule\u003e\nmain()\nFile \"/buildbot/src/android/master-plus-llvm/toolchain/llvm_android/do_test_compiler.py\", line 400, in main\nclang_path, clang_version \u003d build_clang(\nFile \"/buildbot/src/android/master-plus-llvm/toolchain/llvm_android/do_test_compiler.py\", line 340, in build_clang\nstage2_toolchain \u003d toolchains.get_toolchain_from_builder(stage2)\nNameError: name \u0027toolchains\u0027 is not defined",
+      "revId": "362106a6bf996f6ddb37d65b9a03a436f7b30ec7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
