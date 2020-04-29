@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb6aa3ec_b28ca488",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-04-29T04:01:54Z",
+      "side": 1,
+      "message": "This should probably also mention the upstream bug for this issue.",
+      "revId": "f3fdcfd76306476bf2d40ff59a631dd86b11d322",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
