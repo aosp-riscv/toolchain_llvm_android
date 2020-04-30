@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3808d0a_dde01164",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-04-30T08:39:41Z",
+      "side": 1,
+      "message": "Rather than return False, can we log all of the missing binaries and return False if one or more are detected?",
+      "revId": "36025986e0e6859d94b3ebbd656eda89812ad859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
