@@ -22,6 +22,30 @@
       "revId": "f8d629a83e8b9a54afdb50dac2bb244046de57f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b701bbcf_e9de250e",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-04-30T22:22:25Z",
+      "side": 1,
+      "message": "Then update ! at the beginning of this file to python3. We won\u0027t automatically run this with prebuilt python3.",
+      "parentUuid": "efabb386_5e18f0f9",
+      "range": {
+        "startLine": 155,
+        "startChar": 27,
+        "endLine": 155,
+        "endChar": 28
+      },
+      "revId": "f8d629a83e8b9a54afdb50dac2bb244046de57f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
