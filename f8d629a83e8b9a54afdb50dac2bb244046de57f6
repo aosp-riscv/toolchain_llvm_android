@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efabb386_5e18f0f9",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-04-30T18:53:45Z",
+      "side": 1,
+      "message": "Use a f-string literal instead.",
+      "range": {
+        "startLine": 155,
+        "startChar": 27,
+        "endLine": 155,
+        "endChar": 28
+      },
+      "revId": "f8d629a83e8b9a54afdb50dac2bb244046de57f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
