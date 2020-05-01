@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31f415fc_c5e0573f",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-01T17:00:11Z",
+      "side": 1,
+      "message": "I think this could just be \u0027bug\u0027.  The int() is unnecessary here and maybe in the predecessor as well.",
+      "range": {
+        "startLine": 171,
+        "startChar": 27,
+        "endLine": 171,
+        "endChar": 35
+      },
+      "revId": "832f3c7d16f931d3ebf8597be9ff3a7a5a601cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
