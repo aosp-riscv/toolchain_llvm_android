@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c7c18c8_e2cc3dd6",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-05-01T18:32:41Z",
+      "side": 1,
+      "message": "text\u003dTrue is new in python3.7. This script only runs on local machine right?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 67
+      },
+      "revId": "c1ffd516788b52f48dbf82c2502007ebd8087719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
