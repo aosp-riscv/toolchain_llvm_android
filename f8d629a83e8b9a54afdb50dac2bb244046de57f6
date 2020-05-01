@@ -46,6 +46,30 @@
       "revId": "f8d629a83e8b9a54afdb50dac2bb244046de57f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbfa51d2_b34bc5cc",
+        "filename": "update-prebuilts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-05-01T07:57:10Z",
+      "side": 1,
+      "message": "I\u0027ll address this in a follow-up CL to upgrade the entire script to Python3.",
+      "parentUuid": "b701bbcf_e9de250e",
+      "range": {
+        "startLine": 155,
+        "startChar": 27,
+        "endLine": 155,
+        "endChar": 28
+      },
+      "revId": "f8d629a83e8b9a54afdb50dac2bb244046de57f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
