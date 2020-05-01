@@ -1,0 +1,8 @@
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Yabin Cui <yabinc@google.com>
+Submitted-at: Fri, 01 May 2020 23:49:58 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1300333
+Project: toolchain/llvm_android
+Branch: refs/heads/master
