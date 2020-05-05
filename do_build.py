@@ -862,6 +862,9 @@ class Stage2Builder(builders.LLVMBuilder):
         if self._config.target_os.is_darwin:
             defines['LLVM_BUILD_EXTERNAL_COMPILER_RT'] = 'ON'
 
+        if self._config.target_os.is_darwin and utils.within_mac_min_ver('10.11'):
+            # libcompression is introduced in macOS 10.11.
+            defines['HAVE_LIBCOMPRESSION'] = 0
         return defines
 
 
