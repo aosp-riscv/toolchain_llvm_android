@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59562b12_f0c49459",
+        "filename": "utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-06T02:13:28Z",
+      "side": 1,
+      "message": "We can assume python3 is available.  We\u0027ve migrated update-prebuilts.py recently and I _think_ update-lldb-prebuilts.py is obsolete.  Adding Haibo to confirm.  If it\u0027s needed, the right solution is to just upgrade it to python3.",
+      "revId": "2edec4fd483f3ea6fc344c23d3b00a7fedf15b97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
