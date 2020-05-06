@@ -29,7 +29,8 @@ import hosts
 import utils
 
 
-def apply_patches(source_dir, svn_version, patch_json, patch_dir):
+def apply_patches(source_dir, svn_version, patch_json, patch_dir,
+                  failure_mode='fail'):
     """Apply patches in $patch_dir/$patch_json to $source_dir.
 
     Invokes external/toolchain-utils/llvm_tools/patch_manager.py to apply the
@@ -45,10 +46,11 @@ def apply_patches(source_dir, svn_version, patch_json, patch_dir):
         '--filesdir_path', patch_dir,
         '--src_path', source_dir,
         '--use_src_head',
-        '--failure_mode', 'fail'
+        '--failure_mode', failure_mode
     ]
 
-    subprocess.check_call(patch_manager_cmd)
+    output = subprocess.check_output(patch_manager_cmd)
+    return output.decode('utf-8')
 
 
 def setup_sources(source_dir, build_llvm_next):
