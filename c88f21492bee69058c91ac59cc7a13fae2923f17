@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce66095d_c829d798",
+        "filename": "update-lldb-prebuilts.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-05-06T04:31:11Z",
+      "side": 1,
+      "message": "Updates to python3 too",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "c88f21492bee69058c91ac59cc7a13fae2923f17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
