@@ -83,6 +83,14 @@ def logger():
     return logging.getLogger(__name__)
 
 
+def unchecked_call(cmd, *args, **kwargs):
+    """subprocess.call with logging."""
+    logger().info('call:%s %s',
+                  datetime.datetime.now().strftime("%H:%M:%S"),
+                  subprocess.list2cmdline(cmd))
+    subprocess.call(cmd, *args, **kwargs)
+
+
 def check_call(cmd, *args, **kwargs):
     """subprocess.check_call with logging."""
     logger().info('check_call:%s %s',
