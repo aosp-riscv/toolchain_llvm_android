@@ -342,7 +342,7 @@ def build_clang(instrumented=False, pgo=True):
     toolchains.set_runtime_toolchain(stage2_toolchain)
     stage2_install = str(stage2.install_dir)
 
-    build.build_runtimes(stage2_install)
+    build.build_runtimes()
 
     build.package_toolchain(
         stage2_install,

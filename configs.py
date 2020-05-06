@@ -177,10 +177,10 @@ class AndroidConfig(_BaseConfig):
 
     target_arch: hosts.Arch
     _toolchain_path: Path
-    _toolchain_lib: Path
 
     static: bool = False
     platform: bool = False
+    suppress_libcxx_headers: bool = False
 
     @property
     def sysroot(self) -> Path:  # type: ignore
@@ -189,62 +189,52 @@ class AndroidConfig(_BaseConfig):
         return paths.SYSROOTS / platform_or_ndk / self.target_arch.ndk_arch
 
     @property
-    def _toolchain_builtins(self) -> Path:
-        """The path with libgcc.a to include in linker search path."""
-        return (paths.GCC_ROOT / self._toolchain_path / '..' / 'lib' / 'gcc' /
-                self._toolchain_path.name / '4.9.x')
-
-    @property
     def ldflags(self) -> List[str]:
         ldflags = super().ldflags
-        ldflags.append(f'-L{self._toolchain_builtins}')
         ldflags.append('-Wl,-z,defs')
-        ldflags.append(f'-L{self._toolchain_lib}')
         ldflags.append('-Wl,--gc-sections')
         ldflags.append('-Wl,--build-id=sha1')
         ldflags.append('-pie')
+        libatomic_dir = (paths.NDK_BASE / 'toolchains' / 'llvm' / 'prebuilt'
+                         / 'linux-x86_64' / self.target_arch.ndk_triple)
+        ldflags.append(f'-L{libatomic_dir}')
         if self.static:
             ldflags.append('-static')
-        if not self.platform:
-            libcxx_libs = (paths.NDK_BASE / 'toolchains' / 'llvm' / 'prebuilt'
-                           / 'linux-x86_64' / 'sysroot' / 'usr' / 'lib' / self.target_arch.ndk_triple)
-            ldflags.append('-L{}'.format(libcxx_libs / str(self.api_level)))
-            ldflags.append('-L{}'.format(libcxx_libs))
         return ldflags
 
     @property
     def cflags(self) -> List[str]:
         cflags = super().cflags
         toolchain_bin = paths.GCC_ROOT / self._toolchain_path / 'bin'
-        api_level = 10000 if self.platform else self.api_level
-        cflags.append(f'--target={self.target_arch.llvm_triple}')
+        # We need to set the API level in the triple so that the driver finds
+        # the sysroot libraries.
+        cflags.append(f'--target={self.target_arch.llvm_triple}{self.api_level}')
+        if self.platform:
+            # TODO: Can we leave __ANDROID_API__ at 29 instead?
+            cflags.append(f'-U__ANDROID_API__ -D__ANDROID_API__=10000')
         cflags.append(f'-B{toolchain_bin}')
-        cflags.append(f'-D__ANDROID_API__={api_level}')
         cflags.append('-ffunction-sections')
         cflags.append('-fdata-sections')
         return cflags
 
     @property
     def _libcxx_header_dirs(self) -> List[Path]:
-        if self.platform:  # pylint: disable=no-else-return
-            # <prebuilts>/include/c++/v1 includes the cxxabi headers
-            return [
-                paths.CLANG_PREBUILT_LIBCXX_HEADERS,
-                paths.BIONIC_HEADERS,
-            ]
-        else:
-            return [
-                paths.NDK_LIBCXX_HEADERS,
-                paths.NDK_LIBCXXABI_HEADERS,
-                paths.NDK_SUPPORT_HEADERS,
-            ]
+        if self.suppress_libcxx_headers:
+            return []
+        # <prebuilts>/include/c++/v1 includes the cxxabi headers.
+        return [
+            paths.CLANG_PREBUILT_LIBCXX_HEADERS,
+            paths.BIONIC_HEADERS,
+        ]
 
     @property
     def cxxflags(self) -> List[str]:
         cxxflags = super().cxxflags
-        # Skip implicit C++ headers and explicitly include C++ header paths.
-        cxxflags.append('-nostdinc++')
-        cxxflags.extend(f'-isystem {d}' for d in self._libcxx_header_dirs)
+        if self.platform:
+            # For the NDK, the sysroot has the C++ headers, but for the
+            # platform, we need to add the headers manually.
+            cxxflags.append('-nostdinc++')
+            cxxflags.extend(f'-isystem {d}' for d in self._libcxx_header_dirs)
         return cxxflags
 
     @property
@@ -271,8 +261,6 @@ class AndroidARMConfig(AndroidConfig):
     """Configs for android arm targets."""
     target_arch: hosts.Arch = hosts.Arch.ARM
     _toolchain_path: Path = Path('arm/arm-linux-androideabi-4.9/arm-linux-androideabi')
-    _toolchain_lib: Path = (paths.NDK_BASE / 'toolchains' / 'arm-linux-androideabi-4.9' /
-                            'prebuilt' / 'linux-x86_64' / 'arm-linux-androideabi' / 'lib')
 
     @property
     def cflags(self) -> List[str]:
@@ -285,35 +273,24 @@ class AndroidAArch64Config(AndroidConfig):
     """Configs for android arm64 targets."""
     target_arch: hosts.Arch = hosts.Arch.AARCH64
     _toolchain_path: Path = Path('aarch64/aarch64-linux-android-4.9/aarch64-linux-android')
-    _toolchain_lib: Path = (paths.NDK_BASE / 'toolchains' / 'aarch64-linux-android-4.9' /
-                            'prebuilt' / 'linux-x86_64' / 'aarch64-linux-android' / 'lib64')
 
 
 class AndroidX64Config(AndroidConfig):
     """Configs for android x86_64 targets."""
     target_arch: hosts.Arch = hosts.Arch.X86_64
     _toolchain_path: Path = Path('x86/x86_64-linux-android-4.9/x86_64-linux-android')
-    _toolchain_lib: Path = (paths.NDK_BASE / 'toolchains' / 'x86_64-4.9' / 'prebuilt' /
-                            'linux-x86_64' / 'x86_64-linux-android' / 'lib64')
 
 
 class AndroidI386Config(AndroidConfig):
     """Configs for android x86 targets."""
     target_arch: hosts.Arch = hosts.Arch.I386
     _toolchain_path: Path = Path('x86/x86_64-linux-android-4.9/x86_64-linux-android')
-    _toolchain_lib: Path = (paths.NDK_BASE / 'toolchains' / 'x86-4.9' /
-                            'prebuilt' / 'linux-x86_64' / 'x86-linux-android' / 'lib')
 
     @property
     def cflags(self) -> List[str]:
         cflags = super().cflags
         cflags.append('-m32')
         return cflags
-
-    @property
-    def _toolchain_builtins(self) -> Path:
-        # The 32-bit libgcc.a is sometimes in a separate subdir
-        return super()._toolchain_builtins / '32'
 
 
 def _get_default_host_config() -> Config:

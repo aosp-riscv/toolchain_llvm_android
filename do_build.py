@@ -97,39 +97,6 @@ def ndk_base():
     return utils.android_path('toolchain/prebuilts/ndk', ndk_version)
 
 
-def android_api(arch: hosts.Arch, platform=False):
-    if platform:
-        return 29
-    elif arch in [hosts.Arch.ARM, hosts.Arch.I386]:
-        return 16
-    else:
-        return 21
-
-
-def ndk_libcxx_headers():
-    return os.path.join(ndk_base(), 'sources', 'cxx-stl', 'llvm-libc++',
-                        'include')
-
-
-def ndk_libcxxabi_headers():
-    return os.path.join(ndk_base(), 'sources', 'cxx-stl', 'llvm-libc++abi',
-                        'include')
-
-
-def ndk_toolchain_lib(arch: hosts.Arch, toolchain_root, host_tag):
-    toolchain_lib = os.path.join(ndk_base(), 'toolchains', toolchain_root,
-                                 'prebuilt', 'linux-x86_64', host_tag)
-    if arch in [hosts.Arch.ARM, hosts.Arch.I386]:
-        toolchain_lib = os.path.join(toolchain_lib, 'lib')
-    else:
-        toolchain_lib = os.path.join(toolchain_lib, 'lib64')
-    return toolchain_lib
-
-
-def support_headers():
-    return os.path.join(ndk_base(), 'sources', 'android', 'support', 'include')
-
-
 def clang_prebuilt_base_dir():
     return utils.android_path('prebuilts/clang/host',
                               hosts.build_host().os_tag, constants.CLANG_PREBUILT_VERSION)
@@ -137,30 +104,6 @@ def clang_prebuilt_base_dir():
 
 def clang_prebuilt_bin_dir():
     return utils.android_path(clang_prebuilt_base_dir(), 'bin')
-
-
-def clang_resource_dir(version, arch: Optional[hosts.Arch] = None):
-    arch_str = arch.value if arch else ''
-    return os.path.join('lib64', 'clang', version, 'lib', 'linux', arch_str)
-
-
-def clang_prebuilt_libcxx_headers():
-    return utils.android_path(clang_prebuilt_base_dir(), 'include', 'c++', 'v1')
-
-
-def libcxx_header_dirs(ndk_cxx):
-    if ndk_cxx:
-        return [
-            ndk_libcxx_headers(),
-            ndk_libcxxabi_headers(),
-            support_headers()
-        ]
-    else:
-        # <prebuilts>/include/c++/v1 includes the cxxabi headers
-        return [
-            clang_prebuilt_libcxx_headers(),
-            utils.android_path('bionic', 'libc', 'include')
-        ]
 
 
 def check_create_path(path):
@@ -224,94 +167,6 @@ def invoke_cmake(out_path, defines, env, cmake_path, target=None, install=True):
         utils.check_call([paths.NINJA_BIN_PATH, 'install'], cwd=out_path, env=env)
 
 
-def cross_compile_configs(toolchain, platform=False, static=False):
-    configs = [
-        (hosts.Arch.ARM, 'arm/arm-linux-androideabi-4.9/arm-linux-androideabi',
-         'arm-linux-android', '-march=armv7-a'),
-        (hosts.Arch.AARCH64,
-         'aarch64/aarch64-linux-android-4.9/aarch64-linux-android',
-         'aarch64-linux-android', ''),
-        (hosts.Arch.X86_64,
-         'x86/x86_64-linux-android-4.9/x86_64-linux-android',
-         'x86_64-linux-android', ''),
-        (hosts.Arch.I386, 'x86/x86_64-linux-android-4.9/x86_64-linux-android',
-         'i686-linux-android', '-m32'),
-    ]
-
-    cc = os.path.join(toolchain, 'bin', 'clang')
-    cxx = os.path.join(toolchain, 'bin', 'clang++')
-    llvm_config = os.path.join(toolchain, 'bin', 'llvm-config')
-
-    for (arch, toolchain_path, llvm_triple, extra_flags) in configs:
-        if static:
-            api_level = android_api(arch, platform=True)
-        else:
-            api_level = android_api(arch, platform)
-        toolchain_root = utils.android_path('prebuilts/gcc',
-                                            hosts.build_host().os_tag)
-        toolchain_bin = os.path.join(toolchain_root, toolchain_path, 'bin')
-        sysroot = get_sysroot(arch, platform)
-
-        defines = {}
-        defines['CMAKE_C_COMPILER'] = cc
-        defines['CMAKE_CXX_COMPILER'] = cxx
-        defines['LLVM_CONFIG_PATH'] = llvm_config
-
-        # Include the directory with libgcc.a to the linker search path.
-        toolchain_builtins = os.path.join(
-            toolchain_root, toolchain_path, '..', 'lib', 'gcc',
-            os.path.basename(toolchain_path), '4.9.x')
-        # The 32-bit libgcc.a is sometimes in a separate subdir
-        if arch == hosts.Arch.I386:
-            toolchain_builtins = os.path.join(toolchain_builtins, '32')
-
-        if arch == hosts.Arch.ARM:
-            toolchain_lib = ndk_toolchain_lib(arch, 'arm-linux-androideabi-4.9',
-                                              'arm-linux-androideabi')
-        elif arch in [hosts.Arch.I386, hosts.Arch.X86_64]:
-            toolchain_lib = ndk_toolchain_lib(arch, arch.ndk_arch + '-4.9',
-                                              llvm_triple)
-        else:
-            toolchain_lib = ndk_toolchain_lib(arch, llvm_triple + '-4.9',
-                                              llvm_triple)
-
-        ldflags = [
-            '-L' + toolchain_builtins, '-Wl,-z,defs',
-            '-L' + toolchain_lib,
-            '-fuse-ld=lld',
-            '-Wl,--gc-sections',
-            '-Wl,--build-id=sha1',
-            '-pie',
-        ]
-        if static:
-            ldflags.append('-static')
-        if not platform:
-            triple = 'arm-linux-androideabi' if arch == hosts.Arch.ARM else llvm_triple
-            libcxx_libs = os.path.join(ndk_base(), 'toolchains', 'llvm',
-                                       'prebuilt', 'linux-x86_64', 'sysroot',
-                                       'usr', 'lib', triple)
-            ldflags += ['-L', os.path.join(libcxx_libs, str(api_level))]
-            ldflags += ['-L', libcxx_libs]
-
-        defines['CMAKE_EXE_LINKER_FLAGS'] = ' '.join(ldflags)
-        defines['CMAKE_SHARED_LINKER_FLAGS'] = ' '.join(ldflags)
-        defines['CMAKE_MODULE_LINKER_FLAGS'] = ' '.join(ldflags)
-        update_cmake_sysroot_flags(defines, sysroot)
-
-        macro_api_level = 10000 if platform else api_level
-
-        cflags = [
-            debug_prefix_flag(),
-            '--target=%s' % llvm_triple,
-            '-B%s' % toolchain_bin,
-            '-D__ANDROID_API__=' + str(macro_api_level),
-            '-ffunction-sections',
-            '-fdata-sections',
-            extra_flags,
-        ]
-        yield (arch, llvm_triple, defines, cflags)
-
-
 class AsanMapFileBuilder(builders.Builder):
     name: str = 'asan-mapfile'
     config_list: List[configs.Config] = configs.android_configs()
@@ -342,69 +197,6 @@ class AsanMapFileBuilder(builders.Builder):
         lib_file = lib_dir / f'libclang_rt.{san}-{arch.llvm_arch}-android.so'
         map_file = lib_dir / f'libclang_rt.{san}-{arch.llvm_arch}-android.map.txt'
         mapfile.create_map_file(lib_file, map_file)
-
-
-def build_libcxx(toolchain, clang_version):
-    for (arch, llvm_triple, libcxx_defines,
-         cflags) in cross_compile_configs(toolchain): # pylint: disable=not-an-iterable
-        logger().info('Building libcxx for %s', arch.value)
-        libcxx_path = utils.out_path('lib', 'libcxx-' + arch.value)
-
-        libcxx_defines['CMAKE_ASM_FLAGS'] = ' '.join(cflags)
-        libcxx_defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
-        libcxx_defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
-        libcxx_defines['CMAKE_BUILD_TYPE'] = 'Release'
-
-        libcxx_env = dict(ORIG_ENV)
-
-        libcxx_cmake_path = utils.llvm_path('libcxx')
-        rm_cmake_cache(libcxx_path)
-
-        invoke_cmake(
-            out_path=libcxx_path,
-            defines=libcxx_defines,
-            env=libcxx_env,
-            cmake_path=libcxx_cmake_path,
-            install=False)
-        # We need to install libcxx manually.
-        install_subdir = clang_resource_dir(clang_version.long_version(),
-                                            hosts.Arch.from_triple(llvm_triple))
-        libcxx_install = os.path.join(toolchain, install_subdir)
-
-        libcxx_libs = os.path.join(libcxx_path, 'lib')
-        check_create_path(libcxx_install)
-        for f in os.listdir(libcxx_libs):
-            if f.startswith('libc++'):
-                shutil.copy2(os.path.join(libcxx_libs, f), libcxx_install)
-
-
-def build_libcxxabi(toolchain: toolchains.Toolchain, build_arch: hosts.Arch) -> Path:
-    # TODO: Refactor cross_compile_configs to support per-arch queries in
-    # addition to being a generator.
-    for (arch, llvm_triple, defines, cflags) in \
-         cross_compile_configs(toolchain.path, platform=True): # pylint: disable=not-an-iterable
-
-        # Build only the requested arch.
-        if arch != build_arch:
-            continue
-
-        logger().info('Building libcxxabi for %s', arch.value)
-        defines['LIBCXXABI_LIBCXX_INCLUDES'] = utils.llvm_path('libcxx', 'include')
-        defines['LIBCXXABI_ENABLE_SHARED'] = 'OFF'
-        defines['CMAKE_C_FLAGS'] = ' '.join(cflags)
-        defines['CMAKE_CXX_FLAGS'] = ' '.join(cflags)
-
-        out_path = utils.out_path('lib', 'libcxxabi-' + arch.value)
-        if os.path.exists(out_path):
-            utils.rm_tree(out_path)
-
-        invoke_cmake(out_path=out_path,
-                     defines=defines,
-                     env=dict(ORIG_ENV),
-                     cmake_path=utils.llvm_path('libcxxabi'),
-                     install=False)
-        return Path(out_path)
-    raise ValueError(f"{build_arch} is not supported.")
 
 
 def build_llvm_for_windows(enable_assertions,
@@ -702,37 +494,70 @@ class SysrootsBuilder(builders.Builder):
         sysroot = config.sysroot
         if sysroot.exists():
             shutil.rmtree(sysroot)
-        sysroot.mkdir(parents=True, exist_ok=True)
 
-        base_header_path = paths.NDK_BASE / 'sysroot' / 'usr' / 'include'
-        base_lib_path = paths.NDK_BASE / 'platforms' / f'android-{config.api_level}'
-        dest_usr = sysroot / 'usr'
+        # Start with an NDK sysroot.
+        shutil.copytree(paths.NDK_BASE / 'toolchains' / 'llvm' / 'prebuilt' / 'linux-x86_64' / 'sysroot',
+                        sysroot, symlinks=True)
 
-        # Copy over usr/include.
-        dest_usr_include = dest_usr / 'include'
-        shutil.copytree(base_header_path, dest_usr_include, symlinks=True)
+        # Prune individual files.
+        for (parent, _, files) in os.walk(sysroot):
+            for f in files:
+                # Remove the NDK r20's libunwind.a. (In the future, libunwind.a will be located in
+                # the toolchain resource directory along with libclang_rt.*.a, not in the sysroot
+                # directory.)
+                if f in ['libunwind.a', 'libcompiler_rt-extras.a']:
+                    os.remove(os.path.join(parent, f))
+                # Remove the NDK C++ STL libraries from the platform sysroot.
+                if platform and f in [
+                        'libandroid_support.a',
+                        'libc++abi.a',
+                        'libc++.so',
+                        'libc++.a',
+                        'libc++_shared.so',
+                        'libc++_static.a',
+                    ]:
+                    os.remove(os.path.join(parent, f))
 
-        # Copy over usr/include/asm.
-        asm_headers = base_header_path / arch.ndk_triple / 'asm'
-        dest_usr_include_asm = dest_usr_include / 'asm'
-        shutil.copytree(asm_headers, dest_usr_include_asm, symlinks=True)
-
-        # Copy over usr/lib.
-        arch_lib_path = base_lib_path / f'arch-{arch.ndk_arch}' / 'usr' / 'lib'
-        dest_usr_lib = dest_usr / 'lib'
-        shutil.copytree(arch_lib_path, dest_usr_lib, symlinks=True)
-
-        # For only x86_64, we also need to copy over usr/lib64
-        if arch == hosts.Arch.X86_64:
-            arch_lib64_path = base_lib_path / f'arch-{arch.ndk_arch}' / 'usr' / 'lib64'
-            dest_usr_lib64 = dest_usr / 'lib64'
-            shutil.copytree(arch_lib64_path, dest_usr_lib64, symlinks=True)
+        if not platform and arch in [hosts.Arch.ARM, hosts.Arch.I386]:
+            # HACK: The arm32 libunwind uses dl_unwind_find_exidx rather than
+            # __gnu_Unwind_Find_exidx. However, libc.a only provides the latter
+            # until NDK r22. Until this build system upgrades to NDK r22,
+            # replace libc.a(exidx_static.o) with an upgraded copy.
+            #
+            # HACK: The x86 libc.a from NDK r20 needs __x86.get_pc_thunk.cx from
+            # libgcc.a. This incorrect dependency will be fixed in NDK r22's
+            # libc.a. The workaround here might result in a mislinked
+            # lldb-server that crashes, but instead, lldb-server seems to be OK.
+            # See https://bugs.llvm.org/show_bug.cgi?id=45594.
+            patch_dir = paths.OUT_DIR / 'ndk_libc_patch'
+            patch_dir.mkdir(parents=True, exist_ok=True)
+            if arch == hosts.Arch.ARM:
+                patch_src = (paths.ANDROID_DIR / 'bionic' / 'libc' / 'arch-arm' /
+                             'bionic' / 'exidx_static.c')
+                patch_name = 'exidx_static'
+            else:
+                patch_src = (paths.ANDROID_DIR / 'bionic' / 'libc' / 'arch-x86' /
+                             'bionic' / '__x86.get_pc_thunk.S')
+                patch_name = '__x86.get_pc_thunk'
+            patch_obj = patch_dir / f'{patch_name}.o'
+            libc_archive = (sysroot / 'usr' / 'lib' / arch.ndk_triple / '29' /
+                            'libc.a')
+            utils.check_call([self.toolchain.cc, f'--sysroot={sysroot}', '-c',
+                              f'--target={arch.llvm_triple}', f'-o{patch_obj}',
+                              patch_src])
+            utils.check_call([self.toolchain.path / 'bin' / 'llvm-ar',
+                              'rcs', libc_archive, patch_obj])
 
         if platform:
+            # Remove the STL headers.
+            shutil.rmtree(sysroot / 'usr' / 'include' / 'c++')
+            shutil.rmtree(sysroot / 'usr' / 'local')
+
             # Create a stub library for the platform's libc++.
             platform_stubs = paths.OUT_DIR / 'platform_stubs' / arch.ndk_arch
             platform_stubs.mkdir(parents=True, exist_ok=True)
-            libdir = dest_usr_lib64 if arch == hosts.Arch.X86_64 else dest_usr_lib
+            libdir = sysroot / 'usr' / ('lib64' if arch == hosts.Arch.X86_64 else 'lib')
+            libdir.mkdir(parents=True, exist_ok=True)
             with (platform_stubs / 'libc++.c').open('w') as f:
                 f.write(textwrap.dedent("""\
                     void __cxa_atexit() {}
@@ -752,20 +577,59 @@ class SysrootsBuilder(builders.Builder):
                               '-o{}'.format(libdir / 'libc++.so'),
                               str(platform_stubs / 'libc++.c')])
 
-            # For arm64 and x86_64, build static cxxabi library from
-            # toolchain/libcxxabi and use it when building runtimes.  This
-            # should affect all compiler-rt runtimes that use libcxxabi
-            # (e.g. asan, hwasan, scudo, tsan, ubsan, xray).
+            # Create a stub libc++abi.so for 32-bit targets that's good
+            # enough for compiler-rt. We'll compile an actual libc++abi
+            # archive later for 64-bit sanitizers.
             if arch not in (hosts.Arch.AARCH64, hosts.Arch.X86_64):
                 with (libdir / 'libc++abi.so').open('w') as f:
                     f.write('INPUT(-lc++)')
-            else:
-                # We can build libcxxabi only after the sysroots are
-                # created.  Build it for the current arch and copy it to
-                # <libdir>.
-                out_dir = build_libcxxabi(self.toolchain, arch)
-                out_path = out_dir / 'lib64' / 'libc++abi.a'
-                shutil.copy2(out_path, libdir)
+
+
+class BuiltinsBuilder(builders.LLVMRuntimeBuilder):
+    name: str = 'builtins'
+    src_dir: Path = paths.LLVM_PATH / 'compiler-rt' / 'lib' / 'builtins'
+
+    # Only build the builtins library for the NDK, not the platform, then
+    # install it into the resource dir and runtimes_ndk_cxx. Clang references
+    # the builtins using an absolute path to its resource dir, and it will use
+    # the single library in the stage2 resource dir for the remainder of the
+    # LLVM NDK and platform builders, which makes it difficult to have separate
+    # NDK+platform builds. The builtins static library references `stderr` which
+    # is __sF in older API levels.
+    config_list: List[configs.Config] = configs.android_configs(platform=False)
+
+    @property
+    def cmake_defines(self) -> Dict[str, str]:
+        defines = super().cmake_defines
+        arch = self._config.target_arch
+        # CMake will attempt to link a simple executable, but it can't because
+        # that requires the builtins and libunwind. CMake doesn't actually need
+        # to link anything, though, so tell CMake that the compiler works. The
+        # LLVM build itself uses this technique when it recursively invokes
+        # CMake to build the builtins.
+        defines['CMAKE_C_COMPILER_WORKS'] = 'ON'
+        defines['CMAKE_ASM_COMPILER_WORKS'] = 'ON'
+        defines['COMPILER_RT_DEFAULT_TARGET_TRIPLE'] = arch.llvm_triple
+
+        # With CMAKE_SYSTEM_NAME='Android', compiler-rt will be installed to
+        # lib/android instead of lib/linux.
+        del defines['CMAKE_SYSTEM_NAME']
+
+        return defines
+
+    def install_config(self) -> None:
+        # Copy the library into the toolchain resource directory (lib/linux) and
+        # runtimes_ndk_cxx.
+        arch = self._config.target_arch
+        sarch = 'i686' if arch == hosts.Arch.I386 else arch.value
+        filename = 'libclang_rt.builtins-' + sarch + '-android.a'
+        src_path = self.output_dir / 'lib' / 'linux' / filename
+
+        shutil.copy2(src_path, self.toolchain.resource_dir / filename)
+
+        dst_dir = self.toolchain.path / 'runtimes_ndk_cxx'
+        dst_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src_path, dst_dir / filename)
 
 
 class CompilerRTBuilder(builders.LLVMRuntimeBuilder):
@@ -788,11 +652,14 @@ class CompilerRTBuilder(builders.LLVMRuntimeBuilder):
     def cmake_defines(self) -> Dict[str, str]:
         defines = super().cmake_defines
         arch = self._config.target_arch
+        defines['COMPILER_RT_BUILD_BUILTINS'] = 'OFF'
+        defines['COMPILER_RT_USE_BUILTINS_LIBRARY'] = 'ON'
+
         # FIXME: Disable WError build until upstream fixed the compiler-rt
         # personality routine warnings caused by r309226.
         # defines['COMPILER_RT_ENABLE_WERROR'] = 'ON'
         defines['COMPILER_RT_TEST_COMPILER_CFLAGS'] = defines['CMAKE_C_FLAGS']
-        defines['COMPILER_RT_TEST_TARGET_TRIPLE'] = arch.llvm_triple
+        defines['COMPILER_RT_DEFAULT_TARGET_TRIPLE'] = arch.llvm_triple
         defines['COMPILER_RT_INCLUDE_TESTS'] = 'OFF'
         defines['SANITIZER_CXX_ABI'] = 'libcxxabi'
         # With CMAKE_SYSTEM_NAME='Android', compiler-rt will be installed to
@@ -891,6 +758,59 @@ class CompilerRTHostI386Builder(builders.LLVMRuntimeBuilder):
         super()._build_config()
 
 
+class LibUnwindBuilder(builders.LLVMRuntimeBuilder):
+    name: str = 'libunwind'
+    src_dir: Path = paths.LLVM_PATH / 'libunwind'
+    config_list: List[configs.Config] = (
+        configs.android_configs(platform=True) +
+        configs.android_configs(platform=False)
+    )
+
+    @property
+    def is_exported(self) -> bool:
+        return self._config.platform
+
+    @property
+    def output_dir(self) -> Path:
+        old_path = super().output_dir
+        suffix = '-exported' if self.is_exported else '-hermetic'
+        return old_path.parent / (old_path.name + suffix)
+
+    @property
+    def cflags(self) -> List[str]:
+        return super().cflags + ['-D_LIBUNWIND_USE_DLADDR=0']
+
+    @property
+    def ldflags(self) -> List[str]:
+        # We don't link anything, but we need this flag to make CMake happy.
+        return super().ldflags + ['-unwindlib=none']
+
+    @property
+    def cmake_defines(self) -> Dict[str, str]:
+        defines = super().cmake_defines
+        defines['CMAKE_POSITION_INDEPENDENT_CODE'] = 'ON'
+        defines['LIBUNWIND_HERMETIC_STATIC_LIBRARY'] = 'TRUE' if not self.is_exported else 'FALSE'
+        defines['LIBUNWIND_ENABLE_SHARED'] = 'FALSE'
+        return defines
+
+    def install_config(self) -> None:
+        # We need to install libunwind manually.
+        src_file = self.output_dir / 'lib64' / 'libunwind.a'
+        arch = self._config.target_arch
+
+        res_dir = self.toolchain.resource_dir / arch.value
+        res_dir.mkdir(parents=True, exist_ok=True)
+
+        if self.is_exported:
+            shutil.copy2(src_file, res_dir / 'libunwind-exported.a')
+        else:
+            shutil.copy2(src_file, res_dir / 'libunwind.a')
+
+            ndk_dir = self.toolchain.path / 'runtimes_ndk_cxx' / arch.value
+            ndk_dir.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src_file, ndk_dir / 'libunwind.a')
+
+
 class LibOMPBuilder(builders.LLVMRuntimeBuilder):
     name: str = 'libomp'
     src_dir: Path = paths.LLVM_PATH / 'openmp'
@@ -918,6 +838,7 @@ class LibOMPBuilder(builders.LLVMRuntimeBuilder):
         defines['OPENMP_ENABLE_LIBOMPTARGET'] = 'FALSE'
         defines['OPENMP_ENABLE_OMPT_TOOLS'] = 'FALSE'
         defines['LIBOMP_ENABLE_SHARED'] = 'TRUE' if self.is_shared else 'FALSE'
+        defines['LIBOMP_LIBFLAGS'] = '-lm'
         # Minimum version for OpenMP's CMake is too low for the CMP0056 policy
         # to be ON by default.
         defines['CMAKE_POLICY_DEFAULT_CMP0056'] = 'NEW'
@@ -998,6 +919,34 @@ class LldbServerBuilder(builders.LLVMRuntimeBuilder):
         install_dir = self.install_dir
         install_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src_path, install_dir)
+
+
+class PlatformLibcxxAbiBuilder(builders.LLVMRuntimeBuilder):
+    name = 'platform-libcxxabi'
+    src_dir: Path = paths.LLVM_PATH / 'libcxxabi'
+    config_list: List[configs.Config] = [
+        configs.AndroidAArch64Config(),
+        configs.AndroidX64Config(),
+    ]
+    for c in config_list:
+        c.platform = True
+        # We will link libc++abi.a using the libc++ headers from the current
+        # tree, so we have to omit the prebuilt libc++ headers.
+        c.suppress_libcxx_headers = True
+
+    @property
+    def cmake_defines(self) -> Dict[str, str]:
+        defines: Dict[str, str] = super().cmake_defines
+        defines['LIBCXXABI_LIBCXX_INCLUDES'] = str(paths.LLVM_PATH / 'libcxx' / 'include')
+        defines['LIBCXXABI_ENABLE_SHARED'] = 'OFF'
+        return defines
+
+    def install_config(self) -> None:
+        arch = self._config.target_arch
+        src_path = self.output_dir / 'lib64' / 'libc++abi.a'
+        lib_name = 'lib64' if arch == hosts.Arch.X86_64 else 'lib'
+        install_dir = Path(get_sysroot(arch, platform=True)) / 'usr' / lib_name
+        shutil.copy2(src_path, install_dir / 'libc++abi.a')
 
 
 class LibCxxAbiBuilder(builders.LLVMRuntimeBuilder):
@@ -1154,9 +1103,11 @@ class WindowsToolchainBuilder(builders.LLVMBuilder):
         return cxxflags
 
 
-def build_runtimes(toolchain, args=None):
+def build_runtimes():
     SysrootsBuilder().build()
-
+    BuiltinsBuilder().build()
+    LibUnwindBuilder().build()
+    PlatformLibcxxAbiBuilder().build()
     CompilerRTBuilder().build()
     # 32-bit host crts are not needed for Darwin
     if hosts.build_host().is_linux:
@@ -1164,9 +1115,6 @@ def build_runtimes(toolchain, args=None):
     LibOMPBuilder().build()
     if BUILD_LLDB:
         LldbServerBuilder().build()
-    # Bug: http://b/64037266. `strtod_l` is missing in NDK r15. This will break
-    # libcxx build.
-    # build_libcxx(toolchain, version)
     AsanMapFileBuilder().build()
 
 
@@ -1714,10 +1662,7 @@ def main():
         stage2_install = str(stage2.install_dir)
 
         if hosts.build_host().is_linux and do_runtimes:
-            runtimes_toolchain = stage2_install
-            if args.debug or instrumented:
-                runtimes_toolchain = stage1_install
-            build_runtimes(runtimes_toolchain, args)
+            build_runtimes()
 
     if need_windows:
         windows64_install = build_llvm_for_windows(
