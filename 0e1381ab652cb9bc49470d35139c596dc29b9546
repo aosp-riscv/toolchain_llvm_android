@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab18061a_7186510e",
+        "filename": "configs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-06T22:13:21Z",
+      "side": 1,
+      "message": "Should we also specify target_arch here since it\u0027s used in sysroot() and cflags() below?\n\nIn fact, we could pull _ndk_triple to here since all AndroidConfig have an associated NDK triple.",
+      "revId": "0e1381ab652cb9bc49470d35139c596dc29b9546",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d7a9c1d4_753dd1fd",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-06T22:13:21Z",
+      "side": 1,
+      "message": "Note to self that this is off place and we should investigate if it\u0027s necessary.",
+      "range": {
+        "startLine": 894,
+        "startChar": 0,
+        "endLine": 894,
+        "endChar": 50
+      },
+      "revId": "0e1381ab652cb9bc49470d35139c596dc29b9546",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
