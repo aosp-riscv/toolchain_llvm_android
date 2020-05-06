@@ -16,6 +16,24 @@
       "revId": "2edec4fd483f3ea6fc344c23d3b00a7fedf15b97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d16f56f_0c583b4d",
+        "filename": "utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-05-06T02:48:11Z",
+      "side": 1,
+      "message": "I see two other executable scripts that import utils and have a \"#!/usr/bin/env python\" shebang:\n\n - merge_from_upstream.py\n - update-binutils.py\n\nMaybe they already work as Python 3, though?\n\nI agree that it\u0027s better to switch things to Python 3.",
+      "parentUuid": "59562b12_f0c49459",
+      "revId": "2edec4fd483f3ea6fc344c23d3b00a7fedf15b97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
