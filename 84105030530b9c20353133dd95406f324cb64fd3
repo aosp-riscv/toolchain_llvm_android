@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7462ab73_56f527cc",
+        "filename": "trim_patch_data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-05-07T04:38:27Z",
+      "side": 1,
+      "message": "nit: Update copyright year.",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "84105030530b9c20353133dd95406f324cb64fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
