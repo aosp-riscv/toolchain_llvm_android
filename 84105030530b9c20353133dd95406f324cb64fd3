@@ -22,6 +22,30 @@
       "revId": "84105030530b9c20353133dd95406f324cb64fd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb87570d_2d4642a9",
+        "filename": "trim_patch_data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-07T05:02:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7462ab73_56f527cc",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "84105030530b9c20353133dd95406f324cb64fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
