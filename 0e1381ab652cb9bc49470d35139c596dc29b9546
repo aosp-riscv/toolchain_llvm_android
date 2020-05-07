@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "33a39669_f0179de0",
+        "filename": "configs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-07T22:00:41Z",
+      "side": 1,
+      "message": "All these changes LGTM (and better than what it was before).\n\nI\u0027m still wondering if we should also say \u0027target_arch: hosts.Arch\u0027 here or why we shouldn\u0027t.",
+      "parentUuid": "5fa17aa2_a5b50d31",
+      "revId": "0e1381ab652cb9bc49470d35139c596dc29b9546",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7a9c1d4_753dd1fd",
         "filename": "do_build.py",
         "patchSetId": 2
