@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "90b26d42_3b3cf361",
+        "filename": "configs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-07T05:01:05Z",
+      "side": 1,
+      "message": "My suggestion was to say \u0027target_arch: hosts.Arch\u0027 like _toolchain_{path,lib} below - since it\u0027s an expected field (because it gets used in sysroots(), cflags()).\n\nIn a similar vein, why not also include \u0027_ndk_triple: str\u0027?  The subclasses can set the actual values.\n\nMaybe I\u0027m missing something about the semantics behind these property specs.",
+      "parentUuid": "87d143ba_636a9c05",
+      "revId": "0e1381ab652cb9bc49470d35139c596dc29b9546",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7a9c1d4_753dd1fd",
         "filename": "do_build.py",
         "patchSetId": 2
