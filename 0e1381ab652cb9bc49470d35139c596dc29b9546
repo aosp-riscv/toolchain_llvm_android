@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "5fa17aa2_a5b50d31",
+        "filename": "configs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-05-07T08:26:08Z",
+      "side": 1,
+      "message": "On a second thought, I think maybe we should just remove _ndk_triple. Because we should not provide another way to say self.target_arch.ndk_triple. That just causes more confusion (whether they will always be the same?).\n\nAlso we can be more explicit for _toolchain_path and _toolchain_lib. That\u0027s also what we did before refactoring.",
+      "parentUuid": "90b26d42_3b3cf361",
+      "revId": "0e1381ab652cb9bc49470d35139c596dc29b9546",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7a9c1d4_753dd1fd",
         "filename": "do_build.py",
         "patchSetId": 2
