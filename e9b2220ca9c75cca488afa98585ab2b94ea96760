@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66c8cf0e_a82a134c",
+        "filename": "do_build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-05-07T08:49:56Z",
+      "side": 1,
+      "message": "This becomes unused after the conversion.",
+      "range": {
+        "startLine": 298,
+        "startChar": 4,
+        "endLine": 298,
+        "endChar": 22
+      },
+      "revId": "e9b2220ca9c75cca488afa98585ab2b94ea96760",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
