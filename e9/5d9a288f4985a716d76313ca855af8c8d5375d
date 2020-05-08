@@ -1,0 +1,7 @@
+Code-Review+2: Stephen Hines <srhines@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Pirama Arumuga Nainar <pirama@google.com>
+Submitted-at: Fri, 08 May 2020 18:22:47 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1304392
+Project: toolchain/llvm_android
+Branch: refs/heads/master
