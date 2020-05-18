@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e4e8b94_8a652c51",
+        "filename": "do_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-18T17:45:53Z",
+      "side": 1,
+      "message": "Call this AsanMapFileBuilder (or something similar).  The name AsanBuilder is too broad.",
+      "range": {
+        "startLine": 411,
+        "startChar": 6,
+        "endLine": 411,
+        "endChar": 17
+      },
+      "revId": "d8e1bdebf581c92f4061aee1ee58fee7fb02b2c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e998d751_30d69d00",
+        "filename": "do_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-18T17:45:53Z",
+      "side": 1,
+      "message": "android-llvm-dev@: does anyone know if we still need \u0027asan_test\u0027?  If they\u0027re not useful, we can just remove them (in a follow-up CL).",
+      "revId": "d8e1bdebf581c92f4061aee1ee58fee7fb02b2c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f828c74_106d42bf",
+        "filename": "do_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-18T17:45:53Z",
+      "side": 1,
+      "message": "We should create the symlink in CompilerRTBuilder.",
+      "revId": "d8e1bdebf581c92f4061aee1ee58fee7fb02b2c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
