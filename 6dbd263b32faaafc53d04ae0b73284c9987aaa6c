@@ -16,6 +16,24 @@
       "revId": "6dbd263b32faaafc53d04ae0b73284c9987aaa6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6387368b_86b0fd70",
+        "filename": "do_build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-05-20T00:37:01Z",
+      "side": 1,
+      "message": "This only gets run once. So we don\u0027t need to explicitly say arch\u003d\u003dAARCH64.",
+      "parentUuid": "7f28807b_fe818d27",
+      "revId": "6dbd263b32faaafc53d04ae0b73284c9987aaa6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
