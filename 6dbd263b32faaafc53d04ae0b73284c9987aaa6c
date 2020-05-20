@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f28807b_fe818d27",
+        "filename": "do_build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-20T00:30:11Z",
+      "side": 1,
+      "message": "Do this only for aarch64.  It\u0027s idempotent when building other configs, but being explicit makes the action clearer.",
+      "revId": "6dbd263b32faaafc53d04ae0b73284c9987aaa6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
