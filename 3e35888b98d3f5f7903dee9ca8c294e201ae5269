@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8554fed7_ba61903a",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1347428
+      },
+      "writtenOn": "2020-05-21T22:31:38Z",
+      "side": 1,
+      "message": "What does this do? Does it belong to this cherry pick?",
+      "range": {
+        "startLine": 1031,
+        "startChar": 0,
+        "endLine": 1031,
+        "endChar": 69
+      },
+      "revId": "3e35888b98d3f5f7903dee9ca8c294e201ae5269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
