@@ -1028,6 +1028,7 @@ class LibCxxAbiBuilder(builders.LLVMRuntimeBuilder):
 
         # Build only the static library.
         defines['LIBCXXABI_ENABLE_SHARED'] = 'OFF'
+        defines['LIBCXXABI_LINK_TESTS_WITH_SHARED_LIBCXXABI'] = 'OFF'
 
         if self.enable_assertions:
             defines['LIBCXXABI_ENABLE_ASSERTIONS'] = 'ON'
