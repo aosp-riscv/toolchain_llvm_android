@@ -1,0 +1,9 @@
+Code-Review+2: Emre Kultursay <emrekultursay@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Haibo Huang <hhb@google.com>
+Submitted-at: Sat, 23 May 2020 04:14:50 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1316837
+Project: toolchain/llvm_android
+Branch: refs/heads/master
