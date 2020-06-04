@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "beec2490_21ce99e8",
+        "filename": "configs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-04T22:45:03Z",
+      "side": 1,
+      "message": "This was added in https://r.android.com/1090811 for https://reviews.llvm.org/D65245.  While the underlying gcov workaround is not needed anymore (since we moved to clang coverage), using 10000 seems to be the right value to pass here, unless there\u0027s a better reason to use 29.",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f50b6a1_aa695a01",
+        "filename": "configs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-04T22:45:03Z",
+      "side": 1,
+      "message": "Should we still pass \u0027-nostdinc++\u0027 for the NDK?",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14483c36_8dc4c8c5",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-04T22:45:03Z",
+      "side": 1,
+      "message": "Can you raise an exception if either of the libraries is not found?  We could then get rid of these steps/checks when no longer neecssary.\n\nThe same for the NDK STL libraries below even though they are going to be permanent.  But we could detect if the NDK installation is restructured.",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec888a6a_0e727a1b",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-04T22:45:03Z",
+      "side": 1,
+      "message": "If this is no longer necessary for r22 and below, can you raise an exception here if paths.NDK_BASE is r22 or greater?  We could remove these hacks during that switch.",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "492685c2_3e5bb51e",
         "filename": "do_build.py",
         "patchSetId": 1
@@ -19,6 +87,40 @@
         "endLine": 791,
         "endChar": 48
       },
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80cfd024_b13b83d2",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-04T22:45:03Z",
+      "side": 1,
+      "message": "Why is this necessary?",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3206a7be_f7aeaba5",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-04T22:45:03Z",
+      "side": 1,
+      "message": "Want to call out that this means debug builds and PGO-instrumented builds would be slower.  With the new steps incrementally installing to the resource dir and subsequent steps depending on them, I don\u0027t have any sane way to speed this up.",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
