@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "492685c2_3e5bb51e",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-06-04T18:23:17Z",
+      "side": 1,
+      "message": "If this is necessary, maybe move it to CMakeBuilder?",
+      "range": {
+        "startLine": 791,
+        "startChar": 17,
+        "endLine": 791,
+        "endChar": 48
+      },
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
