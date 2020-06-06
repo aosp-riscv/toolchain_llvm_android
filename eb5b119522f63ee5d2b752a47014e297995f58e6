@@ -160,6 +160,24 @@
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b5fcd94_d2f4e113",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-06T00:15:57Z",
+      "side": 1,
+      "message": "Scratch that.  We were already using the stage2 toolchain for runtimes (in line 1661 above).  This is just cleanup of dead code.\n\nI agree that we should just use the stage2 toolchain and pay the performance cost on debug and instrumented builds.",
+      "parentUuid": "545b46bb_77e69240",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
