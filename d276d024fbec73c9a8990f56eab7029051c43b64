@@ -16,6 +16,24 @@
       "revId": "d276d024fbec73c9a8990f56eab7029051c43b64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8531cea0_97d8b1d2",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-08T22:42:17Z",
+      "side": 1,
+      "message": "Looking back at the bug report, it looks like Mips is the one getting built and the rest aren\u0027t.  So this seems fine here.\n\nIn the long term, it might be good to clean up since these may start getting built in the future :)",
+      "parentUuid": "1f93239d_648c6a18",
+      "revId": "d276d024fbec73c9a8990f56eab7029051c43b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
