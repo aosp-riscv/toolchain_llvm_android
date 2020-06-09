@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6081ec9_4f25b384",
+        "filename": "do_build.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-09T02:16:16Z",
+      "side": 1,
+      "message": "This seems unrelated.  Can you explain why this is necessary?",
+      "revId": "e8f43625d47fc7121fe523caf5d89ca45a5ac4ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f836d863_d9d95327",
+        "filename": "do_build.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-09T02:16:16Z",
+      "side": 1,
+      "message": "Is https://android.googlesource.com/platform/prebuilts/cmake/linux-x86/+/refs/heads/master/share/cmake-3.17/Modules/Platform/GNUtoMS_lib.cmake#5 where CMake invokes this script?  Do we need to pass the first argument \u0027{lib}\u0027 to llvm-dlltool?",
+      "revId": "e8f43625d47fc7121fe523caf5d89ca45a5ac4ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
