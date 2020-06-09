@@ -34,6 +34,24 @@
       "revId": "d276d024fbec73c9a8990f56eab7029051c43b64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "741d9410_594ed116",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-06-09T00:04:53Z",
+      "side": 1,
+      "message": "Actually all llvm arches are built before this change. I suspect they are not really needed but just because of some coarse grained dependency.\n\nIt makes sense to only build the one that may be needed.",
+      "parentUuid": "8531cea0_97d8b1d2",
+      "revId": "d276d024fbec73c9a8990f56eab7029051c43b64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
