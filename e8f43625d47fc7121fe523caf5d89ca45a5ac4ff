@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "028c4f0e_3b47af64",
+        "filename": "do_build.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-06-09T04:31:35Z",
+      "side": 1,
+      "message": "This is unnecessary. Removed.",
+      "parentUuid": "b6081ec9_4f25b384",
+      "revId": "e8f43625d47fc7121fe523caf5d89ca45a5ac4ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f836d863_d9d95327",
         "filename": "do_build.py",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "e8f43625d47fc7121fe523caf5d89ca45a5ac4ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85df9382_907492bb",
+        "filename": "do_build.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-06-09T04:31:35Z",
+      "side": 1,
+      "message": "Yes that\u0027s the call site.\n\n{lib} is the path to \"lib\" tool. In our case that\u0027s the path to this script.",
+      "parentUuid": "f836d863_d9d95327",
+      "revId": "e8f43625d47fc7121fe523caf5d89ca45a5ac4ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
