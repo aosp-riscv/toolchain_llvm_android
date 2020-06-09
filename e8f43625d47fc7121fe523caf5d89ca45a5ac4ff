@@ -69,6 +69,24 @@
       "revId": "e8f43625d47fc7121fe523caf5d89ca45a5ac4ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25677a4d_31330fb1",
+        "filename": "do_build.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-06-09T05:01:41Z",
+      "side": 1,
+      "message": "Aah, I missed that.  Thanks for the clarification.",
+      "parentUuid": "85df9382_907492bb",
+      "revId": "e8f43625d47fc7121fe523caf5d89ca45a5ac4ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
