@@ -182,6 +182,24 @@
     },
     {
       "key": {
+        "uuid": "08757480_c39cd799",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-06-12T05:11:20Z",
+      "side": 1,
+      "message": "I see some patches adding -lm to provide the libm functions that compiler-rt/libomp need, but there has also been work done in compiler-rt to remove the libm dependency.\n\nFrom https://reviews.llvm.org/D49514, the calls to fmax and scalbn were left in, with the rationale that they\u0027re provided by libc rather than libm. AFAICT, x86_64 glibc\u0027s libc provides scalbn but not fmax. (I checked both libc.so.6 and libc_nonshared.a.) For Bionic, neither function is in libc. I also looked at FreeBSD 12 x86_64, and its libc also has neither function.\n\nMaybe it\u0027s not too hard to write compiler-rt versions of these functions.",
+      "parentUuid": "8c83a2ce_9afab7f0",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3206a7be_f7aeaba5",
         "filename": "do_build.py",
         "patchSetId": 1
