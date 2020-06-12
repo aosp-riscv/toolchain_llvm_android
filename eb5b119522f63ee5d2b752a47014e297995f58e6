@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "60a7e55d_41befd4e",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-06-12T04:22:10Z",
+      "side": 1,
+      "message": "yeah, I\u0027ll see if if I can do that",
+      "parentUuid": "14483c36_8dc4c8c5",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ec888a6a_0e727a1b",
         "filename": "do_build.py",
         "patchSetId": 1
@@ -82,6 +100,24 @@
       "side": 1,
       "message": "\u003e no longer necessary for r22 and below\nI meant \"no longer necessary for r22 and above\"",
       "parentUuid": "ec888a6a_0e727a1b",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed551729_8bfd5f3e",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-06-12T04:22:10Z",
+      "side": 1,
+      "message": "yeah, that sounds reasonable",
+      "parentUuid": "df368a51_d30ea993",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -122,6 +158,24 @@
       "writtenOn": "2020-06-04T22:45:03Z",
       "side": 1,
       "message": "Why is this necessary?",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c83a2ce_9afab7f0",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-06-12T04:22:10Z",
+      "side": 1,
+      "message": "It seems that libomp calls some functions from the builtins library, where the libclang_rt.builtins versions of those builtins depend on libm functions (whereas libgcc did not need libm).\n\nOn arm32, there are unresolved references while attempting to link libomp.so. They involve complex-FP math:\n\n - __divsc3 builtin calls fmaxf and scalbnf.\n - __divdc3 builtin calls fmax and scalbn.\n\nThe code in compiler-rt/lib/builtins doesn\u0027t directly call the libm functions. Instead, it calls crt_{fmax,scalbn}[f] functions, which are macros for __builtin_fmax[f] or __builtin_scalbn[f]. Clang turns the __builtin_*  calls into calls to the libm functions.\n\nThe dependency on libm did seem odd to me. Depending on target and optimization level, Clang sometimes inlines the __builtin_fmax[f] call. AFAICT, it doesn\u0027t ever inline the __builtin_scalbn[f] call. I think scalbn[f] more-or-less just increments the exponent field of the FP value, so maybe it could be inlined into the builtins archive.\n\nThe functions are defined in int_math.h. Maybe the libm dependency is unintended?\n\n    // This file defines substitutes for the libm functions used in some of the\n    // compiler-rt implementations, defined in such a way that there is not a direct\n    // dependency on libm or math.h. Instead, we use the compiler builtin versions\n    // where available. This reduces our dependencies on the system SDK by foisting\n    // the responsibility onto the compiler.\n\nI also see a call from __divsc3 to __compiler_rt_logbf, which calls __compiler_rt_logbX:\n\n    // Implements logb methods (logb, logbf, logbl) for IEEE-754. This avoids\n    // pulling in a libm dependency from compiler-rt, but is not meant to replace\n    // it (i.e. code calling logb() should get the one from libm, not this), hence\n    // the __compiler_rt prefix.\n    static __inline fp_t __compiler_rt_logbX(fp_t x) {\n\nI know of two places where the builtins library depends on libc, and both are marginal:\n\n - __compilerrt_abort_impl calls abort, but it\u0027s very target-specific. e.g. Fuchsia replaces the abort call with __builtin_trap.\n\n - __eprintf references fprintf, fflush, and stderr. The comments say it was used to implement assert once upon a time, but I don\u0027t know if that has ever been relevant to Android.",
+      "parentUuid": "80cfd024_b13b83d2",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
