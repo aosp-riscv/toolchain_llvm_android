@@ -200,6 +200,24 @@
     },
     {
       "key": {
+        "uuid": "62ec7ef8_3780d763",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-06-12T05:48:01Z",
+      "side": 1,
+      "message": "I verified that fmax*, scanbn*, and logbl are the only libm functions that the builtins use. (The logbl call comes from __divxc3, and I\u0027m guessing it\u0027s an oversight that it doesn\u0027t call __compiler_rt_logbl.)",
+      "parentUuid": "08757480_c39cd799",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3206a7be_f7aeaba5",
         "filename": "do_build.py",
         "patchSetId": 1
