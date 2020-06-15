@@ -124,6 +124,29 @@
     },
     {
       "key": {
+        "uuid": "a9df8614_fd7a158f",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-06-15T23:34:23Z",
+      "side": 1,
+      "message": "It looks like the current libclang_rt.builtins-arm-android.a archive (in both runtimes_ndk_cxx and the resource directory) is built with NEON (the driver\u0027s default). For the platform, that\u0027s ideal, but for the NDK, we currently still support non-NEON arm32 devices.",
+      "range": {
+        "startLine": 592,
+        "startChar": 6,
+        "endLine": 592,
+        "endChar": 67
+      },
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "492685c2_3e5bb51e",
         "filename": "do_build.py",
         "patchSetId": 1
