@@ -241,6 +241,24 @@
     },
     {
       "key": {
+        "uuid": "f50cb692_da4b9812",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-06-17T06:39:28Z",
+      "side": 1,
+      "message": "Nope, __divxc3 doesn\u0027t call __compiler_rt_logbl because __divxc3 (and other *x* builtins) are only supposed to be used for 80-bit x86 long double, and __compiler_rt_logbl is only implemented for standard IEEE-754 formats (not 80-bit).\n\nThere are comments like this (in floatdixf.c):\n\n// Assumption: long double is a IEEE 80 bit floating point type padded to 128\n// bits di_int is a 64 bit integral type\n\nI think __floatdixf is entirely broken if long double is either 64 or 128 bits.\n\nThe HAS_80_BIT_LONG_DOUBLE macro looks broken on Android. It seems it\u0027s only used for unit tests. (I assume we don\u0027t run those.)\n\nThe lib/builtins/CMakeLists.txt only includes the *x* builtins on x86 and x86_64. I think we should omit them instead for Android. Perhaps we\u0027d keep the object files but leave them empty.\n\nI tested __mulxc3 (_Complex 80-bit long double) using host gcc to emit the call, then the NDK toolchain to produce the executable. My test program works with libgcc but segfaults with libclang_rt.builtins-x86_64-android.a.",
+      "parentUuid": "62ec7ef8_3780d763",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3206a7be_f7aeaba5",
         "filename": "do_build.py",
         "patchSetId": 1
