@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "92b3a009_ef3cbb68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-07-10T08:47:39Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e \u003e Patch Set 1:\n\u003e \u003e \n\u003e \u003e This change accidentally omitted __gcc_personality_v0 from the builtins, but none of the NDK or platform testing noticed. Apparently the test we\u0027d need uses __attribute__((cleanup)) on a C file compiled with -fexceptions. Maybe I can add an NDK test for that.\n\u003e \n\u003e lib/builtins/CMakeLists.txt omits __gcc_personality_v0 because it fails the unwind.h existence check.\n\u003e \n\u003e Clang has an unwind.h that\u0027s installed into its resource directory. (libunwind also has an unwind.h that seems to describe roughly the same API, but I suppose it\u0027s not used by default. libunwind also has a libunwind.h for its unw_* APIs.)\n\u003e \n\u003e CMake compiles a test program, and it\u0027s able to find unwind.h when compiling, but check_include_file tries to link an executable, and it can\u0027t, so it declares the header missing.\n\u003e \n\u003e By using -DCMAKE_C_COMPILER_WORKS\u003dON to bypass the CMake feature testing, I was doing the same thing I saw the Fuchsia LLVM build system do. (I think it\u0027s using the llvm_ExternalProject_Add calls in llvm/runtimes/CMakeLists.txt to build the builtins.) It appears that the Fuchsia libclang_rt.builtins.a archives are also missing the __gcc_personality_v0 symbols, also because unwind.h is \"missing\". (As of mid-May, anyway.)\n\u003e \n\u003e One easy fix for Android LLVM is to pass -DHAVE_UNWIND_H\u003dON to cmake for the builtins. We could also change compiler-rt to explicitly turn HAVE_UNWIND_H on for Android.\n\n-DCMAKE_TRY_COMPILE_TARGET_TYPE\u003dSTATIC_LIBRARY seems like a better approach. It configures CMake to skip linking during its feature testing (try_compile). The flag also makes -DCMAKE_C_COMPILER_WORKS\u003dON unnecessary.\n",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "beec2490_21ce99e8",
         "filename": "configs.py",
         "patchSetId": 1
