@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "1e494656_15fc84b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101689
+      },
+      "writtenOn": "2020-07-15T07:39:07Z",
+      "side": 1,
+      "message": "Thank for the heads up, we don\u0027t need __gcc_personality_v0 on Fuchsia which is why we haven\u0027t noticed this issue. I agree that CMAKE_TRY_COMPILE_TARGET_TYPE would be better but it\u0027s not supported by CMake 3.4 which is currently the minimum supported by LLVM. What I think we should do is to move this check to https://github.com/llvm/llvm-project/blob/master/compiler-rt/cmake/builtin-config-ix.cmake and use a custom function akin to builtin_check_c_compiler_flag that doesn\u0027t attempt to link.",
+      "parentUuid": "92b3a009_ef3cbb68",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "beec2490_21ce99e8",
         "filename": "configs.py",
         "patchSetId": 1
