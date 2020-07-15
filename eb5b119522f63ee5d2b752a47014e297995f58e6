@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "90e03596_62cd5404",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-07-15T23:02:03Z",
+      "side": 1,
+      "message": "This AOSP patch builds the builtins by invoking cmake on lib/builtins, so AFAICT, it can use CMAKE_TRY_COMPILE_TARGET_TYPE despite the current 3.4 version minimum. AOSP is using a much newer CMake version.\n\nThat said, it looks like the LLVM CMake version upgrade might be coming soon:\n\nhttp://lists.llvm.org/pipermail/llvm-dev/2020-July/143437.html\n\nhttps://reviews.llvm.org/D78646\n\nMaybe try_compile_only / builtin_check_c_compiler_flag can be removed. The CMAKE_TRY_COMPILE_TARGET_TYPE is harder to apply to a single config-check statement, but libunwind attempts it:\n\nhttps://github.com/llvm/llvm-project/commit/57fc8ecdbaa7fbb1a13907ca3f7a3cb9f9459d27#diff-36a9bbaac909b3b8bb03460da75a0d9c\n\nI was able to set CMAKE_TRY_COMPILE_TARGET_TYPE globally for the entire builtins build, though, which I think is good enough for my purposes.",
+      "parentUuid": "1e494656_15fc84b2",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "beec2490_21ce99e8",
         "filename": "configs.py",
         "patchSetId": 1
