@@ -22,6 +22,30 @@
       "revId": "f9df5e9e158f0733bc9746d4aeb9e5fc8c374152",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fd1c017_68fe7850",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-16T06:26:27Z",
+      "side": 0,
+      "message": "Do we do that even if the major version hasn\u0027t changed? It will appear quite odd, since this is 11.0.4 vs. 11.0.2 (and 3) that we already have in the tree as prebuilts.",
+      "parentUuid": "938858f7_a6e4276d",
+      "range": {
+        "startLine": 17,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "f9df5e9e158f0733bc9746d4aeb9e5fc8c374152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
