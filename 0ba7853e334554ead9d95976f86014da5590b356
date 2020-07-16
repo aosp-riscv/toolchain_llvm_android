@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f1d722c_58587be3",
+        "filename": "base_builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-16T17:03:54Z",
+      "side": 1,
+      "message": "Do we need both \u0027{py_prefix}_LIBRARY\u0027 and \u0027{py_prefix}_LIBRARIES\u0027?  Could the _LIBRARY variable be obsolete now?  Same for INCLUDE_DIR below.\n\n(OK to resolve this in a followup since presubmit tests can be slow).",
+      "revId": "0ba7853e334554ead9d95976f86014da5590b356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
