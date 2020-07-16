@@ -70,6 +70,30 @@
       "revId": "f9df5e9e158f0733bc9746d4aeb9e5fc8c374152",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f6d9629_768ff0b7",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-16T16:53:10Z",
+      "side": 0,
+      "message": "No need to bump. I moved it to 4 in prep for a `d` build that didn\u0027t happen.",
+      "parentUuid": "2be9215c_39dee074",
+      "range": {
+        "startLine": 17,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "f9df5e9e158f0733bc9746d4aeb9e5fc8c374152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
