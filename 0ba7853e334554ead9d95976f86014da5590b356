@@ -16,6 +16,24 @@
       "revId": "0ba7853e334554ead9d95976f86014da5590b356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cf880fe_32066bc6",
+        "filename": "base_builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-17T01:29:24Z",
+      "side": 1,
+      "message": "It will be obsolete once we officially switch everything over. Note that I forgot to advance the \"next\" version, so that one still needs the legacy variable too. I can clean that up shortly.",
+      "parentUuid": "8f1d722c_58587be3",
+      "revId": "0ba7853e334554ead9d95976f86014da5590b356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
