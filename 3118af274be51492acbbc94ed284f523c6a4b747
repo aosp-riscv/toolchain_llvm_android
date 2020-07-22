@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "022e7cc6_1d3c049c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-22T21:55:14Z",
+      "side": 1,
+      "message": "instantiated",
+      "range": {
+        "startLine": 9,
+        "startChar": 45,
+        "endLine": 9,
+        "endChar": 57
+      },
+      "revId": "3118af274be51492acbbc94ed284f523c6a4b747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e559d7a9_35da4893",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-22T21:55:14Z",
+      "side": 1,
+      "message": "Something to consider: we can instantiate the builder always but call `build()` only if necessary.\n\nOptional because I don\u0027t use --skip-build often.",
+      "revId": "3118af274be51492acbbc94ed284f523c6a4b747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
