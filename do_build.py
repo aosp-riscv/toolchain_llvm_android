@@ -39,6 +39,7 @@ import source_manager
 import toolchains
 import utils
 from version import Version
+import win_toolchain
 
 ORIG_ENV = dict(os.environ)
 
@@ -457,23 +458,31 @@ class SysrootsBuilder(base_builders.Builder):
 
 def build_llvm_for_windows(enable_assertions,
                            build_name):
-    if BUILD_LLDB:
-        builders.XzWindowsBuilder().build()
+    if win_toolchain.is_enabled():
+        config_list = [configs.MSVCConfig()]
+    else:
+        config_list = [configs.MinGWConfig()]
 
-    win_builder = builders.WindowsToolchainBuilder()
+    if BUILD_LLDB:
+        builders.XzWindowsBuilder(config_list).build()
+
+    win_builder = builders.WindowsToolchainBuilder(config_list)
     if win_builder.install_dir.exists():
         shutil.rmtree(win_builder.install_dir)
 
-    # Build and install libcxxabi and libcxx and use them to build Clang.
-    libcxxabi_builder = builders.LibCxxAbiBuilder()
-    libcxxabi_builder.enable_assertions = enable_assertions
-    libcxxabi_builder.build()
+    libcxx_builder = builders.LibCxxBuilder(config_list)
+    if not win_toolchain.is_enabled():
+        # Build and install libcxxabi and libcxx and use them to build Clang.
+        libcxxabi_builder = builders.LibCxxAbiBuilder(config_list)
+        libcxxabi_builder.enable_assertions = enable_assertions
+        libcxxabi_builder.build()
+        libcxx_builder.libcxx_abi_path = libcxxabi_builder.install_dir
 
-    libcxx_builder = builders.LibCxxBuilder()
     libcxx_builder.enable_assertions = enable_assertions
     libcxx_builder.build()
 
     win_builder.build_name = build_name
+    win_builder.libcxx_path = libcxx_builder.install_dir
     win_builder.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
     win_builder.build_lldb = BUILD_LLDB
     win_builder.enable_assertions = enable_assertions
@@ -720,7 +729,7 @@ def get_package_install_path(host: hosts.Host, package_name):
     return utils.out_path('install', host.os_tag, package_name)
 
 
-def package_toolchain(build_dir, build_name, host: hosts.Host, dist_dir, strip=True, create_tar=True):
+def package_toolchain(build_dir, build_name, host: hosts.Host, dist_dir, windows_toolchain=None, strip=True, create_tar=True):
     package_name = 'clang-' + build_name
     version = extract_clang_version(build_dir)
 
@@ -836,16 +845,18 @@ def package_toolchain(build_dir, build_name, host: hosts.Host, dist_dir, strip=T
         if not os.path.isfile(os.path.join(bin_dir, necessary_bin_file)):
             raise RuntimeError('Did not find %s in %s' % (necessary_bin_file, bin_dir))
 
-    necessary_lib_files = {
-        'libc++.a',
-        'libc++abi.a',
-    }
+    necessary_lib_files = set()
+    if not windows_toolchain:
+        necessary_lib_files |= {
+            'libc++.a',
+            'libc++abi.a',
+        }
 
     if host.is_windows:
-        necessary_lib_files |= {
-            'LLVMgold' + shlib_ext,
-            'libwinpthread-1' + shlib_ext,
-        }
+        necessary_lib_files.add('LLVMgold' + shlib_ext)
+
+    if host.is_windows and not windows_toolchain:
+        necessary_lib_files.add('libwinpthread-1' + shlib_ext)
         # For Windows, add other relevant libraries.
         install_winpthreads(bin_dir, lib_dir)
 
@@ -1018,6 +1029,15 @@ def parse_args():
         default=False,
         help='Build next LLVM revision (android_version.py:svn_revision_next)')
 
+    parser.add_argument(
+        '--windows-toolchain',
+        help='Path to a Windows toolchain. If set, it will be used instead of MinGW.'
+    )
+
+    parser.add_argument(
+        '--download-windows-toolchain',
+        help='Downloads windows toolchain. (Google internal use only)'
+    )
     return parser.parse_args()
 
 
@@ -1116,6 +1136,10 @@ def main():
             build_runtimes(runtimes_toolchain, args)
 
     if need_windows:
+        if args.windows_toolchain:
+            win_toolchain.set_path(Path(args.windows_toolchain))
+        elif args.download_windows_toolchain:
+            win_toolchain.download_and_enable()
         windows64_install = build_llvm_for_windows(
             enable_assertions=args.enable_assertions,
             build_name=args.build_name)
@@ -1135,6 +1159,7 @@ def main():
             args.build_name,
             hosts.Host.Windows,
             dist_dir,
+            windows_toolchain=windows_toolchain_path,
             strip=do_strip)
 
     return 0
