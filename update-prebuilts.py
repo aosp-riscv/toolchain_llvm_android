@@ -119,7 +119,8 @@ def symlink_to_linux_resource_dir(install_dir):
 
 
 def sanity_check(host, install_dir, clang_version_major):
-    # Make sure the binary has correct PGO profile.
+    # Make sure the binary has correct PGO profile.  Llvm-next builds don't have
+    # the 'NO PGO PROFILE' annotation and profiles are not required for those.
     if host == 'linux-x86':
       realClangPath = os.path.join(install_dir, 'bin', 'clang-' + clang_version_major)
       strings = utils.check_output(['strings', realClangPath])

@@ -1100,8 +1100,9 @@ def main():
         stage2.build_instrumented = instrumented
         stage2.profdata_file = Path(profdata) if profdata else None
 
-        # Annotate the version string if there is no profdata.
-        if profdata is None:
+        # Annotate the version string if there is no profdata.  Skip this for
+        # llvm-next builds which can be uploaded without PGO profiles.
+        if profdata is None and not BUILD_LLVM_NEXT:
             stage2.build_name += ', NO PGO PROFILE, '
 
         stage2.build()
