@@ -16,10 +16,14 @@
 """APIs for build configurations."""
 
 from pathlib import Path
-from typing import List, Optional
+from typing import Dict, List, Optional
+import functools
+import json
 
 import hosts
 import paths
+import toolchains
+import win_toolchain
 
 class Config:
     """Base configuration."""
@@ -27,14 +31,27 @@ class Config:
     name: str
     target_os: hosts.Host
     target_arch: hosts.Arch = hosts.Arch.X86_64
+    sysroot: Optional[Path] = None
 
     """Additional config data that a builder can specify."""
     extra_config = None
 
+    def get_c_compiler(self, toolchain: toolchains.Toolchain) -> Path:
+        """Returns path to c compiler."""
+        return toolchain.cc
+
+    def get_cxx_compiler(self, toolchain: toolchains.Toolchain) -> Path:
+        """Returns path to c++ compiler."""
+        return toolchain.cxx
+
+    @property
+    def linker(self) -> Optional[Path]:
+        return None
+
     @property
     def cflags(self) -> List[str]:
         """Returns a list of flags for c compiler."""
-        raise NotImplementedError()
+        return []
 
     @property
     def cxxflags(self) -> List[str]:
@@ -44,7 +61,11 @@ class Config:
     @property
     def ldflags(self) -> List[str]:
         """Returns a list of flags for static linker."""
-        raise NotImplementedError()
+        return []
+
+    @property
+    def env(self) -> Dict[str, str]:
+        return {}
 
     def __str__(self) -> str:
         return self.target_os.name
@@ -52,9 +73,7 @@ class Config:
     @property
     def output_suffix(self) -> str:
         """The suffix of output directory name."""
-        raise NotImplementedError()
-
-    sysroot: Optional[Path] = None
+        return f'-{self.target_os.value}'
 
 
 class _BaseConfig(Config):  # pylint: disable=abstract-method
@@ -88,10 +107,6 @@ class _BaseConfig(Config):  # pylint: disable=abstract-method
     def lib_dirs(self) -> List[Path]:
         """Paths to libraries used in ldflags."""
         return []
-
-    @property
-    def output_suffix(self) -> str:
-        return f'-{self.target_os.value}'
 
 
 class DarwinConfig(_BaseConfig):
@@ -143,7 +158,7 @@ class LinuxConfig(_GccConfig):
     gcc_ver: str = '4.8.3'
 
 
-class WindowsConfig(_GccConfig):
+class MinGWConfig(_GccConfig):
     """Configuration for Windows targets."""
 
     target_os: hosts.Host = hosts.Host.Windows
@@ -162,6 +177,51 @@ class WindowsConfig(_GccConfig):
         cflags.append('-DWINVER=0x0600')
         cflags.append('-D__MSVCRT_VERSION__=0x1400')
         return cflags
+
+
+class MSVCConfig(Config):
+    """Config using MSVC toolchain."""
+    target_os: hosts.Host = hosts.Host.Windows
+
+    def get_c_compiler(self, toolchain: toolchains.Toolchain) -> Path:
+        """Returns path to c compiler."""
+        return toolchain.cl
+
+    def get_cxx_compiler(self, toolchain: toolchains.Toolchain) -> Path:
+        """Returns path to c++ compiler."""
+        return toolchain.cl
+
+    @property
+    def linker(self) -> Optional[Path]:
+        return Path('bin/lld-link')
+
+    @functools.cached_property
+    def _read_env_setting(self) -> Dict[str, str]:
+        base_path = win_toolchain.get_path() / 'win_sdk' / 'bin'
+        with (base_path / 'SetEnv.x64.json').open('r') as env_file:
+            env_setting = json.load(env_file)
+        return {key: ';'.join(str(base_path.joinpath(*v)) for v in value)
+                for key, value in env_setting['env'].items()}
+
+    @property
+    def cflags(self) -> List[str]:
+        return super().cflags + [
+            '--target=x86_64-pc-windows-msvc',
+            '-fms-compatibility-version=19.10',
+            '-D _HAS_EXCEPTIONS=1',
+            '-w',
+            '-fuse-ld=lld',
+        ]
+
+    @property
+    def ldflags(self) -> List[str]:
+        return super().ldflags + [
+            '/MANIFEST:NO',
+        ]
+
+    @property
+    def env(self) -> Dict[str, str]:
+        return self._read_env_setting
 
 
 class AndroidConfig(_BaseConfig):
@@ -315,7 +375,7 @@ def _get_default_host_config() -> Config:
     return {
         hosts.Host.Linux: LinuxConfig,
         hosts.Host.Darwin: DarwinConfig,
-        hosts.Host.Windows: WindowsConfig
+        hosts.Host.Windows: MinGWConfig
     }[hosts.build_host()]()
 
 
