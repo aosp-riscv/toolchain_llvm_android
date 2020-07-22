@@ -43,8 +43,10 @@ class Builder:  # pylint: disable=too-few-public-methods
     name: str = ""
     config_list: List[configs.Config]
 
-    def __init__(self) -> None:
+    def __init__(self, config_list: Optional[List[configs.Config]]=None) -> None:
         self._config: configs.Config
+        if config_list:
+            self.config_list = config_list
 
     @BuilderRegistry.register_and_build
     def build(self) -> None:
@@ -84,7 +86,16 @@ class Builder:  # pylint: disable=too-few-public-methods
     @property
     def env(self) -> Dict[str, str]:
         """Environment variables used when building."""
-        return dict(ORIG_ENV)
+        return dict()
+
+    @property
+    def _merged_env(self) -> Dict[str, str]:
+        env = dict(ORIG_ENV)
+        env.update(self._config.env)
+        env.update(env)
+        paths = [self.env.get('PATH'), self._config.env.get('PATH'), ORIG_ENV.get('PATH')]
+        env['PATH'] = os.pathsep.join(p for p in paths if p)
+        return env
 
     @property
     def toolchain(self) -> toolchains.Toolchain:
@@ -165,12 +176,12 @@ class AutoconfBuilder(Builder):
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self._touch_autoconfig_files()
 
-        env = self.env
         cflags = self._config.cflags + self.cflags
         cxxflags = self._config.cxxflags + self.cxxflags
         ldflags = self._config.ldflags + self.ldflags
-        env['CC'] = ' '.join([str(self.toolchain.cc)] + cflags + ldflags)
-        env['CXX'] = ' '.join([str(self.toolchain.cxx)] + cxxflags + ldflags)
+        env = self._merged_env
+        env['CC'] = ' '.join([str(self._config.get_c_compiler(self.toolchain))] + cflags + ldflags)
+        env['CXX'] = ' '.join([str(self._config.get_cxx_compiler(self.toolchain))] + cxxflags + ldflags)
 
         config_cmd = [self.src_dir / 'configure', f'--prefix={self.install_dir}']
         config_cmd.extend(self.config_flags)
@@ -220,8 +231,8 @@ class CMakeBuilder(Builder):
         cxxflags_str = ' '.join(cxxflags)
         ldflags_str = ' '.join(ldflags)
         defines: Dict[str, str] = {
-            'CMAKE_C_COMPILER': str(self.toolchain.cc),
-            'CMAKE_CXX_COMPILER': str(self.toolchain.cxx),
+            'CMAKE_C_COMPILER': str(self._config.get_c_compiler(self.toolchain)),
+            'CMAKE_CXX_COMPILER': str(self._config.get_cxx_compiler(self.toolchain)),
 
             'CMAKE_C_COMPILER': str(self.toolchain.cc),
             'CMAKE_CXX_COMPILER': str(self.toolchain.cxx),
@@ -256,6 +267,9 @@ class CMakeBuilder(Builder):
 
             'CMAKE_POSITION_INDEPENDENT_CODE': 'ON',
         }
+        linker = self._config.get_linker(self.toolchain)
+        if linker:
+            defines['CMAKE_LINKER'] = str(linker)
         if self._config.sysroot:
             defines['CMAKE_SYSROOT'] = str(self._config.sysroot)
         if self._config.target_os == hosts.Host.Android:
@@ -266,6 +280,7 @@ class CMakeBuilder(Builder):
             # Cross compiling
             defines['CMAKE_SYSTEM_NAME'] = self._get_cmake_system_name()
             defines['CMAKE_SYSTEM_PROCESSOR'] = self._get_cmake_system_arch()
+        defines.update(self._config.cmake_defines)
         return defines
 
     def _get_cmake_system_name(self) -> str:
@@ -306,19 +321,20 @@ class CMakeBuilder(Builder):
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-        self._record_cmake_command(cmake_cmd, self.env)
-        utils.check_call(cmake_cmd, cwd=self.output_dir, env=self.env)
+        env = self._merged_env
+        self._record_cmake_command(cmake_cmd, env)
+        utils.check_call(cmake_cmd, cwd=self.output_dir, env=env)
 
         ninja_cmd: List[str] = [str(paths.NINJA_BIN_PATH)]
         ninja_cmd.extend(self.ninja_targets)
-        utils.check_call(ninja_cmd, cwd=self.output_dir, env=self.env)
+        utils.check_call(ninja_cmd, cwd=self.output_dir, env=env)
 
         self.install_config()
 
     def install_config(self) -> None:
         """Installs built artifacts for current config."""
         utils.check_call([paths.NINJA_BIN_PATH, 'install'],
-                         cwd=self.output_dir, env=self.env)
+                         cwd=self.output_dir, env=self._merged_env)
 
 
 class LLVMBaseBuilder(CMakeBuilder):  # pylint: disable=abstract-method
@@ -451,7 +467,8 @@ class LLVMBuilder(LLVMBaseBuilder):
         defines['LLDB_ENABLE_LZMA'] = 'ON'
         xz_root = BuilderRegistry.get('xz-windows' if target.is_windows else 'xz').install_dir
         defines['LIBLZMA_INCLUDE_DIR'] = str(xz_root / 'include')
-        defines['LIBLZMA_LIBRARY'] = str(xz_root / 'lib' / 'liblzma.a')
+        liblzma = next((xz_root / 'lib').glob('liblzma.*'))
+        defines['LIBLZMA_LIBRARY'] = str(liblzma)
 
         if not target.is_windows:
             libedit_root = BuilderRegistry.get('libedit').install_dir
