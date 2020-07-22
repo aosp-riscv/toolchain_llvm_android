@@ -34,6 +34,7 @@ class Toolchain:
 
     @property
     def cc(self) -> Path:  # pylint: disable=invalid-name
+        """Returns the path to c compiler."""
         return self.path / 'bin' / 'clang'
 
     @property
@@ -42,9 +43,54 @@ class Toolchain:
         return self.path / 'bin' / 'clang++'
 
     @property
+    def cl(self) -> Path:
+        """Returns the path to c++ compiler."""
+        return self.path / 'bin' / 'clang-cl'
+
+    @property
     def strip(self) -> Path:
         """Returns the path to llvm-strip."""
         return self.path / 'bin' / 'llvm-strip'
+
+    @property
+    def ar(self) -> Path:
+        return self.path / 'bin' / 'llvm-ar'
+
+    @property
+    def rc(self) -> Path:
+        return self.path / 'bin' / 'llvm-rc'
+
+    @property
+    def ranlib(self) -> Path:
+        return self.path / 'bin' / 'llvm-ranlib'
+
+    @property
+    def addr2line(self) -> Path:
+        return self.path / 'bin' / 'llvm-addr2line'
+
+    @property
+    def nm(self) -> Path:
+        return self.path / 'bin' / 'llvm-nm'
+
+    @property
+    def objcopy(self) -> Path:
+        return self.path / 'bin' / 'llvm-objcopy'
+
+    @property
+    def objdump(self) -> Path:
+        return self.path / 'bin' / 'llvm-objdump'
+
+    @property
+    def readelf(self) -> Path:
+        return self.path / 'bin' / 'llvm-readelf'
+
+    @property
+    def strip(self) -> Path:
+        return self.path / 'bin' / 'llvm-strip'
+
+    @property
+    def mt(self) -> Path:
+        return self.path / 'bin' / 'llvm-mt'
 
     @property
     def lib_dir(self) -> Path:
