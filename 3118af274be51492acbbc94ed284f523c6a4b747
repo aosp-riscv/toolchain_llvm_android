@@ -39,6 +39,24 @@
       "revId": "3118af274be51492acbbc94ed284f523c6a4b747",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3a48d5d_85fa1c46",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-07-22T22:01:10Z",
+      "side": 1,
+      "message": "Yeah I guess it is better to always register all builders. That will also make help messages better. But that\u0027s more work to do. This is just a quick fix.",
+      "parentUuid": "e559d7a9_35da4893",
+      "revId": "3118af274be51492acbbc94ed284f523c6a4b747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
