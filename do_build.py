@@ -39,6 +39,7 @@ import source_manager
 import toolchains
 import utils
 from version import Version
+import win_sdk
 
 ORIG_ENV = dict(os.environ)
 
@@ -457,21 +458,29 @@ class SysrootsBuilder(base_builders.Builder):
 
 def build_llvm_for_windows(enable_assertions,
                            build_name):
-    if BUILD_LLDB:
-        builders.XzWindowsBuilder().build()
+    if win_sdk.is_enabled():
+        config_list = [configs.MSVCConfig()]
+    else:
+        config_list = [configs.MinGWConfig()]
 
-    win_builder = builders.WindowsToolchainBuilder()
+    if BUILD_LLDB:
+        builders.XzWindowsBuilder(config_list).build()
+
+    win_builder = builders.WindowsToolchainBuilder(config_list)
     if win_builder.install_dir.exists():
         shutil.rmtree(win_builder.install_dir)
 
-    # Build and install libcxxabi and libcxx and use them to build Clang.
-    libcxxabi_builder = builders.LibCxxAbiBuilder()
-    libcxxabi_builder.enable_assertions = enable_assertions
-    libcxxabi_builder.build()
+    if not win_sdk.is_enabled():
+        # Build and install libcxxabi and libcxx and use them to build Clang.
+        libcxx_builder = builders.LibCxxBuilder(config_list)
+        libcxxabi_builder = builders.LibCxxAbiBuilder(config_list)
+        libcxxabi_builder.enable_assertions = enable_assertions
+        libcxxabi_builder.build()
 
-    libcxx_builder = builders.LibCxxBuilder()
-    libcxx_builder.enable_assertions = enable_assertions
-    libcxx_builder.build()
+        libcxx_builder.libcxx_abi_path = libcxxabi_builder.install_dir
+        libcxx_builder.enable_assertions = enable_assertions
+        libcxx_builder.build()
+        win_builder.libcxx_path = libcxx_builder.install_dir
 
     win_builder.build_name = build_name
     win_builder.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
@@ -836,16 +845,18 @@ def package_toolchain(build_dir, build_name, host: hosts.Host, dist_dir, strip=T
         if not os.path.isfile(os.path.join(bin_dir, necessary_bin_file)):
             raise RuntimeError('Did not find %s in %s' % (necessary_bin_file, bin_dir))
 
-    necessary_lib_files = {
-        'libc++.a',
-        'libc++abi.a',
-    }
+    necessary_lib_files = set()
+    if not (host.is_windows and win_sdk.is_enabled()):
+        necessary_lib_files |= {
+            'libc++.a',
+            'libc++abi.a',
+        }
 
     if host.is_windows:
-        necessary_lib_files |= {
-            'LLVMgold' + shlib_ext,
-            'libwinpthread-1' + shlib_ext,
-        }
+        necessary_lib_files.add('LLVMgold' + shlib_ext)
+
+    if host.is_windows and not win_sdk.is_enabled():
+        necessary_lib_files.add('libwinpthread-1' + shlib_ext)
         # For Windows, add other relevant libraries.
         install_winpthreads(bin_dir, lib_dir)
 
@@ -1018,6 +1029,11 @@ def parse_args():
         default=False,
         help='Build next LLVM revision (android_version.py:svn_revision_next)')
 
+    parser.add_argument(
+        '--windows-sdk',
+        help='Path to a Windows SDK. If set, it will be used instead of MinGW.'
+    )
+
     return parser.parse_args()
 
 
@@ -1112,6 +1128,8 @@ def main():
             build_runtimes(runtimes_toolchain, args)
 
     if need_windows:
+        if args.windows_sdk:
+            win_sdk.set_path(Path(args.windows_sdk))
         windows64_install = build_llvm_for_windows(
             enable_assertions=args.enable_assertions,
             build_name=args.build_name)
