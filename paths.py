@@ -59,6 +59,8 @@ KYTHE_CXX_EXTRACTOR = (PREBUILTS_DIR / 'clang-tools' / hosts.build_host().os_tag
                        'cxx_extractor')
 KYTHE_OUTPUT_DIR = OUT_DIR / 'kythe-files'
 
+WIN_TOOLCHAIN_PATH: Path = Path('/src/visualcpptools')
+
 def get_python_dir(host: hosts.Host) -> Path:
     """Returns the path to python for a host."""
     return PREBUILTS_DIR / 'python' / host.os_tag
