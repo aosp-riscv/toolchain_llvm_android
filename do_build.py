@@ -1071,7 +1071,7 @@ def main():
 
     if BUILD_LLDB:
         builders.SwigBuilder().build()
-        if BuilderRegistry.should_build('stage2'):
+        if need_host:
             # libedit is not needed for windows lldb.
             builders.LibEditBuilder().build()
 
