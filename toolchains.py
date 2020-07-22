@@ -34,6 +34,7 @@ class Toolchain:
 
     @property
     def cc(self) -> Path:  # pylint: disable=invalid-name
+        """Returns the path to c compiler."""
         return self.path / 'bin' / 'clang'
 
     @property
@@ -42,9 +43,18 @@ class Toolchain:
         return self.path / 'bin' / 'clang++'
 
     @property
+    def cl(self) -> Path:
+        """Returns the path to c++ compiler."""
+        return self.path / 'bin' / 'clang-cl'
+
+    @property
     def strip(self) -> Path:
         """Returns the path to llvm-strip."""
         return self.path / 'bin' / 'llvm-strip'
+
+    @property
+    def mt(self) -> Path:
+        return self.path / 'bin' / 'llvm-mt'
 
     @property
     def lib_dir(self) -> Path:
