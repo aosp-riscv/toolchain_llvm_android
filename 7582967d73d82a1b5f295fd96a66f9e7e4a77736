@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "351a704c_f6055a2f",
+        "filename": "do_kythe_xref.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-07-23T22:43:19Z",
+      "side": 1,
+      "message": "Just set stage2.build_lldb \u003d False? I\u0027m going to add more dependencies to lldb..",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 37
+      },
+      "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d161e2fa_59553af2",
+        "filename": "do_kythe_xref.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-07-23T22:43:19Z",
+      "side": 1,
+      "message": "paths.KYTHE_OUTPUT_DIR.exists()",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97c4de69_6fd18436",
+        "filename": "do_kythe_xref.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-07-23T22:43:19Z",
+      "side": 1,
+      "message": "full_path.relative_to(paths.ANDROID_DIR)",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 78
+      },
+      "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
