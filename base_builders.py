@@ -46,6 +46,20 @@ class Builder:  # pylint: disable=too-few-public-methods
     def __init__(self) -> None:
         self._config: configs.Config
 
+    @property
+    def output_dir(self) -> Path:
+        """The path for intermediate results."""
+        return paths.OUT_DIR / 'lib' / (f'{self.name}')
+
+    @property
+    def install_dir(self) -> Path:
+        """Returns the path this target will be installed to."""
+        return paths.OUT_DIR / 'lib' / f'{self.name}-install'
+
+    @property
+    def toolchain(self) -> toolchains.Toolchain:
+        return toolchains.get_runtime_toolchain()
+
     @BuilderRegistry.register_and_build
     def build(self) -> None:
         """Builds all configs."""
@@ -89,7 +103,7 @@ class Builder:  # pylint: disable=too-few-public-methods
     @property
     def toolchain(self) -> toolchains.Toolchain:
         """Returns the toolchain used for this target."""
-        raise NotImplementedError()
+        return toolchains.get_runtime_toolchain()
 
     def install(self) -> None:
         """Installs built artifacts."""
@@ -99,16 +113,6 @@ class AutoconfBuilder(Builder):
     """Builder for autoconf targets."""
     src_dir: Path
     remove_install_dir: bool = True
-
-    @property
-    def output_dir(self) -> Path:
-        """The path for intermediate results."""
-        return paths.OUT_DIR / 'lib' / (f'{self.name}')
-
-    @property
-    def install_dir(self) -> Path:
-        """Returns the path this target will be installed to."""
-        return paths.OUT_DIR / 'lib' / f'{self.name}-install'
 
     @staticmethod
     def _get_mac_sdk_path() -> Path:
@@ -135,10 +139,6 @@ class AutoconfBuilder(Builder):
         cxxflags = super().cxxflags
         cxxflags.append('-stdlib=libc++')
         return cxxflags
-
-    @property
-    def toolchain(self) -> toolchains.Toolchain:
-        return toolchains.get_runtime_toolchain()
 
     @property
     def config_flags(self) -> List[str]:
@@ -196,16 +196,6 @@ class CMakeBuilder(Builder):
     ninja_target: Optional[str] = None
 
     @property
-    def install_dir(self) -> Path:
-        """Returns the path this target will be installed to."""
-        raise NotImplementedError()
-
-    @property
-    def output_dir(self) -> Path:
-        """The path for intermediate results."""
-        return paths.OUT_DIR / self.name
-
-    @property
     def cmake_defines(self) -> Dict[str, str]:
         """CMake defines."""
         cflags = self._config.cflags + self.cflags
@@ -235,6 +225,8 @@ class CMakeBuilder(Builder):
             'CMAKE_FIND_ROOT_PATH_MODE_LIBRARY': 'ONLY',
             'CMAKE_FIND_ROOT_PATH_MODE_PACKAGE': 'ONLY',
             'CMAKE_FIND_ROOT_PATH_MODE_PROGRAM': 'NEVER',
+
+            'CMAKE_POSITION_INDEPENDENT_CODE': 'ON',
         }
         if self._config.sysroot:
             defines['CMAKE_SYSROOT'] = str(self._config.sysroot)
@@ -264,11 +256,13 @@ class CMakeBuilder(Builder):
 
     def _record_cmake_command(self, cmake_cmd: List[str],
                               env: Dict[str, str]) -> None:
-        with open(self.output_dir / 'cmake_invocation.sh', 'w') as outf:
+        script_path = self.output_dir / 'cmake_invocation.sh'
+        with script_path.open('w') as outf:
             for k, v in env.items():
                 if v != ORIG_ENV.get(k):
                     outf.write(f'{k}={v}\n')
             outf.write(utils.list2cmdline(cmake_cmd) + '\n')
+        script_path.chmod(0o755)
 
     def _build_config(self) -> None:
         if self.remove_cmake_cache:
@@ -348,10 +342,6 @@ class LLVMRuntimeBuilder(LLVMBaseBuilder):  # pylint: disable=abstract-method
     _config: configs.AndroidConfig
 
     @property
-    def toolchain(self) -> toolchains.Toolchain:
-        return toolchains.get_runtime_toolchain()
-
-    @property
     def install_dir(self) -> Path:
         arch = self._config.target_arch
         if self._config.platform:
@@ -389,6 +379,10 @@ class LLVMBuilder(LLVMBaseBuilder):
         return paths.OUT_DIR / f'{self.name}-install'
 
     @property
+    def output_dir(self) -> Path:
+        return paths.OUT_DIR / self.name
+
+    @property
     def llvm_projects(self) -> Set[str]:
         """Returns enabled llvm projects."""
         raise NotImplementedError()
@@ -405,9 +399,6 @@ class LLVMBuilder(LLVMBaseBuilder):
     def set_lldb_flags(self, target: hosts.Host, defines: Dict[str, str]) -> None:  # pylint: disable=no-self-use
         """Sets cmake defines for lldb."""
         # By default all these are auto-detected. Disable them explicitly to avoid unexpected dependency.
-        # They may be enabled again below if necessary.
-        defines['LLDB_ENABLE_LIBEDIT'] = 'OFF'
-        defines['LLDB_ENABLE_LZMA'] = 'OFF'
         defines['LLDB_ENABLE_LIBXML2'] = 'OFF'
         defines['LLDB_ENABLE_LUA'] = 'OFF'
 
@@ -426,11 +417,18 @@ class LLVMBuilder(LLVMBaseBuilder):
             # Avoids the build of debug server. It is only used in testing.
             defines['LLDB_USE_SYSTEM_DEBUGSERVER'] = 'ON'
 
+        defines['LLDB_ENABLE_LZMA'] = 'ON'
+        xz_root = BuilderRegistry.get('xz-windows' if target.is_windows else 'xz').install_dir
+        defines['LIBLZMA_INCLUDE_DIR'] = str(xz_root / 'include')
+        defines['LIBLZMA_LIBRARY'] = str(xz_root / 'lib' / 'liblzma.a')
+
         if not target.is_windows:
             libedit_root = BuilderRegistry.get('libedit').install_dir
             defines['LLDB_ENABLE_LIBEDIT'] = 'ON'
             defines['LibEdit_INCLUDE_DIRS'] = str(paths.get_libedit_include_dir(libedit_root))
             defines['LibEdit_LIBRARIES'] = str(paths.get_libedit_lib(libedit_root, target))
+        else:
+            defines['LLDB_ENABLE_LIBEDIT'] = 'OFF'
 
     @property
     def cmake_defines(self) -> Dict[str, str]:
