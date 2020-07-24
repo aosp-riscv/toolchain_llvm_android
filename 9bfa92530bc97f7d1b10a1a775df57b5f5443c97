@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b1164e0_8ff9864f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-24T19:55:36Z",
+      "side": 1,
+      "message": "LGTM otherwise.",
+      "revId": "9bfa92530bc97f7d1b10a1a775df57b5f5443c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be932fef_5a591544",
+        "filename": "do_build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-24T19:55:36Z",
+      "side": 1,
+      "message": "Aah, missed this before.  This should be needed only if BUILD_LLDB, right?",
+      "revId": "9bfa92530bc97f7d1b10a1a775df57b5f5443c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
