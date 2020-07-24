@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c52112d4_ff54db35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-24T05:29:06Z",
+      "side": 1,
+      "message": "I added some comments but everything else LGTM.",
+      "revId": "6551027bfe2628bbebbf783613f920214a8a2ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ecbdadc_2d6e8f4a",
+        "filename": "base_builders.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-24T05:29:06Z",
+      "side": 1,
+      "message": "Defining output_dir here has the least code redundancy but let\u0027s not pick a value just because it\u0027s the most frequently used.  It maybe easier to follow with the redundant code?\n\nAlternatively, we can have a property called \u0027TargetKind\u0027 to Builder which can either be \u0027ToolChain\u0027 or \u0027Library\u0027.  Then output_dir() and install_dir() can check it to return the appropriate dirs.",
+      "revId": "6551027bfe2628bbebbf783613f920214a8a2ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f35dc442_2b765204",
+        "filename": "base_builders.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-24T05:29:06Z",
+      "side": 1,
+      "message": "This function is already present below.",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "6551027bfe2628bbebbf783613f920214a8a2ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
