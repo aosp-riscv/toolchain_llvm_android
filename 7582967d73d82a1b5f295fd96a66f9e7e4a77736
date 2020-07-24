@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "92634cc2_c7cedddb",
+        "filename": "do_kythe_xref.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-24T04:47:24Z",
+      "side": 1,
+      "message": "Done.  Do you foresee the dependencies will converge in the future?  Once we\u0027re comfortable, we could add cross-references for lldb as well.",
+      "parentUuid": "351a704c_f6055a2f",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 37
+      },
+      "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d161e2fa_59553af2",
         "filename": "do_kythe_xref.py",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "dce16c28_61cd1438",
+        "filename": "do_kythe_xref.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-24T04:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d161e2fa_59553af2",
+      "range": {
+        "startLine": 60,
+        "startChar": 7,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97c4de69_6fd18436",
         "filename": "do_kythe_xref.py",
         "patchSetId": 6
@@ -68,6 +116,30 @@
       "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86dad0f5_1e0600ff",
+        "filename": "do_kythe_xref.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-24T04:47:24Z",
+      "side": 1,
+      "message": "full_path is a string not a Path.  We could do `str(Path(full_path).relative_to(...))` but that seems too cumbersome.",
+      "parentUuid": "97c4de69_6fd18436",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 78
+      },
+      "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
