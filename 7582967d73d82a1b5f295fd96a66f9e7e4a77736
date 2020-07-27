@@ -164,6 +164,30 @@
       "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06ee9e88_57830847",
+        "filename": "do_kythe_xref.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-27T17:49:16Z",
+      "side": 1,
+      "message": "lstrip() would remove any character from str(paths.ANDROID_DIR) so might remove more characters than expected..",
+      "parentUuid": "656bdee7_85ffe435",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 78
+      },
+      "revId": "7582967d73d82a1b5f295fd96a66f9e7e4a77736",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
