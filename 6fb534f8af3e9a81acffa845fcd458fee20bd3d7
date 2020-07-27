@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d179a62_57dd1709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1347428
+      },
+      "writtenOn": "2020-07-27T13:05:18Z",
+      "side": 1,
+      "message": "Before I can copy build artifacts of an lldb-master-dev build into Android Studio, AFAIU, I need to:\n\n1. Wait for NDK team to trigger a build, and check-in the new build artifacts, e.g., platform/prebuilts/clang/host/windows-x86/refs/heads/mirror-aosp-master/./clang-r383902b\n2. Update the clang.version in lldb-master-dev:\nhttps://googleplex-android.git.corp.google.com/platform/external/lldb-utils/+/refs/heads/lldb-master-dev/config/clang.version\n3. \"ab trigger\" an lldb-master-dev build manually.\n\nDoes that sound correct? \n\n(I went ahead and did step 3 and then copied all the files to Studio, only to notice that steps #1 and #2 didn\u0027t actually happen, duh!)\n\nDoes step#2 have to be manual?",
+      "revId": "6fb534f8af3e9a81acffa845fcd458fee20bd3d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
