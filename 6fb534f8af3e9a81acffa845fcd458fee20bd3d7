@@ -34,6 +34,24 @@
       "revId": "6fb534f8af3e9a81acffa845fcd458fee20bd3d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2cfeb058_966078bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1347428
+      },
+      "writtenOn": "2020-07-27T18:19:54Z",
+      "side": 1,
+      "message": "I think automating #2 can make it less error prone, if you agree, then we can try.\n\nFor build chaining, I think if we enable continuous integration for lldb-master-dev, we won\u0027t need that (any check-in to clang/ would trigger a build at lldb-master-dev).",
+      "parentUuid": "26521178_d0789252",
+      "revId": "6fb534f8af3e9a81acffa845fcd458fee20bd3d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
