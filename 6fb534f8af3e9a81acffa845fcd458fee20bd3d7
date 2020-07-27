@@ -52,6 +52,24 @@
       "revId": "6fb534f8af3e9a81acffa845fcd458fee20bd3d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f83a527_4463b584",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-07-27T20:35:09Z",
+      "side": 1,
+      "message": "Automating #2 sgtm.\n\nBuild chaining can eliminate #1 too. May not be an urgent task though.",
+      "parentUuid": "2cfeb058_966078bf",
+      "revId": "6fb534f8af3e9a81acffa845fcd458fee20bd3d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
