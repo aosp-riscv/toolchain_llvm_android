@@ -18,4 +18,4 @@
 
 import py3_utils
 
-py3_utils.run_with_py3('do_build.py')
+py3_utils.run_with_py3('do_kythe_xref.py')
