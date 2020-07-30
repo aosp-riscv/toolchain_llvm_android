@@ -1,0 +1,74 @@
+From 869d05fb3e449ec7ec835b8a61687f8df41b8651 Mon Sep 17 00:00:00 2001
+From: Walter Erquinigo <waltermelon@fb.com>
+Date: Mon, 13 Jul 2020 17:55:24 -0700
+Subject: [PATCH] [lldb-vscode] Fix TestVSCode_module This test was added in
+ https://reviews.llvm.org/D82477 and needs to wait a little bit before
+ fetching some information.
+
+---
+ .../test/tools/lldb-vscode/lldbvscode_testcase.py        | 7 +++++++
+ .../API/tools/lldb-vscode/module/TestVSCode_module.py    | 9 +++++++--
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/lldb/packages/Python/lldbsuite/test/tools/lldb-vscode/lldbvscode_testcase.py b/lldb/packages/Python/lldbsuite/test/tools/lldb-vscode/lldbvscode_testcase.py
+index 676e08d5a38..c1b33c220b4 100644
+--- a/lldb/packages/Python/lldbsuite/test/tools/lldb-vscode/lldbvscode_testcase.py
++++ b/lldb/packages/Python/lldbsuite/test/tools/lldb-vscode/lldbvscode_testcase.py
+@@ -2,6 +2,7 @@
+ from lldbsuite.test.lldbtest import *
+ import os
+ import vscode
++import time
+ 
+ 
+ class VSCodeTestCaseBase(TestBase):
+@@ -52,6 +53,12 @@ class VSCodeTestCaseBase(TestBase):
+             breakpoint_ids.append('%i' % (breakpoint['id']))
+         return breakpoint_ids
+ 
++    def waitUntil(self, condition):
++        while True:
++            if condition():
++                break
++            time.sleep(0.5)
++
+     def verify_breakpoint_hit(self, breakpoint_ids):
+         '''Wait for the process we are debugging to stop, and verify we hit
+            any breakpoint location in the "breakpoint_ids" array.
+diff --git a/lldb/test/API/tools/lldb-vscode/module/TestVSCode_module.py b/lldb/test/API/tools/lldb-vscode/module/TestVSCode_module.py
+index 461ac201a73..40c4145b38e 100644
+--- a/lldb/test/API/tools/lldb-vscode/module/TestVSCode_module.py
++++ b/lldb/test/API/tools/lldb-vscode/module/TestVSCode_module.py
+@@ -11,7 +11,6 @@ from lldbsuite.test.lldbtest import *
+ from lldbsuite.test import lldbutil
+ import lldbvscode_testcase
+ 
+-
+ class TestVSCode_module(lldbvscode_testcase.VSCodeTestCaseBase):
+ 
+     mydir = TestBase.compute_mydir(__file__)
+@@ -40,6 +39,13 @@ class TestVSCode_module(lldbvscode_testcase.VSCodeTestCaseBase):
+         self.assertEqual('Symbols not found.', program_module['symbolStatus'])
+         symbol_path = self.getBuildArtifact("a.out")
+         self.vscode.request_evaluate('`%s' % ('target symbols add -s "%s" "%s"' % (program, symbol_path)))
++
++        def checkSymbolsLoaded():
++            active_modules = self.vscode.get_active_modules()
++            program_module = active_modules[program_basename]
++            return 'Symbols loaded.' == program_module['symbolStatus']
++        self.waitUntil(checkSymbolsLoaded)
++
+         active_modules = self.vscode.get_active_modules()
+         program_module = active_modules[program_basename]
+         self.assertEqual(program_basename, program_module['name'])
+@@ -63,7 +69,6 @@ class TestVSCode_module(lldbvscode_testcase.VSCodeTestCaseBase):
+         self.continue_to_breakpoints(breakpoint_ids)
+         moduleId = self.vscode.get_active_modules()['a.out']['id']
+         response = self.vscode.request_getCompileUnits(moduleId)
+-        print(response['body'])
+         self.assertTrue(response['body'])
+         self.assertTrue(len(response['body']['compileUnits']) == 1,
+                         'Only one source file should exist')
+-- 
+2.28.0.rc0.142.g3c755180ce-goog
+
