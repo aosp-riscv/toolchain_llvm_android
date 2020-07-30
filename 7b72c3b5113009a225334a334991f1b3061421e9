@@ -16,6 +16,23 @@
       "revId": "7b72c3b5113009a225334a334991f1b3061421e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d73aedc_02a13d89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-30T00:47:14Z",
+      "side": 1,
+      "message": "Doh, this has the wrong revert cherry-picked. Let me try renaming it again.",
+      "revId": "7b72c3b5113009a225334a334991f1b3061421e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
