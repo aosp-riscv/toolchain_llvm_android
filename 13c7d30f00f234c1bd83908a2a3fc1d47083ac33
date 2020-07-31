@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc412594_543ce0a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-07-31T05:33:40Z",
+      "side": 1,
+      "message": "Oops, thanks for catching this... Is mypy checked into AOSP?  If so, we could figure a way to setup a pre-upload check.",
+      "revId": "13c7d30f00f234c1bd83908a2a3fc1d47083ac33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
