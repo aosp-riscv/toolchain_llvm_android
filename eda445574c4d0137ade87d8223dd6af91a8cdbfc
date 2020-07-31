@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1274c520_9e577e54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-07-31T18:49:56Z",
+      "side": 1,
+      "message": "Not sure whether there\u0027s a reason this was not done... 😊",
+      "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
