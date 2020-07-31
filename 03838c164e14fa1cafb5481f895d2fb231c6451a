@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f55feda_6780ae6f",
+        "filename": "toolchains.py",
+        "patchSetId": 16
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-07-31T05:46:40Z",
+      "side": 1,
+      "message": "nit: windows c++ compiler, to differentiate from cxx",
+      "range": {
+        "startLine": 47,
+        "startChar": 31,
+        "endLine": 47,
+        "endChar": 43
+      },
+      "revId": "03838c164e14fa1cafb5481f895d2fb231c6451a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
