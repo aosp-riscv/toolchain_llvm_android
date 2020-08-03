@@ -16,6 +16,69 @@
       "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "575446e9_77c41455",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-03T16:59:07Z",
+      "side": 1,
+      "message": "LGTM except for nits.",
+      "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99f2e817_f13555b2",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-03T16:59:07Z",
+      "side": 1,
+      "message": "Should this just be `BUILD_LLDB`?  It looks like lldb from stage1 is needed for both Linux stage2 and Windows.",
+      "range": {
+        "startLine": 1066,
+        "startChar": 4,
+        "endLine": 1066,
+        "endChar": 66
+      },
+      "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb10e926_427ae421",
+        "filename": "toolchains.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-03T16:59:07Z",
+      "side": 1,
+      "message": "Reword the comments to be \u0027llvm-ar\u0027 (and similarly for the other tools) below.",
+      "range": {
+        "startLine": 47,
+        "startChar": 31,
+        "endLine": 47,
+        "endChar": 33
+      },
+      "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
