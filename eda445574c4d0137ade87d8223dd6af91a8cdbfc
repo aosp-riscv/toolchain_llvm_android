@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f6fde747_3555ad16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-03T18:29:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "778e6e70_d81b2046",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1274c520_9e577e54",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -82,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "7f24c35b_91d8d77c",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-03T18:29:42Z",
+      "side": 1,
+      "message": "This is used for windows and lldb-server if stage2 is debug. Stage2 builds its own lldb-tblgen.\n\nChange to BUILD_LLDB can simplify things, with the cost of slightly longer build time...",
+      "parentUuid": "99f2e817_f13555b2",
+      "range": {
+        "startLine": 1066,
+        "startChar": 4,
+        "endLine": 1066,
+        "endChar": 66
+      },
+      "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb10e926_427ae421",
         "filename": "toolchains.py",
         "patchSetId": 2
@@ -102,6 +150,30 @@
       "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e14eb49f_aeabf9b8",
+        "filename": "toolchains.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-03T18:29:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb10e926_427ae421",
+      "range": {
+        "startLine": 47,
+        "startChar": 31,
+        "endLine": 47,
+        "endChar": 33
+      },
+      "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
