@@ -130,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "98d4d1da_c22c10bb",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-03T18:40:22Z",
+      "side": 1,
+      "message": "That makes sense.  In that case, either option would have worked.  There are ~20 lldb-tblgen invocations so the build time won\u0027t be severely impacted.",
+      "parentUuid": "7f24c35b_91d8d77c",
+      "range": {
+        "startLine": 1066,
+        "startChar": 4,
+        "endLine": 1066,
+        "endChar": 66
+      },
+      "revId": "eda445574c4d0137ade87d8223dd6af91a8cdbfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb10e926_427ae421",
         "filename": "toolchains.py",
         "patchSetId": 2
