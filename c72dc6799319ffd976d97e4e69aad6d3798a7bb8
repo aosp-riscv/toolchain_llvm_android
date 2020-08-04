@@ -82,6 +82,24 @@
     },
     {
       "key": {
+        "uuid": "14d0b46b_44855a25",
+        "filename": "base_builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T16:31:24Z",
+      "side": 1,
+      "message": "I have the opposite question now - why do we need to set the linker separately here?  For MSVCConfig\u0027s cflags, we pass \u0027-fuse-ld\u003dlld\u0027, so it seems clang-cl can act as the driver to invoke the linker.",
+      "parentUuid": "56dde882_65716826",
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8cbe979b_1b5d09ad",
         "filename": "base_builders.py",
         "patchSetId": 21
