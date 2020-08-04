@@ -166,6 +166,121 @@
       "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66f8a4a3_815cf57a",
+        "filename": "configs.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T16:58:00Z",
+      "side": 1,
+      "message": "Setting -fuse-ld\u003d here caused me to ask about setting CMAKE_LINKER in my other comment.  Is this unnecessary here?",
+      "range": {
+        "startLine": 219,
+        "startChar": 12,
+        "endLine": 219,
+        "endChar": 27
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a01f9d4_9efab229",
+        "filename": "do_build.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T16:58:00Z",
+      "side": 1,
+      "message": "This would omit libc++ from the Linux toolchain as well, if win_sdk.is_enabled().\n\nUse \u0027not (host.is_windows and win_sdk.is_enabled())\u0027?",
+      "range": {
+        "startLine": 849,
+        "startChar": 7,
+        "endLine": 849,
+        "endChar": 31
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3677b0ee_5b16036c",
+        "filename": "win_sdk.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T16:58:00Z",
+      "side": 1,
+      "message": "Why not call \u0027prepare()\u0027 here?  would eliminate the need for the \u0027PREPARED\u0027 global.",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 21
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d3ac29d_b6c392c0",
+        "filename": "win_sdk.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T16:58:00Z",
+      "side": 1,
+      "message": "Do we need \u0027global\u0027 if we\u0027re only reading the variable?",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 24
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40edb9bb_c7c59fcc",
+        "filename": "win_sdk.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T16:58:00Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
