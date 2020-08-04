@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddd961f4_23adab6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T06:05:08Z",
+      "side": 1,
+      "message": "This change looks great so far.  Thanks for working on this.  Being able to use win_sdk would be a great capability for us.\n\n[partial review comments... will review the remainder of this CL tomorrow]",
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff92f4fc_3d4df261",
+        "filename": "base_builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T06:05:08Z",
+      "side": 1,
+      "message": "Would it be clear to have self.env() as the final environment used for the build, i.e. do the merge here?\n\nWe can use a different function, say builder_env(), for subclasses to overload.",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 11
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fce0da6_bfcc2fe4",
+        "filename": "base_builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T06:05:08Z",
+      "side": 1,
+      "message": "Avoid this repeated text by extracting it to a separate function, say cc(), in the Builder base class.\n\nIf you want to make it a bit more modular, we can have the functions in configs.py just return the tool name (clang or clang-cl) and have Builder.cc() construct the path in the toolchain.  So configs.py don\u0027t need to depend on toolchains.py.",
+      "range": {
+        "startLine": 234,
+        "startChar": 36,
+        "endLine": 234,
+        "endChar": 79
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56dde882_65716826",
+        "filename": "base_builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T06:05:08Z",
+      "side": 1,
+      "message": "Shall we always set the linker?",
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cbe979b_1b5d09ad",
+        "filename": "base_builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T06:05:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure why this is necessary.  Are there multiple libraries now or is the extension variable?  Either way, add a comment.",
+      "range": {
+        "startLine": 470,
+        "startChar": 8,
+        "endLine": 470,
+        "endChar": 59
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9422ef4b_771d5266",
+        "filename": "builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T06:05:08Z",
+      "side": 1,
+      "message": "Omitting this for MSVC is fine since it\u0027s on by default.  nxcompat and dynamicbase are also on by default.  Should we move them here as well?",
+      "range": {
+        "startLine": 645,
+        "startChar": 0,
+        "endLine": 645,
+        "endChar": 51
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e53c61d0_5c92b467",
+        "filename": "builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-04T06:05:08Z",
+      "side": 1,
+      "message": "We should pass this to MSVC as well.  This flag makes the links reproducible.",
+      "range": {
+        "startLine": 646,
+        "startChar": 34,
+        "endLine": 646,
+        "endChar": 47
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
