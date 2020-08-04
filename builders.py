@@ -70,7 +70,6 @@ class Stage1Builder(base_builders.LLVMBuilder):
     build_android_targets: bool = False
     config_list: List[configs.Config] = [configs.host_config()]
     use_goma_for_stage1: bool = False
-    build_lldb: bool = False
 
     @property
     def llvm_targets(self) -> Set[str]:
@@ -93,11 +92,6 @@ class Stage1Builder(base_builders.LLVMBuilder):
         # to prevent linking with the newly-built libc++.so
         ldflags.append(f'-Wl,-rpath,{self.toolchain.lib_dir}')
         return ldflags
-
-    def set_lldb_flags(self, target: hosts.Host, defines: Dict[str, str]) -> None:
-        # Disable dependencies because we only need lldb-tblgen to be built.
-        defines['LLDB_ENABLE_PYTHON'] = 'OFF'
-        defines['LLDB_ENABLE_LIBEDIT'] = 'OFF'
 
     @property
     def cmake_defines(self) -> Dict[str, str]:
@@ -141,7 +135,6 @@ class Stage2Builder(base_builders.LLVMBuilder):
     install_dir: Path = paths.OUT_DIR / 'stage2-install'
     config_list: List[configs.Config] = [configs.host_config()]
     remove_install_dir: bool = True
-    build_lldb: bool = True
     debug_build: bool = False
     build_instrumented: bool = False
     profdata_file: Optional[Path] = None
@@ -462,10 +455,16 @@ class XzBuilder(base_builders.CMakeBuilder):
     config_list: List[configs.Config] = [configs.host_config()]
 
 
-class XzWindowsBuilder(base_builders.CMakeBuilder):
-    name: str = 'xz-windows'
-    src_dir: Path = paths.XZ_SRC_DIR
-    config_list: List[configs.Config] = [configs.WindowsConfig()]
+class LibXml2Builder(base_builders.CMakeBuilder):
+    name: str = 'libxml2'
+    src_dir: Path = paths.LIBXML2_SRC_DIR
+    config_list: List[configs.Config] = [configs.host_config()]
+
+    def build(self) -> None:
+        # The src dir contains configure files for Android platform. Remove them.
+        (self.src_dir / 'config.h').unlink(missing_ok=True)
+        (self.src_dir / 'include' / 'libxml' / 'xmlversion.h').unlink(missing_ok=True)
+        super().build()
 
 
 class LldbServerBuilder(base_builders.LLVMRuntimeBuilder):
@@ -587,7 +586,6 @@ class WindowsToolchainBuilder(base_builders.LLVMBuilder):
     name: str = 'windows-x86-64'
     toolchain_name: str = 'stage1'
     config_list: List[configs.Config] = [configs.WindowsConfig()]
-    build_lldb: bool = True
 
     @property
     def install_dir(self) -> Path:

@@ -40,6 +40,7 @@ NINJA_BIN_PATH: Path = PREBUILTS_DIR / 'build-tools' / hosts.build_host().os_tag
 LIBEDIT_SRC_DIR: Path = EXTERNAL_DIR / 'libedit'
 SWIG_SRC_DIR: Path = EXTERNAL_DIR / 'swig'
 XZ_SRC_DIR: Path = TOOLCHAIN_DIR / 'xz'
+LIBXML2_SRC_DIR: Path = EXTERNAL_DIR / 'libxml2'
 
 NDK_BASE: Path = TOOLCHAIN_DIR / 'prebuilts' /'ndk' / constants.NDK_VERSION
 NDK_LIBCXX_HEADERS: Path = NDK_BASE / 'sources' / 'cxx-stl' / 'llvm-libc++'/ 'include'
@@ -47,6 +48,7 @@ NDK_LIBCXXABI_HEADERS: Path = NDK_BASE / 'sources' / 'cxx-stl' / 'llvm-libc++abi
 NDK_SUPPORT_HEADERS: Path = NDK_BASE / 'sources' / 'android' / 'support' / 'include'
 
 GCC_ROOT: Path = PREBUILTS_DIR / 'gcc' / hosts.build_host().os_tag
+MINGW_ROOT: Path = PREBUILTS_DIR / 'gcc' / 'linux-x86' / 'host' / 'x86_64-w64-mingw32-4.8'
 
 _WIN_ZLIB_PATH: Path = (PREBUILTS_DIR / 'clang' / 'host' / 'windows-x86' /
                         'toolchain-prebuilts' / 'zlib')
@@ -99,10 +101,6 @@ def get_python_dynamic_lib(host: hosts.Host) -> Path:
         hosts.Host.Windows: python_root / 'python38.dll',
     }[host]
 
-def get_libedit_include_dir(libedit_root: Path) -> Path:
-    """Returns the path to libedit include for a host."""
-    return libedit_root / 'include'
-
 def get_libedit_lib(libedit_root: Path, host: hosts.Host) -> Path:
     """Returns the path to libedit lib for a host."""
     if host.is_darwin:
@@ -110,3 +108,18 @@ def get_libedit_lib(libedit_root: Path, host: hosts.Host) -> Path:
     if host.is_linux:
         return libedit_root / 'lib' / 'libedit.so.0'
     raise NotImplementedError(f"Unsupported host {host.name}")
+
+def get_libxml2_lib(libxml2_root: Path, host: hosts.Host) -> Path:
+    return {
+        hosts.Host.Linux: libxml2_root / 'lib' / 'libxml2.so.2.9.10',
+        #hosts.Host.Darwin: libxml2_root / 'lib' / 'libpython3.8.dylib',
+        hosts.Host.Windows: libxml2_root / 'lib' / 'libxml2.dll.a',
+    }[host]
+
+def get_libxml2_dynamic_lib(libxml2_root: Path, host: hosts.Host) -> Path:
+    return {
+        hosts.Host.Linux: libxml2_root / 'lib' / 'libxml2.so.2.9.10',
+        #hosts.Host.Darwin: libxml2_root / 'lib' / 'libpython3.8.dylib',
+        hosts.Host.Windows: libxml2_root / 'bin' / 'libxml2.dll',
+    }[host]
+
