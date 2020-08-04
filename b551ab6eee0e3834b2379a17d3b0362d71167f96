@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "151fb0a9_20b6aa7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-04T16:43:34Z",
+      "side": 1,
+      "message": "This is still broken for Darwin builds.",
+      "revId": "b551ab6eee0e3834b2379a17d3b0362d71167f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
