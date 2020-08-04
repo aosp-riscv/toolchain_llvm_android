@@ -21,7 +21,7 @@ import multiprocessing
 import os
 import shutil
 import subprocess
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Sequence
 
 import android_version
 from builder_registry import BuilderRegistry
@@ -43,8 +43,10 @@ class Builder:  # pylint: disable=too-few-public-methods
     name: str = ""
     config_list: List[configs.Config]
 
-    def __init__(self) -> None:
+    def __init__(self, config_list: Optional[Sequence[configs.Config]]=None) -> None:
         self._config: configs.Config
+        if config_list:
+            self.config_list = list(config_list)
 
     @BuilderRegistry.register_and_build
     def build(self) -> None:
@@ -103,12 +105,13 @@ class AutoconfBuilder(Builder):
     @property
     def output_dir(self) -> Path:
         """The path for intermediate results."""
-        return paths.OUT_DIR / 'lib' / (f'{self.name}')
+        return paths.OUT_DIR / 'lib' / (f'{self.name}{self._config.output_suffix}')
 
     @property
     def install_dir(self) -> Path:
         """Returns the path this target will be installed to."""
-        return paths.OUT_DIR / 'lib' / f'{self.name}-install'
+        output_dir = self.output_dir
+        return output_dir.parent / (output_dir.name + '-install')
 
     @staticmethod
     def _get_mac_sdk_path() -> Path:
@@ -198,12 +201,13 @@ class CMakeBuilder(Builder):
     @property
     def output_dir(self) -> Path:
         """The path for intermediate results."""
-        return paths.OUT_DIR / 'lib' / f'{self.name}'
+        return paths.OUT_DIR / 'lib' / (f'{self.name}{self._config.output_suffix}')
 
     @property
     def install_dir(self) -> Path:
         """Returns the path this target will be installed to."""
-        return paths.OUT_DIR / 'lib' / f'{self.name}-install'
+        output_dir = self.output_dir
+        return output_dir.parent / (output_dir.name + '-install')
 
     @property
     def toolchain(self) -> toolchains.Toolchain:
@@ -231,7 +235,7 @@ class CMakeBuilder(Builder):
             'CMAKE_OBJCOPY': str(self.toolchain.objcopy),
             'CMAKE_OBJDUMP': str(self.toolchain.objdump),
             'CMAKE_RANLIB': str(self.toolchain.ranlib),
-            'CMAKE_RC': str(self.toolchain.rc),
+            'CMAKE_RC_COMPILER': str(self.toolchain.rc),
             'CMAKE_READELF': str(self.toolchain.readelf),
             'CMAKE_STRIP': str(self.toolchain.strip),
             'CMAKE_MT': str(self.toolchain.mt),
@@ -380,10 +384,6 @@ class LLVMRuntimeBuilder(LLVMBaseBuilder):  # pylint: disable=abstract-method
         return self.toolchain.path / 'runtimes_ndk_cxx' / arch.value
 
     @property
-    def output_dir(self) -> Path:
-        return paths.OUT_DIR / 'lib' / (f'{self.name}{self._config.output_suffix}')
-
-    @property
     def cmake_defines(self) -> Dict[str, str]:
         defines: Dict[str, str] = super().cmake_defines
         defines['LLVM_CONFIG_PATH'] = str(self.toolchain.path /
@@ -400,6 +400,13 @@ class LLVMBuilder(LLVMBaseBuilder):
     svn_revision: str
     enable_assertions: bool = False
     toolchain_name: str
+
+    # lldb options.
+    build_lldb: bool = True
+    libxml2_path: Optional[Path] = None
+    swig_executable: Optional[Path] = None
+    liblzma_path: Optional[Path] = None
+    libedit_path: Optional[Path] = None
 
     @property
     def toolchain(self) -> toolchains.Toolchain:
@@ -423,43 +430,47 @@ class LLVMBuilder(LLVMBaseBuilder):
         """Returns llvm target archtects to build."""
         raise NotImplementedError()
 
-    @property
-    def _enable_lldb(self) -> bool:
-        return 'lldb' in self.llvm_projects
-
     def set_lldb_flags(self, target: hosts.Host, defines: Dict[str, str]) -> None:  # pylint: disable=no-self-use
         """Sets cmake defines for lldb."""
-        # By default all these are auto-detected. Disable them explicitly to avoid unexpected dependency.
-        defines['LLDB_ENABLE_LIBXML2'] = 'OFF'
-        defines['LLDB_ENABLE_LUA'] = 'OFF'
-
-        swig_executable = BuilderRegistry.get('swig').install_dir / 'bin' / 'swig'
-        defines['SWIG_EXECUTABLE'] = str(swig_executable)
-        py_prefix = 'Python3' if target.is_windows else 'PYTHON'
-        defines['LLDB_ENABLE_PYTHON'] = 'ON'
-        defines[f'{py_prefix}_LIBRARY'] = str(paths.get_python_lib(target))
-        defines[f'{py_prefix}_LIBRARIES'] = str(paths.get_python_lib(target))
-        defines[f'{py_prefix}_INCLUDE_DIR'] = str(paths.get_python_include_dir(target))
-        defines[f'{py_prefix}_INCLUDE_DIRS'] = str(paths.get_python_include_dir(target))
-        defines[f'{py_prefix}_EXECUTABLE'] = str(paths.get_python_executable(hosts.build_host()))
-        defines['LLDB_EMBED_PYTHON_HOME'] = 'OFF'
-
         if target.is_darwin:
             # Avoids the build of debug server. It is only used in testing.
             defines['LLDB_USE_SYSTEM_DEBUGSERVER'] = 'ON'
 
-        defines['LLDB_ENABLE_LZMA'] = 'ON'
-        xz_root = BuilderRegistry.get('xz-windows' if target.is_windows else 'xz').install_dir
-        defines['LIBLZMA_INCLUDE_DIR'] = str(xz_root / 'include')
-        defines['LIBLZMA_LIBRARY'] = str(xz_root / 'lib' / 'liblzma.a')
+        defines['LLDB_ENABLE_LUA'] = 'OFF'
 
-        if not target.is_windows:
-            libedit_root = BuilderRegistry.get('libedit').install_dir
+        if self.swig_executable:
+            defines['SWIG_EXECUTABLE'] = str(self.swig_executable)
+            py_prefix = 'Python3' if target.is_windows else 'PYTHON'
+            defines['LLDB_ENABLE_PYTHON'] = 'ON'
+            defines[f'{py_prefix}_LIBRARY'] = str(paths.get_python_lib(target))
+            defines[f'{py_prefix}_LIBRARIES'] = str(paths.get_python_lib(target))
+            defines[f'{py_prefix}_INCLUDE_DIR'] = str(paths.get_python_include_dir(target))
+            defines[f'{py_prefix}_INCLUDE_DIRS'] = str(paths.get_python_include_dir(target))
+            defines[f'{py_prefix}_EXECUTABLE'] = str(paths.get_python_executable(hosts.build_host()))
+            defines['LLDB_EMBED_PYTHON_HOME'] = 'OFF'
+        else:
+            defines['LLDB_ENABLE_PYTHON'] = 'OFF'
+
+        if self.liblzma_path:
+            defines['LLDB_ENABLE_LZMA'] = 'ON'
+            defines['LIBLZMA_INCLUDE_DIR'] = str(self.liblzma_path / 'include')
+            defines['LIBLZMA_LIBRARY'] = str(self.liblzma_path / 'lib' / 'liblzma.a')
+        else:
+            defines['LLDB_ENABLE_LZMA'] = 'OFF'
+
+        if self.libedit_path:
             defines['LLDB_ENABLE_LIBEDIT'] = 'ON'
-            defines['LibEdit_INCLUDE_DIRS'] = str(paths.get_libedit_include_dir(libedit_root))
-            defines['LibEdit_LIBRARIES'] = str(paths.get_libedit_lib(libedit_root, target))
+            defines['LibEdit_INCLUDE_DIRS'] = str(self.libedit_path / 'include')
+            defines['LibEdit_LIBRARIES'] = str(paths.get_libedit_lib(self.libedit_path, target))
         else:
             defines['LLDB_ENABLE_LIBEDIT'] = 'OFF'
+
+        if self.libxml2_path:
+            defines['LLDB_ENABLE_LIBXML2'] = 'ON'
+            defines['LIBXML2_INCLUDE_DIR'] = str(self.libxml2_path / 'include' / 'libxml2')
+            defines['LIBXML2_LIBRARY'] = str(paths.get_libxml2_lib(self.libxml2_path, target))
+        else:
+            defines['LLDB_ENABLE_LIBXML2'] = 'OFF'
 
     @property
     def cmake_defines(self) -> Dict[str, str]:
@@ -477,7 +488,12 @@ class LLVMBuilder(LLVMBaseBuilder):
                                               'binutils' / 'binutils-2.27' / 'include')
         defines['LLVM_BUILD_RUNTIME'] = 'ON'
 
-        if self._enable_lldb:
+        if self._config.target_os.is_darwin:
+            if utils.is_available_mac_ver('10.11'):
+                raise RuntimeError('libcompression can be enabled for macOS 10.11 and above.')
+            defines['HAVE_LIBCOMPRESSION'] = '0'
+
+        if self.build_lldb:
             self.set_lldb_flags(self._config.target_os, defines)
 
         return defines
