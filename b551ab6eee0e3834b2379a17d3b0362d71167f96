@@ -16,6 +16,24 @@
       "revId": "b551ab6eee0e3834b2379a17d3b0362d71167f96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0173c6ac_20657867",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-04T18:31:06Z",
+      "side": 1,
+      "message": "That\u0027s weird... Checking....",
+      "parentUuid": "151fb0a9_20b6aa7d",
+      "revId": "b551ab6eee0e3834b2379a17d3b0362d71167f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
