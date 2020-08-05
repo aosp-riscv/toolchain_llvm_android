@@ -492,11 +492,21 @@ class LldbServerBuilder(base_builders.LLVMRuntimeBuilder):
         }[self._config.target_arch]
 
     @property
+    def _llvm_host_triple(self) -> str:
+        return {
+            hosts.Arch.ARM: 'arm-unknown-linux-android',
+            hosts.Arch.AARCH64: 'aarch64-unknown-linux-android',
+            hosts.Arch.I386: 'i386-unknown-linux-android',
+            hosts.Arch.X86_64: 'x86_64-unknown-linux-android',
+        }[self._config.target_arch]
+
+    @property
     def cmake_defines(self) -> Dict[str, str]:
         defines = super().cmake_defines
         # lldb depends on support libraries.
         defines['LLVM_ENABLE_PROJECTS'] = 'clang;lldb'
         defines['LLVM_TARGETS_TO_BUILD'] = self._llvm_target
+        defines['LLVM_HOST_TRIPLE'] = self._llvm_host_triple
         defines['LLVM_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'llvm-tblgen')
         defines['CLANG_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'clang-tblgen')
         defines['LLDB_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'lldb-tblgen')
