@@ -1,0 +1,10 @@
+Code-Review+2: Haibo Huang <hhb@google.com>
+Code-Review+2: Emre Kultursay <emrekultursay@google.com>
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Autosubmit+1: Haibo Huang <hhb@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 05 Aug 2020 22:41:03 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1391353
+Project: toolchain/llvm_android
+Branch: refs/heads/master
