@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "881623a1_6ee91cc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-05T21:19:46Z",
+      "side": 1,
+      "message": "Addressed review comments and made a few fixes from pyformat, pylint.",
+      "revId": "2637c0c28764cb97c11a2822fd6fe57ba867397f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f53ebbb2_f10272cf",
+        "filename": "gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-05T21:19:46Z",
+      "side": 1,
+      "message": "We could use re.sub() but constructing the repl argument to it seems too complex considering our search pattern is simple.",
+      "parentUuid": "6a8db030_cbc4f224",
+      "range": {
+        "startLine": 194,
+        "startChar": 66,
+        "endLine": 194,
+        "endChar": 70
+      },
+      "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8955547f_3458d8c1",
         "filename": "gerrit.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0548e646_f8a97812",
+        "filename": "gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-05T21:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8955547f_3458d8c1",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 42
+      },
+      "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c379a1a6_cc6a5149",
+        "filename": "gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-05T21:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1468336c_7dc75981",
+      "range": {
+        "startLine": 258,
+        "startChar": 21,
+        "endLine": 258,
+        "endChar": 38
+      },
+      "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c73710c_360edd76",
         "filename": "gerrit.py",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1df435dc_9049abf1",
+        "filename": "gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-05T21:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c73710c_360edd76",
+      "range": {
+        "startLine": 262,
+        "startChar": 24,
+        "endLine": 262,
+        "endChar": 29
+      },
+      "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "d06817c5_cb4ad141",
+        "filename": "test-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-05T21:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ee29286_4dc41330",
+      "range": {
+        "startLine": 47,
+        "startChar": 29,
+        "endLine": 47,
+        "endChar": 31
+      },
+      "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4625db5_9deb1104",
         "filename": "test-prebuilts.py",
         "patchSetId": 1
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "5052e113_4bb10896",
+        "filename": "test-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-05T21:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4625db5_9deb1104",
+      "range": {
+        "startLine": 64,
+        "startChar": 58,
+        "endLine": 64,
+        "endChar": 59
+      },
+      "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e74eab0b_50a8f3a5",
         "filename": "test-prebuilts.py",
         "patchSetId": 1
@@ -160,6 +304,30 @@
       "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "283d8948_9eeff04f",
+        "filename": "test-prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-05T21:19:46Z",
+      "side": 1,
+      "message": "The toolchain build exists but prebuilts from it may not be uploaded to prebuilts/clang/... or the switchover change to build/soong.\n\nHowever, I simplified to move the upload logic to the constructor since we\u0027d always eventually upload the CLs to Gerrit.",
+      "parentUuid": "e74eab0b_50a8f3a5",
+      "range": {
+        "startLine": 69,
+        "startChar": 16,
+        "endLine": 69,
+        "endChar": 29
+      },
+      "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
