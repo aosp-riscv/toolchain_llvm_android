@@ -1,0 +1,9 @@
+Autosubmit+1: Haibo Huang <hhb@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Code-Review+2: Yi Kong <yikong@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 06 Aug 2020 02:00:39 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1392542
+Project: toolchain/llvm_android
+Branch: refs/heads/master
