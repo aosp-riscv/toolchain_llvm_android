@@ -184,6 +184,24 @@
     },
     {
       "key": {
+        "uuid": "6074047e_0e68921f",
+        "filename": "base_builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-07T04:27:51Z",
+      "side": 1,
+      "message": "Done. Now only MSVCConfig sets the linker.",
+      "parentUuid": "2422c087_ae99e623",
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8cbe979b_1b5d09ad",
         "filename": "base_builders.py",
         "patchSetId": 21
