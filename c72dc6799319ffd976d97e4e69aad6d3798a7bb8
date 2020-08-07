@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "2422c087_ae99e623",
+        "filename": "base_builders.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-07T04:08:38Z",
+      "side": 1,
+      "message": "I take it back - we should set it only for the WinSDK build.  Mainly because I couldn\u0027t find any documentation on what this does :(  Also a comment in https://reviews.llvm.org/D62111 seems to indicate it is ignored in non-windows builds.\n\n(Ok to do as a follow up.)",
+      "parentUuid": "8c1456c6_c53cec5e",
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8cbe979b_1b5d09ad",
         "filename": "base_builders.py",
         "patchSetId": 21
@@ -342,6 +360,30 @@
       "side": 1,
       "message": "Yes it is. Or config will fail because link.exe is not found.",
       "parentUuid": "66f8a4a3_815cf57a",
+      "range": {
+        "startLine": 219,
+        "startChar": 12,
+        "endLine": 219,
+        "endChar": 27
+      },
+      "revId": "c72dc6799319ffd976d97e4e69aad6d3798a7bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dafe271d_cc714d9c",
+        "filename": "configs.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-07T04:08:38Z",
+      "side": 1,
+      "message": "This\u0027d make \u0027-fuse-ld\u003dlld\u0027 to every compile step :(  I wish it was clear why CMake uses link.exe instead of the compiler to pick the linker.  Until then, this is fine.",
+      "parentUuid": "ecc0c946_fd42abfb",
       "range": {
         "startLine": 219,
         "startChar": 12,
