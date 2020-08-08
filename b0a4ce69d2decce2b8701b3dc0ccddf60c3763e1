@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a0d3d78_32bc442c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-08T02:03:28Z",
+      "side": 1,
+      "message": "Or should we give it a default empty value in do_build.py?",
+      "revId": "b0a4ce69d2decce2b8701b3dc0ccddf60c3763e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
