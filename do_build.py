@@ -1132,7 +1132,7 @@ def main():
 
             libxml2_builder = builders.LibXml2Builder()
             libxml2_builder.build()
-            stage2.libxml2_path = libxml2_builder
+            stage2.libxml2 = libxml2_builder
 
             libedit_builder = builders.LibEditBuilder()
             libedit_builder.build()
