@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "5701c229_996c2850",
+        "filename": "gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-08T01:42:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f53ebbb2_f10272cf",
+      "range": {
+        "startLine": 194,
+        "startChar": 66,
+        "endLine": 194,
+        "endChar": 70
+      },
+      "revId": "4de0a5dbfffa3c3949da301cc24c32294aaeff13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8955547f_3458d8c1",
         "filename": "gerrit.py",
         "patchSetId": 1
