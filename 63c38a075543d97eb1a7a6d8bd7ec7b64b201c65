@@ -34,6 +34,24 @@
       "revId": "63c38a075543d97eb1a7a6d8bd7ec7b64b201c65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa00759_0129086a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-10T22:22:41Z",
+      "side": 1,
+      "message": "Did option (1) to always install to stage2.  This is indeed simpler - thanks for the suggestion.",
+      "parentUuid": "dc7de33a_00e97c8a",
+      "revId": "63c38a075543d97eb1a7a6d8bd7ec7b64b201c65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
