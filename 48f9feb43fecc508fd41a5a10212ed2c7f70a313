@@ -46,6 +46,30 @@
       "revId": "48f9feb43fecc508fd41a5a10212ed2c7f70a313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89f7f121_501d2999",
+        "filename": "do_build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-10T21:33:53Z",
+      "side": 0,
+      "message": "I think package_toolchain only removes the unnecessary static libraries, but we only passed shared libraries in lldb_deps, so they don\u0027t get removed.\n\n(I\u0027m just double checking that it\u0027s ok to no longer pass this lldb_deps param to package_toolchain()).",
+      "parentUuid": "bd58c94f_da3b891b",
+      "range": {
+        "startLine": 1180,
+        "startChar": 12,
+        "endLine": 1180,
+        "endChar": 21
+      },
+      "revId": "48f9feb43fecc508fd41a5a10212ed2c7f70a313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
