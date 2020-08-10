@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee682d22_5619d665",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-10T18:14:55Z",
+      "side": 1,
+      "message": "On second thought, should we instead add the opposite option \u0027--create-tar\u0027 and use it only in the handful of go/ab/ build targets?  \u0027tar\u0027 is very unlikely to fail or unexpectedly misbehave.",
+      "revId": "a94e8ca2ef4f162a257911a98c646eb8beff7fc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
