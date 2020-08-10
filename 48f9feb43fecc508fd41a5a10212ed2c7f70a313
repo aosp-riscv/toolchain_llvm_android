@@ -22,6 +22,30 @@
       "revId": "48f9feb43fecc508fd41a5a10212ed2c7f70a313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd58c94f_da3b891b",
+        "filename": "do_build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-10T21:06:49Z",
+      "side": 0,
+      "message": "Package step not only validate files that are necessary, but also remove files that are not necessary...",
+      "parentUuid": "2be20c88_917912da",
+      "range": {
+        "startLine": 1180,
+        "startChar": 12,
+        "endLine": 1180,
+        "endChar": 21
+      },
+      "revId": "48f9feb43fecc508fd41a5a10212ed2c7f70a313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
