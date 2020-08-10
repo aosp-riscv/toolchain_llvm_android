@@ -16,6 +16,24 @@
       "revId": "a94e8ca2ef4f162a257911a98c646eb8beff7fc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1837a43d_37fdc98b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-10T19:22:20Z",
+      "side": 1,
+      "message": "Yeah, I think that would be better. Can you switch this to be an opt-in flag that defaults to true right now? Then we can flip our builds to use it (or we could even just drop it from our builds right now and turn it on in ab/ once it lands).",
+      "parentUuid": "ee682d22_5619d665",
+      "revId": "a94e8ca2ef4f162a257911a98c646eb8beff7fc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
