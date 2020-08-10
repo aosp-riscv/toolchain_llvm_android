@@ -1009,6 +1009,12 @@ def parse_args():
         help='Skip the packaging, and only do the build step')
 
     parser.add_argument(
+        '--no-create-tar',
+        action='store_true',
+        default=False,
+        help='Do not create a tar archive of the toolchain')
+
+    parser.add_argument(
         '--no-strip',
         action='store_true',
         default=False,
@@ -1065,6 +1071,7 @@ def main():
     do_package = not args.skip_package
     do_strip = not args.no_strip
     do_strip_host_package = do_strip and not args.debug
+    do_create_tar = not args.no_create_tar
 
     # TODO (Pirama): Avoid using global statement
     global BUILD_LLDB, BUILD_LLVM_NEXT
@@ -1109,6 +1116,7 @@ def main():
     else:
         swig_builder = None
 
+    lldb_deps: Optional[List[Path]] = None
     if need_host:
         profdata_filename = pgo_profdata_filename()
         profdata = pgo_profdata_file(profdata_filename)
@@ -1138,7 +1146,7 @@ def main():
             libedit_builder.build()
             stage2.libedit = libedit_builder
 
-            lldb_deps: List[Path] = [
+            lldb_deps = [
                 libxml2_builder.install_library,
                 libedit_builder.install_library,
             ]
@@ -1178,7 +1186,8 @@ def main():
             hosts.build_host(),
             dist_dir,
             lldb_deps,
-            strip=do_strip_host_package)
+            strip=do_strip_host_package,
+            create_tar=do_create_tar)
 
     if do_package and need_windows:
         package_toolchain(
@@ -1187,7 +1196,8 @@ def main():
             hosts.Host.Windows,
             dist_dir,
             win_lldb_deps,
-            strip=do_strip)
+            strip=do_strip,
+            create_tar=do_create_tar)
 
     return 0
 
