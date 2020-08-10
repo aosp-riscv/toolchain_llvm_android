@@ -451,7 +451,7 @@ class SysrootsBuilder(base_builders.Builder):
                 # We can build libcxxabi only after the sysroots are
                 # created.  Build it for the current arch and copy it to
                 # <libdir>.
-                out_dir = build_libcxxabi(self.toolchain, arch)
+                out_dir = build_libcxxabi(self.output_toolchain, arch)
                 out_path = out_dir / 'lib64' / 'libc++abi.a'
                 shutil.copy2(out_path, libdir)
 
@@ -1125,8 +1125,9 @@ def main():
             stage2.build_name += ', ANDROID_LLVM_NEXT'
 
         stage2.build()
+        stage2_toolchain = toolchains.get_toolchain_from_builder(stage2)
+        toolchains.set_output_toolchain(stage2_toolchain)
         if not (stage2.build_instrumented or stage2.debug_build):
-            stage2_toolchain = toolchains.get_toolchain_from_builder(stage2)
             toolchains.set_runtime_toolchain(stage2_toolchain)
         stage2_install = str(stage2.install_dir)
 

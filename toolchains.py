@@ -17,6 +17,7 @@
 
 import functools
 from pathlib import Path
+from typing import Optional
 
 from builder_registry import BuilderRegistry
 import paths
@@ -157,3 +158,21 @@ def get_runtime_toolchain() -> Toolchain:
     """Gets the toolchain used to build runtime."""
     global _RUNTIME_TOOLCHAIN  # pylint: disable=global-statement
     return _RUNTIME_TOOLCHAIN
+
+_OUTPUT_TOOLCHAIN: Optional[Toolchain] = None
+def set_output_toolchain(toolchain: Toolchain) -> None:
+    """Set the Linux toolchain being built.  Used by builders to install
+    additional artifacts.
+    """
+    global _OUTPUT_TOOLCHAIN
+    if _OUTPUT_TOOLCHAIN is not None:
+        raise RuntimeError('Cannot change output toolchain')
+    _OUTPUT_TOOLCHAIN = toolchain
+
+def get_output_toolchain() -> Toolchain:
+    """Get the Linux toolchain being built.  Used by builders to install
+    additional artifacts.
+    """
+    if _OUTPUT_TOOLCHAIN is None:
+        raise RuntimeError('Output toolchain is not set yet.')
+    return _OUTPUT_TOOLCHAIN
