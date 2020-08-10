@@ -70,6 +70,30 @@
       "revId": "48f9feb43fecc508fd41a5a10212ed2c7f70a313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c76fe6a2_decb0696",
+        "filename": "do_build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-10T22:34:51Z",
+      "side": 0,
+      "message": "It is ok for Linux / Darwin because their shared libraries are in lib64/.\n\nBut for windows, the libraries are installed to bin/. And they will be removed if not \"necessary\".",
+      "parentUuid": "89f7f121_501d2999",
+      "range": {
+        "startLine": 1180,
+        "startChar": 12,
+        "endLine": 1180,
+        "endChar": 21
+      },
+      "revId": "48f9feb43fecc508fd41a5a10212ed2c7f70a313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
