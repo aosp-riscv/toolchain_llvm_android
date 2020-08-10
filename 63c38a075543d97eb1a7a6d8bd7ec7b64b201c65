@@ -16,6 +16,24 @@
       "revId": "63c38a075543d97eb1a7a6d8bd7ec7b64b201c65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc7de33a_00e97c8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-10T22:07:58Z",
+      "side": 1,
+      "message": "I\u0027m thinking whether we can simplify things a little..\n\n1. Maybe always install to stage2? Don\u0027t have set_* get_*...\n\n2. Maybe always build runtimes with stage1? But then we lose a chance to validation stage2 build..",
+      "parentUuid": "16177f91_20e97a29",
+      "revId": "63c38a075543d97eb1a7a6d8bd7ec7b64b201c65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
