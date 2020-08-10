@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2be20c88_917912da",
+        "filename": "do_build.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1180,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-10T16:44:46Z",
+      "side": 0,
+      "message": "I guess we can assume that these files will always be present and don\u0027t need to be validated in the package step.",
+      "range": {
+        "startLine": 1180,
+        "startChar": 12,
+        "endLine": 1180,
+        "endChar": 21
+      },
+      "revId": "48f9feb43fecc508fd41a5a10212ed2c7f70a313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
