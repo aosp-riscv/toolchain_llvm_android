@@ -1159,7 +1159,7 @@ def main():
             args.build_name,
             hosts.Host.Windows,
             dist_dir,
-            win_lldb_bins,
+            [],
             strip=do_strip)
 
     return 0
