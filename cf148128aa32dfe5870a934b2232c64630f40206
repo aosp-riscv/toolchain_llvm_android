@@ -46,6 +46,30 @@
       "revId": "cf148128aa32dfe5870a934b2232c64630f40206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d04ebce1_c6418eed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-11T08:15:51Z",
+      "side": 1,
+      "message": "Yi correctly pointed out that I actually was missing a necessary dependent change if we want to take this reland. Instead, we\u0027ll drop this one as well, since we don\u0027t have the other fixes we would need.",
+      "parentUuid": "9dd68c3d_b7bdde1a",
+      "range": {
+        "startLine": 15,
+        "startChar": 13,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "cf148128aa32dfe5870a934b2232c64630f40206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
