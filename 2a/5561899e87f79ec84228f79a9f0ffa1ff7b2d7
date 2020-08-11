@@ -1,0 +1,8 @@
+Autosubmit+1: Stephen Hines <srhines@google.com>
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Tue, 11 Aug 2020 19:15:52 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1395700
+Project: toolchain/llvm_android
+Branch: refs/heads/master
