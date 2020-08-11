@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e421167_68e45bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-11T09:22:20Z",
+      "side": 1,
+      "message": "This should have minimal/zero impact, but it does help us to get rid of unnecessary prebuilts.",
+      "revId": "eab8b99c6a6a3e493c01ca198290b72c404f95d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
