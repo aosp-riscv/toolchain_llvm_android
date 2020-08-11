@@ -22,6 +22,30 @@
       "revId": "cf148128aa32dfe5870a934b2232c64630f40206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dd68c3d_b7bdde1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-11T08:08:22Z",
+      "side": 1,
+      "message": "Yes, upstream \"revert of a revert\". The tool we use for checking for these kinds of patches looks for this as a keyword as well.",
+      "parentUuid": "8477a51c_b010b7f8",
+      "range": {
+        "startLine": 15,
+        "startChar": 13,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "cf148128aa32dfe5870a934b2232c64630f40206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
