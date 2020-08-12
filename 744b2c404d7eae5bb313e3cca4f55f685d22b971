@@ -63,6 +63,30 @@
       "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43094a48_224868eb",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-12T18:34:35Z",
+      "side": 1,
+      "message": "It\u0027s not the AndroidLibcxx though. It\u0027s really the upstream one that Android LLVM is building. To me, `platform` and `android` both imply the one that currently lives in `external/llvm`, which is not what we\u0027re building or working with here.\n\nMarking this as resolved because it shouldn\u0027t block submission of the rest of this CL stack (which is definitely a big step in the right direction).",
+      "parentUuid": "2e50df63_893ec986",
+      "range": {
+        "startLine": 666,
+        "startChar": 6,
+        "endLine": 666,
+        "endChar": 14
+      },
+      "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
