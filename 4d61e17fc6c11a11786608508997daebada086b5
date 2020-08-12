@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f22a5b3_34ce7dd1",
+        "filename": "do_test_compiler.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-12T09:27:45Z",
+      "side": 1,
+      "message": "Can sink this line out of the if/elif/else. I hadn\u0027t noticed that we make the same calls in each.",
+      "revId": "4d61e17fc6c11a11786608508997daebada086b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
