@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2605c4e6_013acff6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-12T09:11:16Z",
+      "side": 1,
+      "message": "I had one minor suggestion for clarity, but we can postpone it until the patch is in (assuming there are no other concerns).",
+      "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04f25372_6920d358",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-12T09:11:16Z",
+      "side": 1,
+      "message": "Rather than `Platform`, perhaps we should be calling this `Upstream` instead. The platform libc++ is actually yet another different version. If we change this, we should change the other `platform` names below as well.\n\nWe could also do this in a follow-up (or pre) change to minimize churn and confusion, since this CL is moving a lot of existing code too.",
+      "range": {
+        "startLine": 666,
+        "startChar": 6,
+        "endLine": 666,
+        "endChar": 14
+      },
+      "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
