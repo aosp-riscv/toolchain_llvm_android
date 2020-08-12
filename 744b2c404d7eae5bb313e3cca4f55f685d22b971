@@ -183,6 +183,30 @@
       "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05e9a7a5_8ca0d91f",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-12T20:26:08Z",
+      "side": 1,
+      "message": "Isn\u0027t \u0027sysroot` the issue because we look at the NDK sysroot ones as well? Maybe it\u0027s ok to leave this as platform, because it is approximating the platform version.",
+      "parentUuid": "3cf6c71c_1f21ed21",
+      "range": {
+        "startLine": 666,
+        "startChar": 6,
+        "endLine": 666,
+        "endChar": 14
+      },
+      "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
