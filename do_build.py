@@ -28,7 +28,7 @@ import textwrap
 from typing import cast, List, Optional, Set
 
 import android_version
-import base_builders
+from base_builders import Builder, LLVMBuilder
 import builders
 from builder_registry import BuilderRegistry
 import configs
@@ -284,7 +284,7 @@ def remove_static_libraries(static_lib_dir, necessary_libs=None):
                 os.remove(static_library)
 
 
-def package_toolchain(toolchain_builder: base_builders.LLVMBuilder,
+def package_toolchain(toolchain_builder: LLVMBuilder,
                       necessary_bin_files: Optional[Set[str]]=None,
                       strip=True, create_tar=True):
     dist_dir = Path(ORIG_ENV.get('DIST_DIR', paths.OUT_DIR))
@@ -382,7 +382,7 @@ def package_toolchain(toolchain_builder: base_builders.LLVMBuilder,
 
     bin_dir = os.path.join(install_dir, 'bin')
     lib_dir = os.path.join(install_dir, 'lib64')
-    strip_cmd = toolchains.get_runtime_toolchain().strip
+    strip_cmd = Builder.default_toolchain.strip
 
     for bin_filename in os.listdir(bin_dir):
         binary = os.path.join(bin_dir, bin_filename)
@@ -645,8 +645,7 @@ def main():
     stage1.build_android_targets = args.debug or instrumented
     stage1.use_goma_for_stage1 = USE_GOMA_FOR_STAGE1
     stage1.build()
-    stage1_toolchain = stage1.installed_toolchain
-    toolchains.set_runtime_toolchain(stage1_toolchain)
+    Builder.default_toolchain = stage1.installed_toolchain
 
     if build_lldb:
         # Swig is needed for both host and windows lldb.
@@ -695,8 +694,9 @@ def main():
 
         stage2.build()
         if not (stage2.build_instrumented or stage2.debug_build):
-            toolchains.set_runtime_toolchain(stage2.installed_toolchain)
+            Builder.default_toolchain = stage2.installed_toolchain
 
+        Builder.output_toolchain = stage2.installed_toolchain
         if hosts.build_host().is_linux and do_runtimes:
             build_runtimes(build_lldb_server=build_lldb)
 
