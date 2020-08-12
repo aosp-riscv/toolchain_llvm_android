@@ -38,8 +38,7 @@ def apply_patches(source_dir, svn_version, patch_json, patch_dir,
 
     patch_manager_cmd = [
         sys.executable,
-        utils.android_path('external', 'toolchain-utils', 'llvm_tools',
-                          'patch_manager.py'),
+        str(paths.TOOLCHAIN_UTILS_DIR / 'llvm_tools' / 'patch_manager.py'),
         '--svn_version', svn_version,
         '--patch_metadata_file', patch_json,
         '--filesdir_path', patch_dir,
@@ -60,12 +59,12 @@ def setup_sources(source_dir, build_llvm_next):
     source_dir only if necessary to avoid recompiles during incremental builds.
     """
 
-    copy_from = utils.android_path('toolchain', 'llvm-project')
+    copy_from = paths.TOOLCHAIN_LLVM_PATH
 
     # Copy llvm source tree to a temporary directory.
     tmp_source_dir = source_dir.rstrip('/') + '.tmp'
     if os.path.exists(tmp_source_dir):
-        utils.rm_tree(tmp_source_dir)
+        shutil.rmtree(tmp_source_dir)
 
     # mkdir parent of tmp_source_dir if necessary - so we can call 'cp' below.
     tmp_source_parent = os.path.dirname(tmp_source_dir)
@@ -87,7 +86,7 @@ def setup_sources(source_dir, build_llvm_next):
       subprocess.check_call(cmd)
 
     # patch source tree
-    patch_dir = utils.android_path('toolchain', 'llvm_android', 'patches')
+    patch_dir = paths.SCRIPT_DIR / 'patches'
     patch_json = os.path.join(patch_dir, 'PATCHES.json')
     svn_version = android_version.get_svn_revision(build_llvm_next)
     # strip the leading 'r' and letter suffix, e.g., r377782b => 377782
@@ -113,4 +112,4 @@ def setup_sources(source_dir, build_llvm_next):
         subprocess.check_call(['rsync', '-r', '--delete', '--links', '-c',
                                tmp_source_dir, source_dir])
 
-        utils.rm_tree(tmp_source_dir)
+        shutil.rmtree(tmp_source_dir)

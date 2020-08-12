@@ -72,22 +72,22 @@ DISABLED_WARNINGS = [
 class ClangProfileHandler(object):
 
     def __init__(self):
-        self.profiles_dir = utils.out_path('clang-profiles')
+        self.profiles_dir = paths.OUT_DIR / 'clang-profiles'
         self.profiles_format = os.path.join(self.profiles_dir, '%4m.profraw')
 
     def getProfileFileEnvVar(self):
         return ('LLVM_PROFILE_FILE', self.profiles_format)
 
     def mergeProfiles(self):
-        stage1_install = utils.out_path('stage1-install')
-        profdata = os.path.join(stage1_install, 'bin', 'llvm-profdata')
+        stage1_install = paths.OUT_DIR / 'stage1-install'
+        profdata = stage1_install / 'bin' / 'llvm-profdata'
 
         profdata_file = paths.pgo_profdata_filename()
 
-        dist_dir = os.environ.get('DIST_DIR', utils.out_path())
-        out_file = os.path.join(dist_dir, profdata_file)
+        dist_dir = Path(os.environ.get('DIST_DIR', paths.OUT_DIR))
+        out_file = dist_dir / profdata_file
 
-        cmd = [profdata, 'merge', '-o', out_file, self.profiles_dir]
+        cmd = [str(profdata), 'merge', '-o', str(out_file), str(self.profiles_dir)]
         subprocess.check_call(cmd)
 
 
@@ -181,7 +181,10 @@ def link_clang(android_base, clang_path):
     android_clang_path = os.path.join(android_base, 'prebuilts',
                                       'clang', 'host',
                                       hosts.build_host().os_tag, 'clang-dev')
-    utils.remove(android_clang_path)
+    if os.path.isdir(android_clang_path):
+        shutil.rmtree(android_clang_path)
+    else:
+        os.remove(android_clang_path)
     os.symlink(os.path.abspath(clang_path), android_clang_path)
 
 
@@ -198,7 +201,7 @@ def get_connected_device_list():
 
 def rm_current_product_out():
     if 'ANDROID_PRODUCT_OUT' in os.environ:
-        utils.remove(os.environ['ANDROID_PRODUCT_OUT'])
+        shutil.rmtree(os.environ['ANDROID_PRODUCT_OUT'])
 
 
 def extract_clang_version(clang_install: Path) -> version.Version:
@@ -242,7 +245,7 @@ def build_target(android_base, clang_version, target, max_jobs, redirect_stderr,
         else:
             redirect_path = os.path.abspath(
                 os.path.join(android_base, 'out', 'clang-error.log'))
-            utils.remove(redirect_path)
+            os.remove(redirect_path)
         env[redirect_key] = redirect_path
         fallback_path = str(paths.CLANG_PREBUILT_DIR / 'bin')
         env[PREBUILT_COMPILER_PATH_KEY] = fallback_path
@@ -343,18 +346,15 @@ def main():
     args = parse_args()
     if args.clang_path is not None:
         clang_path = Path(args.clang_path)
-        clang_version = extract_clang_version(clang_path)
     elif args.clang_package_path is not None:
         clang_path = extract_packaged_clang(Path(args.clang_package_path))
-        clang_version = extract_clang_version(clang_path)
     else:
-        cmd = [paths.ANDROID_DIR / 'toolchain' / 'llvm_android' / 'build.py',
-               '--no-build=windows,lldb',]
+        cmd = [paths.SCRIPT_DIR / 'build.py', '--no-build=windows,lldb']
         if args.profile:
             cmd.append('--build-instrumented')
         utils.check_call(cmd)
         clang_path = paths.get_package_install_path(hosts.build_host(), 'clang-dev')
-        clang_version = extract_clang_version(clang_path)
+    clang_version = extract_clang_version(clang_path)
     link_clang(args.android_path, clang_path)
 
     if args.build_only:
