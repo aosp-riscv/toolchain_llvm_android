@@ -87,6 +87,30 @@
       "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b24b98a9_6301f449",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-12T19:12:04Z",
+      "side": 1,
+      "message": "To me, the prefix denotes that we\u0027re targeting Android (or Platform) as opposed to Windows or other host OS.\n\nJust \u0027Upstream\u0027 doesn\u0027t describe the build completely either.  We\u0027re using CMake that upstream also uses (as opposed to Android.bp in external/libcxxabi) but so do other LibcxxAbi builders in this file.\n\nEither case, we should add additional clarification in the doc string.",
+      "parentUuid": "43094a48_224868eb",
+      "range": {
+        "startLine": 666,
+        "startChar": 6,
+        "endLine": 666,
+        "endChar": 14
+      },
+      "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
