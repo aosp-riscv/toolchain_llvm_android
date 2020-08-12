@@ -39,6 +39,30 @@
       "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e50df63_893ec986",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-12T18:17:48Z",
+      "side": 1,
+      "message": "Maybe \"AndroidLibcxxAbiBuilder\"?  We should also rename LibcxxAbiBuilder above and LibcxxBuilder below with the \u0027Windows\u0027 prefix as they seem tailored to Windows?\n\nAlternately, if we can merge them all together, we can avoid separate builders and just have the different targets in config_list?\n\nre: doing this in a followup, SGTM.",
+      "parentUuid": "04f25372_6920d358",
+      "range": {
+        "startLine": 666,
+        "startChar": 6,
+        "endLine": 666,
+        "endChar": 14
+      },
+      "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
