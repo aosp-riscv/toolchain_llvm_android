@@ -236,7 +236,7 @@ class SoongSwitchoverChange(GerritChange):
         #   - repo start
         #   - update clang version in soong
         #   - git commit
-        with chdir_context(utils.android_path(self.project)):
+        with chdir_context(paths.ANDROID_DIR / self.project):
             utils.unchecked_call(['repo', 'abandon', branch, '.'])
             utils.check_call(['repo', 'start', branch, '.'])
 
