@@ -111,6 +111,30 @@
       "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4142010_785e3466",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-12T19:37:06Z",
+      "side": 1,
+      "message": "(Oh and I do agree with your point that this is not the libcxxabi used in the platform.  That is a confusion that comes up again and again as we\u0027ve seen in the past.  But I feel the choice we make here won\u0027t make it clearer to those outside of our team.  That we\u0027re building the only downstream Android project of LLVM on Github is enough to cause that confusion.)",
+      "parentUuid": "b24b98a9_6301f449",
+      "range": {
+        "startLine": 666,
+        "startChar": 6,
+        "endLine": 666,
+        "endChar": 14
+      },
+      "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
