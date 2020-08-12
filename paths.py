@@ -32,6 +32,8 @@ LLVM_PATH: Path = OUT_DIR / 'llvm-project'
 PREBUILTS_DIR: Path = ANDROID_DIR / 'prebuilts'
 EXTERNAL_DIR: Path = ANDROID_DIR / 'external'
 TOOLCHAIN_DIR: Path = ANDROID_DIR / 'toolchain'
+TOOLCHAIN_UTILS_DIR: Path = EXTERNAL_DIR / 'toolchain-utils'
+TOOLCHAIN_LLVM_PATH: Path = TOOLCHAIN_DIR / 'llvm-project'
 
 CLANG_PREBUILT_DIR: Path = (PREBUILTS_DIR / 'clang' / 'host' / hosts.build_host().os_tag
                             / constants.CLANG_PREBUILT_VERSION)
@@ -76,7 +78,7 @@ def pgo_profdata_file(profdata_file) -> Optional[Path]:
                'profiles' / profdata_file)
     return profile if profile.exists() else None
 
-def get_package_install_path(host: hosts.Host, package_name):
+def get_package_install_path(host: hosts.Host, package_name) -> Path:
     return OUT_DIR / 'install' / host.os_tag / package_name
 
 def get_python_dir(host: hosts.Host) -> Path:
