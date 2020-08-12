@@ -159,6 +159,30 @@
       "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cf6c71c_1f21ed21",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-12T20:22:31Z",
+      "side": 1,
+      "message": "How about SysrootLibCxxAbiBuilder. This indicates that we just install it to sysroot and won\u0027t ship it.",
+      "parentUuid": "e10b899b_c47b6498",
+      "range": {
+        "startLine": 666,
+        "startChar": 6,
+        "endLine": 666,
+        "endChar": 14
+      },
+      "revId": "744b2c404d7eae5bb313e3cca4f55f685d22b971",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
