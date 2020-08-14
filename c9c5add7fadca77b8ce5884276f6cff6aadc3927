@@ -1,0 +1,58 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004427464",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1401127?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "62718f44_eb15662e",
+        "filename": "win_sdk.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-14T19:59:22Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 60,
+        "startChar": 78,
+        "endLine": 60,
+        "endChar": 84
+      },
+      "revId": "c9c5add7fadca77b8ce5884276f6cff6aadc3927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004427464",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1401127?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b8dae720_988bd5ea",
+        "filename": "win_sdk.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-14T19:59:22Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details.",
+      "range": {
+        "startLine": 88,
+        "startChar": 68,
+        "endLine": 88,
+        "endChar": 74
+      },
+      "revId": "c9c5add7fadca77b8ce5884276f6cff6aadc3927",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
