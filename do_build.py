@@ -596,9 +596,19 @@ def parse_args():
         default=False,
         help='Build next LLVM revision (android_version.py:svn_revision_next)')
 
-    parser.add_argument(
+
+    wintoolchain_group = parser.add_mutually_exclusive_group()
+    wintoolchain_group.add_argument(
         '--windows-sdk',
         help='Path to a Windows SDK. If set, it will be used instead of MinGW.'
+    )
+    wintoolchain_group.add_argument(
+        '--download-windows-sdk', action='store_true',
+        help='(Google Internal Only) Download and enable windows sdk.'
+    )
+    wintoolchain_group.add_argument(
+        '--mingw', action='store_true',
+        help='Use MinGW for windows build. This is the default setting.'
     )
 
     return parser.parse_args()
@@ -708,6 +718,8 @@ def main():
     if need_windows:
         if args.windows_sdk:
             win_sdk.set_path(Path(args.windows_sdk))
+        elif args.download_windows_sdk:
+            win_sdk.download_and_enable()
         win_builder, win_lldb_bins = build_llvm_for_windows(
             enable_assertions=args.enable_assertions,
             build_name=args.build_name,
