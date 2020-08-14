@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbd0b4ae_ec30162c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-14T03:03:19Z",
+      "side": 1,
+      "message": "Let\u0027s see if this + getting prebuilts is faster than getting NDK approval tonight.",
+      "revId": "04a34ae07b488d129ad37c112ea22e431a7e2a52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
