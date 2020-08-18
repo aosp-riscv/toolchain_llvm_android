@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1dd836dc_aa15d260",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-18T15:50:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "433613c0_7f7d224f",
+      "revId": "569229ed9c48510de712217992fd6ee40c2578d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4e87a8b2_99e2a831",
         "filename": "do_test_compiler.py",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "ec84a9dc_ddf58fb5",
+        "filename": "do_test_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-18T15:50:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e87a8b2_99e2a831",
+      "revId": "569229ed9c48510de712217992fd6ee40c2578d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e55573c6_7d3b4184",
         "filename": "merge_from_upstream.py",
         "patchSetId": 6
@@ -50,6 +86,24 @@
       "revId": "569229ed9c48510de712217992fd6ee40c2578d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63c8e7cc_319d3760",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-08-18T15:50:24Z",
+      "side": 1,
+      "message": "Done. Added dry_run mode.",
+      "parentUuid": "e55573c6_7d3b4184",
+      "revId": "569229ed9c48510de712217992fd6ee40c2578d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
