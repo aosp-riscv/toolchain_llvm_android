@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "433613c0_7f7d224f",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-18T03:14:28Z",
+      "side": 1,
+      "message": "-\u003e None",
+      "revId": "569229ed9c48510de712217992fd6ee40c2578d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e87a8b2_99e2a831",
+        "filename": "do_test_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-18T03:14:28Z",
+      "side": 1,
+      "message": "-\u003e bool",
+      "revId": "569229ed9c48510de712217992fd6ee40c2578d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e55573c6_7d3b4184",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-18T03:14:28Z",
+      "side": 1,
+      "message": "Is this essentially dropping the dry-run option from check_call? I don\u0027t see it implemented in utils.py.",
+      "revId": "569229ed9c48510de712217992fd6ee40c2578d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
