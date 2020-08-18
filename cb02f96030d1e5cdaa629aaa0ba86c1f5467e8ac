@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df371b71_a7be297f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-08-18T18:47:23Z",
+      "side": 1,
+      "message": "This will work for now. Ideally we wouldn\u0027t mutate the source tree at all, but this is such a small edit that it isn\u0027t worth additional effort right now. Thanks for fixing this up for me.",
+      "revId": "cb02f96030d1e5cdaa629aaa0ba86c1f5467e8ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
