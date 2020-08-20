@@ -70,6 +70,24 @@
       "revId": "f683e7b8bc3fd16fc3780c6652631af7620415f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd6593dd_17a91ed1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-20T23:54:26Z",
+      "side": 1,
+      "message": "The only Darwin code we support with these prebuilts is building the platform host code for Darwin.  They *seem* to use lld (I think?).  If so, wouldn\u0027t this change be safe?\n\nIf the NDK already defaults to lld, we can make this config change for Linux?  IIUC, Nick is interested in this change when building the kernel and setting this config for the Linux prebuilts would suffice for that usecase.",
+      "parentUuid": "ffd351c6_fe260d59",
+      "revId": "f683e7b8bc3fd16fc3780c6652631af7620415f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
