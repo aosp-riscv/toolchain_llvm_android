@@ -34,6 +34,42 @@
       "revId": "f683e7b8bc3fd16fc3780c6652631af7620415f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffd351c6_fe260d59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2020-08-20T23:44:06Z",
+      "side": 1,
+      "message": "https://reviews.llvm.org/rG53ff95254df4be3365a0bf4da2677e75ccbf32ba solve the problem blocking this change. That change just makes it so that the LLD driver mode (argument handling and whatnot) is used by default on Darwin. This change will still make Darwin host builds use LLD by default, which aiui is not a thing we can do.",
+      "parentUuid": "d4d6f259_845c584d",
+      "revId": "f683e7b8bc3fd16fc3780c6652631af7620415f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b04fb2f_2c01d94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2020-08-20T23:44:06Z",
+      "side": 1,
+      "message": "That change fixes the case where LLD would use the ld64 driver mode on Darwin if the binary name was `ld`. That\u0027s not what\u0027s happening here, so it makes no difference to this change.\n\nChanging this config value will still make builds that Darwin builds that *target* Darwin use LLD by default, which aiui is not a thing we can do.",
+      "parentUuid": "d4d6f259_845c584d",
+      "revId": "f683e7b8bc3fd16fc3780c6652631af7620415f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
