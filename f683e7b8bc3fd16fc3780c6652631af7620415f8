@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb3b0168_2617fee0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-08-20T22:42:07Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e \u003e Patch Set 1: Code-Review-1\n\u003e \u003e \n\u003e \u003e \u003e Patch Set 1:\n\u003e \u003e \u003e \n\u003e \u003e \u003e This may have to wait until we switch the default for the NDK over, or anyone not setting a linker will just get the current Android (non-lld) default. :(\n\u003e \u003e \n\u003e \u003e Yeah, this changes the NDK defaults. That\u0027s still a few releases out.\n\u003e \u003e \n\u003e \u003e If there\u0027s much value in doing this for the platform/kernel, we can work around this when installing Clang to the NDK by undoing it manually, but if this is just a clean up I\u0027d prefer if we wait since I\u0027d rather have as few special cases in our build as possible.\n\u003e \n\u003e I\u0027d actually tried doing this myself recently, and it seems we can\u0027t because it breaks darwin host builds. https://reviews.llvm.org/D76452 is my attempt to fix it in a way that doesn\u0027t break darwin.\n\nIt looks like something landed upstream for this. srhines@ just mentioned this in https://b.corp.google.com/issues/141693040#comment17.  Time for rereview?",
+      "revId": "f683e7b8bc3fd16fc3780c6652631af7620415f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
