@@ -88,6 +88,24 @@
       "revId": "f683e7b8bc3fd16fc3780c6652631af7620415f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e675b9e_d35a3771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2020-08-21T00:12:26Z",
+      "side": 1,
+      "message": "I thought it was used by other projects as well. Many of the NDK host tools use it, but we own those so we can probably fix those.\n\nCan we just have this script `cp ld.lld ld`, for Linux only (or maybe Windows too)? That way Darwin continues working as expected, the kernel gets LLD by default, and the NDK can undo the default change if it needs to.",
+      "parentUuid": "bd6593dd_17a91ed1",
+      "revId": "f683e7b8bc3fd16fc3780c6652631af7620415f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
