@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1653716e_73aeb68f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-03T01:14:49Z",
+      "side": 1,
+      "message": "Looks like this is failing more tests on my local test build of r399163. I\u0027ll look more as I can.\n\nsrhines@ringworld:BU:aosp-master-plus-llvm$ grep \"listed below\" windows-test-dir/*/*.txt | sed \"s/32\\// /g\" | \\\n\u003e sed \"s/64\\// /g\" | sort -k 2\nwindows-test-dir/ aapt2_tests.exe.txt:[  FAILED  ] 10 tests, listed below:\nwindows-test-dir/ aapt2_tests.exe.txt:[  FAILED  ] 10 tests, listed below:\nwindows-test-dir/ libbase_test32.exe.txt:[  FAILED  ] 1 test, listed below:\nwindows-test-dir/ libbase_test64.exe.txt:[  FAILED  ] 1 test, listed below:\nwindows-test-dir/ simpleperf_unit_test.exe.txt:[  FAILED  ] 2 tests, listed below:\nwindows-test-dir/ simpleperf_unit_test.exe.txt:[  FAILED  ] 2 tests, listed below:\nwindows-test-dir/ ziparchive-tests.exe.txt:[  FAILED  ] 12 tests, listed below:\nwindows-test-dir/ ziparchive-tests.exe.txt:[  FAILED  ] 12 tests, listed below:\n",
+      "revId": "07e0133cb6e94d7837ac7b19e54865c0eea2dd4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
