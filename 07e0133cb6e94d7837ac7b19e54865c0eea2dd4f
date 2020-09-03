@@ -16,6 +16,24 @@
       "revId": "07e0133cb6e94d7837ac7b19e54865c0eea2dd4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4be9fd1d_0a394d70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-03T01:39:01Z",
+      "side": 1,
+      "message": "The failures at the top of the script are stale.  Look at go/android-llvm-windows-testing for the latest failure status, which matches what you\u0027re seeing.  I\u0027ll remove the expected output from the script in a followup CL and instead point to the doc (At least ATM, only our team is running in these tests, so a closed doc seems fine.)\n\nAlso filed b/167604389 for the simpleperf failures.",
+      "parentUuid": "1653716e_73aeb68f",
+      "revId": "07e0133cb6e94d7837ac7b19e54865c0eea2dd4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
