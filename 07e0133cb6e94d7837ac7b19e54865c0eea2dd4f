@@ -34,6 +34,24 @@
       "revId": "07e0133cb6e94d7837ac7b19e54865c0eea2dd4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3cee242_06e78b3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-09T17:45:29Z",
+      "side": 1,
+      "message": "Removed the (stale) expected output in latest patchset.",
+      "parentUuid": "4be9fd1d_0a394d70",
+      "revId": "07e0133cb6e94d7837ac7b19e54865c0eea2dd4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
