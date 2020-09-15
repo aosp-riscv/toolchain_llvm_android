@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "035b6046_f4963743",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-09-15T22:10:20Z",
+      "side": 1,
+      "message": "Do we still need BUILD_LLVM_NEXT global variable after this change?",
+      "range": {
+        "startLine": 606,
+        "startChar": 11,
+        "endLine": 606,
+        "endChar": 26
+      },
+      "revId": "09fdaa4cee69faa496accc79dc6fb8273df201fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
