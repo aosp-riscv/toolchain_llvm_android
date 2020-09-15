@@ -22,6 +22,30 @@
       "revId": "09fdaa4cee69faa496accc79dc6fb8273df201fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bb51fa3_a8e485fa",
+        "filename": "do_build.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-15T22:20:20Z",
+      "side": 1,
+      "message": "After this, we only need it in install_wrappers (whose call chain is not that deep: main -\u003e package_toolchain -\u003e install_wrappers).  I can plumb a flag through and remove the global in a follow up.",
+      "parentUuid": "035b6046_f4963743",
+      "range": {
+        "startLine": 606,
+        "startChar": 11,
+        "endLine": 606,
+        "endChar": 26
+      },
+      "revId": "09fdaa4cee69faa496accc79dc6fb8273df201fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
