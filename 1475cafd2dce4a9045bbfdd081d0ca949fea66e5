@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f875b6aa_a860f4cb",
+        "filename": "base_builders.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-15T20:23:05Z",
+      "side": 1,
+      "message": "TIL https://www.python.org/dev/peps/pep-0572/ :)",
+      "range": {
+        "startLine": 379,
+        "startChar": 23,
+        "endLine": 379,
+        "endChar": 25
+      },
+      "revId": "1475cafd2dce4a9045bbfdd081d0ca949fea66e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
