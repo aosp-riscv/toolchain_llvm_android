@@ -421,6 +421,14 @@ class LLVMRuntimeBuilder(LLVMBaseBuilder):  # pylint: disable=abstract-method
                                           'bin' / 'llvm-config')
         return defines
 
+    @property
+    def cflags(self) -> List[str]:
+        cflags = super().cflags
+        # We need libgcc for runtime libraries since compiler-rt builtins does
+        # not have all the unwinder symbols.
+        cflags.append('--rtlib=libgcc')
+        return cflags
+
 
 class LLVMBuilder(LLVMBaseBuilder):
     """Builder for LLVM project."""

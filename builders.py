@@ -175,6 +175,7 @@ class Stage2Builder(base_builders.LLVMBuilder):
         defines['SANITIZER_ALLOW_CXXABI'] = 'OFF'
         defines['OPENMP_ENABLE_OMPT_TOOLS'] = 'FALSE'
         defines['LIBOMP_ENABLE_SHARED'] = 'FALSE'
+        defines['CLANG_DEFAULT_RTLIB'] = 'compiler-rt'
         defines['CLANG_PYTHON_BINDINGS_VERSIONS'] = '3'
 
         if (self.lto and
