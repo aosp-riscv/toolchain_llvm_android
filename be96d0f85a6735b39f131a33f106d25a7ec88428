@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e9fe8a0_5bdf6fd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-16T05:03:13Z",
+      "side": 1,
+      "message": "Looks like I was optimistic in expecting a mini 1000-change update to be clean/smooth 😊",
+      "revId": "be96d0f85a6735b39f131a33f106d25a7ec88428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
