@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "3c39e089_90c9476e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-09-16T21:57:37Z",
+      "side": 1,
+      "message": "I\u0027m not sure how close I actually am. I\u0027m currently still trying to get upstream LLVM into an OK state. (i.e. at most a small perf regression from libgcc, and it needs to pass the Bionic unit tests.)\n\nFor host targets, I\u0027m wondering how the LLVM unwinder would be linked?\n\ne.g. It seems that LLVM currently defaults to finding the unwinder in libc/libSystem (e.g. Apple) or in the STL (e.g. Fuchsia). Therefore, --rtlib\u003dcompiler-rt implies --unwindlib\u003dnone. Clang does have a --unwindlib\u003dlibunwind that links with either -l:libunwind.a or -l:libunwind.so. Bundling the unwinder with the STL makes some sense to me, but I don\u0027t know if Android can/should do that. (Eventually a dynamic NDK binary could use the unwinder from libc.so, and then we *don\u0027t* want the unwinder in the STL...)\n\nFor the NDK, my plan so far has been to use a hermetic libunwind.a archive, and change the driver so that --rtlib\u003dcompiler-rt for Android implies --unwindlib\u003dlibunwind (rather than --unwindlib\u003dnone). I\u0027m not sure what upstream would think about it, and I\u0027ve been focused on fixing compiler-rt + libunwind first.",
+      "parentUuid": "fee56067_29498950",
+      "revId": "26a79a6e526aca176a4f221308f9d4f0ae0b60a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f8dcce3_0369101f",
         "filename": "base_builders.py",
         "patchSetId": 1
