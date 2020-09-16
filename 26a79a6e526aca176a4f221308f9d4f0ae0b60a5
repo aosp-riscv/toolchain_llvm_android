@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "fee56067_29498950",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2020-09-16T19:06:03Z",
+      "side": 1,
+      "message": "I think we can\u0027t take this change until we\u0027re ready to switch unwinders as well. aiui we\u0027re getting close to that, but we probably shouldn\u0027t switch the toolchain until we\u0027re also making the unwinder change? I\u0027m not fully up to date on the status of that, I don\u0027t think. Ryan knows better than I do, so I\u0027ll defer to him.\n\nIf there\u0027s a need to do this sooner than the NDK is ready, lmk. We could probably play tricks with linker scripts to make it so this doesn\u0027t adversely affect the NDK (essentially the inverse of what we currently do with libgcc.a), but if this is just cleanup I\u0027d prefer to hold off rather than risk that hack breaking things that the current hack doesn\u0027t 😊",
+      "revId": "26a79a6e526aca176a4f221308f9d4f0ae0b60a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f8dcce3_0369101f",
         "filename": "base_builders.py",
         "patchSetId": 1
