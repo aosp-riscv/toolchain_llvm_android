@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d71cdb5b_7c28f8c7",
+        "filename": "test/scripts/utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-18T04:24:06Z",
+      "side": 1,
+      "message": "Why not just import the existing utils.py? Is it because it depends on constants too?",
+      "revId": "d2bac31eba225c5a28ca6033907c20a6e2123b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
