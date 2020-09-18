@@ -34,6 +34,24 @@
       "revId": "d2bac31eba225c5a28ca6033907c20a6e2123b03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6151a41f_3243430b",
+        "filename": "test/scripts/utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-18T05:25:38Z",
+      "side": 1,
+      "message": "Even if we move them to google3, they could be using copybara or whatever so that we don\u0027t have to deal with 2 slightly different versions of the same function (even though that means we have to \"sync\").",
+      "parentUuid": "3ee1c393_7aea7c8f",
+      "revId": "d2bac31eba225c5a28ca6033907c20a6e2123b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
