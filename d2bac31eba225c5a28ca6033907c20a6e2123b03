@@ -16,6 +16,24 @@
       "revId": "d2bac31eba225c5a28ca6033907c20a6e2123b03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ee1c393_7aea7c8f",
+        "filename": "test/scripts/utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-18T05:13:30Z",
+      "side": 1,
+      "message": "I wanted to keep these scripts self contained in case we moved them to google3.  If we do so, they could be run in workstations and in automation from the same code base (instead of duplicating in AOSP and google3).\n\nDo you think we should use the existing utils.py to begin with?",
+      "parentUuid": "d71cdb5b_7c28f8c7",
+      "revId": "d2bac31eba225c5a28ca6033907c20a6e2123b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
