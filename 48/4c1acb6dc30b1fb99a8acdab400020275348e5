@@ -1,0 +1,8 @@
+Code-Review+2: Stephen Hines <srhines@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Submitted-by: Pirama Arumuga Nainar <pirama@google.com>
+Submitted-at: Fri, 18 Sep 2020 16:29:37 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1430133
+Project: toolchain/llvm_android
+Branch: refs/heads/master
