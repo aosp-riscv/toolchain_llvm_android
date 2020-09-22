@@ -22,6 +22,30 @@
       "revId": "a79e4393ecb095f02e3147b124540d6dd04adf80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "386da70b_1e5f70ec",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-22T07:13:30Z",
+      "side": 1,
+      "message": "Doh, you\u0027re right. I need to think up a way to resolve this, since we\u0027re going to have to have a way to differentiate builds that get branched off later (and I really don\u0027t want to guess whether \u0027c\u0027 or \u0027d\u0027 is ahead of the other in time).",
+      "parentUuid": "b148ec4c_f3b35746",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "a79e4393ecb095f02e3147b124540d6dd04adf80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
