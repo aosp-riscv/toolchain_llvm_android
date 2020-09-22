@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b148ec4c_f3b35746",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-22T07:08:59Z",
+      "side": 1,
+      "message": "source_manager.py (and trim_patch_data.py) assumes that the suffix is only string.ascii_lowercase.  This would break the build, IIUC.",
+      "range": {
+        "startLine": 18,
+        "startChar": 17,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "a79e4393ecb095f02e3147b124540d6dd04adf80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
