@@ -16,6 +16,24 @@
       "revId": "3de816f63a73da3a1b933809a4fbafadf357f78e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0867ade1_1774d78b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-22T21:25:09Z",
+      "side": 1,
+      "message": "Oops, incomplete comment.\n\nI\u0027ll bypass presubmit for these since these were previously tested and don\u0027t get executed anywhere.",
+      "parentUuid": "5dac9f5d_825061e5",
+      "revId": "3de816f63a73da3a1b933809a4fbafadf357f78e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
