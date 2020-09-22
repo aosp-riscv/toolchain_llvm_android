@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5057adf7_b69b4fe2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-22T10:12:00Z",
+      "side": 1,
+      "message": "about",
+      "range": {
+        "startLine": 11,
+        "startChar": 27,
+        "endLine": 11,
+        "endChar": 31
+      },
+      "revId": "4aaa24ed1f7aa0a04ddd43073baec72d1fb4637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a646a82_4636ca0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-22T10:12:00Z",
+      "side": 1,
+      "message": "up to",
+      "range": {
+        "startLine": 18,
+        "startChar": 40,
+        "endLine": 18,
+        "endChar": 44
+      },
+      "revId": "4aaa24ed1f7aa0a04ddd43073baec72d1fb4637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1affd6f7_e271158a",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-22T10:12:00Z",
+      "side": 1,
+      "message": "exception",
+      "range": {
+        "startLine": 100,
+        "startChar": 17,
+        "endLine": 100,
+        "endChar": 25
+      },
+      "revId": "4aaa24ed1f7aa0a04ddd43073baec72d1fb4637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e97ed7ea_0ca34df7",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-22T10:12:00Z",
+      "side": 1,
+      "message": "Prebuilt",
+      "range": {
+        "startLine": 95,
+        "startChar": 10,
+        "endLine": 95,
+        "endChar": 18
+      },
+      "revId": "4aaa24ed1f7aa0a04ddd43073baec72d1fb4637d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
