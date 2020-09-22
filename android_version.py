@@ -15,7 +15,7 @@
 #
 
 patch_level = '2'
-_svn_revision = 'r383902b'
+_svn_revision = 'r383902b1'
 # svn_revision_next will be newer than the official svn_revision in the future.
 _svn_revision_next = 'r383902'
 
