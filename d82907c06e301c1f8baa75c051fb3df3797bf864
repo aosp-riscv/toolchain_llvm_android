@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7408a3e2_35b3efdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-25T05:28:33Z",
+      "side": 1,
+      "message": "I\u0027m wondering if this will work for presubmit. We\u0027ll see, I guess.",
+      "revId": "d82907c06e301c1f8baa75c051fb3df3797bf864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
