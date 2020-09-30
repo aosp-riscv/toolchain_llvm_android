@@ -114,3 +114,45 @@ def setup_sources(source_dir):
                                tmp_source_dir_str, source_dir])
 
         shutil.rmtree(tmp_source_dir)
+    try_set_git_remote(source_dir)
+    sys.exit(0)
+
+
+def try_set_git_remote(source_dir):
+    AOSP_URL = 'https://android.googlesource.com/toolchain/llvm-project'
+    def get_git_remote():
+        remote = None
+        try:
+            remote = utils.check_output(
+                ['git', 'rev-parse', '--abbrev-ref',
+                 '--symbolic-full-name', '@{upstream}']
+            ).strip()
+            remote = remote.split('/')[0]
+            url = utils.check_output(['git', 'remote', 'get-url', remote]).strip()
+            return (remote, url)
+        except:
+            return (remote, None)
+
+    with utils.chdir_context(source_dir / '.git'):
+        remote, url = get_git_remote()
+        if url == AOSP_URL:
+            print('url already set' + remote)
+            return
+        print('Found url: ' + str(url))
+
+        if not remote:
+            remote = 'origin'
+        try:
+            link = utils.check_output(['readlink', 'config']).strip()
+            utils.check_call(['rm', '-f', 'config'])
+            utils.check_call(['cp', link, 'config'])
+            if remote:
+                utils.check_call(['git', 'remote', 'set-url', remote, AOSP_URL])
+            else:
+                utils.check_call(['git', 'remote', 'add', remote, AOSP_URL])
+            print('set remote-url succeeded')
+        except:
+            print('Cannot set remote-url')
+            raise
+        print('new_remote')
+        print(get_git_remote())

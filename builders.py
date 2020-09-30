@@ -83,9 +83,8 @@ class Stage1Builder(base_builders.LLVMBuilder):
     @property
     def ldflags(self) -> List[str]:
         ldflags = super().ldflags
-        # Point CMake to the libc++.so from the prebuilts.  Install an rpath
-        # to prevent linking with the newly-built libc++.so
-        ldflags.append(f'-Wl,-rpath,{self.toolchain.lib_dir}')
+        ldflags.append('-static-libstdc++')
+        ldflags.append('-Wl,--hash-style=both')
         return ldflags
 
     @property
