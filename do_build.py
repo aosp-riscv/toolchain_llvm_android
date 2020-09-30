@@ -627,6 +627,12 @@ def main():
     stage1.build()
     set_default_toolchain(stage1.installed_toolchain)
 
+    dist_dir = Path(ORIG_ENV.get('DIST_DIR', paths.OUT_DIR))
+    package_path = dist_dir / 'stage1-install.tar.bz2'
+    args = ['tar', '-cjC', paths.OUT_DIR, '-f', package_path, 'stage1-install']
+    utils.check_call(args)
+    sys.exit(0)
+
     if build_lldb:
         # Swig is needed for both host and windows lldb.
         swig_builder = builders.SwigBuilder()
