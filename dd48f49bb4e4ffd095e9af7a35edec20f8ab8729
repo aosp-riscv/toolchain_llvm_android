@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "619781a1_05e0d3bd",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T19:27:08Z",
+      "side": 1,
+      "message": "Done.  Thanks for the suggstion.  This was also able to pass mypy typecheck :)",
+      "parentUuid": "9c713af6_b7191e6e",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3db480ba_3ab967ce",
         "filename": "test/scripts/paths.py",
         "patchSetId": 2
@@ -367,6 +385,24 @@
       "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adc577b4_32637112",
+        "filename": "test/scripts/update_results.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T19:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d967270_830b1ccb",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
