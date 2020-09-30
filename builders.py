@@ -83,9 +83,7 @@ class Stage1Builder(base_builders.LLVMBuilder):
     @property
     def ldflags(self) -> List[str]:
         ldflags = super().ldflags
-        # Point CMake to the libc++.so from the prebuilts.  Install an rpath
-        # to prevent linking with the newly-built libc++.so
-        ldflags.append(f'-Wl,-rpath,{self.toolchain.lib_dir}')
+        ldflags.append(f'-static-libstdc++')
         return ldflags
 
     @property
@@ -95,6 +93,7 @@ class Stage1Builder(base_builders.LLVMBuilder):
         defines['CLANG_ENABLE_STATIC_ANALYZER'] = 'OFF'
 
         defines['LLVM_BUILD_TOOLS'] = 'ON'
+        defines['LLVM_APPEND_VC_REV'] = 'OFF'
 
         # Make libc++.so a symlink to libc++.so.x instead of a linker script that
         # also adds -lc++abi.  Statically link libc++abi to libc++ so it is not
