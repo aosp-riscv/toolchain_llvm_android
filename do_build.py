@@ -618,13 +618,22 @@ def main():
     instrumented = hosts.build_host().is_linux and args.build_instrumented
 
     stage1 = builders.Stage1Builder()
-    stage1.build_name = args.build_name
+    stage1.build_name = 'stage1'
     stage1.svn_revision = android_version.get_svn_revision()
     # Build lldb for lldb-tblgen. It will be used to build lldb-server and windows lldb.
     stage1.build_lldb = build_lldb
     stage1.build_android_targets = args.debug or instrumented
     stage1.build()
     set_default_toolchain(stage1.installed_toolchain)
+
+    dist_dir = Path(ORIG_ENV.get('DIST_DIR', paths.OUT_DIR))
+    package_path = dist_dir / 'stage1-install.tar.bz2'
+    args = ['tar', '-cjC', paths.OUT_DIR, '-f', package_path, 'stage1-install']
+    utils.check_call(args)
+
+    args = ['tar', '-cjC', paths.OUT_DIR, '-f', dist_dir / 'stage1.tar.bz2', 'stage1']
+    utils.check_call(args)
+    sys.exit(0)
 
     if build_lldb:
         # Swig is needed for both host and windows lldb.
