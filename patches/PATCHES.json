@@ -306,6 +306,12 @@
         "end_version": 401257
     },
     {
+        "comment": "[UPSTREAM] GlobalISel: Add utilty for getting function argument live ins",
+        "rel_patch_path": "cherry/f8fb7835d6a5e2a75d412e1482fc1c039efef1f0.patch",
+        "start_version": 399163,
+        "end_version": 401402
+    },
+    {
         "comment": "[UPSTREAM] [ELF] Allow SHF_LINK_ORDER sections to have sh_link=0",
         "rel_patch_path": "cherry/b216c80cc2496b87bf827260ce7e24dc62247d71.patch",
         "start_version": 399163,
@@ -354,10 +360,46 @@
         "end_version": 403816
     },
     {
+        "comment": "[UPSTREAM] [AArch64] Add -mmark-bti-property flag.",
+        "rel_patch_path": "cherry/f70baaf71f62ba8623b3522345527271add74f6b.patch",
+        "start_version": 399163,
+        "end_version": 405405
+    },
+    {
         "comment": "[UPSTREAM] PR47468: Fix findPHICopyInsertPoint, so that copies aren't incorrectly inserted after an INLINEASM_BR.",
         "rel_patch_path": "cherry/f7a53d82c0902147909f28a9295a9d00b4b27d38.patch",
         "start_version": 399163,
         "end_version": 405613
+    },
+    {
+        "comment": "[UPSTREAM] [AArch64][GlobalISel] Implement __builtin_return_address for PAC-RET ",
+        "rel_patch_path": "cherry/bd44558001e978d93fbff5a4537f38b46b0e355a.patch",
+        "start_version": 399163,
+        "end_version": 406195
+    },
+    {
+        "comment": "[UPSTREAM] [AArch64] __builtin_return_address for PAuth.",
+        "rel_patch_path": "cherry/2a96f47c5ffca84cd774ad402cacd137f4bf45e2.patch",
+        "start_version": 399163,
+        "end_version": 406227
+    },
+    {
+        "comment": "[UPSTREAM] [AArch64] PAC/BTI code generation for LLVM generated functions",
+        "rel_patch_path": "cherry/a88c722e687e6780dcd6a58718350dc76fcc4cc9.patch",
+        "start_version": 399163,
+        "end_version": 406276
+    },
+    {
+        "comment": "[UPSTREAM] [AArch64] Generate .note.gnu.property based on module flags.",
+        "rel_patch_path": "cherry/a48f6079f288619fcc7656e89e8aa7cd0aac1281.patch",
+        "start_version": 399163,
+        "end_version": 406438
+    },
+    {
+        "comment": "[UPSTREAM] [AArch64] Add BTI to CFI jumptables.",
+        "rel_patch_path": "cherry/c5a4900e1a00e88df9d6d9bc39594ff8afd0d9b5.patch",
+        "start_version": 399163,
+        "end_version": 406546
     },
     {
         "comment": "Driver: Add integer sanitizers to trapping group automatically.",
