@@ -122,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "77871297_ec5a5175",
+        "filename": "test/scripts/paths.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T15:56:55Z",
+      "side": 1,
+      "message": "Oh! Neat.",
+      "parentUuid": "e24e3dc2_17d690f5",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bdb3836_472094c0",
         "filename": "test/scripts/test_prebuilts.py",
         "patchSetId": 2
