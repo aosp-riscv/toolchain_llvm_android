@@ -349,6 +349,24 @@
       "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d967270_830b1ccb",
+        "filename": "test/scripts/update_results.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T18:58:08Z",
+      "side": 1,
+      "message": "If you changed `if buildId !\u003d \u0027PENDING\u0027 to `if buildId \u003d\u003d \u0027PENDING\u0027: continue`, then I think you could get rid of `recordUpdated`?",
+      "parentUuid": "608b9f38_d27f5ad6",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
