@@ -95,6 +95,7 @@ class Stage1Builder(base_builders.LLVMBuilder):
         defines['CLANG_ENABLE_STATIC_ANALYZER'] = 'OFF'
 
         defines['LLVM_BUILD_TOOLS'] = 'ON'
+        defines['LLVM_APPEND_VC_REV'] = 'OFF'
 
         # Make libc++.so a symlink to libc++.so.x instead of a linker script that
         # also adds -lc++abi.  Statically link libc++abi to libc++ so it is not
