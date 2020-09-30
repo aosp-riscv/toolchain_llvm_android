@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f513fa15_37fc19c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T18:38:57Z",
+      "side": 1,
+      "message": "Yea, and to check for violations, we have to run yet another tool (mypy).  But it\u0027s better than nothing.\n\nDo you find them distracting?  We could try to adjust how we do the annotaiton.",
+      "parentUuid": "3079146c_0f57a2b9",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "976d1094_6240cf40",
         "filename": "test/scripts/data.py",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-09-30T07:58:28Z",
       "side": 1,
       "message": "Do we have to worry about timeouts with auth credentials here? I guess we can check that we have at least some reasonable amount of time pending on script initialization. Also, what happens if we do write a corrupt version of the csv file? I realize these are very hypothetical, but I also have definitely found myself running commands that fail because I am no longer authenticated (which I discover too late in the process). I assume that the file could just get created from scratch again if we removed it or it is corrupt, but if that\u0027s the case, we should really be logging that too.",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc9d1766_b7c752df",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T18:38:57Z",
+      "side": 1,
+      "message": "For auth credentials, test_prebuilts.py checks whether gcert is valid for at least an hour.\n\nThe other questions are valid but I don\u0027t have a concrete solution yet.  I couldn\u0027t find any consistency guarantees from fileutil.  Another issue that I\u0027ve been thinking about is concurrent writes (esp. if parts of this run in automation).  I\u0027ll add a section to the design doc about this and ping the team once it\u0027s ready.",
+      "parentUuid": "976d1094_6240cf40",
       "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4f73e1b2_fb57682d",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T18:38:57Z",
+      "side": 1,
+      "message": "namedtuple._make is a class method that makes the namedtuple.  namedtuple._make(tuple) \u003c--\u003e namedtuple.__new__(*tuple).  Just slightly better syntax.",
+      "parentUuid": "6ca1aba8_2539d462",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b70bf7f_37d67e75",
         "filename": "test/scripts/data.py",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "af1bd882_b574b917",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T18:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b70bf7f_37d67e75",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7488f391_9d683ef3",
         "filename": "test/scripts/data.py",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2020-09-30T05:10:36Z",
       "side": 1,
       "message": "These 3 methods look exactly the same to me between the two classes.  Would inheritence make this more concise/DRY\u0027er?",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c713af6_b7191e6e",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T18:38:57Z",
+      "side": 1,
+      "message": "I\u0027ve uploaded a patchset resolving other comments.  I\u0027ll try to avoid the duplication and upload a new patch set if I succeed.",
+      "parentUuid": "7488f391_9d683ef3",
       "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -157,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "8af9c978_97023f6e",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T18:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bdb3836_472094c0",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8958b940_11544e0b",
         "filename": "test/scripts/update_results.py",
         "patchSetId": 2
@@ -191,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "4ba4db95_603953a6",
+        "filename": "test/scripts/update_results.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T18:38:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c06d51a_32fe8f00",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1b9bff1_a6e5f93c",
         "filename": "test/scripts/update_results.py",
         "patchSetId": 2
@@ -202,6 +328,24 @@
       "writtenOn": "2020-09-30T05:10:36Z",
       "side": 1,
       "message": "I find setting `done` each iteration then switching on `not done` then rechecking `done` curious.  Might the loop body be clearer as:\n\nif complete is None:\n  buildId ...\n  ...\nCNSData.ForrestPending ...\n\nthen you don\u0027t need `done`?",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "608b9f38_d27f5ad6",
+        "filename": "test/scripts/update_results.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-09-30T18:38:57Z",
+      "side": 1,
+      "message": "`done` was a misleading variable inside a loop.  It signified whether a record in forrest_pending.csv has also been added to forrest.csv.  A record may exist in both files if there\u0027s a tool failure when deleting the record from forrest_pending.csv in a prior run.  If it\u0027s not in forrest.csv, we create a new record in that file if the build is complete.\n\nI\u0027ve changed `done` to `recordUpdated`.  Hopefully it is clearer.",
+      "parentUuid": "a1b9bff1_a6e5f93c",
       "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
