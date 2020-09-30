@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005274625",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1440577?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "342d7fbd_669ba986",
+        "filename": "test/scripts/test_configs.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-30T18:37:37Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "ffd3f1018474f34ae740cdd97f2816f4a800f639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005274625",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1440577?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f3c21979_da406fa3",
+        "filename": "test/scripts/test_configs.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-30T18:37:37Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 38,
+        "startChar": 24,
+        "endLine": 38,
+        "endChar": 30
+      },
+      "revId": "ffd3f1018474f34ae740cdd97f2816f4a800f639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005274625",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1440577?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "783e5c59_c4419f62",
+        "filename": "test/scripts/test_configs.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-30T18:37:37Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027primary/secondary\u0027 or \u0027manager/worker\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 45,
+        "startChar": 34,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "ffd3f1018474f34ae740cdd97f2816f4a800f639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
