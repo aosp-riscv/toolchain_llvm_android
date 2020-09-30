@@ -114,3 +114,31 @@ def setup_sources(source_dir):
                                tmp_source_dir_str, source_dir])
 
         shutil.rmtree(tmp_source_dir)
+    try_set_git_remote(source_dir)
+    sys.exit(0)
+
+
+def try_set_git_remote(source_dir):
+    AOSP_REMOTE = 'https://android.googlesource.com/toolchain/llvm-project'
+    UPSTREAM = 'aosp'
+    def get_git_remote():
+        try:
+            return utils.check_output(['git', 'remote', 'get-url', UPSTREAM]).strip()
+        except:
+            return None
+
+    with utils.chdir_context(source_dir / '.git'):
+        remote = get_git_remote()
+        if remote == AOSP_REMOTE:
+            print('remote already set' + remote)
+            return
+        print('Found remote: ' + str(remote))
+
+        try:
+            link = utils.check_output(['readlink', 'config']).strip()
+            utils.check_call(['rm', '-f', 'config'])
+            utils.check_call(['cp', link, 'config'])
+            utils.check_call(['git', 'remote', 'set-url', UPSTREAM, AOSP_REMOTE])
+            print('set remote-url succeeded')
+        except:
+            print('Cannot set remote-url')
