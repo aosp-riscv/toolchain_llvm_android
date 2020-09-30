@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3079146c_0f57a2b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "that\u0027s my first time reviewing python with Named Tuples.  It\u0027s pretty jarring seeing type signatures in Python!",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ca1aba8_2539d462",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "what is `_make`?",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b70bf7f_37d67e75",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "might be shorter as one line:\n\nif self.get(...):",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7488f391_9d683ef3",
+        "filename": "test/scripts/data.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "These 3 methods look exactly the same to me between the two classes.  Would inheritence make this more concise/DRY\u0027er?",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db480ba_3ab967ce",
+        "filename": "test/scripts/paths.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "should `os.path.join` be used here or string interpolation?",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bdb3836_472094c0",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "I\u0027d move the arg validation into parse_args().",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8958b940_11544e0b",
+        "filename": "test/scripts/update_results.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "neat; I didn\u0027t know you could catch these, makes sense.",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c06d51a_32fe8f00",
+        "filename": "test/scripts/update_results.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "probably need a TODO about validating the response?",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1b9bff1_a6e5f93c",
+        "filename": "test/scripts/update_results.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-30T05:10:36Z",
+      "side": 1,
+      "message": "I find setting `done` each iteration then switching on `not done` then rechecking `done` curious.  Might the loop body be clearer as:\n\nif complete is None:\n  buildId ...\n  ...\nCNSData.ForrestPending ...\n\nthen you don\u0027t need `done`?",
+      "revId": "dd48f49bb4e4ffd095e9af7a35edec20f8ab8729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
