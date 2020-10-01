@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0de5ab8_9f5c035f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-01T01:47:31Z",
+      "side": 1,
+      "message": "This broke my upload of the latest prebuilts because I specified the full http://b/... version of the bug number on the command line. I tested this actually with just a regular python install to make sure it does what I want going forward.",
+      "revId": "c02069a53489ec6fad41f0d06d12b2ae000c3a64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
