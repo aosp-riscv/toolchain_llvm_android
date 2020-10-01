@@ -16,6 +16,24 @@
       "revId": "f981cc869294103077ad3d049f6be67335fda0fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "104a1275_f3eb8c97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-01T18:01:53Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/platform/build/soong/+/1443957",
+      "parentUuid": "a3b226ea_112413a1",
+      "revId": "f981cc869294103077ad3d049f6be67335fda0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
