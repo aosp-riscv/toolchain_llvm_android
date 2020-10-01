@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3b226ea_112413a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-01T17:43:51Z",
+      "side": 1,
+      "message": "We should probably also adapt this for use in `build/soong`, which today only does this for debug-prefix.",
+      "revId": "f981cc869294103077ad3d049f6be67335fda0fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
