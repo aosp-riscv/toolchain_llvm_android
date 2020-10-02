@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "843f549d_67561a4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-02T09:51:54Z",
+      "side": 1,
+      "message": "There are pretty safe. I verified that the build actually works, since both patches had some obvious merge conflicts from the older branch they came from.",
+      "revId": "2fd8af1a4b8c3eea6847e7b7054c9a5580ed35e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
