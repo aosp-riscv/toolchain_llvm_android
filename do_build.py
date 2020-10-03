@@ -83,8 +83,13 @@ def build_llvm_for_windows(enable_assertions: bool,
         libcxx_builder.build()
         win_builder.libcxx_path = libcxx_builder.install_dir
 
+    lldb_bins: Set[str] = set()
+    libxml2_builder = builders.LibXml2Builder(config_list)
+    libxml2_builder.build()
+    win_builder.libxml2 = libxml2_builder
+    lldb_bins.add(libxml2_builder.install_library.name)
+
     win_builder.build_lldb = build_lldb
-    lldb_bins: Optional[Set[str]] = None
     if build_lldb:
         assert swig_builder is not None
         win_builder.libedit = None
@@ -94,14 +99,8 @@ def build_llvm_for_windows(enable_assertions: bool,
         xz_builder.build()
         win_builder.liblzma = xz_builder
 
-        libxml2_builder = builders.LibXml2Builder(config_list)
-        libxml2_builder.build()
-        win_builder.libxml2 = libxml2_builder
-        lldb_bins = {
-            'liblldb.dll',
-            'python38.dll',
-            libxml2_builder.install_library.name,
-        }
+        lldb_bins.add('liblldb.dll')
+        lldb_bins.add('python38.dll')
 
     win_builder.build_name = build_name
     win_builder.svn_revision = android_version.get_svn_revision(BUILD_LLVM_NEXT)
@@ -654,6 +653,10 @@ def main():
         stage2.build_instrumented = instrumented
         stage2.profdata_file = profdata if profdata else None
 
+        libxml2_builder = builders.LibXml2Builder()
+        libxml2_builder.build()
+        stage2.libxml2 = libxml2_builder
+
         stage2.build_lldb = build_lldb
         if build_lldb:
             stage2.swig_executable = swig_builder.install_dir / 'bin' / 'swig'
@@ -661,10 +664,6 @@ def main():
             xz_builder = builders.XzBuilder()
             xz_builder.build()
             stage2.liblzma = xz_builder
-
-            libxml2_builder = builders.LibXml2Builder()
-            libxml2_builder.build()
-            stage2.libxml2 = libxml2_builder
 
             libedit_builder = builders.LibEditBuilder()
             libedit_builder.build()
