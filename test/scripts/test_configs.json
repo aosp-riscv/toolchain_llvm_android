@@ -4,6 +4,8 @@
         "target": "cf_x86_phone-userdebug",
         "groups": "x86 smoke",
         "tests": [
+            "apct/bionic/native_test",
+            "apct/device_boot_health_check_extra"
         ]
     },
     {
@@ -11,6 +13,8 @@
         "target": "crosshatch-userdebug",
         "groups": "arm64 smoke",
         "tests": [
+            "apct/bionic/native_test",
+            "apct/device_boot_health_check_extra"
         ]
     },
     {
@@ -18,6 +22,8 @@
         "target": "crosshatch_hwasan-userdebug",
         "groups": "arm64 hwasan",
         "tests": [
+            "apct/bionic/native_test",
+            "apct/device_boot_health_check_extra"
         ]
     },
     {
@@ -25,6 +31,7 @@
         "target": "cf_x86_phone-userdebug_coverage",
         "groups": "x86 coverage",
         "tests": [
+            "apct/device_boot_health_check_extra"
         ]
     },
     {
@@ -32,6 +39,8 @@
         "target": "aosp_cf_x86_phone-userdebug",
         "groups": "x86 smoke",
         "tests": [
+            "apct/bionic/native_test",
+            "apct/device_boot_health_check_extra"
         ]
     },
     {
@@ -46,6 +55,8 @@
         "target": "aosp_crosshatch-userdebug",
         "groups": "arm64 smoke",
         "tests": [
+            "apct/bionic/native_test",
+            "apct/device_boot_health_check"
         ]
     }
 ]
