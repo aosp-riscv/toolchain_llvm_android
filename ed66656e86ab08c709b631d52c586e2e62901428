@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f979c9a_0c1a3f61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-09T16:35:13Z",
+      "side": 1,
+      "message": "Not ready for review yet.  Tests are getting submitted but cf_x86_phone tests fail due to infra error.",
+      "revId": "ed66656e86ab08c709b631d52c586e2e62901428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
