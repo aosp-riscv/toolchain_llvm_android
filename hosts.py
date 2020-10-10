@@ -15,6 +15,7 @@
 #
 """Constants and helper functions for hosts."""
 import enum
+import platform
 import sys
 
 @enum.unique
@@ -45,7 +46,7 @@ class Host(enum.Enum):
         """Returns the os tag of current Host."""
         return {
             Host.Darwin: 'darwin-x86',
-            Host.Linux: 'linux-x86',
+            Host.Linux: 'linux-' + ('x86' if platform.machine() == 'x86_64' else 'arm' if platform.machine() == 'aarch64' else RuntimeError('Unsupported arch: {}'.format(platform.machine()))),
             Host.Windows: 'windows-x86',
         }[self]
 

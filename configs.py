@@ -22,6 +22,7 @@ import json
 
 import hosts
 import paths
+import platform
 import toolchains
 import win_sdk
 
@@ -157,9 +158,9 @@ class LinuxConfig(_GccConfig):
     """Configuration for Linux targets."""
 
     target_os: hosts.Host = hosts.Host.Linux
-    sysroot: Optional[Path] = (paths.GCC_ROOT / 'host' / 'x86_64-linux-glibc2.17-4.8' / 'sysroot')
-    gcc_root: Path = (paths.GCC_ROOT / 'host' / 'x86_64-linux-glibc2.17-4.8')
-    gcc_triple: str = 'x86_64-linux'
+    sysroot: Optional[Path] = (paths.GCC_ROOT / 'host' / (platform.machine() + '-linux-glibc2.17-4.8') / 'sysroot')
+    gcc_root: Path = (paths.GCC_ROOT / 'host' / (platform.machine() + '-linux-glibc2.17-4.8'))
+    gcc_triple: str = platform.machine() + '-linux'
     gcc_ver: str = '4.8.3'
 
 
