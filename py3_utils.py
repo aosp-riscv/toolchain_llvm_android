@@ -16,13 +16,19 @@
 """Starts a script with prebuilt python3."""
 
 import os
+import platform
 import subprocess
 import sys
 
 THIS_DIR = os.path.realpath(os.path.dirname(__file__))
 def get_host_tag():
     if sys.platform.startswith('linux'):
-        return "linux-x86"
+        if platform.machine() == "aarch64":
+            return "linux-arm"
+        elif platform.machine() == "x86_64":
+            return "linux-x86"
+        else:
+            raise RuntimeError('Unsupported arch: {}'.format(platform.machine()))
     elif sys.platform.startswith('darwin'):
         return "darwin-x86"
     else:
