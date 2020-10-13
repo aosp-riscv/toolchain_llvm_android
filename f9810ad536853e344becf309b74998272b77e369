@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aed3c30e_e8f79d60",
+        "filename": "do_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-10-13T13:09:46Z",
+      "side": 1,
+      "message": "FYI changed it to libxml2.so after pirama@\u0027s change to have a symlink for libxml2.",
+      "range": {
+        "startLine": 455,
+        "startChar": 38,
+        "endLine": 455,
+        "endChar": 48
+      },
+      "revId": "f9810ad536853e344becf309b74998272b77e369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
