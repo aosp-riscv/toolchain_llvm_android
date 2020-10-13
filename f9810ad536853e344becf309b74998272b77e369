@@ -22,6 +22,30 @@
       },
       "revId": "f9810ad536853e344becf309b74998272b77e369",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8562f55f_750e1e61",
+        "filename": "do_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-13T16:35:06Z",
+      "side": 1,
+      "message": "👍 Good to know that reproxy follows symlinks.",
+      "parentUuid": "aed3c30e_e8f79d60",
+      "range": {
+        "startLine": 455,
+        "startChar": 38,
+        "endLine": 455,
+        "endChar": 48
+      },
+      "revId": "f9810ad536853e344becf309b74998272b77e369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
