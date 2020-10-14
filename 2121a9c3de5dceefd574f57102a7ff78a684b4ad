@@ -52,6 +52,24 @@
       "parentUuid": "c26750d4_653061d3",
       "revId": "2121a9c3de5dceefd574f57102a7ff78a684b4ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "574b3fad_89472f3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-14T19:21:14Z",
+      "side": 1,
+      "message": "Since we run/support both Ubuntu and Debian, I think that the conservative approach here is best right now. It might be worth an upstream LLVM discussion about whether these defaults are still correct in 2020 though.",
+      "parentUuid": "f82f58e5_b2463cb4",
+      "revId": "2121a9c3de5dceefd574f57102a7ff78a684b4ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
