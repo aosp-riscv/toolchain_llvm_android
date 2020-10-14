@@ -34,6 +34,24 @@
       "parentUuid": "5c6fbbc7_683d1082",
       "revId": "2121a9c3de5dceefd574f57102a7ff78a684b4ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f82f58e5_b2463cb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-10-14T19:01:45Z",
+      "side": 1,
+      "message": "It\u0027s ok to be conservative here, but unless there\u0027s a known breakage this resolves, we really shouldn\u0027t need .hash.\n\nDT_HASH: https://flapenguin.me/elf-dt-hash\nDT_GNU_HASH: https://flapenguin.me/elf-dt-gnu-hash",
+      "parentUuid": "c26750d4_653061d3",
+      "revId": "2121a9c3de5dceefd574f57102a7ff78a684b4ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
