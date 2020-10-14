@@ -16,6 +16,24 @@
       "message": "Do we need .hash? That\u0027s some old badness IMO and bloats binaries; it duplicates information about the symbol table that\u0027s already in .gnu.hash.",
       "revId": "2121a9c3de5dceefd574f57102a7ff78a684b4ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c26750d4_653061d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-14T18:59:12Z",
+      "side": 1,
+      "message": "I\u0027m OK to use .gnu.hash if we know it\u0027s well adapted by the various distros.  The driver still uses .hash for Debian and older Ubuntu so I decided to be conservative.",
+      "parentUuid": "5c6fbbc7_683d1082",
+      "revId": "2121a9c3de5dceefd574f57102a7ff78a684b4ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
