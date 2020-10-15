@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc134ae_fc3c9e7b",
+        "filename": "test/scripts/forrest.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-15T00:57:13Z",
+      "side": 1,
+      "message": "Initially I updated _get_device_info to camel case but looks like PEP8 suggests that snake case suits Python better 😊\n\nThere are more methods with camelCase names in these scripts, which I\u0027ll resolve in a follow up.",
+      "parentUuid": "4985e045_07cf3a60",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 20
+      },
+      "revId": "342cebe742794e3ae0f14bb2816c1e409eb490ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93b2842d_c8498abf",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "228e6111_b2a13b05",
+        "filename": "test/scripts/test_paths.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-15T00:57:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b2842d_c8498abf",
+      "range": {
+        "startLine": 38,
+        "startChar": 34,
+        "endLine": 38,
+        "endChar": 35
+      },
+      "revId": "342cebe742794e3ae0f14bb2816c1e409eb490ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f296060_d46c21a8",
@@ -60,6 +108,30 @@
       "writtenOn": "2020-10-15T00:30:49Z",
       "side": 1,
       "message": "I guess it\u0027s left intentionally for debugging.",
+      "range": {
+        "startLine": 165,
+        "startChar": 30,
+        "endLine": 165,
+        "endChar": 31
+      },
+      "revId": "342cebe742794e3ae0f14bb2816c1e409eb490ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb9d51e_d0ab131b",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-15T00:57:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f296060_d46c21a8",
       "range": {
         "startLine": 165,
         "startChar": 30,
