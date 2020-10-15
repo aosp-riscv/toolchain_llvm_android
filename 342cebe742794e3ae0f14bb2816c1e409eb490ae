@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4985e045_07cf3a60",
+        "filename": "test/scripts/forrest.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-15T00:30:49Z",
+      "side": 1,
+      "message": "method here uses camel case, but below _get_device_info uses snake case, better be the same.",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 20
+      },
+      "revId": "342cebe742794e3ae0f14bb2816c1e409eb490ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b2842d_c8498abf",
+        "filename": "test/scripts/test_paths.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-15T00:30:49Z",
+      "side": 1,
+      "message": "-\u003estr, same for below function?",
+      "range": {
+        "startLine": 38,
+        "startChar": 34,
+        "endLine": 38,
+        "endChar": 35
+      },
+      "revId": "342cebe742794e3ae0f14bb2816c1e409eb490ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f296060_d46c21a8",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-15T00:30:49Z",
+      "side": 1,
+      "message": "I guess it\u0027s left intentionally for debugging.",
+      "range": {
+        "startLine": 165,
+        "startChar": 30,
+        "endLine": 165,
+        "endChar": 31
+      },
+      "revId": "342cebe742794e3ae0f14bb2816c1e409eb490ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
