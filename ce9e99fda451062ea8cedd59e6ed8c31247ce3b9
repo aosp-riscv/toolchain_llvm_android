@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4330df14_da5fb93a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-19T17:53:48Z",
+      "side": 1,
+      "message": "Thanks for finding and fixing this.",
+      "revId": "ce9e99fda451062ea8cedd59e6ed8c31247ce3b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90976716_1bef658e",
@@ -14,6 +31,24 @@
       "writtenOn": "2020-10-19T17:33:28Z",
       "side": 1,
       "message": "base_builders.py:CMakeBuilder.cmake_defines() calls this function and upon getting a non-None value, sets CMAKE_LINKER.",
+      "revId": "ce9e99fda451062ea8cedd59e6ed8c31247ce3b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cd0c560_035f8ea3",
+        "filename": "configs.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-19T17:53:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90976716_1bef658e",
       "revId": "ce9e99fda451062ea8cedd59e6ed8c31247ce3b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
