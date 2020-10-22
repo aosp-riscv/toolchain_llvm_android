@@ -145,7 +145,14 @@ def invokeForrestRuns(cls, args):
     all_configs = json.load(open(test_paths.CONFIGS_JSON))
     cl_numbers = [cl.cl_number for cl in cls]
 
+    to_run = set(args.groups.split(',')) if args.groups else set()
+    def _should_run(test_groups):
+        return to_run and any(g in to_run for g in test_groups.split())
+
     for config in all_configs:
+        if not _should_run(config['groups']):
+            print(f'Skipping disabled config {config}')
+            continue
         branch = config['branch']
         target = config['target']
         tests = config['tests']
@@ -185,6 +192,11 @@ def parse_args():
         '--tag',
         help=('Tag to group Forrest invocations for this test ' +
               '(and avoid duplicate submissions).'))
+
+    parser.add_argument(
+        '--groups',
+        help='Comma separated list of test groups to run.')
+
 
     args = parser.parse_args()
     if not args.prepare_only and not args.tag:
