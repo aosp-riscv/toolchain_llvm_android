@@ -34,6 +34,24 @@
       "parentUuid": "2052537c_fcc8032a",
       "revId": "77ed11dba40b060c32befbd9392e159ef98408ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b90bc981_179e07eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-26T20:30:30Z",
+      "side": 1,
+      "message": "The two reverts need to be applied atomically so it seems cleaner to put them together in a single patch file.  If two separate patch files would help in another way, I\u0027m fine with splitting them.",
+      "parentUuid": "7885324f_191667f7",
+      "revId": "77ed11dba40b060c32befbd9392e159ef98408ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
