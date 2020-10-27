@@ -45,6 +45,30 @@
       },
       "revId": "9403dce4ced6ea1f1bdacf3cf6f680d7cd45a336",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c71e8e3_7226ab77",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-27T20:39:54Z",
+      "side": 1,
+      "message": "Ack.\n\nIs nargs\u003d\u0027+\u0027 preverable over action\u003d\u0027append\u0027 to add_argument?\n\nWith nargs\u003d\u0027+\u0027:\n  --groups smoke1 smoke2 \u003c-- OK\n  --groups smoke1 --groups smoke2 \u003c-- OK but args.groups \u003d\u003d [\u0027smoke2\u0027]\n\nWith action\u003d\u0027append\u0027:\n  --groups smoke1 smoke2 \u003c-- ERROR\n  --groups smoke1 --groups smoke2 \u003c-- OK; args.groups \u003d [\u0027smoke1\u0027, \u0027smoke2\u0027]\n\naction\u003d\u0027append\u0027 looks natural to me but it\u0027s only because I haven\u0027t seen scripts using the nargs\u003d\u0027+\u0027 behavior before",
+      "parentUuid": "a3922448_29f427b9",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 19
+      },
+      "revId": "9403dce4ced6ea1f1bdacf3cf6f680d7cd45a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
