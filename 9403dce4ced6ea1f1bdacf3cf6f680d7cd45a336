@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34b4a40c_b8369ad4",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-27T21:30:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de562ed9_14b382b4",
+      "range": {
+        "startLine": 150,
+        "startChar": 70,
+        "endLine": 150,
+        "endChar": 71
+      },
+      "revId": "9403dce4ced6ea1f1bdacf3cf6f680d7cd45a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3922448_29f427b9",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I am more familiar with nargs\u003d\u0027+\u0027 and its behavior in python. I don\u0027t know if there is any preference. And I found I used them both in https://android.googlesource.com/platform/system/extras/+/master/simpleperf/scripts/annotate.py#469. So it\u0027s up to you.",
       "parentUuid": "7c71e8e3_7226ab77",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 19
+      },
+      "revId": "9403dce4ced6ea1f1bdacf3cf6f680d7cd45a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bbbcb13_9dc03c88",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-27T21:30:28Z",
+      "side": 1,
+      "message": "Done.  Looks like there\u0027s also action\u003d\u0027extend\u0027 in Python 3.8, which would append to the arg value instead of creating a list-of-lists.  This may be useful in simpleperf/scripts/annotate.py as well.",
+      "parentUuid": "f5ce3d4e_9fd8a206",
       "range": {
         "startLine": 197,
         "startChar": 18,
