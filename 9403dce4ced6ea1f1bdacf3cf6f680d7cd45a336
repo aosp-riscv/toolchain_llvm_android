@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de562ed9_14b382b4",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-27T17:59:55Z",
+      "side": 1,
+      "message": "This line seems a little hard to understand, I prefer to have a comment or an explicit for loop.",
+      "range": {
+        "startLine": 150,
+        "startChar": 70,
+        "endLine": 150,
+        "endChar": 71
+      },
+      "revId": "9403dce4ced6ea1f1bdacf3cf6f680d7cd45a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3922448_29f427b9",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-27T17:59:55Z",
+      "side": 1,
+      "message": "If we get all possible values for --groups option from CONFIGS_JSON, and put them into choices field, then we don\u0027t need to remember valid group names. add_argument(nargs\u003d\u0027+\u0027, choices\u003d[\u0027smoke1\u0027, \u0027smoke2\u0027]) can accept multiple choices.",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 19
+      },
+      "revId": "9403dce4ced6ea1f1bdacf3cf6f680d7cd45a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
