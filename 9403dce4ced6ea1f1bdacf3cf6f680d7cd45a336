@@ -141,6 +141,30 @@
       },
       "revId": "9403dce4ced6ea1f1bdacf3cf6f680d7cd45a336",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "168d2aa3_d83e49f3",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-27T21:43:53Z",
+      "side": 1,
+      "message": "Good to know. I will use it after I drop python2 support in simpleperf.",
+      "parentUuid": "6bbbcb13_9dc03c88",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 19
+      },
+      "revId": "9403dce4ced6ea1f1bdacf3cf6f680d7cd45a336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
