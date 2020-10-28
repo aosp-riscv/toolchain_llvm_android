@@ -52,6 +52,41 @@
       "parentUuid": "7885324f_191667f7",
       "revId": "77ed11dba40b060c32befbd9392e159ef98408ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21936659_a4e2da3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-28T00:48:00Z",
+      "side": 1,
+      "message": "Ping...",
+      "revId": "77ed11dba40b060c32befbd9392e159ef98408ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed211c5_e3c96caa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-28T00:48:00Z",
+      "side": 1,
+      "message": "I think this a single patch file is fine.  We are never going to be in a state where only one of them would be needed (or we\u0027d get an error when it doesn\u0027t apply).\n\nIn general, I think we\u0027re keeping related cherry-picks as individual patches while related reverts as single patch files.",
+      "parentUuid": "b90bc981_179e07eb",
+      "revId": "77ed11dba40b060c32befbd9392e159ef98408ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
