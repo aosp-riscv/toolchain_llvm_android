@@ -22,6 +22,30 @@
       },
       "revId": "bbeec28331deda1ed1e7b6f014aa6d1833e08bcc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ed813a_6b8fd12c",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1470412
+      },
+      "writtenOn": "2020-10-29T19:50:36Z",
+      "side": 1,
+      "message": "I see, I\u0027m not sure how to generate these revision numbers.",
+      "parentUuid": "f9e2074a_05d6395c",
+      "range": {
+        "startLine": 6,
+        "startChar": 23,
+        "endLine": 6,
+        "endChar": 27
+      },
+      "revId": "bbeec28331deda1ed1e7b6f014aa6d1833e08bcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
