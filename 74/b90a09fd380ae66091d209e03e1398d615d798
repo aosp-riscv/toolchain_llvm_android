@@ -1,0 +1,7 @@
+Code-Review+2: Stephen Hines <srhines@google.com>
+Bypass-Presubmit+1: Stephen Hines <srhines@google.com>
+Submitted-by: Stephen Hines <srhines@google.com>
+Submitted-at: Thu, 29 Oct 2020 20:16:58 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1480387
+Project: toolchain/llvm_android
+Branch: refs/heads/llvm-r365631
