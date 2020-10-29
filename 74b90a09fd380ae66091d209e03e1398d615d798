@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8955b1c0_a5a776d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-29T20:16:23Z",
+      "side": 1,
+      "message": "Submitting to prevent builds from being turned down due to 6 month inactivity. We still need this build for 2020 LTS releases.",
+      "revId": "74b90a09fd380ae66091d209e03e1398d615d798",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
