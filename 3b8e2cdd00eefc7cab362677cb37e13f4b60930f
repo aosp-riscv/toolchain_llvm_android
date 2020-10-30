@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c4e4244_034c1f70",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-10-30T05:53:48Z",
+      "side": 1,
+      "message": "This is now redundant?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 11
+      },
+      "revId": "3b8e2cdd00eefc7cab362677cb37e13f4b60930f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
