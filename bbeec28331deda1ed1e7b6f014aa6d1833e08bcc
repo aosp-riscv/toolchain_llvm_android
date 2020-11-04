@@ -94,6 +94,30 @@
       },
       "revId": "bbeec28331deda1ed1e7b6f014aa6d1833e08bcc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fd475d3_d0149681",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-11-04T17:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f536536_b24cbb4a",
+      "range": {
+        "startLine": 6,
+        "startChar": 23,
+        "endLine": 6,
+        "endChar": 27
+      },
+      "revId": "bbeec28331deda1ed1e7b6f014aa6d1833e08bcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
