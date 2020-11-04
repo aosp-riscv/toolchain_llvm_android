@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39f1247b_6561e23f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-11-04T08:33:29Z",
+      "side": 1,
+      "message": "Ok, I just put the ordering back to the original. Hopefully we don\u0027t have to modify the patches too much when doing the next update (to r404259, which is after the 1st of these patches but before the rest of them).",
+      "revId": "f4c6b2818f31c3a8bf5d40563bdd66a7b516ce83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
