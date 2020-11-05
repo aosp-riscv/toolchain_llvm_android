@@ -465,6 +465,12 @@
         "comment": "Revert \"[libc++] Remove workarounds for the lack of clock_gettime on older macOS platforms\"",
         "rel_patch_path": "Revert-Remove-workarounds-for-the-lack-of-clock_gettime-on-older-macOS-platforms.patch",
         "start_version": 395739,
+        "end_version": 407598
+    },
+    {
+        "comment": "Revert \"[libc++] Remove workarounds for the lack of clock_gettime on older macOS platforms\"",
+        "rel_patch_path": "Revert-Remove-workarounds-for-the-lack-of-clock_gettime-on-older-macOS-platforms-v2.patch",
+        "start_version": 407598,
         "end_version": null
     },
     {
@@ -477,6 +483,12 @@
         "comment": "Revert two changes that break cfi_test.basic in bionic-unit-tests",
         "rel_patch_path": "Revert-two-changes-that-break-cfi_test.basic-in-bionic-unit-tests.patch",
         "start_version": 404259,
+        "end_version": 407598
+    },
+    {
+        "comment": "Revert several changes that break cfi_test.basic in bionic-unit-tests",
+        "rel_patch_path": "Revert-several-changes-that-break-cfi_test.basic-in-bionic-unit-tests.patch",
+        "start_version": 407598,
         "end_version": null
     }
 ]
