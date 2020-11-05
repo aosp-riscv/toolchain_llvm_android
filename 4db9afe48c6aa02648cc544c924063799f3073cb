@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "857d5862_19d5d204",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-11-05T01:41:16Z",
+      "side": 1,
+      "message": "I did not test this on mac (and doubt that I will a priori), but I did have to make some easy tweaks for v2 of that patch. The other reverts are clean (once you take all of them).",
+      "revId": "4db9afe48c6aa02648cc544c924063799f3073cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
