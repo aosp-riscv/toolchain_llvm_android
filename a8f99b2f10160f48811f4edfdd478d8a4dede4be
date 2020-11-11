@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f050389_6ef44f2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-11-11T23:00:08Z",
+      "side": 1,
+      "message": "Adding hhb@ here, but I think the recommendation is not to disable ncurses support because of the libedit dependency too.",
+      "revId": "a8f99b2f10160f48811f4edfdd478d8a4dede4be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
