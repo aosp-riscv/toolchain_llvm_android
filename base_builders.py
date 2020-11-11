@@ -470,6 +470,7 @@ class LLVMBuilder(LLVMBaseBuilder):
             defines['LLDB_USE_SYSTEM_DEBUGSERVER'] = 'ON'
 
         defines['LLDB_ENABLE_LUA'] = 'OFF'
+        defines['LLDB_ENABLE_CURSES'] = 'OFF'
 
         if self.swig_executable:
             defines['SWIG_EXECUTABLE'] = str(self.swig_executable)
