@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "645a20d1_6610c86a",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-13T23:14:24Z",
+      "side": 1,
+      "message": "This is matching the CompilerRTBuilder, FWIW. It seems OK for builtins to be different, though. Maybe compiler-rt needs to use lib/linux because it\u0027s using `ninja install` to install directly into the clang resource directory.\n\ncompiler-rt/CMakeLists.txt also sets ANDROID:\n\n    if (\"${COMPILER_RT_DEFAULT_TARGET_TRIPLE}\" MATCHES \".*android.*\")\n      set(ANDROID 1)\n\nI think that line doesn\u0027t apply if I use compiler-rt/lib/builtins/CMakeLists.txt.\n\nIt looks like ANDROID is set in base_builders.py, CMakeBuilder.cmake_defines:\n\n        if self._config.target_os \u003d\u003d hosts.Host.Android:\n            defines[\u0027ANDROID\u0027] \u003d \u00271\u0027",
+      "parentUuid": "747f69f9_09b7866b",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 8
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b006e93d_099278ca",
         "filename": "builders.py",
         "patchSetId": 2
@@ -61,6 +85,24 @@
       "writtenOn": "2020-11-13T20:57:21Z",
       "side": 1,
       "message": "lib/Driver/ToolChains/CommonArgs.cpp:AddUnwindLibrary\n```\n  // Targets that don\u0027t use unwind libraries.\n  if (TC.getTriple().isAndroid() || TC.getTriple().isOSIAMCU() ||\n      TC.getTriple().isOSBinFormatWasm() ||\n      UNW \u003d\u003d ToolChain::UNW_None)\n    return;\n```\n\nShould we change the driver to remove the check for Android.",
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd2e23c_c65c62c1",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-13T23:14:24Z",
+      "side": 1,
+      "message": "Probably. I think we also want to:\n - Always use the static libunwind.a, not libunwind.so (unless -shared-libgcc is passed explicitly?).\n - With -rtlib\u003dcompiler-rt, default to -unwindlib\u003dlibunwind (rather than -unwindlib\u003dnone)\n\nFor the NDK, I think we\u0027d also want to default to -rtlib\u003dcompiler-rt, but I think that transition may break people building LLVM themselves outside the Android LLVM team.\n\nI have a couple of patches that implement some version of the above. e.g. Leave the -rtlib default alone and just change the behavior for -rtlib\u003dcompiler-rt and/or -unwindlib\u003dlibunwind.",
+      "parentUuid": "b006e93d_099278ca",
       "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +130,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f1520e8_ef3651db",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-13T23:14:24Z",
+      "side": 1,
+      "message": "Currently I\u0027m installing libunwind.a into the Clang resource directory, and during the toolchain build, there\u0027s only one resource directory for both NDK and platform builds, so the library has to be built against the older API level.\n\n(IIUC, that would be true of the other compiler-rt runtimes too if they were actually linked into NDK binaries.)\n\nThis is similar to what we already do with libgcc, where platform and NDK builds use a libgcc built against an old API level.\n\nThe libunwind-exported.a, intended for use in libc.so, is built against a newer API level.",
+      "parentUuid": "16105398_f6727cc0",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 59
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7929ad99_e31895a5",
@@ -101,6 +167,30 @@
       "writtenOn": "2020-11-13T20:57:21Z",
       "side": 1,
       "message": "Is there a plan for breaking this dependency?  If so, please file a bug with the details.",
+      "range": {
+        "startLine": 497,
+        "startChar": 10,
+        "endLine": 497,
+        "endChar": 15
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06cf0c21_4c46f1ce",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-13T23:14:24Z",
+      "side": 1,
+      "message": "I think I\u0027ll file an LLVM bug and maybe upload my WIP patch to Phabricator.",
+      "parentUuid": "7929ad99_e31895a5",
       "range": {
         "startLine": 497,
         "startChar": 10,
