@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "747f69f9_09b7866b",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-11-13T22:09:02Z",
+      "side": 1,
+      "message": "ANDROID will be set if CMAKE_SYSTEM_NAME\u003dAndroid. [1]\n\nFrom cmake\u0027s aspect, CMAKE_SYSTEM_NAME\u003dAndroid is used to build Android apps. With CMAKE_SYSTEM_VERSION\u003d1 almost all Android specific logic will be skipped. It is almost identical to CMAKE_SYSTEM_NAME\u003dLinux.\n\nBut surely lib/builtins/CMakeLists.txt can behave differently for Android.\n\n[1] https://gitlab.kitware.com/cmake/cmake/-/blob/cbc51a8be36b4448048c68106fd895eccee8b9fb/Modules/Platform/Android.cmake#L9",
+      "parentUuid": "48aad537_d6bd5d0e",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 8
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b006e93d_099278ca",
         "filename": "builders.py",
         "patchSetId": 2
