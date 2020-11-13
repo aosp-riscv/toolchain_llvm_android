@@ -54,8 +54,8 @@ class LibInfo:
         raise NotImplementedError()
 
     @property
-    def install_library(self) -> Optional[Path]:
-        """Path to the library to install. Returns None for static library."""
+    def install_libraries(self) -> List[Path]:
+        """Path to the libraries to install. Empty for static library."""
         raise NotImplementedError()
 
     @property
@@ -69,7 +69,7 @@ class Builder:  # pylint: disable=too-few-public-methods
     name: str = ""
     config_list: List[configs.Config]
 
-    """Use prebuilt toolchain if not specified otherwise in constructor."""
+    """Use prebuilt toolchain by default. This value will be updated if a new toolchain is built."""
     toolchain: toolchains.Toolchain = toolchains.get_prebuilt_toolchain()
 
     """The toolchain to install artifacts from this LLVMRuntimeBuilder."""
@@ -183,6 +183,15 @@ class AutoconfBuilder(Builder):
         return cxxflags
 
     @property
+    def ldflags(self) -> List[str]:
+        ldflags = super().ldflags
+        if self._config.target_os.is_darwin:
+            ldflags.append('-Wl,-rpath,@loader_path/../lib64')
+        if self._config.target_os.is_linux:
+            ldflags.append('-Wl,-rpath,$ORIGIN/../lib64')
+        return ldflags
+
+    @property
     def config_flags(self) -> List[str]:
         """Parameters to configure."""
         return []
@@ -207,12 +216,20 @@ class AutoconfBuilder(Builder):
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self._touch_autoconfig_files()
 
-        env = self.env
+        # Write flags to files, to avoid various escaping issues.
         cflags = self._config.cflags + self.cflags
         cxxflags = self._config.cxxflags + self.cxxflags
         ldflags = self._config.ldflags + self.ldflags
-        env['CC'] = ' '.join([str(self._cc)] + cflags + ldflags)
-        env['CXX'] = ' '.join([str(self._cxx)] + cxxflags + ldflags)
+        cflags_file = self.output_dir / 'cflags'
+        cxxflags_file = self.output_dir / 'cxxflags'
+        with cflags_file.open('w') as argfile:
+            argfile.write(' '.join(cflags + ldflags))
+        with cxxflags_file.open('w') as argfile:
+            argfile.write(' '.join(cxxflags + ldflags))
+
+        env = self.env
+        env['CC'] = f'{self._cc} @{cflags_file}'
+        env['CXX'] = f'{self._cxx} @{cxxflags_file}'
 
         config_cmd = [self.src_dir / 'configure', f'--prefix={self.install_dir}']
         config_cmd.extend(self.config_flags)
@@ -444,6 +461,7 @@ class LLVMBuilder(LLVMBaseBuilder):
     libxml2: Optional[LibInfo] = None
     liblzma: Optional[LibInfo] = None
     libedit: Optional[LibInfo] = None
+    libncurses: Optional[LibInfo] = None
 
     @property
     def install_dir(self) -> Path:
@@ -520,11 +538,13 @@ class LLVMBuilder(LLVMBaseBuilder):
                             ignore=shutil.ignore_patterns('*.pyc', '__pycache__', 'Android.bp',
                                                           '.git', '.gitignore'))
 
-        for lib in (self.liblzma, self.libedit, self.libxml2):
-            if lib and lib.install_library:
-                shutil.copy2(lib.install_library, lib_dir)
-                for link in lib.symlinks:
-                    shutil.copy2(link, lib_dir, follow_symlinks=False)
+        for lib in (self.liblzma, self.libedit, self.libxml2, self.libncurses):
+            if not lib:
+                continue
+            for lib_file in lib.install_libraries:
+                shutil.copy2(lib_file, lib_dir)
+            for link in lib.symlinks:
+                shutil.copy2(link, lib_dir, follow_symlinks=False)
 
     @property
     def cmake_defines(self) -> Dict[str, str]:
