@@ -428,8 +428,14 @@ class LibEditBuilder(base_builders.AutoconfBuilder, base_builders.LibInfo):
         }[self._config.target_os]
 
     @property
-    def install_library(self) -> Path:
-        return self.link_library
+    def install_libraries(self) -> List[Path]:
+        libs = [self.link_library]
+        if self._config.target_os.is_linux and self._config.sysroot:
+            libs += [
+                self._config.sysroot / 'usr' / 'lib' / 'libncurses.so.5',
+                self._config.sysroot / 'usr' / 'lib' / 'libtinfo.so.5',
+            ]
+        return libs
 
 
 class SwigBuilder(base_builders.AutoconfBuilder):
@@ -467,8 +473,8 @@ class XzBuilder(base_builders.CMakeBuilder, base_builders.LibInfo):
         return self.install_dir / 'lib' / 'liblzma.a'
 
     @property
-    def install_library(self) -> Optional[Path]:
-        return None
+    def install_libraries(self) -> List[Path]:
+        return []
 
 
 class LibXml2Builder(base_builders.CMakeBuilder, base_builders.LibInfo):
@@ -518,10 +524,10 @@ class LibXml2Builder(base_builders.CMakeBuilder, base_builders.LibInfo):
         }[self._config.target_os]
 
     @property
-    def install_library(self) -> Path:
+    def install_libraries(self) -> List[Path]:
         if self._config.target_os.is_windows:
-            return self.install_dir / 'bin' / 'libxml2.dll'
-        return self.link_library
+            return [self.install_dir / 'bin' / 'libxml2.dll']
+        return [self.link_library]
 
     @property
     def symlinks(self) -> List[Path]:

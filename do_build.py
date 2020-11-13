@@ -83,7 +83,8 @@ def build_llvm_for_windows(enable_assertions: bool,
     libxml2_builder = builders.LibXml2Builder(config_list)
     libxml2_builder.build()
     win_builder.libxml2 = libxml2_builder
-    lldb_bins.add(libxml2_builder.install_library.name)
+    for lib in libxml2_builder.install_libraries:
+        lldb_bins.add(lib.name)
 
     win_builder.build_lldb = build_lldb
     if build_lldb:
