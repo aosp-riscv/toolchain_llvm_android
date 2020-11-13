@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48aad537_d6bd5d0e",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-13T20:57:21Z",
+      "side": 1,
+      "message": "Does this matter?  We can copy from \u0027lib/android\u0027 instead of \u0027lib/linux\u0027 in line 273 below.\n\nOn the flip side, I see a few \u0027if(ANDROID)\u0027 checks in lib/builtins/CMakeLists.txt.  Do you know how `ANDROID` variable is set?  If it is set from CMAKE_SYSTEM_NAME, we should have that set.",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 8
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b006e93d_099278ca",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-13T20:57:21Z",
+      "side": 1,
+      "message": "lib/Driver/ToolChains/CommonArgs.cpp:AddUnwindLibrary\n```\n  // Targets that don\u0027t use unwind libraries.\n  if (TC.getTriple().isAndroid() || TC.getTriple().isOSIAMCU() ||\n      TC.getTriple().isOSBinFormatWasm() ||\n      UNW \u003d\u003d ToolChain::UNW_None)\n    return;\n```\n\nShould we change the driver to remove the check for Android.",
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16105398_f6727cc0",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-13T20:57:21Z",
+      "side": 1,
+      "message": "The platform copy of libunwind.a would be built for an older API level.  SGTM if that\u0027s intended.",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 59
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7929ad99_e31895a5",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-13T20:57:21Z",
+      "side": 1,
+      "message": "Is there a plan for breaking this dependency?  If so, please file a bug with the details.",
+      "range": {
+        "startLine": 497,
+        "startChar": 10,
+        "endLine": 497,
+        "endChar": 15
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73fd6d81_7a0ba553",
+        "filename": "configs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-13T20:57:21Z",
+      "side": 1,
+      "message": "I think this comment can be removed.  Passing the API level in the triple rather than as a macro is a good change by itself.",
+      "range": {
+        "startLine": 289,
+        "startChar": 8,
+        "endLine": 290,
+        "endChar": 32
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
