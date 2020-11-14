@@ -1,0 +1,81 @@
+From b2cc05a12925e7e31877441881e47bddbe86ea33 Mon Sep 17 00:00:00 2001
+From: Pirama Arumuga Nainar <pirama@google.com>
+Date: Fri, 13 Nov 2020 16:33:47 -0800
+Subject: WIP patch for b/173049907
+
+If APCS is used, set calling convention for emitted libcalls to that of
+the callee.
+---
+ llvm/include/llvm/IR/CallingConv.h          |  3 +++
+ llvm/lib/IR/Function.cpp                    |  7 +++++++
+ llvm/lib/Transforms/Utils/BuildLibCalls.cpp | 20 ++++++++++++++++----
+ 3 files changed, 26 insertions(+), 4 deletions(-)
+
+diff --git a/llvm/include/llvm/IR/CallingConv.h b/llvm/include/llvm/IR/CallingConv.h
+index 6a4e368b2e9..eee96ad173f 100644
+--- a/llvm/include/llvm/IR/CallingConv.h
++++ b/llvm/include/llvm/IR/CallingConv.h
+@@ -248,6 +248,9 @@ namespace CallingConv {
+     MaxID = 1023
+   };
+ 
++  /// isARMTargetCC - Return true if the specific calling convention is one of
++  /// ARM target specific calling convention.
++  bool isARMTargetCC(ID id);
+ } // end namespace CallingConv
+ 
+ } // end namespace llvm
+diff --git a/llvm/lib/IR/Function.cpp b/llvm/lib/IR/Function.cpp
+index 8c360dd1841..2ac05d48296 100644
+--- a/llvm/lib/IR/Function.cpp
++++ b/llvm/lib/IR/Function.cpp
+@@ -1765,3 +1765,10 @@ bool llvm::NullPointerIsDefined(const Function *F, unsigned AS) {
+ 
+   return false;
+ }
++
++/// isARMTargetCC - Return true if the specific calling convention is one of
++/// ARM target specific calling convention.
++/// There isn't a CallingConv.cpp so we are adding this utility routine here.
++bool CallingConv::isARMTargetCC(ID id) {
++  return id == ARM_APCS || id == ARM_AAPCS || id == ARM_AAPCS_VFP;
++}
+diff --git a/llvm/lib/Transforms/Utils/BuildLibCalls.cpp b/llvm/lib/Transforms/Utils/BuildLibCalls.cpp
+index e8b14409c28..95ab1fdf0b6 100644
+--- a/llvm/lib/Transforms/Utils/BuildLibCalls.cpp
++++ b/llvm/lib/Transforms/Utils/BuildLibCalls.cpp
+@@ -1017,15 +1017,27 @@ static Value *emitLibCall(LibFunc TheLibFunc, Type *ReturnType,
+   if (!TLI->has(TheLibFunc))
+     return nullptr;
+ 
+-  Module *M = B.GetInsertBlock()->getModule();
++  Function *CallerF = B.GetInsertBlock()->getParent();
++  Module *M = CallerF->getParent();
+   StringRef FuncName = TLI->getName(TheLibFunc);
+   FunctionType *FuncType = FunctionType::get(ReturnType, ParamTypes, IsVaArgs);
+   FunctionCallee Callee = M->getOrInsertFunction(FuncName, FuncType);
+   inferLibFuncAttributes(M, FuncName, *TLI);
+   CallInst *CI = B.CreateCall(Callee, Operands, FuncName);
+-  if (const Function *F =
+-          dyn_cast<Function>(Callee.getCallee()->stripPointerCasts()))
+-    CI->setCallingConv(F->getCallingConv());
++  if (Function *F =
++          dyn_cast<Function>(Callee.getCallee()->stripPointerCasts())) {
++
++    CallingConv::ID CC = F->getCallingConv();
++    CallingConv::ID CallerCC = CallerF->getCallingConv();
++    if (CC == CallingConv::C && CallingConv::isARMTargetCC(CallerCC)) {
++      // If caller is using ARM target specific CC such as AAPCS-VFP,
++      // make sure the call uses it or it would introduce a calling
++      // convention mismatch.
++      CI->setCallingConv(CallerCC);
++      F->setCallingConv(CallerCC);
++    } else
++      CI->setCallingConv(CC);
++  }
+   return CI;
+ }
+ 
+-- 
+2.29.2.299.gdc1121823c-goog
+
