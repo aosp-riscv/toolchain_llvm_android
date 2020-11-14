@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68f3a202_d8882a01",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-14T00:13:50Z",
+      "side": 1,
+      "message": "Thanks for the analysis.  This is indeed needed for compiler-rt to install correctly.  I think we have some plans to be able to pass CMAKE_SYSTEM_NAME there as well.\n\nIf there are no other concerns, I think we should set CMAKE_SYSTEM_NAME here and copy from $output_dir/lib/android.",
+      "parentUuid": "645a20d1_6610c86a",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 8
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b006e93d_099278ca",
         "filename": "builders.py",
         "patchSetId": 2
@@ -103,6 +127,24 @@
       "side": 1,
       "message": "Probably. I think we also want to:\n - Always use the static libunwind.a, not libunwind.so (unless -shared-libgcc is passed explicitly?).\n - With -rtlib\u003dcompiler-rt, default to -unwindlib\u003dlibunwind (rather than -unwindlib\u003dnone)\n\nFor the NDK, I think we\u0027d also want to default to -rtlib\u003dcompiler-rt, but I think that transition may break people building LLVM themselves outside the Android LLVM team.\n\nI have a couple of patches that implement some version of the above. e.g. Leave the -rtlib default alone and just change the behavior for -rtlib\u003dcompiler-rt and/or -unwindlib\u003dlibunwind.",
       "parentUuid": "b006e93d_099278ca",
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8b7c140_410e0b10",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-14T00:13:50Z",
+      "side": 1,
+      "message": "SGTM.\n\n\u003e For the NDK, I think we\u0027d also want to default to -rtlib\u003dcompiler-rt, but I think that transition may break people building LLVM themselves outside the Android LLVM team.\n\nYes, we\u0027d want this at some point in the future.  We should do this for all Android triples (i.e. platform as well).\n\nIIUC, as long as we can override with -rtlib and -unwindlib, having others explicitly set these flags should be fine.",
+      "parentUuid": "2dd2e23c_c65c62c1",
       "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -144,6 +186,30 @@
       "side": 1,
       "message": "Currently I\u0027m installing libunwind.a into the Clang resource directory, and during the toolchain build, there\u0027s only one resource directory for both NDK and platform builds, so the library has to be built against the older API level.\n\n(IIUC, that would be true of the other compiler-rt runtimes too if they were actually linked into NDK binaries.)\n\nThis is similar to what we already do with libgcc, where platform and NDK builds use a libgcc built against an old API level.\n\nThe libunwind-exported.a, intended for use in libc.so, is built against a newer API level.",
       "parentUuid": "16105398_f6727cc0",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 59
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a028dc_a7820507",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-14T00:13:50Z",
+      "side": 1,
+      "message": "ACK.",
+      "parentUuid": "8f1520e8_ef3651db",
       "range": {
         "startLine": 463,
         "startChar": 0,
