@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a4a7ebf_dce49131",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-14T02:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68f3a202_d8882a01",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 8
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b006e93d_099278ca",
@@ -269,6 +293,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b480194_dc93f43f",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-14T02:35:20Z",
+      "side": 1,
+      "message": "There was an existing bug for this issue when it affected FreeBSD -- https://bugs.llvm.org/show_bug.cgi?id\u003d32279. I commented on it, and I think I can add a link to it in our Python script.",
+      "parentUuid": "06cf0c21_4c46f1ce",
+      "range": {
+        "startLine": 497,
+        "startChar": 10,
+        "endLine": 497,
+        "endChar": 15
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73fd6d81_7a0ba553",
         "filename": "configs.py",
         "patchSetId": 2
@@ -280,6 +328,30 @@
       "writtenOn": "2020-11-13T20:57:21Z",
       "side": 1,
       "message": "I think this comment can be removed.  Passing the API level in the triple rather than as a macro is a good change by itself.",
+      "range": {
+        "startLine": 289,
+        "startChar": 8,
+        "endLine": 290,
+        "endChar": 32
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fbaedb5_6826771e",
+        "filename": "configs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-14T02:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73fd6d81_7a0ba553",
       "range": {
         "startLine": 289,
         "startChar": 8,
