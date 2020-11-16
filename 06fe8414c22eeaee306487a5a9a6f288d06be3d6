@@ -315,6 +315,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "333d23dd_1f744d92",
+        "filename": "builders.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-16T23:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b480194_dc93f43f",
+      "range": {
+        "startLine": 497,
+        "startChar": 10,
+        "endLine": 497,
+        "endChar": 15
+      },
+      "revId": "06fe8414c22eeaee306487a5a9a6f288d06be3d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73fd6d81_7a0ba553",

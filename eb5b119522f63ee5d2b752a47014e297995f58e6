@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "92b3a009_ef3cbb68",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "\u003e Patch Set 1:\n\u003e \n\u003e \u003e Patch Set 1:\n\u003e \u003e \n\u003e \u003e This change accidentally omitted __gcc_personality_v0 from the builtins, but none of the NDK or platform testing noticed. Apparently the test we\u0027d need uses __attribute__((cleanup)) on a C file compiled with -fexceptions. Maybe I can add an NDK test for that.\n\u003e \n\u003e lib/builtins/CMakeLists.txt omits __gcc_personality_v0 because it fails the unwind.h existence check.\n\u003e \n\u003e Clang has an unwind.h that\u0027s installed into its resource directory. (libunwind also has an unwind.h that seems to describe roughly the same API, but I suppose it\u0027s not used by default. libunwind also has a libunwind.h for its unw_* APIs.)\n\u003e \n\u003e CMake compiles a test program, and it\u0027s able to find unwind.h when compiling, but check_include_file tries to link an executable, and it can\u0027t, so it declares the header missing.\n\u003e \n\u003e By using -DCMAKE_C_COMPILER_WORKS\u003dON to bypass the CMake feature testing, I was doing the same thing I saw the Fuchsia LLVM build system do. (I think it\u0027s using the llvm_ExternalProject_Add calls in llvm/runtimes/CMakeLists.txt to build the builtins.) It appears that the Fuchsia libclang_rt.builtins.a archives are also missing the __gcc_personality_v0 symbols, also because unwind.h is \"missing\". (As of mid-May, anyway.)\n\u003e \n\u003e One easy fix for Android LLVM is to pass -DHAVE_UNWIND_H\u003dON to cmake for the builtins. We could also change compiler-rt to explicitly turn HAVE_UNWIND_H on for Android.\n\n-DCMAKE_TRY_COMPILE_TARGET_TYPE\u003dSTATIC_LIBRARY seems like a better approach. It configures CMake to skip linking during its feature testing (try_compile). The flag also makes -DCMAKE_C_COMPILER_WORKS\u003dON unnecessary.\n",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3030900c_56617b6b",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "(remember to rebase. builders are moved to builders.py. it will be more and more difficult to merge... 😊",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1e494656_15fc84b2",
         "filename": "/PATCHSET_LEVEL",
@@ -49,10 +50,10 @@
       "message": "Thank for the heads up, we don\u0027t need __gcc_personality_v0 on Fuchsia which is why we haven\u0027t noticed this issue. I agree that CMAKE_TRY_COMPILE_TARGET_TYPE would be better but it\u0027s not supported by CMake 3.4 which is currently the minimum supported by LLVM. What I think we should do is to move this check to https://github.com/llvm/llvm-project/blob/master/compiler-rt/cmake/builtin-config-ix.cmake and use a custom function akin to builtin_check_c_compiler_flag that doesn\u0027t attempt to link.",
       "parentUuid": "92b3a009_ef3cbb68",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "90e03596_62cd5404",
         "filename": "/PATCHSET_LEVEL",
@@ -67,10 +68,10 @@
       "message": "This AOSP patch builds the builtins by invoking cmake on lib/builtins, so AFAICT, it can use CMAKE_TRY_COMPILE_TARGET_TYPE despite the current 3.4 version minimum. AOSP is using a much newer CMake version.\n\nThat said, it looks like the LLVM CMake version upgrade might be coming soon:\n\nhttp://lists.llvm.org/pipermail/llvm-dev/2020-July/143437.html\n\nhttps://reviews.llvm.org/D78646\n\nMaybe try_compile_only / builtin_check_c_compiler_flag can be removed. The CMAKE_TRY_COMPILE_TARGET_TYPE is harder to apply to a single config-check statement, but libunwind attempts it:\n\nhttps://github.com/llvm/llvm-project/commit/57fc8ecdbaa7fbb1a13907ca3f7a3cb9f9459d27#diff-36a9bbaac909b3b8bb03460da75a0d9c\n\nI was able to set CMAKE_TRY_COMPILE_TARGET_TYPE globally for the entire builtins build, though, which I think is good enough for my purposes.",
       "parentUuid": "1e494656_15fc84b2",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "beec2490_21ce99e8",
         "filename": "configs.py",
@@ -84,10 +85,28 @@
       "side": 1,
       "message": "This was added in https://r.android.com/1090811 for https://reviews.llvm.org/D65245.  While the underlying gcov workaround is not needed anymore (since we moved to clang coverage), using 10000 seems to be the right value to pass here, unless there\u0027s a better reason to use 29.",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a938e0a9_f5811f6d",
+        "filename": "configs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-16T23:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "beec2490_21ce99e8",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "9f50b6a1_aa695a01",
         "filename": "configs.py",
@@ -101,10 +120,28 @@
       "side": 1,
       "message": "Should we still pass \u0027-nostdinc++\u0027 for the NDK?",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5023137_3e4fc9e1",
+        "filename": "configs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-16T23:15:37Z",
+      "side": 1,
+      "message": "Not sure what my question here was about.",
+      "parentUuid": "9f50b6a1_aa695a01",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "14483c36_8dc4c8c5",
         "filename": "do_build.py",
@@ -118,10 +155,10 @@
       "side": 1,
       "message": "Can you raise an exception if either of the libraries is not found?  We could then get rid of these steps/checks when no longer neecssary.\n\nThe same for the NDK STL libraries below even though they are going to be permanent.  But we could detect if the NDK installation is restructured.",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "60a7e55d_41befd4e",
         "filename": "do_build.py",
@@ -136,10 +173,28 @@
       "message": "yeah, I\u0027ll see if if I can do that",
       "parentUuid": "14483c36_8dc4c8c5",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6edda5de_712d859d",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-16T23:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60a7e55d_41befd4e",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "ec888a6a_0e727a1b",
         "filename": "do_build.py",
@@ -153,10 +208,10 @@
       "side": 1,
       "message": "If this is no longer necessary for r22 and below, can you raise an exception here if paths.NDK_BASE is r22 or greater?  We could remove these hacks during that switch.",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "df368a51_d30ea993",
         "filename": "do_build.py",
@@ -171,10 +226,10 @@
       "message": "\u003e no longer necessary for r22 and below\nI meant \"no longer necessary for r22 and above\"",
       "parentUuid": "ec888a6a_0e727a1b",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "ed551729_8bfd5f3e",
         "filename": "do_build.py",
@@ -189,10 +244,28 @@
       "message": "yeah, that sounds reasonable",
       "parentUuid": "df368a51_d30ea993",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f70903_cf12580b",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-16T23:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed551729_8bfd5f3e",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "a9df8614_fd7a158f",
         "filename": "do_build.py",
@@ -212,10 +285,34 @@
         "endChar": 67
       },
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a88233b_a4f13948",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-16T23:15:37Z",
+      "side": 1,
+      "message": "Marking this resolved since they\u0027re built only for the NDK in the latest patchset.",
+      "parentUuid": "a9df8614_fd7a158f",
+      "range": {
+        "startLine": 592,
+        "startChar": 6,
+        "endLine": 592,
+        "endChar": 67
+      },
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "492685c2_3e5bb51e",
         "filename": "do_build.py",
@@ -235,10 +332,10 @@
         "endChar": 48
       },
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "80cfd024_b13b83d2",
         "filename": "do_build.py",
@@ -252,10 +349,10 @@
       "side": 1,
       "message": "Why is this necessary?",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8c83a2ce_9afab7f0",
         "filename": "do_build.py",
@@ -270,10 +367,10 @@
       "message": "It seems that libomp calls some functions from the builtins library, where the libclang_rt.builtins versions of those builtins depend on libm functions (whereas libgcc did not need libm).\n\nOn arm32, there are unresolved references while attempting to link libomp.so. They involve complex-FP math:\n\n - __divsc3 builtin calls fmaxf and scalbnf.\n - __divdc3 builtin calls fmax and scalbn.\n\nThe code in compiler-rt/lib/builtins doesn\u0027t directly call the libm functions. Instead, it calls crt_{fmax,scalbn}[f] functions, which are macros for __builtin_fmax[f] or __builtin_scalbn[f]. Clang turns the __builtin_*  calls into calls to the libm functions.\n\nThe dependency on libm did seem odd to me. Depending on target and optimization level, Clang sometimes inlines the __builtin_fmax[f] call. AFAICT, it doesn\u0027t ever inline the __builtin_scalbn[f] call. I think scalbn[f] more-or-less just increments the exponent field of the FP value, so maybe it could be inlined into the builtins archive.\n\nThe functions are defined in int_math.h. Maybe the libm dependency is unintended?\n\n    // This file defines substitutes for the libm functions used in some of the\n    // compiler-rt implementations, defined in such a way that there is not a direct\n    // dependency on libm or math.h. Instead, we use the compiler builtin versions\n    // where available. This reduces our dependencies on the system SDK by foisting\n    // the responsibility onto the compiler.\n\nI also see a call from __divsc3 to __compiler_rt_logbf, which calls __compiler_rt_logbX:\n\n    // Implements logb methods (logb, logbf, logbl) for IEEE-754. This avoids\n    // pulling in a libm dependency from compiler-rt, but is not meant to replace\n    // it (i.e. code calling logb() should get the one from libm, not this), hence\n    // the __compiler_rt prefix.\n    static __inline fp_t __compiler_rt_logbX(fp_t x) {\n\nI know of two places where the builtins library depends on libc, and both are marginal:\n\n - __compilerrt_abort_impl calls abort, but it\u0027s very target-specific. e.g. Fuchsia replaces the abort call with __builtin_trap.\n\n - __eprintf references fprintf, fflush, and stderr. The comments say it was used to implement assert once upon a time, but I don\u0027t know if that has ever been relevant to Android.",
       "parentUuid": "80cfd024_b13b83d2",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "08757480_c39cd799",
         "filename": "do_build.py",
@@ -288,10 +385,10 @@
       "message": "I see some patches adding -lm to provide the libm functions that compiler-rt/libomp need, but there has also been work done in compiler-rt to remove the libm dependency.\n\nFrom https://reviews.llvm.org/D49514, the calls to fmax and scalbn were left in, with the rationale that they\u0027re provided by libc rather than libm. AFAICT, x86_64 glibc\u0027s libc provides scalbn but not fmax. (I checked both libc.so.6 and libc_nonshared.a.) For Bionic, neither function is in libc. I also looked at FreeBSD 12 x86_64, and its libc also has neither function.\n\nMaybe it\u0027s not too hard to write compiler-rt versions of these functions.",
       "parentUuid": "8c83a2ce_9afab7f0",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "62ec7ef8_3780d763",
         "filename": "do_build.py",
@@ -306,10 +403,10 @@
       "message": "I verified that fmax*, scanbn*, and logbl are the only libm functions that the builtins use. (The logbl call comes from __divxc3, and I\u0027m guessing it\u0027s an oversight that it doesn\u0027t call __compiler_rt_logbl.)",
       "parentUuid": "08757480_c39cd799",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "f50cb692_da4b9812",
         "filename": "do_build.py",
@@ -324,10 +421,28 @@
       "message": "Nope, __divxc3 doesn\u0027t call __compiler_rt_logbl because __divxc3 (and other *x* builtins) are only supposed to be used for 80-bit x86 long double, and __compiler_rt_logbl is only implemented for standard IEEE-754 formats (not 80-bit).\n\nThere are comments like this (in floatdixf.c):\n\n// Assumption: long double is a IEEE 80 bit floating point type padded to 128\n// bits di_int is a 64 bit integral type\n\nI think __floatdixf is entirely broken if long double is either 64 or 128 bits.\n\nThe HAS_80_BIT_LONG_DOUBLE macro looks broken on Android. It seems it\u0027s only used for unit tests. (I assume we don\u0027t run those.)\n\nThe lib/builtins/CMakeLists.txt only includes the *x* builtins on x86 and x86_64. I think we should omit them instead for Android. Perhaps we\u0027d keep the object files but leave them empty.\n\nI tested __mulxc3 (_Complex 80-bit long double) using host gcc to emit the call, then the NDK toolchain to produce the executable. My test program works with libgcc but segfaults with libclang_rt.builtins-x86_64-android.a.",
       "parentUuid": "62ec7ef8_3780d763",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ffeb7a_07ae182b",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-16T23:15:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f50cb692_da4b9812",
+      "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "3206a7be_f7aeaba5",
         "filename": "do_build.py",
@@ -341,10 +456,10 @@
       "side": 1,
       "message": "Want to call out that this means debug builds and PGO-instrumented builds would be slower.  With the new steps incrementally installing to the resource dir and subsequent steps depending on them, I don\u0027t have any sane way to speed this up.",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "545b46bb_77e69240",
         "filename": "do_build.py",
@@ -359,10 +474,10 @@
       "message": "Done",
       "parentUuid": "3206a7be_f7aeaba5",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "5b5fcd94_d2f4e113",
         "filename": "do_build.py",
@@ -377,8 +492,7 @@
       "message": "Scratch that.  We were already using the stage2 toolchain for runtimes (in line 1661 above).  This is just cleanup of dead code.\n\nI agree that we should just use the stage2 toolchain and pay the performance cost on debug and instrumented builds.",
       "parentUuid": "545b46bb_77e69240",
       "revId": "eb5b119522f63ee5d2b752a47014e297995f58e6",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
