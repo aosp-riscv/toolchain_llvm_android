@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f95631c9_08263549",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2020-11-16T22:51:46Z",
+      "side": 1,
+      "message": "oops! did we try to switch the toolchain build to r21 and fail, or just forget to try?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 62
+      },
+      "revId": "f3eb387b86a371c5b8702775e158a218b3e5b70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
