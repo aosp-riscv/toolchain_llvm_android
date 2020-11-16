@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94399fb5_3e921f2b",
+        "filename": "test/scripts/gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-11-16T19:21:54Z",
+      "side": 1,
+      "message": "Do we want to handle failure to match here?",
+      "revId": "25fe5ea5446cefcbb632ae49f6639d86d10c9279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82653d40_abeafa25",
+        "filename": "test/scripts/test_configs.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-11-16T19:21:54Z",
+      "side": 1,
+      "message": "this is 32b x86, which is our lease supported platform. Can we use kernel_aarch64 instead?",
+      "revId": "25fe5ea5446cefcbb632ae49f6639d86d10c9279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "917f277e_839c5d9e",
+        "filename": "test/scripts/test_prebuilts.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-11-16T19:21:54Z",
+      "side": 1,
+      "message": "Does the call on L221 also need the same guard on `if cl_number`?",
+      "range": {
+        "startLine": 228,
+        "startChar": 8,
+        "endLine": 229,
+        "endChar": 63
+      },
+      "revId": "25fe5ea5446cefcbb632ae49f6639d86d10c9279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
