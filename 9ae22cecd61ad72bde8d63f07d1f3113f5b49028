@@ -33,6 +33,24 @@
       "message": "Thanks for handling this break.",
       "revId": "9ae22cecd61ad72bde8d63f07d1f3113f5b49028",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd529c10_1e4b0882",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-18T20:50:02Z",
+      "side": 1,
+      "message": "Build of libunwind fails with\n\n```\nld.lld: error: cannot open /usr/local/google/buildbot/src/android/master-plus-llvm/out/stage1-install/lib64/clang/11.0.5/lib/linux/libclang_rt.builtins-arm-android.a: No such file or directory\n    ld.lld: error: cannot open /usr/local/google/buildbot/src/android/master-plus-llvm/out/stage1-install/lib64/clang/11.0.5/lib/linux/libclang_rt.builtins-arm-android.a: No such file or directory\n    clang-11: error: linker command failed with exit code 1 (use -v to see invocation)\n    ninja: build stopped: subcommand failed.\n```\n\nI guess we need the builtins in both self.toolchain and self.output_toolchain.  I\u0027ll do the same for libunwind as well to be cautious.",
+      "parentUuid": "70f0bbc6_603eab05",
+      "revId": "9ae22cecd61ad72bde8d63f07d1f3113f5b49028",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
