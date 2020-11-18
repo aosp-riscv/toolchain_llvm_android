@@ -16,6 +16,23 @@
       "message": "https://android-build.googleplex.com/builds/forrest/run/L91200000748153205 is the forrest run.",
       "revId": "9ae22cecd61ad72bde8d63f07d1f3113f5b49028",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d93f62df_8e0cf8cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-11-18T20:49:37Z",
+      "side": 1,
+      "message": "Thanks for handling this break.",
+      "revId": "9ae22cecd61ad72bde8d63f07d1f3113f5b49028",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
