@@ -22,7 +22,7 @@ import multiprocessing
 import os
 import shutil
 import subprocess
-from typing import Dict, List, Optional, Set, Sequence
+from typing import cast, Dict, List, Optional, Set, Sequence
 
 import android_version
 from builder_registry import BuilderRegistry
@@ -32,8 +32,8 @@ import hosts
 import paths
 import toolchains
 import utils
+import win_sdk
 
-ORIG_ENV = dict(os.environ)
 
 def logger():
     """Returns the module level logger."""
@@ -43,25 +43,72 @@ def logger():
 class LibInfo:
     """An interface to get information of a library."""
 
+    name: str
+    _config: configs.Config
+
+    lib_version: str
+    static_lib: bool = False
+
+    @property
+    def install_dir(self) -> Path:
+        raise NotImplementedError()
+
+    @property
+    def _lib_names(self) -> List[str]:
+        return [self.name]
+
     @property
     def include_dir(self) -> Path:
         """Path to headers."""
-        raise NotImplementedError()
+        return self.install_dir / 'include'
 
     @property
-    def link_library(self) -> Path:
-        """Path to the library used when linking."""
-        raise NotImplementedError()
+    def _lib_suffix(self) -> str:
+        if self._config.target_os.is_windows and win_sdk.is_enabled():
+            return '.lib'
+        if self.static_lib:
+            return '.a'
+        return {
+            hosts.Host.Linux: f'.so.{self.lib_version}',
+            hosts.Host.Darwin: f'.{self.lib_version}.dylib',
+            hosts.Host.Windows: '.dll.a',
+        }[self._config.target_os]
 
     @property
-    def install_library(self) -> Optional[Path]:
-        """Path to the library to install. Returns None for static library."""
-        raise NotImplementedError()
+    def link_libraries(self) -> List[Path]:
+        """Path to the libraries used when linking."""
+        suffix = self._lib_suffix
+        return list(self.install_dir / 'lib' / f'{name}{suffix}' for name in self._lib_names)
+
+    @property
+    def install_libraries(self) -> List[Path]:
+        """Path to the libraries to install."""
+        if self.static_lib:
+            return []
+        if self._config.target_os.is_windows:
+            return [self.install_dir / 'bin' / f'{name}.dll' for name in self._lib_names]
+        return self.link_libraries
 
     @property
     def symlinks(self) -> List[Path]:
         """List of symlinks to the library that may need to be installed."""
         return []
+
+    def update_lib_id(self) -> None:
+        """Util function to update lib paths on mac."""
+        if self.static_lib:
+            return
+        if not self._config.target_os.is_darwin:
+            return
+        for lib in self.link_libraries:
+            # Update LC_ID_DYLIB, so that users of the library won't link with absolute path.
+            cmd = ['install_name_tool', '-id', f'@rpath/{lib.name}', str(lib)]
+            utils.check_call(cmd)
+            # The lib may already reference other libs.
+            for other_lib in self.link_libraries:
+                cmd = ['install_name_tool',
+                       '-change', str(other_lib), f'@rpath/{other_lib.name}', str(lib)]
+                utils.check_call(cmd)
 
 
 class Builder:  # pylint: disable=too-few-public-methods
@@ -130,9 +177,9 @@ class Builder:  # pylint: disable=too-few-public-methods
     @property
     def env(self) -> Dict[str, str]:
         """Environment variables used when building."""
-        env = dict(ORIG_ENV)
+        env = dict(utils.ORIG_ENV)
         env.update(self._config.env)
-        paths = [self._config.env.get('PATH'), ORIG_ENV.get('PATH')]
+        paths = [self._config.env.get('PATH'), utils.ORIG_ENV.get('PATH')]
         env['PATH'] = os.pathsep.join(p for p in paths if p)
         return env
 
@@ -233,6 +280,7 @@ class AutoconfBuilder(Builder):
 
         config_cmd = [self.src_dir / 'configure', f'--prefix={self.install_dir}']
         config_cmd.extend(self.config_flags)
+        utils.create_script(self.output_dir / 'config_invocation.sh', config_cmd, env)
         utils.check_call(config_cmd, cwd=self.output_dir, env=env)
 
         make_cmd = ['make', f'-j{multiprocessing.cpu_count()}']
@@ -244,6 +292,8 @@ class AutoconfBuilder(Builder):
         """Installs built artifacts for current config."""
         install_cmd = ['make', 'install']
         utils.check_call(install_cmd, cwd=self.output_dir)
+        if isinstance(self, LibInfo):
+            cast(LibInfo, self).update_lib_id()
 
 
 class CMakeBuilder(Builder):
@@ -339,16 +389,6 @@ class CMakeBuilder(Builder):
             if 'CMakeFiles' in dirs:
                 shutil.rmtree(os.path.join(dirpath, 'CMakeFiles'))
 
-    def _record_cmake_command(self, cmake_cmd: List[str],
-                              env: Dict[str, str]) -> None:
-        script_path = self.output_dir / 'cmake_invocation.sh'
-        with script_path.open('w') as outf:
-            for k, v in env.items():
-                if v != ORIG_ENV.get(k):
-                    outf.write(f'{k}={v}\n')
-            outf.write(utils.list2cmdline(cmake_cmd) + '\n')
-        script_path.chmod(0o755)
-
     def _build_config(self) -> None:
         if self.remove_cmake_cache:
             self._rm_cmake_cache(self.output_dir)
@@ -364,7 +404,7 @@ class CMakeBuilder(Builder):
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
         env = self.env
-        self._record_cmake_command(cmake_cmd, env)
+        utils.create_script(self.output_dir / 'cmake_invocation.sh', cmake_cmd, env)
         utils.check_call(cmake_cmd, cwd=self.output_dir, env=env)
 
         ninja_cmd: List[str] = [str(paths.NINJA_BIN_PATH)]
@@ -461,6 +501,7 @@ class LLVMBuilder(LLVMBaseBuilder):
     libxml2: Optional[LibInfo] = None
     liblzma: Optional[LibInfo] = None
     libedit: Optional[LibInfo] = None
+    libncurses: Optional[LibInfo] = None
 
     @property
     def install_dir(self) -> Path:
@@ -509,14 +550,14 @@ class LLVMBuilder(LLVMBaseBuilder):
         if self.liblzma:
             defines['LLDB_ENABLE_LZMA'] = 'ON'
             defines['LIBLZMA_INCLUDE_DIR'] = str(self.liblzma.include_dir)
-            defines['LIBLZMA_LIBRARY'] = str(self.liblzma.link_library)
+            defines['LIBLZMA_LIBRARY'] = str(self.liblzma.link_libraries[0])
         else:
             defines['LLDB_ENABLE_LZMA'] = 'OFF'
 
         if self.libedit:
             defines['LLDB_ENABLE_LIBEDIT'] = 'ON'
             defines['LibEdit_INCLUDE_DIRS'] = str(self.libedit.include_dir)
-            defines['LibEdit_LIBRARIES'] = str(self.libedit.link_library)
+            defines['LibEdit_LIBRARIES'] = str(self.libedit.link_libraries[0])
         else:
             defines['LLDB_ENABLE_LIBEDIT'] = 'OFF'
 
@@ -524,6 +565,15 @@ class LLVMBuilder(LLVMBaseBuilder):
             defines['LLDB_ENABLE_LIBXML2'] = 'ON'
         else:
             defines['LLDB_ENABLE_LIBXML2'] = 'OFF'
+
+        if self.libncurses:
+            defines['LLDB_ENABLE_CURSES'] = 'ON'
+            defines['CURSES_INCLUDE_DIRS'] = str(self.libncurses.include_dir)
+            curses_libs = ';'.join(str(lib) for lib in self.libncurses.link_libraries)
+            defines['CURSES_LIBRARIES'] = curses_libs
+            defines['PANEL_LIBRARIES'] = curses_libs
+        else:
+            defines['LLDB_ENABLE_CURSES'] = 'OFF'
 
     def _install_lldb_deps(self) -> None:
         lib_dir = self.install_dir / ('bin' if self._config.target_os.is_windows else 'lib64')
@@ -536,18 +586,12 @@ class LLVMBuilder(LLVMBaseBuilder):
                             ignore=shutil.ignore_patterns('*.pyc', '__pycache__', 'Android.bp',
                                                           '.git', '.gitignore'))
 
-        for lib in (self.liblzma, self.libedit, self.libxml2):
-            if lib and lib.install_library:
-                shutil.copy2(lib.install_library, lib_dir)
+        for lib in (self.liblzma, self.libedit, self.libxml2, self.libncurses):
+            if lib:
+                for lib_file in lib.install_libraries:
+                    shutil.copy2(lib_file, lib_dir)
                 for link in lib.symlinks:
                     shutil.copy2(link, lib_dir, follow_symlinks=False)
-
-        if self._config.target_os.is_linux and self._config.sysroot:
-            ncurses_libs = [
-                'libform.so.5', 'libpanel.so.5', 'libncurses.so.5', 'libtinfo.so.5',
-            ]
-            for lib_file in ncurses_libs:
-                shutil.copy2(self._config.sysroot / 'usr' / 'lib' / lib_file, lib_dir)
 
     @property
     def cmake_defines(self) -> Dict[str, str]:
@@ -581,7 +625,7 @@ class LLVMBuilder(LLVMBaseBuilder):
         # libxml2 is used by lld and lldb.
         if self.libxml2:
             defines['LIBXML2_INCLUDE_DIR'] = str(self.libxml2.include_dir)
-            defines['LIBXML2_LIBRARY'] = str(self.libxml2.link_library)
+            defines['LIBXML2_LIBRARY'] = str(self.libxml2.link_libraries[0])
 
         if self.build_lldb:
             self._set_lldb_flags(self._config.target_os, defines)
