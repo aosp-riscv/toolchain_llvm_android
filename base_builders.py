@@ -32,6 +32,7 @@ import hosts
 import paths
 import toolchains
 import utils
+import win_sdk
 
 ORIG_ENV = dict(os.environ)
 
@@ -43,20 +44,51 @@ def logger():
 class LibInfo:
     """An interface to get information of a library."""
 
+    name: str
+    _config: configs.Config
+
+    lib_version: str
+    static_lib: bool = False
+
+    @property
+    def install_dir(self) -> Path:
+        raise NotImplementedError()
+
+    @property
+    def _lib_names(self) -> List[str]:
+        return [self.name]
+
     @property
     def include_dir(self) -> Path:
         """Path to headers."""
-        raise NotImplementedError()
+        return self.install_dir / 'include'
 
     @property
-    def link_library(self) -> Path:
-        """Path to the library used when linking."""
-        raise NotImplementedError()
+    def _lib_suffix(self) -> str:
+        if self._config.target_os.is_windows and win_sdk.is_enabled():
+            return '.lib'
+        if self.static_lib:
+            return '.a'
+        return {
+            hosts.Host.Linux: f'.so.{self.lib_version}',
+            hosts.Host.Darwin: f'.{self.lib_version}.dylib',
+            hosts.Host.Windows: '.dll.a',
+        }[self._config.target_os]
 
     @property
-    def install_library(self) -> Optional[Path]:
-        """Path to the library to install. Returns None for static library."""
-        raise NotImplementedError()
+    def link_libraries(self) -> List[Path]:
+        """Path to the libraries used when linking."""
+        suffix = self._lib_suffix
+        return list(self.install_dir / 'lib' / f'{name}{suffix}' for name in self._lib_names)
+
+    @property
+    def install_libraries(self) -> List[Path]:
+        """Path to the libraries to install."""
+        if self.static_lib:
+            return []
+        if self._config.target_os.is_windows:
+            return [self.install_dir / 'bin' / f'{name}.dll' for name in self._lib_names]
+        return self.link_libraries
 
     @property
     def symlinks(self) -> List[Path]:
@@ -461,6 +493,7 @@ class LLVMBuilder(LLVMBaseBuilder):
     libxml2: Optional[LibInfo] = None
     liblzma: Optional[LibInfo] = None
     libedit: Optional[LibInfo] = None
+    libncurses: Optional[LibInfo] = None
 
     @property
     def install_dir(self) -> Path:
@@ -509,14 +542,14 @@ class LLVMBuilder(LLVMBaseBuilder):
         if self.liblzma:
             defines['LLDB_ENABLE_LZMA'] = 'ON'
             defines['LIBLZMA_INCLUDE_DIR'] = str(self.liblzma.include_dir)
-            defines['LIBLZMA_LIBRARY'] = str(self.liblzma.link_library)
+            defines['LIBLZMA_LIBRARY'] = str(self.liblzma.link_libraries[0])
         else:
             defines['LLDB_ENABLE_LZMA'] = 'OFF'
 
         if self.libedit:
             defines['LLDB_ENABLE_LIBEDIT'] = 'ON'
             defines['LibEdit_INCLUDE_DIRS'] = str(self.libedit.include_dir)
-            defines['LibEdit_LIBRARIES'] = str(self.libedit.link_library)
+            defines['LibEdit_LIBRARIES'] = str(self.libedit.link_libraries[0])
         else:
             defines['LLDB_ENABLE_LIBEDIT'] = 'OFF'
 
@@ -524,6 +557,15 @@ class LLVMBuilder(LLVMBaseBuilder):
             defines['LLDB_ENABLE_LIBXML2'] = 'ON'
         else:
             defines['LLDB_ENABLE_LIBXML2'] = 'OFF'
+
+        if self.libncurses:
+            defines['LLDB_ENABLE_CURSES'] = 'ON'
+            defines['CURSES_INCLUDE_DIRS'] = str(self.libncurses.include_dir)
+            curses_libs = ';'.join(str(lib) for lib in self.libncurses.link_libraries)
+            defines['CURSES_LIBRARIES'] = curses_libs
+            defines['PANEL_LIBRARIES'] = curses_libs
+        else:
+            defines['LLDB_ENABLE_CURSES'] = 'OFF'
 
     def _install_lldb_deps(self) -> None:
         lib_dir = self.install_dir / ('bin' if self._config.target_os.is_windows else 'lib64')
@@ -536,18 +578,12 @@ class LLVMBuilder(LLVMBaseBuilder):
                             ignore=shutil.ignore_patterns('*.pyc', '__pycache__', 'Android.bp',
                                                           '.git', '.gitignore'))
 
-        for lib in (self.liblzma, self.libedit, self.libxml2):
-            if lib and lib.install_library:
-                shutil.copy2(lib.install_library, lib_dir)
+        for lib in (self.liblzma, self.libedit, self.libxml2, self.libncurses):
+            if lib:
+                for lib_file in lib.install_libraries:
+                    shutil.copy2(lib_file, lib_dir)
                 for link in lib.symlinks:
                     shutil.copy2(link, lib_dir, follow_symlinks=False)
-
-        if self._config.target_os.is_linux and self._config.sysroot:
-            ncurses_libs = [
-                'libform.so.5', 'libpanel.so.5', 'libncurses.so.5', 'libtinfo.so.5',
-            ]
-            for lib_file in ncurses_libs:
-                shutil.copy2(self._config.sysroot / 'usr' / 'lib' / lib_file, lib_dir)
 
     @property
     def cmake_defines(self) -> Dict[str, str]:
@@ -578,7 +614,7 @@ class LLVMBuilder(LLVMBaseBuilder):
         # libxml2 is used by lld and lldb.
         if self.libxml2:
             defines['LIBXML2_INCLUDE_DIR'] = str(self.libxml2.include_dir)
-            defines['LIBXML2_LIBRARY'] = str(self.libxml2.link_library)
+            defines['LIBXML2_LIBRARY'] = str(self.libxml2.link_libraries[0])
 
         if self.build_lldb:
             self._set_lldb_flags(self._config.target_os, defines)
