@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e61e17b9_726bbada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-18T22:52:22Z",
+      "side": 1,
+      "message": "Thanks for fixing this build break.\n",
+      "revId": "8bbe37a598d135a4f629d3a01100e122bbe9b660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f791b536_b57a3719",
+        "filename": "builders.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-18T22:52:22Z",
+      "side": 1,
+      "message": "Is it just libunwind or is it a larger class of things? (e.g. When Builder.toolchain is stage1.installed_toolchain, I would guess that everything in build_runtimes would need builtins in the stage1 resource directory, because everything is linked using -rtlib\u003dcompiler-rt from AndroidConfig.ldflags.)",
+      "revId": "8bbe37a598d135a4f629d3a01100e122bbe9b660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c33cf906_28780231",
+        "filename": "builders.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-11-18T22:52:22Z",
+      "side": 1,
+      "message": "No change is needed, but I think this library only needs to be installed in self.output_toolchain when that\u0027s different from self.toolchain. i.e. libunwind-exported.a isn\u0027t an input to anything in the toolchain build.",
+      "revId": "8bbe37a598d135a4f629d3a01100e122bbe9b660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
