@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b2cef99_7c443f6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-11-18T08:03:10Z",
+      "side": 1,
+      "message": "Hmm, `toolchain/prebuilts/ndk/r20` is all that exists in our manifest (not a typo that this starts with `toolchain/`. Perhaps we should just be using `prebuilts/ndk/r21` now, which also exists in the `master-plus-llvm` manifest.",
+      "parentUuid": "f95631c9_08263549",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 62
+      },
+      "revId": "f3eb387b86a371c5b8702775e158a218b3e5b70c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4fa0da96_313444fa",
