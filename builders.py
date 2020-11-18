@@ -269,9 +269,9 @@ class BuiltinsBuilder(base_builders.LLVMRuntimeBuilder):
         filename = 'libclang_rt.builtins-' + sarch + '-android.a'
         src_path = self.output_dir / 'lib' / 'android' / filename
 
-        shutil.copy2(src_path, self.toolchain.resource_dir / filename)
+        shutil.copy2(src_path, self.output_toolchain.resource_dir / filename)
 
-        dst_dir = self.toolchain.path / 'runtimes_ndk_cxx'
+        dst_dir = self.output_toolchain.path / 'runtimes_ndk_cxx'
         dst_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src_path, dst_dir / filename)
 
@@ -451,7 +451,7 @@ class LibUnwindBuilder(base_builders.LLVMRuntimeBuilder):
         src_file = self.output_dir / 'lib64' / 'libunwind.a'
         arch = self._config.target_arch
 
-        res_dir = self.toolchain.resource_dir / arch.value
+        res_dir = self.output_toolchain.resource_dir / arch.value
         res_dir.mkdir(parents=True, exist_ok=True)
 
         if self.is_exported:
@@ -459,7 +459,7 @@ class LibUnwindBuilder(base_builders.LLVMRuntimeBuilder):
         else:
             shutil.copy2(src_file, res_dir / 'libunwind.a')
 
-            ndk_dir = self.toolchain.path / 'runtimes_ndk_cxx' / arch.value
+            ndk_dir = self.output_toolchain.path / 'runtimes_ndk_cxx' / arch.value
             ndk_dir.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src_file, ndk_dir / 'libunwind.a')
 
