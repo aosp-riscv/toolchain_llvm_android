@@ -19,11 +19,12 @@ import contextlib
 import datetime
 import logging
 import os
+from pathlib import Path
 import shlex
 import shutil
 import stat
 import subprocess
-from typing import List
+from typing import Iterator, List
 
 import constants
 
@@ -94,3 +95,18 @@ def chdir_context(directory):
         yield
     finally:
         os.chdir(prev_dir)
+
+
+@contextlib.contextmanager
+def backup_files_context(files: List[Path]) -> Iterator[None]:
+    renamed_files = []
+    for file in files:
+        if file.is_symlink() or file.is_file():
+            backup_file = file.parent / (file.name + '.bak')
+            renamed_files.append((backup_file, file))
+            file.rename(backup_file)
+    try:
+        yield
+    finally:
+        for backup_file, file in renamed_files:
+            backup_file.rename(file)
