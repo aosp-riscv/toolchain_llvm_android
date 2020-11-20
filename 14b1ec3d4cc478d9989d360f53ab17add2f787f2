@@ -16,6 +16,24 @@
       "message": "Sounds like PGO might be a double edged sword.",
       "revId": "14b1ec3d4cc478d9989d360f53ab17add2f787f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d3a7fce_e3ed41b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-20T20:47:11Z",
+      "side": 1,
+      "message": "Yes and no - we do need to be careful with setting up the PGO pipeline.\n\nBut there\u0027s also an underlying LLVM issue when building with PGO profiles.  See the bug for more details.  Even without this change, we get non-trivial performance improvements and binary-size savings on the produced binaries.",
+      "parentUuid": "a0755e79_4421e1dd",
+      "revId": "14b1ec3d4cc478d9989d360f53ab17add2f787f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
