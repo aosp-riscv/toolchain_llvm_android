@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d7ea84_7ed32f89",
+        "filename": "base_builders.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-30T21:28:03Z",
+      "side": 1,
+      "message": "Fold the list into the call and avoid a new single-use variable.",
+      "range": {
+        "startLine": 106,
+        "startChar": 29,
+        "endLine": 106,
+        "endChar": 32
+      },
+      "revId": "8c63870bd80bb26b764d3f694c3aa5299cf4625a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "420d2ed6_c41e7bcb",
+        "filename": "base_builders.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-30T21:28:03Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 111,
+        "startChar": 33,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "8c63870bd80bb26b764d3f694c3aa5299cf4625a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d68200_5dd878fa",
+        "filename": "do_build.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-30T21:28:03Z",
+      "side": 1,
+      "message": "Just checking: do we want ncurses for Darwin as well.",
+      "range": {
+        "startLine": 674,
+        "startChar": 0,
+        "endLine": 674,
+        "endChar": 53
+      },
+      "revId": "8c63870bd80bb26b764d3f694c3aa5299cf4625a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
