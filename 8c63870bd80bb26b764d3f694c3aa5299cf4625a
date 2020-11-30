@@ -140,6 +140,30 @@
       },
       "revId": "8c63870bd80bb26b764d3f694c3aa5299cf4625a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b54611_d51771c6",
+        "filename": "do_build.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-30T22:36:52Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "8af6fe35_6ec61cd4",
+      "range": {
+        "startLine": 674,
+        "startChar": 0,
+        "endLine": 674,
+        "endChar": 53
+      },
+      "revId": "8c63870bd80bb26b764d3f694c3aa5299cf4625a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
