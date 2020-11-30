@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46020f00_964fc35d",
+        "filename": "base_builders.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-11-30T22:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36d7ea84_7ed32f89",
+      "range": {
+        "startLine": 106,
+        "startChar": 29,
+        "endLine": 106,
+        "endChar": 32
+      },
+      "revId": "8c63870bd80bb26b764d3f694c3aa5299cf4625a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "420d2ed6_c41e7bcb",
@@ -49,6 +73,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0a41783b_14ced500",
+        "filename": "base_builders.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-11-30T22:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "420d2ed6_c41e7bcb",
+      "range": {
+        "startLine": 111,
+        "startChar": 33,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "8c63870bd80bb26b764d3f694c3aa5299cf4625a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "96d68200_5dd878fa",
         "filename": "do_build.py",
         "patchSetId": 13
@@ -60,6 +108,30 @@
       "writtenOn": "2020-11-30T21:28:03Z",
       "side": 1,
       "message": "Just checking: do we want ncurses for Darwin as well.",
+      "range": {
+        "startLine": 674,
+        "startChar": 0,
+        "endLine": 674,
+        "endChar": 53
+      },
+      "revId": "8c63870bd80bb26b764d3f694c3aa5299cf4625a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af6fe35_6ec61cd4",
+        "filename": "do_build.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2020-11-30T22:07:22Z",
+      "side": 1,
+      "message": "I did use ncurses for darwin in this change. I don\u0027t have a strong opinion here, and open to other ideas.\n\nDarwin is probably more stable than Linux, but it is still possible that they remove ncurses entirely someday. Also using the same ncurses6 may help us avoid some consistency issue between different platforms.",
+      "parentUuid": "96d68200_5dd878fa",
       "range": {
         "startLine": 674,
         "startChar": 0,
