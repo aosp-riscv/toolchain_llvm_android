@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "778f54e7_58bb3060",
+        "filename": "utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-11-30T18:24:43Z",
+      "side": 1,
+      "message": "nit, ok to ignore: Is constants.py a better place for ORIG_ENV?",
+      "revId": "cea06475e70474e6aa1e7c2a5a007f5d76c8b24e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
