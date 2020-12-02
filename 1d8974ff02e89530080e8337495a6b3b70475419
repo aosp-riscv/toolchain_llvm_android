@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ec283d3_bafcc7cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-02T17:42:28Z",
+      "side": 1,
+      "message": "ps3: remove \u0027-Wno-string-concatenation\u0027.",
+      "revId": "1d8974ff02e89530080e8337495a6b3b70475419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
