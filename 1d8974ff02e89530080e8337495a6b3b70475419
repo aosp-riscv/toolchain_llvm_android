@@ -34,6 +34,24 @@
       "parentUuid": "1ec283d3_bafcc7cc",
       "revId": "1d8974ff02e89530080e8337495a6b3b70475419",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79dcdf40_b79d451f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-02T17:53:21Z",
+      "side": 1,
+      "message": "They compiled without error in make build. Not sure about test_compiler.py, trying it now.",
+      "parentUuid": "196fb614_0dd5caa7",
+      "revId": "1d8974ff02e89530080e8337495a6b3b70475419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
