@@ -52,6 +52,24 @@
       "parentUuid": "196fb614_0dd5caa7",
       "revId": "1d8974ff02e89530080e8337495a6b3b70475419",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c01ac9_19d849ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-02T21:26:18Z",
+      "side": 1,
+      "message": "looks like the left code complies without fix. I will manually check if we need to fix them. But it doesn\u0027t block our compiler update.",
+      "parentUuid": "79dcdf40_b79d451f",
+      "revId": "1d8974ff02e89530080e8337495a6b3b70475419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
