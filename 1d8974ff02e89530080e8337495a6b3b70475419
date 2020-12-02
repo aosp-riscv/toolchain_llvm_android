@@ -16,6 +16,24 @@
       "message": "ps3: remove \u0027-Wno-string-concatenation\u0027.",
       "revId": "1d8974ff02e89530080e8337495a6b3b70475419",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "196fb614_0dd5caa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-02T17:46:00Z",
+      "side": 1,
+      "message": "I think we may still need it since a few occurrences are not fixed yet (e.g.: external/grpc-grpc/src/core/lib/debug/stats_data.cc:284)",
+      "parentUuid": "1ec283d3_bafcc7cc",
+      "revId": "1d8974ff02e89530080e8337495a6b3b70475419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
