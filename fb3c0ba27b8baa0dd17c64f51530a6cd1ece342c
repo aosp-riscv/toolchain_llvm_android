@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07aed3b6_b41130a9",
+        "filename": "test/scripts/ab_client.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-03T06:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "771a8a61_d41bbe63",
+      "range": {
+        "startLine": 135,
+        "startChar": 26,
+        "endLine": 135,
+        "endChar": 54
+      },
+      "revId": "fb3c0ba27b8baa0dd17c64f51530a6cd1ece342c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e50cbd0_684fabe1",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-02T22:20:37Z",
       "side": 1,
       "message": "Can you put more help info? How can we get an llvm_next_build? Is it from a specific branch or how to trigger such a build?",
+      "range": {
+        "startLine": 121,
+        "startChar": 72,
+        "endLine": 121,
+        "endChar": 73
+      },
+      "revId": "fb3c0ba27b8baa0dd17c64f51530a6cd1ece342c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46201812_82b4ca7d",
+        "filename": "test/scripts/llvm_next_warnings.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-03T06:54:37Z",
+      "side": 1,
+      "message": "Added details.  Also see the doc string at the top of the file, which gets passed as the argparser description in line 107 above.",
+      "parentUuid": "5e50cbd0_684fabe1",
       "range": {
         "startLine": 121,
         "startChar": 72,
