@@ -16,6 +16,54 @@
       "message": "LGTM, but didn\u0027t +2 in case you miss the lint warnings?",
       "revId": "dd8d7d9845c46cbbf693274f34500eac42e3618e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd4c9408_23fe0e73",
+        "filename": "test/scripts/llvm_next_warnings.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-03T17:41:06Z",
+      "side": 1,
+      "message": "\u003e Please remove the trailing whitespace.\n\nDone.  I needed this before discovering the `formatter_class` parameter to ArgumentParser constructor.",
+      "parentUuid": "3b54fa46_bd3db023",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "dd8d7d9845c46cbbf693274f34500eac42e3618e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf13d038_c8dc15b1",
+        "filename": "test/scripts/llvm_next_warnings.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-03T17:41:06Z",
+      "side": 1,
+      "message": "\u003e Please remove the trailing whitespace.\n\nDone",
+      "parentUuid": "67c208a1_4ca1a0cc",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "dd8d7d9845c46cbbf693274f34500eac42e3618e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
