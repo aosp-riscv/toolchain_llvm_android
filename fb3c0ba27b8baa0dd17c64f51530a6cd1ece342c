@@ -93,6 +93,30 @@
       },
       "revId": "fb3c0ba27b8baa0dd17c64f51530a6cd1ece342c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90f03368_3fb2f510",
+        "filename": "test/scripts/llvm_next_warnings.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-03T17:30:06Z",
+      "side": 1,
+      "message": "Great, thanks!",
+      "parentUuid": "46201812_82b4ca7d",
+      "range": {
+        "startLine": 121,
+        "startChar": 72,
+        "endLine": 121,
+        "endChar": 73
+      },
+      "revId": "fb3c0ba27b8baa0dd17c64f51530a6cd1ece342c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
