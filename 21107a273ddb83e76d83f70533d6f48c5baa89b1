@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "526b6055_eb1ba3c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-04T18:43:08Z",
+      "side": 1,
+      "message": "Bug: http://b/163618332",
+      "revId": "21107a273ddb83e76d83f70533d6f48c5baa89b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
