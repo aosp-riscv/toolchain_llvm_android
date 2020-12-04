@@ -16,6 +16,24 @@
       "message": "Bug: http://b/163618332",
       "revId": "21107a273ddb83e76d83f70533d6f48c5baa89b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cd17542_72d62d6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1726181
+      },
+      "writtenOn": "2020-12-04T18:54:23Z",
+      "side": 1,
+      "message": "Added\n\nBug: b/163618332\n\nTo the description.",
+      "parentUuid": "526b6055_eb1ba3c0",
+      "revId": "21107a273ddb83e76d83f70533d6f48c5baa89b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
