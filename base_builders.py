@@ -366,6 +366,9 @@ class CMakeBuilder(Builder):
             defines['ANDROID'] = '1'
             # Inhibit all of CMake's own NDK handling code.
             defines['CMAKE_SYSTEM_VERSION'] = '1'
+        if self._config.target_os.is_darwin:
+            # Build universal binaries.
+            defines['CMAKE_OSX_ARCHITECTURES'] = 'arm64;x86_64'
         if self._is_cross_compiling():
             # Cross compiling
             defines['CMAKE_SYSTEM_NAME'] = self._get_cmake_system_name()
