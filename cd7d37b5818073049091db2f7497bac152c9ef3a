@@ -16,6 +16,126 @@
       "message": "ps2: tiny fix.",
       "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a766d6d9_3f1acfb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-07T23:56:12Z",
+      "side": 1,
+      "message": "Thanks a lot for working on this Yabin.  This\u0027d greatly simplify our update/cherry-pick workflow 👍.  Just one large suggestion about verifying clean cherry-pick and a few minor comments.",
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c12da40_61d8b4d2",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-07T23:56:12Z",
+      "side": 1,
+      "message": "\u0027patches\u0027 / \u0027PATCHES.json\u0027.",
+      "range": {
+        "startLine": 102,
+        "startChar": 41,
+        "endLine": 102,
+        "endChar": 63
+      },
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f242d76f_c32db02e",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-07T23:56:12Z",
+      "side": 1,
+      "message": "\u0027patches\u0027 / \u0027cherry\u0027 / (sha + \u0027.patch\u0027)",
+      "range": {
+        "startLine": 124,
+        "startChar": 40,
+        "endLine": 124,
+        "endChar": 69
+      },
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "105088d2_c2f45558",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-07T23:56:12Z",
+      "side": 1,
+      "message": "Would `stdout\u003doutput` directly write to the file?",
+      "range": {
+        "startLine": 126,
+        "startChar": 97,
+        "endLine": 126,
+        "endChar": 98
+      },
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3bc3b23_5d428614",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-07T23:56:12Z",
+      "side": 1,
+      "message": "Do a \u0027repo sync\u0027 in toolchain/llvm-project so `upstream-master` gets synced.",
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c96284ae_4d48d82a",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-07T23:56:12Z",
+      "side": 1,
+      "message": "It would also help if we could make sure that the cherry-picks apply cleanly [1].  Maybe add a \u0027--verify-merge\u0027 or some other option?  Feel free to do this in a follow-up.\n\n[1] source_manager.py:setup_sources()",
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
