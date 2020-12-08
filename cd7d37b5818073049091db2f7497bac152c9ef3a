@@ -123,6 +123,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "398dbeea_919c3937",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-12-08T00:58:37Z",
+      "side": 1,
+      "message": "`repo sync` could fail if the local tree has modifications (e.g. repo will try to rebase the merge commit, and it sometimes fails). `git fetch aosp upstream-master` is much faster to run and won\u0027t modify current source tree.",
+      "parentUuid": "a3bc3b23_5d428614",
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c96284ae_4d48d82a",
         "filename": "cherrypick_cl.py",
         "patchSetId": 2
