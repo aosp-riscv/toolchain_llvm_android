@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d0bfbd_6a72a0f8",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-08T21:52:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c12da40_61d8b4d2",
+      "range": {
+        "startLine": 102,
+        "startChar": 41,
+        "endLine": 102,
+        "endChar": 63
+      },
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f242d76f_c32db02e",
@@ -81,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c79d49f8_b5d207d9",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-08T21:52:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f242d76f_c32db02e",
+      "range": {
+        "startLine": 124,
+        "startChar": 40,
+        "endLine": 124,
+        "endChar": 69
+      },
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "105088d2_c2f45558",
@@ -94,6 +142,30 @@
       "writtenOn": "2020-12-07T23:56:12Z",
       "side": 1,
       "message": "Would `stdout\u003doutput` directly write to the file?",
+      "range": {
+        "startLine": 126,
+        "startChar": 97,
+        "endLine": 126,
+        "endChar": 98
+      },
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec426af8_2c5ac3c1",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-08T21:52:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "105088d2_c2f45558",
       "range": {
         "startLine": 126,
         "startChar": 97,
@@ -139,6 +211,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6f84fbd_5b089e89",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-08T21:52:27Z",
+      "side": 1,
+      "message": "Yeah, git_llvm_rev.py needs a remote branch. So we call fetch_upstream() in generate_patch_files() instead of syncing to a local branch. But I agree the dependency isn\u0027t obvious. So I added a call to fetch_upstream_once here, and used @lru_cache to make sure the expensive operation is only called once.",
+      "parentUuid": "398dbeea_919c3937",
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c96284ae_4d48d82a",
@@ -152,6 +242,24 @@
       "writtenOn": "2020-12-07T23:56:12Z",
       "side": 1,
       "message": "It would also help if we could make sure that the cherry-picks apply cleanly [1].  Maybe add a \u0027--verify-merge\u0027 or some other option?  Feel free to do this in a follow-up.\n\n[1] source_manager.py:setup_sources()",
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae75b4c_544ce726",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-08T21:52:27Z",
+      "side": 1,
+      "message": "Good idea! Done",
+      "parentUuid": "c96284ae_4d48d82a",
       "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
