@@ -33,6 +33,24 @@
       "message": "Optional: Could we make this a function that returns the cross-arch only when needed?  I.e. for the universal binary, where we need AArch64 + X86.",
       "revId": "a4a35c69f40aa52ae65f2d1e9beaca60455e0c57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0066e913_84c38981",
+        "filename": "constants.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-12-08T18:25:07Z",
+      "side": 1,
+      "message": "I don\u0027t think this affects build time significantly, and we might want to support AArch64 Linux host in the future.",
+      "parentUuid": "3ba22a28_7e8ca581",
+      "revId": "a4a35c69f40aa52ae65f2d1e9beaca60455e0c57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
