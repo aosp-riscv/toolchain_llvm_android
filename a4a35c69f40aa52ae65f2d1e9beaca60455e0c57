@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bc2d683_a2681912",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-08T18:21:06Z",
+      "side": 1,
+      "message": "Sho",
+      "revId": "a4a35c69f40aa52ae65f2d1e9beaca60455e0c57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba22a28_7e8ca581",
+        "filename": "constants.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-08T18:21:06Z",
+      "side": 1,
+      "message": "Optional: Could we make this a function that returns the cross-arch only when needed?  I.e. for the universal binary, where we need AArch64 + X86.",
+      "revId": "a4a35c69f40aa52ae65f2d1e9beaca60455e0c57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
