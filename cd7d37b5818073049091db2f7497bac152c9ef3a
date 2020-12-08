@@ -229,6 +229,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c5c3fe_bb71b78b",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-08T22:09:38Z",
+      "side": 1,
+      "message": "Aah,  I didn\u0027t realize `fetch_upstream` is already invoked once before any call to `sha_to_revision`.  But I like the current solution so we don\u0027t have to worry that in the future, we may call `sha_to_revision` from a different place.",
+      "parentUuid": "a6f84fbd_5b089e89",
+      "revId": "cd7d37b5818073049091db2f7497bac152c9ef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c96284ae_4d48d82a",
