@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98c7e792_616f4ef1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-10T21:36:29Z",
+      "side": 1,
+      "message": "LGTM otherwise.",
+      "revId": "b53ce6ced5d9f89a459b35c22d6a5a67356146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21fe6bbb_1c7aae09",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-10T21:36:29Z",
+      "side": 1,
+      "message": "Move below llvm-cov so this list stays sorted.",
+      "revId": "b53ce6ced5d9f89a459b35c22d6a5a67356146cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
