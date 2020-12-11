@@ -1,5 +1,23 @@
 [
     {
+        "comment": "[UPSTREAM] Set target CPU to A12 for compiler invocations that target Apple Silicon macOS machines",
+        "rel_patch_path": "cherry/c9d8617c7a6.patch",
+        "start_version": 407598,
+        "end_version": 375655
+    },
+    {
+        "comment": "[UPSTREAM] arm64: count Triple::aarch64_32 as an aarch64 target and enable leaf frame pointers",
+        "rel_patch_path": "cherry/bfe5864c7a9.patch",
+        "start_version": 407598,
+        "end_version": 375656
+    },
+    {
+        "comment": "[UPSTREAM] Define \"arm64e\", an AArch64 subarch for Pointer Auth.",
+        "rel_patch_path": "cherry/533d5e926c7.patch",
+        "start_version": 407598,
+        "end_version": 375657
+    },
+    {
         "comment": "[UPSTREAM] Revert \"[compiler-rt] [test] Allow expanding lit substitutions recursively\"",
         "rel_patch_path": "cherry/eafeb8af34946306a7382fa3801cf6e39a1c7226.patch",
         "start_version": 399163,
