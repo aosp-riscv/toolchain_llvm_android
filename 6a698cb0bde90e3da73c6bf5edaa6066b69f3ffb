@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "772b2f74_17a4ec95",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-12-12T01:25:17Z",
+      "side": 1,
+      "message": "I used the new cherrypick script, seems like it is not handling partial SHA well.",
+      "parentUuid": "c8daee4e_58b0e0f1",
+      "range": {
+        "startLine": 4,
+        "startChar": 34,
+        "endLine": 4,
+        "endChar": 45
+      },
+      "revId": "6a698cb0bde90e3da73c6bf5edaa6066b69f3ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b2a485a6_084b368e",
         "filename": "patches/PATCHES.json",
         "patchSetId": 1
