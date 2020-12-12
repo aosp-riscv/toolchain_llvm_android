@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8daee4e_58b0e0f1",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-12T01:04:32Z",
+      "side": 1,
+      "message": "have full sha as other patches?",
+      "range": {
+        "startLine": 4,
+        "startChar": 34,
+        "endLine": 4,
+        "endChar": 45
+      },
+      "revId": "6a698cb0bde90e3da73c6bf5edaa6066b69f3ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a485a6_084b368e",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-12T01:04:32Z",
+      "side": 1,
+      "message": "why cherry pick patches have end_version \u003c start_version?",
+      "range": {
+        "startLine": 6,
+        "startChar": 9,
+        "endLine": 6,
+        "endChar": 20
+      },
+      "revId": "6a698cb0bde90e3da73c6bf5edaa6066b69f3ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
