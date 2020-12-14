@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16cce240_1fdff285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1514973
+      },
+      "writtenOn": "2020-12-14T21:55:23Z",
+      "side": 1,
+      "message": "Thanks. To clarify - what\u0027s happening with reproxy is that its actually preserving the symlink as it is and not resolving the symlink to the file. That is why we have to include the path to the file directly.",
+      "revId": "a1376c70854a4cac27f55c66922787c158242173",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
