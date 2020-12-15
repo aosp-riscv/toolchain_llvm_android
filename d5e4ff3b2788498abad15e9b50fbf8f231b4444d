@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6a345b_3ee2aa86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-12-15T01:34:40Z",
+      "side": 1,
+      "message": "Let\u0027s unblock our next update, and we can work on getting this handled better upstream. Thanks for tracking this down.",
+      "revId": "d5e4ff3b2788498abad15e9b50fbf8f231b4444d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
