@@ -63,6 +63,30 @@
       },
       "revId": "b8f07b65f8e48fdc02b3e134412f8c0c784c65b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcf7461c_f25de3d5",
+        "filename": "builders.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-17T22:18:16Z",
+      "side": 1,
+      "message": "SG.  Thanks for the clarification Ryan.",
+      "parentUuid": "0f621206_ee2b655d",
+      "range": {
+        "startLine": 302,
+        "startChar": 12,
+        "endLine": 305,
+        "endChar": 54
+      },
+      "revId": "b8f07b65f8e48fdc02b3e134412f8c0c784c65b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
