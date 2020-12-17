@@ -16,6 +16,29 @@
       "message": "This change will work without https://reviews.llvm.org/D93431, but all of the resulting builtins libraries have non-hidden symbols. I also have platform changes that switch libc.so over to using the exported variants of the builtins archive (for 32-bit) and libunwind (for all archs). I still need to update libm.so.\n\nIf there\u0027s some other reason for needing a builtins library with non-hidden symbols, that would be good to know. AFAIK, the only need for it is libc.so and libm.so, on arm32 and 32-bit x86. (I checked bionic/libc/libc.map.txt and bionic/libm/libm.map.txt against the symbols in the actual archives.)\n",
       "revId": "b8f07b65f8e48fdc02b3e134412f8c0c784c65b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a811ccab_007ca6e4",
+        "filename": "builders.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-17T20:50:15Z",
+      "side": 1,
+      "message": "Do we need a separate copy in the NDK?  IIUC, files under `runtimes_ndk_cxx` overwrite the resource_dir when the NDK imports the prebuilts.  In this case, the files are the same.",
+      "range": {
+        "startLine": 302,
+        "startChar": 12,
+        "endLine": 305,
+        "endChar": 54
+      },
+      "revId": "b8f07b65f8e48fdc02b3e134412f8c0c784c65b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
