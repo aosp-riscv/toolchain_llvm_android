@@ -39,6 +39,30 @@
       },
       "revId": "b8f07b65f8e48fdc02b3e134412f8c0c784c65b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f621206_ee2b655d",
+        "filename": "builders.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2020-12-17T22:15:52Z",
+      "side": 1,
+      "message": "checkbuild.py deletes the existing lib/linux resource directory, then copies runtimes_ndx_cxx:\n\nhttps://android.googlesource.com/platform/ndk/+/f7384f018cdfdfd0b988d338bf9c2bfc8913357c/ndk/checkbuild.py#450\n\nWe have to make a copy into runtimes_ndk_cxx, or else the NDK wouldn\u0027t have a copy of the builtins. The *-exported.a variants of builtins+libunwind aren\u0027t needed in the NDK, so they\u0027re not copied into runtimes_ndk_cxx.",
+      "parentUuid": "a811ccab_007ca6e4",
+      "range": {
+        "startLine": 302,
+        "startChar": 12,
+        "endLine": 305,
+        "endChar": 54
+      },
+      "revId": "b8f07b65f8e48fdc02b3e134412f8c0c784c65b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
