@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d03dc8b_bf50ec12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-12-18T10:40:45Z",
+      "side": 1,
+      "message": "Still fails as it\u0027s not retaining the name and just keeping a blank for the compiler-rt invocation:\n\n```\nFAILED: /Volumes/Android/srhines/llvm-toolchain/out/stage1/lib64/clang/12.0.1/lib/darwin/libclang_rt.ios.a \ncd /Volumes/Android/srhines/llvm-toolchain/out/stage1/tools/clang/runtime/compiler-rt-bins/lib/builtins \u0026\u0026 /Volumes/Android/srhines/llvm-toolchain/prebuilts/cmake/darwin-x86/bin/cmake -E make_directory /Volumes/Android/srhines/llvm-toolchain/out/stage1/lib64/clang/12.0.1/lib/darwin \u0026\u0026 -output /Volumes/Android/srhines/llvm-toolchain/out/stage1/lib64/clang/12.0.1/lib/darwin/libclang_rt.ios.a -create -arch arm64 /Volumes/Android/srhines/llvm-toolchain/out/stage1/tools/clang/runtime/compiler-rt-bins/lib/builtins/libclang_rt.builtins_arm64_ios.a -arch arm64e /Volumes/Android/srhines/llvm-toolchain/out/stage1/tools/clang/runtime/compiler-rt-bins/lib/builtins/libclang_rt.builtins_arm64e_ios.a\n/bin/sh: -output: command not found\n```",
+      "revId": "bca9bdb135872a5398a22fac727ff6abbff6273a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
