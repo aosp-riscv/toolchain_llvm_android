@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db9a4e32_87fc4877",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-12-18T08:34:54Z",
+      "side": 1,
+      "message": "I\u0027ll mark this autosubmit once it passes again (from scratch) on my local mac build tonight.",
+      "revId": "ad031081dfd309d32c2a8cbe99d472c1051b6d01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
