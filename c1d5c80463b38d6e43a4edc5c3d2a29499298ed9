@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99426e2e_d6e1b80e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-12-18T04:27:28Z",
+      "side": 1,
+      "message": "As far as I know the arm64e support upstream is incomplete so you probably don\u0027t want to actually build anything with arm64e at this point.",
+      "revId": "c1d5c80463b38d6e43a4edc5c3d2a29499298ed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
