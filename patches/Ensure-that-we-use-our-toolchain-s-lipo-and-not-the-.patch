@@ -1,0 +1,44 @@
+From 1f889a0a4f271a1776eb84aa4bfb3f204cdd9413 Mon Sep 17 00:00:00 2001
+From: Stephen Hines <srhines@google.com>
+Date: Fri, 18 Dec 2020 00:10:27 -0800
+Subject: [PATCH] Ensure that we use our toolchain's lipo, and not the system
+ version
+
+Change-Id: Ib505775e62e10e1821dc4e036daae46f2cff630f
+---
+ clang/CMakeLists.txt                                  | 5 +++++
+ compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake | 2 +-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/clang/CMakeLists.txt b/clang/CMakeLists.txt
+index 900ef0a4d73..cae5cfe7feb 100644
+--- a/clang/CMakeLists.txt
++++ b/clang/CMakeLists.txt
+@@ -782,6 +782,11 @@ if (CLANG_ENABLE_BOOTSTRAP)
+     set(PGO_OPT -DLLVM_PROFDATA=${LLVM_RUNTIME_OUTPUT_INTDIR}/llvm-profdata)
+   endif()
+ 
++  # Retain lipo configuration as needed
++  if(APPLE)
++    set(CMAKE_LIPO "lipo" CACHE FILEPATH "path to the lipo tool")
++  endif()
++
+   if(LLVM_BUILD_INSTRUMENTED)
+     add_dependencies(clang-bootstrap-deps generate-profdata)
+     set(PGO_OPT -DLLVM_PROFDATA_FILE=${CMAKE_CURRENT_BINARY_DIR}/utils/perf-training/clang.profdata)
+diff --git a/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake b/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake
+index f6689c2e79a..02dc7f3c0fc 100644
+--- a/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake
++++ b/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake
+@@ -2,7 +2,7 @@ include(CMakeParseArguments)
+ include(CompilerRTUtils)
+ include(BuiltinTests)
+ 
+-set(CMAKE_LIPO "lipo" CACHE PATH "path to the lipo tool")
++#set(CMAKE_LIPO "lipo" CACHE PATH "path to the lipo tool")
+ 
+ # On OS X SDKs can be installed anywhere on the base system and xcode-select can
+ # set the default Xcode to use. This function finds the SDKs that are present in
+-- 
+2.29.2.729.g45daf8777d-goog
+
