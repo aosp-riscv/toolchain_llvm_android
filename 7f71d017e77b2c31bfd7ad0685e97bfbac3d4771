@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f369e0c1_c4fa342a",
+        "filename": "patches/Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-12-18T11:37:21Z",
+      "side": 1,
+      "message": "This may be the only part that\u0027s actually needed, but I don\u0027t have the patience to minimize it tonight. I really just want this build working again.",
+      "revId": "7f71d017e77b2c31bfd7ad0685e97bfbac3d4771",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
