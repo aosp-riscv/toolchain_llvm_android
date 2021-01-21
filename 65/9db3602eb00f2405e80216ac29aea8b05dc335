@@ -1,0 +1,10 @@
+Verified+1: Yabin Cui <yabinc@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified-Together+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Yabin Cui <yabinc@google.com>
+Submitted-at: Thu, 21 Jan 2021 22:30:16 +0000
+Reviewed-on: https://android-review.googlesource.com/c/toolchain/llvm_android/+/1556717
+Project: toolchain/llvm_android
+Branch: refs/heads/master
