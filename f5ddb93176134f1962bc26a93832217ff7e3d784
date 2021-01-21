@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33f0700b_481fd5ce",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-01-21T18:42:14Z",
+      "side": 1,
+      "message": "This needs a \u0027b\u0027 as well.",
+      "revId": "f5ddb93176134f1962bc26a93832217ff7e3d784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
