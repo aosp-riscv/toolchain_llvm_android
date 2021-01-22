@@ -70,6 +70,9 @@ KYTHE_CXX_EXTRACTOR = (PREBUILTS_DIR / 'clang-tools' / hosts.build_host().os_tag
                        'cxx_extractor')
 KYTHE_OUTPUT_DIR = OUT_DIR / 'kythe-files'
 
+_PYTHON_VER = ['3', '9']
+_PYTHON_VER_FULL = '.'.join(_PYTHON_VER)
+_PYTHON_VER_SHORT = ''.join(_PYTHON_VER)
 
 def pgo_profdata_filename() -> str:
     svn_revision = android_version.get_svn_revision_number()
@@ -97,8 +100,8 @@ def get_python_executable(host: hosts.Host) -> Path:
     """Returns the path to python executable for a host."""
     python_root = get_python_dir(host)
     return {
-        hosts.Host.Linux: python_root / 'bin' / 'python3.8',
-        hosts.Host.Darwin: python_root / 'bin' / 'python3.8',
+        hosts.Host.Linux: python_root / 'bin' / f'python{_PYTHON_VER_FULL}',
+        hosts.Host.Darwin: python_root / 'bin' / f'python{_PYTHON_VER_FULL}',
         hosts.Host.Windows: python_root / 'python.exe',
     }[host]
 
@@ -106,8 +109,8 @@ def get_python_include_dir(host: hosts.Host) -> Path:
     """Returns the path to python include dir for a host."""
     python_root = get_python_dir(host)
     return {
-        hosts.Host.Linux: python_root / 'include' / 'python3.8',
-        hosts.Host.Darwin: python_root / 'include' / 'python3.8',
+        hosts.Host.Linux: python_root / 'include' / f'python{_PYTHON_VER_FULL}',
+        hosts.Host.Darwin: python_root / 'include' / f'python{_PYTHON_VER_FULL}',
         hosts.Host.Windows: python_root / 'include',
     }[host]
 
@@ -115,16 +118,16 @@ def get_python_lib(host: hosts.Host) -> Path:
     """Returns the path to python lib for a host."""
     python_root = get_python_dir(host)
     return {
-        hosts.Host.Linux: python_root / 'lib' / 'libpython3.8.so',
-        hosts.Host.Darwin: python_root / 'lib' / 'libpython3.8.dylib',
-        hosts.Host.Windows: python_root / 'libs' / 'python38.lib',
+        hosts.Host.Linux: python_root / 'lib' / f'libpython{_PYTHON_VER_FULL}.so',
+        hosts.Host.Darwin: python_root / 'lib' / f'libpython{_PYTHON_VER_FULL}.dylib',
+        hosts.Host.Windows: python_root / 'libs' / f'python{_PYTHON_VER_SHORT}.lib',
     }[host]
 
 def get_python_dynamic_lib(host: hosts.Host) -> Path:
     """Returns the path to python runtime dynamic lib for a host."""
     python_root = get_python_dir(host)
     return {
-        hosts.Host.Linux: python_root / 'lib' / 'libpython3.8.so.1.0',
-        hosts.Host.Darwin: python_root / 'lib' / 'libpython3.8.dylib',
-        hosts.Host.Windows: python_root / 'python38.dll',
+        hosts.Host.Linux: python_root / 'lib' / f'libpython{_PYTHON_VER_FULL}.so.1.0',
+        hosts.Host.Darwin: python_root / 'lib' / f'libpython{_PYTHON_VER_FULL}.dylib',
+        hosts.Host.Windows: python_root / f'python{_PYTHON_VER_SHORT}.dll',
     }[host]
