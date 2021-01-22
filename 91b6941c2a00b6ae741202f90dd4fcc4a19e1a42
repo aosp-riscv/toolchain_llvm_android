@@ -16,6 +16,24 @@
       "message": "Super minor nitpick, but I would expect most people to grep for \"3.9\" if they were trying to figure out where that version number was coming from, so it might be better to hard-code the full version number, while doing something like `full.replace(\u0027.\u0027, \u0027\u0027)` to construct the short version number.",
       "revId": "91b6941c2a00b6ae741202f90dd4fcc4a19e1a42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9cdb9c_3e54ba44",
+        "filename": "paths.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2021-01-22T22:19:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5866809_a9688d61",
+      "revId": "91b6941c2a00b6ae741202f90dd4fcc4a19e1a42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
