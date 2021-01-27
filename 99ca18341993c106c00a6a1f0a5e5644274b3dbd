@@ -87,6 +87,24 @@
       "parentUuid": "eddfa111_3ecd4400",
       "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12eee35f_e5c6a7de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-01-27T00:41:43Z",
+      "side": 1,
+      "message": "https://android-build.googleplex.com/builds/submitted/6713224/darwin_mac/latest/view/attempts/1/logs/build.log was the original failure.",
+      "parentUuid": "e23f674b_34dbe627",
+      "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
