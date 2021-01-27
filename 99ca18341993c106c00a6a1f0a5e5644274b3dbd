@@ -51,6 +51,24 @@
       "message": "LGTM but wait for srhines\u0027 +1 for the MacOS change.",
       "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eddfa111_3ecd4400",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-01-27T00:33:46Z",
+      "side": 1,
+      "message": "Not tested on Mac yet. Is there a bug with reproducible steps for this issue?",
+      "parentUuid": "0e24fe5a_8836c87f",
+      "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
