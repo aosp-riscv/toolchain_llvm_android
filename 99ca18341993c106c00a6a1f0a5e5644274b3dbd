@@ -69,6 +69,24 @@
       "parentUuid": "0e24fe5a_8836c87f",
       "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e23f674b_34dbe627",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-01-27T00:40:45Z",
+      "side": 1,
+      "message": "The mac build was broken without the revert, so the build passing on mac should suffice.",
+      "parentUuid": "eddfa111_3ecd4400",
+      "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
