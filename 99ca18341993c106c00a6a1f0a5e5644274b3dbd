@@ -105,6 +105,23 @@
       "parentUuid": "e23f674b_34dbe627",
       "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1637cb9f_0a9cf76f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-01-27T08:13:16Z",
+      "side": 1,
+      "message": "Yes, we need to test reverting that patch on the mac first before submitting it. Unfortunately, my mac is still dead right now.",
+      "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
