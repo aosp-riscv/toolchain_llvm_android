@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "961ffdb6_ddeaf433",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-01-27T00:07:10Z",
+      "side": 1,
+      "message": "Stephen, please take a look of https://reviews.llvm.org/D88825.\nI think it could have fixed the gettime problem and we should not need the revert patch any more.\n",
+      "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
