@@ -16,6 +16,41 @@
       "message": "Stephen, please take a look of https://reviews.llvm.org/D88825.\nI think it could have fixed the gettime problem and we should not need the revert patch any more.\n",
       "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e24fe5a_8836c87f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-01-27T00:17:32Z",
+      "side": 1,
+      "message": "Thanks for investigating if this is still needed.  Did you get a chance to test this on Mac?  If not, it\u0027s ok to test it on the build bots.\n\nLGTM otherwise, but wait for +1 from srhines\u0027.",
+      "parentUuid": "961ffdb6_ddeaf433",
+      "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b37bbb_fd5fc321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-01-27T00:17:32Z",
+      "side": 1,
+      "message": "LGTM but wait for srhines\u0027 +1 for the MacOS change.",
+      "revId": "99ca18341993c106c00a6a1f0a5e5644274b3dbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
