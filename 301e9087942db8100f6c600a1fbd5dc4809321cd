@@ -46,6 +46,30 @@
       },
       "revId": "301e9087942db8100f6c600a1fbd5dc4809321cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e307deed_cdfe0fbd",
+        "filename": "patches/Undef-FS-macro-for-Android-x86_64.patch",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-01-28T05:26:11Z",
+      "side": 1,
+      "message": "SGTM about maintaining a simple patch for now - didn\u0027t realize the extent of the variable name.  We should really follow up and fix this upstream.\n\n\u003e Although I\u0027m not sure yet which recent change(s) caused this issue,\n\nMy guess is that lldb server (which runs on the device) started depending on libLLVMSupport, causing this code to be built for the device.",
+      "parentUuid": "49f24cff_449c7f0e",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 10
+      },
+      "revId": "301e9087942db8100f6c600a1fbd5dc4809321cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
