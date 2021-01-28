@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2edcde7a_2b4a3511",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-01-28T22:19:55Z",
+      "side": 1,
+      "message": "The comment for this CMake variable says:\n\u003e \"Build libc++ with definitions for operator new/delete. These are normally\n   defined in libc++abi, but this option can be used to define them in libc++\n   instead. If you define them in libc++, make sure they are NOT defined in\n   libc++abi. Doing otherwise is an ODR violation.\" OFF)\n\n... and we follow that by setting LIBCXXABI_ENABLE_NEW_DELETE_DEFINITIONS\u003dOFF in libcxxabi.",
+      "revId": "7eef947adbb1b010cd1cc1c77a5dfdc9b310e69f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
