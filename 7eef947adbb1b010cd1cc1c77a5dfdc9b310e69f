@@ -34,6 +34,24 @@
       "parentUuid": "2edcde7a_2b4a3511",
       "revId": "7eef947adbb1b010cd1cc1c77a5dfdc9b310e69f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "340bfff0_97f7596d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-01-28T23:18:29Z",
+      "side": 1,
+      "message": "Right, I checked the output libc++.a and libc++abi.a. They are the same as our current prebuilt after this change. One has new/delete and the other does not.",
+      "parentUuid": "7b50df11_d9a1dcab",
+      "revId": "7eef947adbb1b010cd1cc1c77a5dfdc9b310e69f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
