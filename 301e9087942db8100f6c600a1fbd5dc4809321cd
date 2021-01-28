@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e110f5_096beaf8",
+        "filename": "patches/Undef-FS-macro-for-Android-x86_64.patch",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-01-28T01:42:18Z",
+      "side": 1,
+      "message": "\u0027#undef FS\u0027 may break in the future if FS is actually needed in the code.  We should rename the variable instead.  In the long run, I am not sure how to prevent/forbid such variable names.\n\nFor posterity, the macro is defined in https://android.googlesource.com/platform/bionic/+/25ac753/libc/include/sys/reg.h.  I presume the broken compilation is for lldb?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 10
+      },
+      "revId": "301e9087942db8100f6c600a1fbd5dc4809321cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
