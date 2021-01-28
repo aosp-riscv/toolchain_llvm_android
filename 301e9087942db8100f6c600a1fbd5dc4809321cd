@@ -22,6 +22,30 @@
       },
       "revId": "301e9087942db8100f6c600a1fbd5dc4809321cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f24cff_449c7f0e",
+        "filename": "patches/Undef-FS-macro-for-Android-x86_64.patch",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-01-28T02:19:19Z",
+      "side": 1,
+      "message": "Yes, this came from compiling lldb\u0027s NativeProcessLinux.cpp.\nAlthough I\u0027m not sure yet which recent change(s) caused this issue,\nthere are multiple files in llvm/lib/Support/*cpp and\nllvm/include/llvm/Support/*h using this \u0027FS\u0027 variable name.\n\nUntil llvm upstream source has renamed all of them, I am proposing this smaller local patch to build. Maintaining a larger patch to renaming FS is more difficult.\nIf in the future the macro FS is needed, the undef patch should stop compilation and be caught/fixed quickly.",
+      "parentUuid": "50e110f5_096beaf8",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 10
+      },
+      "revId": "301e9087942db8100f6c600a1fbd5dc4809321cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
