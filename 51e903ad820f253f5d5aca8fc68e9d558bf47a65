@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e912a6_b93a978d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-01-29T02:04:05Z",
+      "side": 1,
+      "message": "Since this should fix our mac build, this is probably fine. TBH we need to figure out what to do about legacy mac builds, because this level of reverting is probably not sustainable in the future.",
+      "revId": "51e903ad820f253f5d5aca8fc68e9d558bf47a65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
