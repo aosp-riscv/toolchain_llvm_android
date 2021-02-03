@@ -16,6 +16,24 @@
       "message": "Propose to bypass aosp-master-plus-llvm test due to b/179158989.\n",
       "revId": "d80ed13766fb2464f1a393d95b2b73ee0c780174",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3fa7f63_8a3f6d73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-02-03T00:27:22Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "e7c2ea69_7a41ec5c",
+      "revId": "d80ed13766fb2464f1a393d95b2b73ee0c780174",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
