@@ -25,6 +25,32 @@
       },
       "revId": "2e48dd3ec11cea090433aff75435ff102cf934f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007916685",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1576078?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "31bb3115_fc83fe3e",
+        "filename": "patches/cherry/1d51c699b9e2ebc5bcfdbe85c74cc871426333d4.patch",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-05T00:52:19Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027valid\u0027, \u0027validity check\u0027 or \u0027initial check\u0027; see https://source.android.com/setup/contribute/respectful-code for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 209,
+        "startChar": 5,
+        "endLine": 209,
+        "endChar": 11
+      },
+      "revId": "2e48dd3ec11cea090433aff75435ff102cf934f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
