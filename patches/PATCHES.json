@@ -372,6 +372,12 @@
         "end_version": 418022
     },
     {
+        "comment": "[UPSTREAM] [clang][Arm] Fix handling of -Wa,-implicit-it=",
+        "rel_patch_path": "cherry/a680bc3a31d36d321ccf3801bdcff74d58842bfa.patch",
+        "start_version": 412851,
+        "end_version": 418680
+    },
+    {
         "comment": "Revert two changes that break Android builds.",
         "rel_patch_path": "Revert-two-changes-that-break-Android-builds.v3.patch",
         "start_version": 394052,
