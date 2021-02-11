@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4647717a_932019d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-11T23:26:51Z",
+      "side": 1,
+      "message": "Agree with skipped patches too. Thank you for taking the time to pick up the relevant upstream reverts/fixes.",
+      "revId": "7c8b5f7550739ee811a51edf48c31ef949351c66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
