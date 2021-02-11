@@ -336,6 +336,18 @@
         "end_version": 412730
     },
     {
+        "comment": "[UPSTREAM] [InlineCost] Implement cost-benefit-based inliner",
+        "rel_patch_path": "cherry/9895c7012d61525ed541ef74d9eb43300bac9b0c.patch",
+        "start_version": 412851,
+        "end_version": 414211
+    },
+    {
+        "comment": "[UPSTREAM] [Inliner] Compute the full cost for the cost benefit analsysis",
+        "rel_patch_path": "cherry/65cd3cbb3fc9ee440234a5adbfea6cbe4834f3d3.patch",
+        "start_version": 412851,
+        "end_version": 415159
+    },
+    {
         "comment": "[UPSTREAM] [InitLLVM] Ensure SIGPIPE handler installed before sigaction()",
         "rel_patch_path": "cherry/e05baf40de8a3bbfcf4a765761b1147e94b7309c.patch",
         "start_version": 407598,

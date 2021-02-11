@@ -1,0 +1,43 @@
+From 65cd3cbb3fc9ee440234a5adbfea6cbe4834f3d3 Mon Sep 17 00:00:00 2001
+From: Kazu Hirata <kazu@google.com>
+Date: Tue, 5 Jan 2021 12:48:49 -0800
+Subject: [PATCH] [Inliner] Compute the full cost for the cost benefit
+ analsysis
+
+This patch teaches the inliner to compute the full cost for a call
+site where the newly introduced cost benefit analysis is enabled.
+
+Note that the cost benefit analysis requires the full cost to be
+computed.  However, without this patch or the -inline-cost-full
+option, the early termination logic would kick in when the cost
+exceeds the threshold, so we don't get to perform the cost benefit
+analysis.  For this reason, we would need to specify four clang
+options:
+
+  -mllvm -inline-cost-full
+  -mllvm -inline-enable-cost-benefit-analysis
+
+This patch eliminates the need to specify -inline-cost-full.
+
+Differential Revision: https://reviews.llvm.org/D93658
+---
+ llvm/lib/Analysis/InlineCost.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/llvm/lib/Analysis/InlineCost.cpp b/llvm/lib/Analysis/InlineCost.cpp
+index bf8d9c98aa0e..ff589b86bb50 100644
+--- a/llvm/lib/Analysis/InlineCost.cpp
++++ b/llvm/lib/Analysis/InlineCost.cpp
+@@ -901,7 +901,8 @@ public:
+       bool IgnoreThreshold = false)
+       : CallAnalyzer(Callee, Call, TTI, GetAssumptionCache, GetBFI, PSI, ORE),
+         ComputeFullInlineCost(OptComputeFullInlineCost ||
+-                              Params.ComputeFullInlineCost || ORE),
++                              Params.ComputeFullInlineCost || ORE ||
++                              isCostBenefitAnalysisEnabled()),
+         Params(Params), Threshold(Params.DefaultThreshold),
+         BoostIndirectCalls(BoostIndirect), IgnoreThreshold(IgnoreThreshold),
+         CostBenefitAnalysisEnabled(isCostBenefitAnalysisEnabled()),
+-- 
+2.30.0.478.g8a0d178c01-goog
+
