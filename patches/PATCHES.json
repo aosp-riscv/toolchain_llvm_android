@@ -336,6 +336,12 @@
         "end_version": 412730
     },
     {
+        "comment": "[UPSTREAM] Re-apply \"[CMake][compiler-rt][AArch64] Avoid preprocessing LSE builtins separately\"",
+        "rel_patch_path": "cherry/d0797e62fa8a73ad75dcaca7c0e1a71c2001c855.patch",
+        "start_version": 412851,
+        "end_version": 413706
+    },
+    {
         "comment": "[UPSTREAM] Revert \"[MachineDebugify] Insert synthetic DBG_VALUE instructions\"",
         "rel_patch_path": "cherry/841f9c937f6e593c926a26aedf054436eb807fe6.patch",
         "start_version": 412851,

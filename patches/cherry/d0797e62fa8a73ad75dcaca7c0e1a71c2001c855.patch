@@ -1,0 +1,109 @@
+From d0797e62fa8a73ad75dcaca7c0e1a71c2001c855 Mon Sep 17 00:00:00 2001
+From: Raul Tambre <raul@tambre.ee>
+Date: Mon, 14 Dec 2020 16:40:20 +0200
+Subject: [PATCH] Re-apply "[CMake][compiler-rt][AArch64] Avoid preprocessing
+ LSE builtins separately"
+
+aa772fc85e0f526615c78b9c3979c2be945a754c (D92530) has landed fixing Apple builds.
+Previous quick-fix d9697c2e6b153ac7dc40a69450d9b672f71b1029 (D93198) included in this commit.
+
+Invoking the preprocessor ourselves is fragile and would require us to replicate CMake's handling of definitions, compiler flags, etc for proper compatibility.
+In my toolchain builds this notably resulted in a bunch of warnings from unused flags as my CMAKE_C_FLAGS includes CPU-specific optimization options.
+Notably this part was already duplicating the logic for VISIBILITY_HIDDEN define.
+
+Instead, symlink the files and set the proper set of defines on each.
+This should also be faster as we avoid invoking the compiler multiple times.
+
+Fixes https://llvm.org/PR48494
+
+Differential Revision: https://reviews.llvm.org/D93211
+---
+ .../cmake/Modules/CompilerRTDarwinUtils.cmake |  4 ++-
+ compiler-rt/lib/builtins/CMakeLists.txt       | 25 ++++++++-----------
+ compiler-rt/lib/builtins/aarch64/lse.S        |  2 +-
+ 3 files changed, 14 insertions(+), 17 deletions(-)
+
+diff --git a/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake b/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake
+index f6689c2e79ad..456a8dcda59f 100644
+--- a/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake
++++ b/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake
+@@ -395,7 +395,9 @@ macro(darwin_add_builtin_libraries)
+   set(CMAKE_CXX_FLAGS "")
+   set(CMAKE_ASM_FLAGS "")
+ 
+-  set(PROFILE_SOURCES ../profile/InstrProfiling 
++  append_string_if(COMPILER_RT_HAS_ASM_LSE " -DHAS_ASM_LSE" CFLAGS)
++
++  set(PROFILE_SOURCES ../profile/InstrProfiling
+                       ../profile/InstrProfilingBuffer
+                       ../profile/InstrProfilingPlatformDarwin
+                       ../profile/InstrProfilingWriter
+diff --git a/compiler-rt/lib/builtins/CMakeLists.txt b/compiler-rt/lib/builtins/CMakeLists.txt
+index d84f4d09e53e..5259e951dff3 100644
+--- a/compiler-rt/lib/builtins/CMakeLists.txt
++++ b/compiler-rt/lib/builtins/CMakeLists.txt
+@@ -509,31 +509,24 @@ set(aarch64_SOURCES
+ )
+ 
+ # Generate outline atomics helpers from lse.S base
+-set(CUSTOM_FLAGS ${CMAKE_C_FLAGS})
+-if(NOT ANDROID)
+-  append_list_if(COMPILER_RT_HAS_VISIBILITY_HIDDEN_FLAG -DVISIBILITY_HIDDEN CUSTOM_FLAGS)
+-endif()
+-append_list_if(COMPILER_RT_HAS_ASM_LSE -DHAS_ASM_LSE CUSTOM_FLAGS)
+-string(REPLACE " " "\t" CUSTOM_FLAGS "${CUSTOM_FLAGS}")
+ set(OA_HELPERS_DIR "${CMAKE_CURRENT_BINARY_DIR}/outline_atomic_helpers.dir")
+-file(MAKE_DIRECTORY ${OA_HELPERS_DIR})
++file(MAKE_DIRECTORY "${OA_HELPERS_DIR}")
+ 
+ foreach(pat cas swp ldadd ldclr ldeor ldset)
+   foreach(size 1 2 4 8 16)
+     foreach(model 1 2 3 4)
+       if(pat STREQUAL "cas" OR NOT size STREQUAL "16")
+-        set(helper_asm ${OA_HELPERS_DIR}/outline_atomic_${pat}${size}_${model}.S)
++        set(helper_asm "${OA_HELPERS_DIR}/outline_atomic_${pat}${size}_${model}.S")
+         add_custom_command(
+           OUTPUT ${helper_asm}
+-          COMMAND ${CMAKE_C_COMPILER} -E ${CUSTOM_FLAGS} -DL_${pat} -DSIZE=${size} -DMODEL=${model}
+-                  ${CMAKE_CURRENT_SOURCE_DIR}/aarch64/lse.S -o ${helper_asm}
+-          DEPENDS aarch64/lse.S assembly.h
++          COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_CURRENT_SOURCE_DIR}/aarch64/lse.S" "${helper_asm}"
+         )
+-        set_source_files_properties(${helper_asm} PROPERTIES GENERATED TRUE)
+-        set(aarch64_SOURCES
+-          ${aarch64_SOURCES}
+-          ${helper_asm}
++        set_source_files_properties("${helper_asm}"
++          PROPERTIES
++          COMPILE_DEFINITIONS "L_${pat};SIZE=${size};MODEL=${model}"
++          INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}"
+         )
++        list(APPEND aarch64_SOURCES "${helper_asm}")
+       endif()
+     endforeach(model)
+   endforeach(size)
+@@ -687,6 +680,8 @@ else ()
+     append_list_if(COMPILER_RT_HAS_VISIBILITY_HIDDEN_FLAG VISIBILITY_HIDDEN BUILTIN_DEFS)
+   endif()
+ 
++  append_list_if(COMPILER_RT_HAS_ASM_LSE HAS_ASM_LSE BUILTIN_DEFS)
++
+   foreach (arch ${BUILTIN_SUPPORTED_ARCH})
+     if (CAN_TARGET_${arch})
+       # For ARM archs, exclude any VFP builtins if VFP is not supported
+diff --git a/compiler-rt/lib/builtins/aarch64/lse.S b/compiler-rt/lib/builtins/aarch64/lse.S
+index 770f098b7cf1..7a9433fd89cf 100644
+--- a/compiler-rt/lib/builtins/aarch64/lse.S
++++ b/compiler-rt/lib/builtins/aarch64/lse.S
+@@ -2,7 +2,7 @@
+ // See https://llvm.org/LICENSE.txt for license information.
+ // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+ 
+-#include "../assembly.h"
++#include "assembly.h"
+ 
+ // Out-of-line LSE atomics helpers. Ported from libgcc library.
+ // N = {1, 2, 4, 8}
+-- 
+2.30.0.478.g8a0d178c01-goog
+
