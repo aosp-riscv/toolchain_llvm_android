@@ -371,6 +371,12 @@ class CMakeBuilder(Builder):
             # Cross compiling
             defines['CMAKE_SYSTEM_NAME'] = self._get_cmake_system_name()
             defines['CMAKE_SYSTEM_PROCESSOR'] = self._get_cmake_system_arch()
+        target = self._config.target_os
+        defines['Python3_LIBRARY'] = str(paths.get_python_lib(target))
+        defines['Python3_LIBRARIES'] = str(paths.get_python_lib(target))
+        defines['Python3_INCLUDE_DIR'] = str(paths.get_python_include_dir(target))
+        defines['Python3_INCLUDE_DIRS'] = str(paths.get_python_include_dir(target))
+        defines['Python3_EXECUTABLE'] = str(paths.get_python_executable(hosts.build_host()))
         defines.update(self._config.cmake_defines)
         return defines
 
@@ -530,13 +536,7 @@ class LLVMBuilder(LLVMBaseBuilder):
 
         if self.swig_executable:
             defines['SWIG_EXECUTABLE'] = str(self.swig_executable)
-            py_prefix = 'Python3'
             defines['LLDB_ENABLE_PYTHON'] = 'ON'
-            defines[f'{py_prefix}_LIBRARY'] = str(paths.get_python_lib(target))
-            defines[f'{py_prefix}_LIBRARIES'] = str(paths.get_python_lib(target))
-            defines[f'{py_prefix}_INCLUDE_DIR'] = str(paths.get_python_include_dir(target))
-            defines[f'{py_prefix}_INCLUDE_DIRS'] = str(paths.get_python_include_dir(target))
-            defines[f'{py_prefix}_EXECUTABLE'] = str(paths.get_python_executable(hosts.build_host()))
             defines['LLDB_EMBED_PYTHON_HOME'] = 'OFF'
         else:
             defines['LLDB_ENABLE_PYTHON'] = 'OFF'
