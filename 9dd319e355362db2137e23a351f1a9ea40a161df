@@ -33,6 +33,23 @@
       "message": "Something\u0027s wrong with my updated version of this patch (that I uploaded).",
       "revId": "9dd319e355362db2137e23a351f1a9ea40a161df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99f65798_a54cf6a0",
+        "filename": "base_builders.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1307957
+      },
+      "writtenOn": "2021-02-24T23:01:45Z",
+      "side": 1,
+      "message": "Add them to LLVMBaseBuilder instead? I guess runtime libraries don\u0027t need these.",
+      "revId": "9dd319e355362db2137e23a351f1a9ea40a161df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
