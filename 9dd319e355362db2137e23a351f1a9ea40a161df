@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe5dd65_ea3f865d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-24T21:54:46Z",
+      "side": 1,
+      "message": "It is likely that the following can also be removed (and we rely just on executable), but I\u0027m not 100% sure (and don\u0027t want to risk the mac build):\n\n```\n  Manually-specified variables were not used by the project:\n                                                         \n    Python3_INCLUDE_DIR                 \n    Python3_INCLUDE_DIRS    \n    Python3_LIBRARIES                                   \n    Python3_LIBRARY \n```",
+      "revId": "9dd319e355362db2137e23a351f1a9ea40a161df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
