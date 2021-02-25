@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7e52a9_2c7dc175",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-25T02:51:51Z",
+      "side": 1,
+      "message": "Thanks, Haibo, for the suggestion. It was unfortunately a little trickier than that, but moving this into LLVMBaseBuilder is the right move anyways.",
+      "revId": "2e83d4ae331483dd7869425e96a806cedcc41230",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
