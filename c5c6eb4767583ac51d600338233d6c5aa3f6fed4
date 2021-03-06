@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f2a02f_d816c3eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-06T04:36:18Z",
+      "side": 1,
+      "message": "I probably can remove some of the other header/linker flags from the builder, but I wanted to minimally fix this problem tonight.",
+      "revId": "c5c6eb4767583ac51d600338233d6c5aa3f6fed4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
