@@ -1,4 +1,6 @@
 git_master:
+    adt3-userdebug:
+        groups: arm64
     cf_x86_phone-userdebug:
         groups: x86 smoke
         tests:
@@ -17,10 +19,6 @@ git_master:
         tests:
             - apct/bionic/native_test
             - apct/device_boot_health_check_extra
-    crosshatch_hwasan-userdebug:
-        groups: arm64 hwasan
-        test:
-            - apct/device_boot_health_check_extra
     cf_x86_phone-userdebug_coverage:
         groups: x86 coverage
         tests:
@@ -31,6 +29,11 @@ git_master:
             - apct/bionic/native_test
             - apct/device_boot_health_check_extra
     flame-userdebug:
+        groups: arm64
+        tests:
+            - apct/bionic/native_test
+            - apct/device_boot_health_check_extra
+    flame_hwasan-userdebug:
         groups: arm64
         tests:
             - apct/bionic/native_test
@@ -63,7 +66,7 @@ git_master:
     wembley-userdebug:
         groups: arm64
 
-RELEASE_BRANCH:
+RELEASE_BRANCH_1:
     cf_x86_phone_analyzer-userdebug:
         groups: tidy
     coral_analyzer-userdebug:
@@ -73,6 +76,18 @@ RELEASE_BRANCH:
         tests:
             - apct/perf/pgo/apk-profile-collector
             - apct/perf/pgo/profile-collector
+
+RELEASE_BRANCH_2:
+    DEVICE_TARGET_1:
+        groups: arm64
+
+RELEASE_BRANCH_3:
+    cf_x86_phone_analyzer-userdebug:
+        groups: tidy
+    coral_analyzer-userdebug:
+        groups: tidy
+    pgo-coral-config1:
+        groups: pgo
 
 git_master-art-host:
     art-test:
