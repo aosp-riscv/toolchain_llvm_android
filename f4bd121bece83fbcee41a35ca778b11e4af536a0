@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008902338",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1629460?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d0d29cc9_e877aeb7",
+        "filename": "patches/cherry/06829034ca64b8c83a5b20d8abe5ddbfe7af0004.patch",
+        "patchSetId": 1
+      },
+      "lineNbr": 1876,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-11T19:52:59Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 1876,
+        "startChar": 35,
+        "endLine": 1876,
+        "endChar": 40
+      },
+      "revId": "f4bd121bece83fbcee41a35ca778b11e4af536a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
