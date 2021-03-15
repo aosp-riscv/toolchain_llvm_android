@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4de8169_9dc9a4f8",
+        "filename": "builders.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2021-03-15T20:29:06Z",
+      "side": 1,
+      "message": "Should we enable this for the platform build of libunwind?",
+      "range": {
+        "startLine": 486,
+        "startChar": 10,
+        "endLine": 486,
+        "endChar": 43
+      },
+      "revId": "9e4f84996b023e95df1926b00015e14def7f4573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
