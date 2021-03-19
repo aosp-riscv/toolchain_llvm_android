@@ -801,8 +801,6 @@ class SysrootsBuilder(base_builders.Builder):
         # directory along with libclang_rt.*.a, not in the sysroot directory.)
         # For the platform, also remove the NDK libc++.
         (dest_lib / 'libcompiler_rt-extras.a').unlink()
-        if arch == hosts.Arch.ARM:
-            (dest_lib / 'libunwind.a').unlink()
         if platform:
             (dest_lib / 'libc++abi.a').unlink()
             (dest_lib / 'libc++_static.a').unlink()
