@@ -216,6 +216,12 @@
         "end_version": 421672
     },
     {
+        "comment": "[UPSTREAM] [SantizerCoverage] handle missing DBG MD when inserting libcalls",
+        "rel_patch_path": "cherry/4914c9836765532ffaec9c85bc57690dbdaeb50f.patch",
+        "start_version": 416183,
+        "end_version": 424245
+    },
+    {
         "comment": "Revert two changes that break Android builds.",
         "rel_patch_path": "Revert-two-changes-that-break-Android-builds.v4.patch",
         "start_version": 412851,
