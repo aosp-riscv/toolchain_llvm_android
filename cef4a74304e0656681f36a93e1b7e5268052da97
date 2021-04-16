@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b92266a3_7990aa52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-04-16T00:14:12Z",
+      "side": 1,
+      "message": "Yi, let me know if this change is safe w.r.t. darwin universal binaries.",
+      "revId": "cef4a74304e0656681f36a93e1b7e5268052da97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
