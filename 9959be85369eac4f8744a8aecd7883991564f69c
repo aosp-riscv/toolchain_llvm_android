@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0273733_ca1de594",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-04-19T19:45:52Z",
+      "side": 1,
+      "message": "If you prefer to use the `print()` function otherwise, you can do: `print(line, end\u003d\u0027\u0027)`.",
+      "range": {
+        "startLine": 140,
+        "startChar": 16,
+        "endLine": 140,
+        "endChar": 38
+      },
+      "revId": "9959be85369eac4f8744a8aecd7883991564f69c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
