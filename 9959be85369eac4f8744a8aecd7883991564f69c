@@ -22,6 +22,30 @@
       },
       "revId": "9959be85369eac4f8744a8aecd7883991564f69c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b4d37d7_eec2b5d4",
+        "filename": "update_kernel_toolchain.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-04-19T20:12:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0273733_ca1de594",
+      "range": {
+        "startLine": 140,
+        "startChar": 16,
+        "endLine": 140,
+        "endChar": 38
+      },
+      "revId": "9959be85369eac4f8744a8aecd7883991564f69c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
