@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4607f5c8_353ad173",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-05-05T20:36:05Z",
+      "side": 1,
+      "message": "This should be 416183.  Maybe you misunderstood this to denote the dependencies but it\u0027s actually the llvm-toolchain revision for which this cherry-pick should be applied.",
+      "range": {
+        "startLine": 251,
+        "startChar": 25,
+        "endLine": 251,
+        "endChar": 31
+      },
+      "revId": "293ee5bfebe34552152b96e22fb731b4e4bc01dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
