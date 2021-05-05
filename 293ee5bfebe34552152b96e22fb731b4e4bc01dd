@@ -70,6 +70,30 @@
       },
       "revId": "293ee5bfebe34552152b96e22fb731b4e4bc01dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f785018_c3fcdb60",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-05-05T20:45:03Z",
+      "side": 1,
+      "message": "In the future, you can try toolchain/llvm_android/cherrypick_cl.py when creating these cherry-picks..",
+      "parentUuid": "31b9fb96_de94be5e",
+      "range": {
+        "startLine": 251,
+        "startChar": 25,
+        "endLine": 251,
+        "endChar": 31
+      },
+      "revId": "293ee5bfebe34552152b96e22fb731b4e4bc01dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
