@@ -22,6 +22,30 @@
       },
       "revId": "293ee5bfebe34552152b96e22fb731b4e4bc01dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd1ef8e_a92c27d5",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2021-05-05T20:38:49Z",
+      "side": 1,
+      "message": "Ah ok, I got this by running external/toolchain-utils/llvm_tools/git_llvm_rev.py for the breaking change (51aa61e7) and this change. Will fix.",
+      "parentUuid": "4607f5c8_353ad173",
+      "range": {
+        "startLine": 251,
+        "startChar": 25,
+        "endLine": 251,
+        "endChar": 31
+      },
+      "revId": "293ee5bfebe34552152b96e22fb731b4e4bc01dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
