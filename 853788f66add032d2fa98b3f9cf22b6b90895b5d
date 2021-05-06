@@ -22,6 +22,30 @@
       },
       "revId": "853788f66add032d2fa98b3f9cf22b6b90895b5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1320e30f_0a1f3df6",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-05-06T08:13:22Z",
+      "side": 1,
+      "message": "Ack. Thanks for thinking of this.",
+      "parentUuid": "3de7a7fc_0a5e2327",
+      "range": {
+        "startLine": 251,
+        "startChar": 25,
+        "endLine": 251,
+        "endChar": 31
+      },
+      "revId": "853788f66add032d2fa98b3f9cf22b6b90895b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
