@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3de7a7fc_0a5e2327",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-05-06T00:35:22Z",
+      "side": 1,
+      "message": "I cherry-picked this starting the next update since this issue is not severe enough to be included in a respin.",
+      "range": {
+        "startLine": 251,
+        "startChar": 25,
+        "endLine": 251,
+        "endChar": 31
+      },
+      "revId": "853788f66add032d2fa98b3f9cf22b6b90895b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
