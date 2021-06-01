@@ -467,6 +467,21 @@ def package_toolchain(toolchain_builder: LLVMBuilder,
         svn_revision = android_version.get_svn_revision()
         version_file.write(f'based on {svn_revision}\n')
 
+    # Add BUILD.bazel file.
+    build_bazel_file = install_dir / 'BUILD.bazel'
+    with build_bazel_file.open('w') as bazel_file:
+        bazel_file.write(
+            textwrap.dedent("""\
+                package(default_visibility = ["//visibility:public"])
+
+                filegroup(
+                    name = "binaries",
+                    srcs = glob([
+                        "bin/*",
+                        "lib64/*",
+                    ]),
+                )"""))
+
     # Create RBE input files.
     if host.is_linux:
         with (install_dir / 'bin' / 'remote_toolchain_inputs').open('w') as inputs_file:
