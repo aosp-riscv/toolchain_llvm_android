@@ -33,6 +33,24 @@
       "message": "Add this file only for Linux and Darwin:  `if not host.is_windows:`",
       "revId": "013b9458e03f766edfeb9a2b9de26e73441a5296",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c2b327_4906d52a",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-06-01T21:49:52Z",
+      "side": 1,
+      "message": "probably don\u0027t need it for Darwin either.",
+      "parentUuid": "b59f8bca_8122248d",
+      "revId": "013b9458e03f766edfeb9a2b9de26e73441a5296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
