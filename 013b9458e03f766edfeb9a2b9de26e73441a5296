@@ -16,6 +16,23 @@
       "message": "I think this looks good. Not sure if it would interfere with the BUILD.bazel one directory above where this one will get placed.",
       "revId": "013b9458e03f766edfeb9a2b9de26e73441a5296",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b59f8bca_8122248d",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-01T21:47:32Z",
+      "side": 1,
+      "message": "Add this file only for Linux and Darwin:  `if not host.is_windows:`",
+      "revId": "013b9458e03f766edfeb9a2b9de26e73441a5296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
