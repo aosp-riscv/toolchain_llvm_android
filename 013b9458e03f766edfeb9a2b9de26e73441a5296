@@ -105,6 +105,24 @@
       "parentUuid": "4ea20fde_48522bac",
       "revId": "013b9458e03f766edfeb9a2b9de26e73441a5296",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9e0f58d_70cf6c33",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-01T22:01:32Z",
+      "side": 1,
+      "message": "ACK.",
+      "parentUuid": "966c2ec0_9c29880e",
+      "revId": "013b9458e03f766edfeb9a2b9de26e73441a5296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
