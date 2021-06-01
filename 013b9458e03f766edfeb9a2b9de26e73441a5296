@@ -87,6 +87,24 @@
       "parentUuid": "aa48f0e4_e4bde5b1",
       "revId": "013b9458e03f766edfeb9a2b9de26e73441a5296",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "966c2ec0_9c29880e",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-06-01T21:55:26Z",
+      "side": 1,
+      "message": "This is just a filegroup. Likely the soong build will use this as a toolchain and needs a different definition. I would leave it as linux only (as in PS3 now).",
+      "parentUuid": "4ea20fde_48522bac",
+      "revId": "013b9458e03f766edfeb9a2b9de26e73441a5296",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
