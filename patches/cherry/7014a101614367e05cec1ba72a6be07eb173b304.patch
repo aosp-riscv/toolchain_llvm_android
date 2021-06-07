@@ -1,0 +1,108 @@
+From 7014a101614367e05cec1ba72a6be07eb173b304 Mon Sep 17 00:00:00 2001
+From: Vedant Kumar <vsk@apple.com>
+Date: Tue, 18 May 2021 16:35:21 -0700
+Subject: [PATCH] [profile] Skip mmap() if there are no counters
+
+If there are no counters, an mmap() of the counters section would fail
+due to the size argument being too small (EINVAL).
+
+rdar://78175925
+
+Differential Revision: https://reviews.llvm.org/D102735
+---
+ compiler-rt/lib/profile/InstrProfilingFile.c  | 60 ++++++++++---------
+ .../image-with-no-counters.c                  | 11 ++++
+ 2 files changed, 43 insertions(+), 28 deletions(-)
+ create mode 100644 compiler-rt/test/profile/ContinuousSyncMode/image-with-no-counters.c
+
+diff --git a/compiler-rt/lib/profile/InstrProfilingFile.c b/compiler-rt/lib/profile/InstrProfilingFile.c
+index c74a5962fd9f..5da709c2a724 100644
+--- a/compiler-rt/lib/profile/InstrProfilingFile.c
++++ b/compiler-rt/lib/profile/InstrProfilingFile.c
+@@ -638,34 +638,38 @@ static void initializeProfileForContinuousMode(void) {
+     }
+   }
+ 
+-  int Fileno = fileno(File);
+-
+-  /* Determine how much padding is needed before/after the counters and after
+-   * the names. */
+-  uint64_t PaddingBytesBeforeCounters, PaddingBytesAfterCounters,
+-      PaddingBytesAfterNames;
+-  __llvm_profile_get_padding_sizes_for_counters(
+-      DataSize, CountersSize, NamesSize, &PaddingBytesBeforeCounters,
+-      &PaddingBytesAfterCounters, &PaddingBytesAfterNames);
+-
+-  uint64_t PageAlignedCountersLength =
+-      (CountersSize * sizeof(uint64_t)) + PaddingBytesAfterCounters;
+-  uint64_t FileOffsetToCounters =
+-      CurrentFileOffset + sizeof(__llvm_profile_header) +
+-      (DataSize * sizeof(__llvm_profile_data)) + PaddingBytesBeforeCounters;
+-
+-  uint64_t *CounterMmap = (uint64_t *)mmap(
+-      (void *)CountersBegin, PageAlignedCountersLength, PROT_READ | PROT_WRITE,
+-      MAP_FIXED | MAP_SHARED, Fileno, FileOffsetToCounters);
+-  if (CounterMmap != CountersBegin) {
+-    PROF_ERR(
+-        "Continuous counter sync mode is enabled, but mmap() failed (%s).\n"
+-        "  - CountersBegin: %p\n"
+-        "  - PageAlignedCountersLength: %" PRIu64 "\n"
+-        "  - Fileno: %d\n"
+-        "  - FileOffsetToCounters: %" PRIu64 "\n",
+-        strerror(errno), CountersBegin, PageAlignedCountersLength, Fileno,
+-        FileOffsetToCounters);
++  /* mmap() the profile counters so long as there is at least one counter.
++   * If there aren't any counters, mmap() would fail with EINVAL. */
++  if (CountersSize > 0) {
++    int Fileno = fileno(File);
++
++    /* Determine how much padding is needed before/after the counters and after
++     * the names. */
++    uint64_t PaddingBytesBeforeCounters, PaddingBytesAfterCounters,
++        PaddingBytesAfterNames;
++    __llvm_profile_get_padding_sizes_for_counters(
++        DataSize, CountersSize, NamesSize, &PaddingBytesBeforeCounters,
++        &PaddingBytesAfterCounters, &PaddingBytesAfterNames);
++
++    uint64_t PageAlignedCountersLength =
++        (CountersSize * sizeof(uint64_t)) + PaddingBytesAfterCounters;
++    uint64_t FileOffsetToCounters =
++        CurrentFileOffset + sizeof(__llvm_profile_header) +
++        (DataSize * sizeof(__llvm_profile_data)) + PaddingBytesBeforeCounters;
++
++    uint64_t *CounterMmap = (uint64_t *)mmap(
++        (void *)CountersBegin, PageAlignedCountersLength, PROT_READ | PROT_WRITE,
++        MAP_FIXED | MAP_SHARED, Fileno, FileOffsetToCounters);
++    if (CounterMmap != CountersBegin) {
++      PROF_ERR(
++          "Continuous counter sync mode is enabled, but mmap() failed (%s).\n"
++          "  - CountersBegin: %p\n"
++          "  - PageAlignedCountersLength: %" PRIu64 "\n"
++          "  - Fileno: %d\n"
++          "  - FileOffsetToCounters: %" PRIu64 "\n",
++          strerror(errno), CountersBegin, PageAlignedCountersLength, Fileno,
++          FileOffsetToCounters);
++    }
+   }
+ 
+   if (ProfileRequiresUnlock)
+diff --git a/compiler-rt/test/profile/ContinuousSyncMode/image-with-no-counters.c b/compiler-rt/test/profile/ContinuousSyncMode/image-with-no-counters.c
+new file mode 100644
+index 000000000000..f30e2255b228
+--- /dev/null
++++ b/compiler-rt/test/profile/ContinuousSyncMode/image-with-no-counters.c
+@@ -0,0 +1,11 @@
++// REQUIRES: darwin
++
++// RUN: echo "static void dead_code(void) {}" > %t.dso.c
++// RUN: %clang_profgen -fcoverage-mapping -O3 -dynamiclib -o %t.dso.dylib %t.dso.c
++// RUN: %clang_profgen -fcoverage-mapping -O3 -o %t.exe %s %t.dso.dylib
++// RUN: env LLVM_PROFILE_FILE="%c%t.profraw" %run %t.exe 2>&1 | count 0
++// RUN: llvm-profdata show --counts --all-functions %t.profraw | FileCheck %s
++
++// CHECK: Total functions: 1
++
++int main() {}
+-- 
+2.32.0.rc1.229.g3e70b5a671-goog
+
