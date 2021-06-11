@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9581ec58_bec2f667",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-06-11T09:47:09Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure we want to bump the version, but we can talk about this tomorrow.",
+      "revId": "64dbead2e5fc22d12691bf84f4509f0ec796423b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
