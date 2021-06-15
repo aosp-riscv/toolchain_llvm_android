@@ -989,11 +989,8 @@ class WindowsToolchainBuilder(base_builders.LLVMBuilder):
         if self.build_lldb:
             defines['LLDB_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'lldb-tblgen')
             defines['LLDB_PYTHON_RELATIVE_PATH'] = f'lib/python{paths._PYTHON_VER}/site-packages'
-        if self._is_msvc:
-            # Generating libLLVM is not supported on MSVC.
-            defines['LLVM_BUILD_LLVM_DYLIB'] = 'OFF'
-            # But we still want LLVMgold.dll.
-            defines['LLVM_ENABLE_PLUGINS'] = 'ON'
+        # Build LLVMgold.dll.
+        defines['LLVM_ENABLE_PLUGINS'] = 'ON'
 
         defines['CMAKE_CXX_STANDARD'] = '17'
         defines['LLVM_BUILD_LLVM_C_DYLIB'] = 'OFF'
