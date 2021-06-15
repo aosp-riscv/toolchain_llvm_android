@@ -622,7 +622,8 @@ class LLVMBuilder(LLVMBaseBuilder):
 
         defines['LLVM_BINUTILS_INCDIR'] = str(paths.ANDROID_DIR / 'toolchain' /
                                               'binutils' / 'binutils-2.27' / 'include')
-        defines['LLVM_BUILD_RUNTIME'] = 'ON'
+        if self._config.target_os.is_darwin or self._config.target_os.is_linux:
+            defines['LLVM_BUILD_LLVM_DYLIB'] = 'ON'
 
         if self._config.target_os.is_darwin:
             if utils.is_available_mac_ver('10.11'):
