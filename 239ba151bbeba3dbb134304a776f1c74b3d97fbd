@@ -33,6 +33,24 @@
       "message": "Is this line still necessary?  If yes, I\u0027d prefer it set in the `else` clause of the changes to base_builders.py.",
       "revId": "239ba151bbeba3dbb134304a776f1c74b3d97fbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0406717b_bbe18d73",
+        "filename": "builders.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-16T01:05:17Z",
+      "side": 1,
+      "message": "not needed for cross-compile windows, but probably is needed for MSVCConfig. Moved to base_builders.py.",
+      "parentUuid": "47727987_e319e807",
+      "revId": "239ba151bbeba3dbb134304a776f1c74b3d97fbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
