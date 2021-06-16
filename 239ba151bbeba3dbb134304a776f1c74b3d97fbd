@@ -16,6 +16,23 @@
       "message": "ps3, 4: fix presubmit failure of missing LLVMgold.dll.",
       "revId": "239ba151bbeba3dbb134304a776f1c74b3d97fbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47727987_e319e807",
+        "filename": "builders.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 996,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-16T00:22:53Z",
+      "side": 1,
+      "message": "Is this line still necessary?  If yes, I\u0027d prefer it set in the `else` clause of the changes to base_builders.py.",
+      "revId": "239ba151bbeba3dbb134304a776f1c74b3d97fbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
