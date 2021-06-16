@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f967e3c5_a8d052ed",
+        "filename": "patches/Revert-Sema-Introduce-BuiltinAttr-per-declaration-bu.v3.patch",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-16T05:27:23Z",
+      "side": 1,
+      "message": "Filed b/191218178 for resolving this local revert.  (The others have tracking bugs for their resolution).",
+      "revId": "a751645ba8d9021e277c96ac2976834e3a02cca4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
