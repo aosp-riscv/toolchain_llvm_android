@@ -121,8 +121,8 @@ class Builder:  # pylint: disable=too-few-public-methods
     output_toolchain: toolchains.Toolchain
 
     def __init__(self,
-                 config_list: Optional[Sequence[configs.Config]]=None,
-                 toolchain: Optional[toolchains.Toolchain]=None) -> None:
+                 config_list: Optional[Sequence[configs.Config]] = None,
+                 toolchain: Optional[toolchains.Toolchain] = None) -> None:
         if toolchain:
             self.toolchain = toolchain
         if config_list:
@@ -283,8 +283,8 @@ class AutoconfBuilder(Builder):
         # work when -arch flags also present.
         if self._config.target_os.is_darwin:
             universal_cflags = f'-arch arm64 -arch x86_64'
-            env['CFLAGS']  = universal_cflags
-            env['CXXFLAGS']  = universal_cflags
+            env['CFLAGS'] = universal_cflags
+            env['CXXFLAGS'] = universal_cflags
 
         config_cmd = [str(self.src_dir / 'configure'), f'--prefix={self.install_dir}']
         config_cmd.extend(self.config_flags)
@@ -475,12 +475,13 @@ class LLVMBaseBuilder(CMakeBuilder):  # pylint: disable=abstract-method
 
         # Use Python for any host build (not Android targets, however)
         target = self._config.target_os
-        if target != hosts.Host.Android:
-            defines['Python3_LIBRARY'] = str(paths.get_python_lib(target))
-            defines['Python3_LIBRARIES'] = str(paths.get_python_lib(target))
-            defines['Python3_INCLUDE_DIR'] = str(paths.get_python_include_dir(target))
-            defines['Python3_INCLUDE_DIRS'] = str(paths.get_python_include_dir(target))
-            defines['Python3_EXECUTABLE'] = str(paths.get_python_executable(hosts.build_host()))
+        if target == hosts.Host.Android:
+            target = hosts.build_host()
+        defines['Python3_LIBRARY'] = str(paths.get_python_lib(target))
+        defines['Python3_LIBRARIES'] = str(paths.get_python_lib(target))
+        defines['Python3_INCLUDE_DIR'] = str(paths.get_python_include_dir(target))
+        defines['Python3_INCLUDE_DIRS'] = str(paths.get_python_include_dir(target))
+        defines['Python3_EXECUTABLE'] = str(paths.get_python_executable(hosts.build_host()))
 
         return defines
 
