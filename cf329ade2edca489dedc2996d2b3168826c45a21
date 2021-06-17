@@ -16,6 +16,24 @@
       "message": "Spurious white space?",
       "revId": "cf329ade2edca489dedc2996d2b3168826c45a21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "533c06dd_8e1e550f",
+        "filename": "android_version.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-17T21:29:02Z",
+      "side": 1,
+      "message": "Probably autopep8 doesn\u0027t think the comment belongs to the next function. Changed to python style comment.",
+      "parentUuid": "00c7baea_1a3bb81e",
+      "revId": "cf329ade2edca489dedc2996d2b3168826c45a21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
