@@ -110,6 +110,30 @@
       },
       "revId": "ba8b23eea3d5b6ab1ae5956ac3c150e2bc6c64f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b07a2895_3954c635",
+        "filename": "base_builders.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-18T17:08:03Z",
+      "side": 1,
+      "message": "I think so.  My guess is that we also set Python libraries and include dirs to build lldb client for the host.  But we can investigate this later.",
+      "parentUuid": "a18b87c3_359764f1",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 92
+      },
+      "revId": "ba8b23eea3d5b6ab1ae5956ac3c150e2bc6c64f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
