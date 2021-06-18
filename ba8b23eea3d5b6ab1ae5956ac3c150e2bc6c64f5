@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "146ebe00_e6a430b5",
+        "filename": "base_builders.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-18T17:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "891299a0_cc71b7af",
+      "range": {
+        "startLine": 476,
+        "startChar": 0,
+        "endLine": 476,
+        "endChar": 70
+      },
+      "revId": "ba8b23eea3d5b6ab1ae5956ac3c150e2bc6c64f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac731f63_b25cc8ae",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-06-18T05:11:54Z",
       "side": 1,
       "message": "Do we need only Python3_EXECUTABLE to fix the break?  If so, we should set only that when targetting Android.",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 92
+      },
+      "revId": "ba8b23eea3d5b6ab1ae5956ac3c150e2bc6c64f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a18b87c3_359764f1",
+        "filename": "base_builders.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-18T17:02:31Z",
+      "side": 1,
+      "message": "Probably yes. All llvm components only need python interpreter, except for mlir when MLIR_ENABLE_BINDINGS_PYTHON\u003dOn.",
+      "parentUuid": "ac731f63_b25cc8ae",
       "range": {
         "startLine": 484,
         "startChar": 0,
