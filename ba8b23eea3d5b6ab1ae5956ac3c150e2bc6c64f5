@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35dd36f3_993a37d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-18T00:40:45Z",
+      "side": 1,
+      "message": "ps3: use prebuilts python for Android targets, to fix presubmit failure.",
+      "revId": "ba8b23eea3d5b6ab1ae5956ac3c150e2bc6c64f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
