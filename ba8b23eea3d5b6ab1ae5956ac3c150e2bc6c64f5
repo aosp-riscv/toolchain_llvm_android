@@ -16,6 +16,52 @@
       "message": "ps3: use prebuilts python for Android targets, to fix presubmit failure.",
       "revId": "ba8b23eea3d5b6ab1ae5956ac3c150e2bc6c64f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891299a0_cc71b7af",
+        "filename": "base_builders.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-18T05:11:54Z",
+      "side": 1,
+      "message": "Update this comment.",
+      "range": {
+        "startLine": 476,
+        "startChar": 0,
+        "endLine": 476,
+        "endChar": 70
+      },
+      "revId": "ba8b23eea3d5b6ab1ae5956ac3c150e2bc6c64f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac731f63_b25cc8ae",
+        "filename": "base_builders.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-18T05:11:54Z",
+      "side": 1,
+      "message": "Do we need only Python3_EXECUTABLE to fix the break?  If so, we should set only that when targetting Android.",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 92
+      },
+      "revId": "ba8b23eea3d5b6ab1ae5956ac3c150e2bc6c64f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
