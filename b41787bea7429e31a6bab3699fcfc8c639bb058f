@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "963cb2e2_9c8e1805",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-22T21:06:57Z",
+      "side": 1,
+      "message": "The following seems to be missing from the revert list:\n\n\u003e r429922 (appears to revert r407821): Revert \"Revert \"DirectoryWatcher: add an implementation for Windows\"\"\n\nCould this be relevant for the Windows build?",
+      "revId": "b41787bea7429e31a6bab3699fcfc8c639bb058f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
