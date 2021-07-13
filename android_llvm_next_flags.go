@@ -23,8 +23,6 @@ package main
 // `android_llvm_next_flags` tag is set.
 
 // TODO: Enable test in config_test.go, once we have new llvm-next flags.
-var llvmNextFlags = []string{
-	"-fcommon", // http://b/151457797
-}
+var llvmNextFlags = []string{}
 
 var llvmNextPostFlags = []string{}
