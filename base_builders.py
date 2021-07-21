@@ -483,6 +483,9 @@ class LLVMBaseBuilder(CMakeBuilder):  # pylint: disable=abstract-method
             defines['Python3_INCLUDE_DIRS'] = str(paths.get_python_include_dir(target))
         defines['Python3_EXECUTABLE'] = str(paths.get_python_executable(hosts.build_host()))
 
+        # Enabling new pass manager makes devices fail to boot. See http://b/194136530.
+        defines['ENABLE_EXPERIMENTAL_NEW_PASS_MANAGER'] = 'Off'
+
         return defines
 
 
