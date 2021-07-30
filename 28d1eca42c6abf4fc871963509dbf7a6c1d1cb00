@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fa0541f_5cb90dc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-07-30T00:05:18Z",
+      "side": 1,
+      "message": "Thanks Dan!  LGTM except for one comment.",
+      "revId": "28d1eca42c6abf4fc871963509dbf7a6c1d1cb00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f4908b_7e049f3b",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-07-30T00:05:18Z",
+      "side": 1,
+      "message": "This should be `if args.run_tests and need_host` since we also support a mode where we build only the Windows toolchain.",
+      "revId": "28d1eca42c6abf4fc871963509dbf7a6c1d1cb00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
