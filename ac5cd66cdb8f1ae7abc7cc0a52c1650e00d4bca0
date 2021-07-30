@@ -22,6 +22,30 @@
       },
       "revId": "ac5cd66cdb8f1ae7abc7cc0a52c1650e00d4bca0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3be0423_d5dcc04c",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-07-30T04:51:45Z",
+      "side": 1,
+      "message": "Heh, I actually caught this before I uploaded, but then forgot to amend my commit. Thank you for noticing though. It would have been silly to commit this without the fix.",
+      "parentUuid": "142459f0_203e3ca9",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 26
+      },
+      "revId": "ac5cd66cdb8f1ae7abc7cc0a52c1650e00d4bca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
