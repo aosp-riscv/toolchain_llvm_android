@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "142459f0_203e3ca9",
+        "filename": "cherrypick_cl.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-07-30T04:44:39Z",
+      "side": 1,
+      "message": "Missing \u0027:\u0027 at the end.",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 26
+      },
+      "revId": "ac5cd66cdb8f1ae7abc7cc0a52c1650e00d4bca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
