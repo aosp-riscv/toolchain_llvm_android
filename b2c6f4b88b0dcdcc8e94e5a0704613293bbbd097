@@ -46,6 +46,30 @@
       },
       "revId": "b2c6f4b88b0dcdcc8e94e5a0704613293bbbd097",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "805517dd_0d20fd8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-07-30T20:38:04Z",
+      "side": 1,
+      "message": "Yes, this is for a different bug.  I started a discussion internally on resolving that.  Seems better than patching up the tests with more downstream changes.",
+      "parentUuid": "cd9d18a5_f0467382",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "b2c6f4b88b0dcdcc8e94e5a0704613293bbbd097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
