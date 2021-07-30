@@ -1,0 +1,66 @@
+From 658a1be76ba2e9880bc1dd530869a45be452344c Mon Sep 17 00:00:00 2001
+From: Ryan Prichard <rprichard@google.com>
+Date: Thu, 7 Jan 2021 17:49:29 -0800
+Subject: [PATCH] [builtins] Add COMPILER_RT_BUILTINS_HIDE_SYMBOLS
+
+On Android, when the builtins are linked into a binary, they are
+typically linked using -Wl,--exclude-libs so that the symbols aren't
+reexported. For the NDK, compiler-rt's default behavior (build the
+builtins archive with -fvisibility=hidden) is better so that builtins
+are hidden even without -Wl,--exclude-libs.
+
+Android needs the builtins with non-hidden symbols only for a special
+case: for backwards compatibility with old binaries, the libc.so and
+libm.so DSOs in the platform need to export some builtins for arm32 and
+32-bit x86. See D56977.
+
+Control the behavior with a new flag,
+`COMPILER_RT_BUILTINS_HIDE_SYMBOLS`, that behaves similarly to the
+`*_HERMETIC_STATIC_LIBRARY` in libunwind/libcxx/libcxxabi, so that
+Android can build a special builtins variant for libc.so/libm.so.
+
+Unlike the hermetic flags for other projects, this new flag is enabled
+by default.
+
+Reviewed By: compnerd, MaskRay
+
+Differential Revision: https://reviews.llvm.org/D93431
+---
+ compiler-rt/lib/builtins/CMakeLists.txt | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/compiler-rt/lib/builtins/CMakeLists.txt b/compiler-rt/lib/builtins/CMakeLists.txt
+index 5259e951dff3..b511a9a987b3 100644
+--- a/compiler-rt/lib/builtins/CMakeLists.txt
++++ b/compiler-rt/lib/builtins/CMakeLists.txt
+@@ -47,6 +47,9 @@ endif()
+ 
+ include(builtin-config-ix)
+ 
++option(COMPILER_RT_BUILTINS_HIDE_SYMBOLS
++  "Do not export any symbols from the static library." ON)
++
+ # TODO: Need to add a mechanism for logging errors when builtin source files are
+ # added to a sub-directory and not this CMakeLists file.
+ set(GENERIC_SOURCES
+@@ -666,7 +669,7 @@ else ()
+       append_list_if(COMPILER_RT_HAS_FPIC_FLAG -fPIC BUILTIN_CFLAGS)
+     endif()
+     append_list_if(COMPILER_RT_HAS_FNO_BUILTIN_FLAG -fno-builtin BUILTIN_CFLAGS)
+-    if(NOT ANDROID)
++    if(COMPILER_RT_BUILTINS_HIDE_SYMBOLS)
+       append_list_if(COMPILER_RT_HAS_VISIBILITY_HIDDEN_FLAG -fvisibility=hidden BUILTIN_CFLAGS)
+     endif()
+     if(NOT COMPILER_RT_DEBUG)
+@@ -676,7 +679,7 @@ else ()
+ 
+   set(BUILTIN_DEFS "")
+ 
+-  if(NOT ANDROID)
++  if(COMPILER_RT_BUILTINS_HIDE_SYMBOLS)
+     append_list_if(COMPILER_RT_HAS_VISIBILITY_HIDDEN_FLAG VISIBILITY_HIDDEN BUILTIN_DEFS)
+   endif()
+ 
+-- 
+2.32.0.554.ge1b32706d8-goog
+
