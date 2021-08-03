@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15fc773_8c90a34f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-03T21:06:52Z",
+      "side": 1,
+      "message": "This patch is already included in r428724 so no cherry-pick needed for the main branch.",
+      "revId": "1d91fe06317c55f5d840e2a917ec9c8ce44e9d57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
