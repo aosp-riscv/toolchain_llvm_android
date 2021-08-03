@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd58e9d_2d7ae52d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-03T23:52:24Z",
+      "side": 1,
+      "message": "This is a nice-to-have patch that we can include in the update if we\u0027re generating new prebuilts.  I\u0027ve validated this locally and can help further validate on go/ab if necessary.",
+      "revId": "9b9511706c7a1c8b339a1ee369cbd8df5b12beda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
