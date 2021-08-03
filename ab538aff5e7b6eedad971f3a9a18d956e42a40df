@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f32a62c_ca8d288f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-03T20:02:25Z",
+      "side": 1,
+      "message": "Mitch just uploaded https://reviews.llvm.org/D93585. I am testing it. So we may not need this revert.",
+      "revId": "ab538aff5e7b6eedad971f3a9a18d956e42a40df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
