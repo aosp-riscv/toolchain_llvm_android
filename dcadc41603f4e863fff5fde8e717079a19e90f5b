@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0f1f09d_cc519c79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-03T21:59:21Z",
+      "side": 1,
+      "message": "This happens in my upstream checkout as well.  Should be easy to silence or fix, I think.",
+      "revId": "dcadc41603f4e863fff5fde8e717079a19e90f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf8116af_c8d5853b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-03T21:59:21Z",
+      "side": 1,
+      "message": "Likely due to downstream revert in aosp/1298100.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "dcadc41603f4e863fff5fde8e717079a19e90f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bf8e7d9_f99a2194",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-03T21:59:21Z",
+      "side": 1,
+      "message": "Thanks Dan!",
+      "revId": "dcadc41603f4e863fff5fde8e717079a19e90f5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
