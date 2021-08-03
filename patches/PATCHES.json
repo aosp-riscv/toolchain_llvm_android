@@ -466,5 +466,11 @@
         "rel_patch_path": "Revert-babd3aefc91-and-6-changes-after-it.patch",
         "start_version": 416183,
         "end_version": 416772
+    },
+    {
+        "comment": "Revert [AArch64][Clang][Linux] Enable out-of-line atomics by default.",
+        "rel_patch_path": "Revert-AArch64-Clang-Linux-Enable-out-of-line-atomic.patch",
+        "start_version": 417502,
+        "end_version": null
     }
 ]

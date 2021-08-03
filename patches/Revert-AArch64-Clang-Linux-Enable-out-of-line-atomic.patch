@@ -1,0 +1,192 @@
+From 960b3875d5eb52d4c95b6b0f0f8f4773cd3039a4 Mon Sep 17 00:00:00 2001
+From: Yabin Cui <yabinc@google.com>
+Date: Tue, 3 Aug 2021 12:40:05 -0700
+Subject: [PATCH] Revert "[AArch64][Clang][Linux] Enable out-of-line atomics by
+ default."
+
+This reverts commit c5e7e649d537067dec7111f3de1430d0fc8a4d11.
+---
+ clang/include/clang/Driver/ToolChain.h        |  6 --
+ clang/lib/Driver/ToolChains/Clang.cpp         |  4 --
+ clang/lib/Driver/ToolChains/Linux.cpp         | 13 -----
+ clang/lib/Driver/ToolChains/Linux.h           |  2 -
+ .../aarch64-unknown-linux-gnu/10/crtbegin.o   |  0
+ .../gcc/aarch64-unknown-linux-gnu/10/libgcc.a |  0
+ .../7.5.0/crtbegin.o                          |  0
+ .../aarch64-unknown-linux-gnu/7.5.0/libgcc.a  |  0
+ .../9.3.0/crtbegin.o                          |  0
+ .../aarch64-unknown-linux-gnu/9.3.0/libgcc.a  |  0
+ .../9.3.1/crtbegin.o                          |  0
+ .../aarch64-unknown-linux-gnu/9.3.1/libgcc.a  |  0
+ clang/test/Driver/aarch64-features.c          | 57 -------------------
+ 13 files changed, 82 deletions(-)
+ delete mode 100644 clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-10/lib/gcc/aarch64-unknown-linux-gnu/10/crtbegin.o
+ delete mode 100644 clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-10/lib/gcc/aarch64-unknown-linux-gnu/10/libgcc.a
+ delete mode 100644 clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-7.5.0/lib/gcc/aarch64-unknown-linux-gnu/7.5.0/crtbegin.o
+ delete mode 100644 clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-7.5.0/lib/gcc/aarch64-unknown-linux-gnu/7.5.0/libgcc.a
+ delete mode 100644 clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.0/lib/gcc/aarch64-unknown-linux-gnu/9.3.0/crtbegin.o
+ delete mode 100644 clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.0/lib/gcc/aarch64-unknown-linux-gnu/9.3.0/libgcc.a
+ delete mode 100644 clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.1/lib/gcc/aarch64-unknown-linux-gnu/9.3.1/crtbegin.o
+ delete mode 100644 clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.1/lib/gcc/aarch64-unknown-linux-gnu/9.3.1/libgcc.a
+
+diff --git a/clang/include/clang/Driver/ToolChain.h b/clang/include/clang/Driver/ToolChain.h
+index 882ae40086ce..1cc1af89d09d 100644
+--- a/clang/include/clang/Driver/ToolChain.h
++++ b/clang/include/clang/Driver/ToolChain.h
+@@ -468,12 +468,6 @@ public:
+   /// by default.
+   virtual bool IsUnwindTablesDefault(const llvm::opt::ArgList &Args) const;
+ 
+-  /// Test whether this toolchain supports outline atomics by default.
+-  virtual bool
+-  IsAArch64OutlineAtomicsDefault(const llvm::opt::ArgList &Args) const {
+-    return false;
+-  }
+-
+   /// Test whether this toolchain defaults to PIC.
+   virtual bool isPICDefault() const = 0;
+ 
+diff --git a/clang/lib/Driver/ToolChains/Clang.cpp b/clang/lib/Driver/ToolChains/Clang.cpp
+index 3de54e248f24..b569702b3c0e 100644
+--- a/clang/lib/Driver/ToolChains/Clang.cpp
++++ b/clang/lib/Driver/ToolChains/Clang.cpp
+@@ -6822,10 +6822,6 @@ void Clang::ConstructJob(Compilation &C, const JobAction &JA,
+       CmdArgs.push_back("-target-feature");
+       CmdArgs.push_back("-outline-atomics");
+     }
+-  } else if (Triple.isAArch64() &&
+-             getToolChain().IsAArch64OutlineAtomicsDefault(Args)) {
+-    CmdArgs.push_back("-target-feature");
+-    CmdArgs.push_back("+outline-atomics");
+   }
+ 
+   if (Args.hasFlag(options::OPT_faddrsig, options::OPT_fno_addrsig,
+diff --git a/clang/lib/Driver/ToolChains/Linux.cpp b/clang/lib/Driver/ToolChains/Linux.cpp
+index c9360fc67165..f646b3ac4622 100644
+--- a/clang/lib/Driver/ToolChains/Linux.cpp
++++ b/clang/lib/Driver/ToolChains/Linux.cpp
+@@ -656,19 +656,6 @@ bool Linux::isPIEDefault() const {
+           getTriple().isMusl() || getSanitizerArgs().requiresPIE();
+ }
+ 
+-bool Linux::IsAArch64OutlineAtomicsDefault(const ArgList &Args) const {
+-  // Outline atomics for AArch64 are supported by compiler-rt
+-  // and libgcc since 9.3.1
+-  assert(getTriple().isAArch64() && "expected AArch64 target!");
+-  ToolChain::RuntimeLibType RtLib = GetRuntimeLibType(Args);
+-  if (RtLib == ToolChain::RLT_CompilerRT)
+-    return true;
+-  assert(RtLib == ToolChain::RLT_Libgcc && "unexpected runtime library type!");
+-  if (GCCInstallation.getVersion().isOlderThan(9, 3, 1))
+-    return false;
+-  return true;
+-}
+-
+ bool Linux::isNoExecStackDefault() const {
+     return getTriple().isAndroid();
+ }
+diff --git a/clang/lib/Driver/ToolChains/Linux.h b/clang/lib/Driver/ToolChains/Linux.h
+index 169a37c44072..74bb18b3b87a 100644
+--- a/clang/lib/Driver/ToolChains/Linux.h
++++ b/clang/lib/Driver/ToolChains/Linux.h
+@@ -41,8 +41,6 @@ public:
+                            llvm::opt::ArgStringList &CC1Args) const override;
+   RuntimeLibType GetDefaultRuntimeLibType() const override;
+   CXXStdlibType GetDefaultCXXStdlibType() const override;
+-  bool
+-  IsAArch64OutlineAtomicsDefault(const llvm::opt::ArgList &Args) const override;
+   bool isPIEDefault() const override;
+   bool isNoExecStackDefault() const override;
+   bool IsMathErrnoDefault() const override;
+diff --git a/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-10/lib/gcc/aarch64-unknown-linux-gnu/10/crtbegin.o b/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-10/lib/gcc/aarch64-unknown-linux-gnu/10/crtbegin.o
+deleted file mode 100644
+index e69de29bb2d1..000000000000
+diff --git a/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-10/lib/gcc/aarch64-unknown-linux-gnu/10/libgcc.a b/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-10/lib/gcc/aarch64-unknown-linux-gnu/10/libgcc.a
+deleted file mode 100644
+index e69de29bb2d1..000000000000
+diff --git a/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-7.5.0/lib/gcc/aarch64-unknown-linux-gnu/7.5.0/crtbegin.o b/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-7.5.0/lib/gcc/aarch64-unknown-linux-gnu/7.5.0/crtbegin.o
+deleted file mode 100644
+index e69de29bb2d1..000000000000
+diff --git a/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-7.5.0/lib/gcc/aarch64-unknown-linux-gnu/7.5.0/libgcc.a b/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-7.5.0/lib/gcc/aarch64-unknown-linux-gnu/7.5.0/libgcc.a
+deleted file mode 100644
+index e69de29bb2d1..000000000000
+diff --git a/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.0/lib/gcc/aarch64-unknown-linux-gnu/9.3.0/crtbegin.o b/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.0/lib/gcc/aarch64-unknown-linux-gnu/9.3.0/crtbegin.o
+deleted file mode 100644
+index e69de29bb2d1..000000000000
+diff --git a/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.0/lib/gcc/aarch64-unknown-linux-gnu/9.3.0/libgcc.a b/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.0/lib/gcc/aarch64-unknown-linux-gnu/9.3.0/libgcc.a
+deleted file mode 100644
+index e69de29bb2d1..000000000000
+diff --git a/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.1/lib/gcc/aarch64-unknown-linux-gnu/9.3.1/crtbegin.o b/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.1/lib/gcc/aarch64-unknown-linux-gnu/9.3.1/crtbegin.o
+deleted file mode 100644
+index e69de29bb2d1..000000000000
+diff --git a/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.1/lib/gcc/aarch64-unknown-linux-gnu/9.3.1/libgcc.a b/clang/test/Driver/Inputs/aarch64-linux-gnu-tree/gcc-9.3.1/lib/gcc/aarch64-unknown-linux-gnu/9.3.1/libgcc.a
+deleted file mode 100644
+index e69de29bb2d1..000000000000
+diff --git a/clang/test/Driver/aarch64-features.c b/clang/test/Driver/aarch64-features.c
+index 356ed3682a24..8d8cc3c68afe 100644
+--- a/clang/test/Driver/aarch64-features.c
++++ b/clang/test/Driver/aarch64-features.c
+@@ -6,60 +6,3 @@
+ // The AArch64 PCS states that chars should be unsigned.
+ // CHECK: fno-signed-char
+ 
+-// Check for AArch64 out-of-line atomics default settings.
+-// RUN: %clang -target aarch64-linux-android -rtlib=compiler-rt \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-ON %s
+-
+-// RUN: %clang -target aarch64-linux-gnu -rtlib=compiler-rt \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-ON %s
+-
+-// RUN: %clang -target arm64-unknown-linux -rtlib=compiler-rt \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-ON %s
+-
+-// RUN: %clang -target aarch64--none-eabi -rtlib=compiler-rt \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-OFF %s
+-
+-// RUN: %clang -target aarch64-apple-darwin -rtlib=compiler-rt \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-OFF %s
+-
+-// RUN: %clang -target aarch64-windows-gnu -rtlib=compiler-rt \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-OFF %s
+-
+-// RUN: %clang -target aarch64-unknown-openbsd -rtlib=compiler-rt \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-OFF %s
+-
+-// RUN: %clang -target aarch64-linux-gnu -rtlib=libgcc \
+-// RUN: --gcc-toolchain=%S/Inputs/aarch64-linux-gnu-tree/gcc-10 \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-ON %s
+-
+-// RUN: %clang -target aarch64-linux-gnu -rtlib=libgcc \
+-// RUN: --gcc-toolchain=%S/Inputs/aarch64-linux-gnu-tree/gcc-7.5.0 \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-OFF %s
+-
+-// RUN: %clang -target aarch64-linux-gnu -rtlib=libgcc \
+-// RUN: --gcc-toolchain=%S/Inputs/aarch64-linux-gnu-tree/gcc-9.3.1 \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-ON %s
+-
+-// RUN: %clang -target aarch64-linux-gnu -rtlib=libgcc \
+-// RUN: --gcc-toolchain=%S/Inputs/aarch64-linux-gnu-tree/gcc-9.3.0 \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-OFF %s
+-
+-// RUN: %clang -target arm64-linux -rtlib=compiler-rt -mno-outline-atomics \
+-// RUN: -### -c %s 2>&1 | FileCheck \
+-// RUN: -check-prefixes=CHECK-OUTLINE-ATOMICS-OFF,CHECK-NO-OUTLINE-ATOMICS %s
+-
+-// RUN: %clang -target aarch64-linux-gnu -rtlib=libgcc -mno-outline-atomics \
+-// RUN: --gcc-toolchain=%S/Inputs/aarch64-linux-gnu-tree/gcc-10 \
+-// RUN: -### -c %s 2>&1 | FileCheck \
+-// RUN: -check-prefixes=CHECK-OUTLINE-ATOMICS-OFF,CHECK-NO-OUTLINE-ATOMICS %s
+-
+-// RUN: %clang -target aarch64-apple-darwin -rtlib=compiler-rt -moutline-atomics \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-ON %s
+-
+-// RUN: %clang -target aarch64-windows-gnu -rtlib=libgcc -moutline-atomics \
+-// RUN: --gcc-toolchain=%S/Inputs/aarch64-linux-gnu-tree/gcc-7.5.0 \
+-// RUN: -### -c %s 2>&1 | FileCheck -check-prefix=CHECK-OUTLINE-ATOMICS-ON %s
+-
+-// CHECK-OUTLINE-ATOMICS-ON: "-target-feature" "+outline-atomics"
+-// CHECK-OUTLINE-ATOMICS-OFF-NOT: "-target-feature" "+outline-atomics"
+-// CHECK-NO-OUTLINE-ATOMICS: "-target-feature" "-outline-atomics"
+-- 
+2.32.0.554.ge1b32706d8-goog
+
