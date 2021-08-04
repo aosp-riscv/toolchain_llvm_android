@@ -16,6 +16,24 @@
       "message": "This is a nice-to-have patch that we can include in the update if we\u0027re generating new prebuilts.  I\u0027ve validated this locally and can help further validate on go/ab if necessary.",
       "revId": "9b9511706c7a1c8b339a1ee369cbd8df5b12beda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "187276c1_8f04b68b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-04T01:08:52Z",
+      "side": 1,
+      "message": "We will  generate new prebuilts.",
+      "parentUuid": "9fd58e9d_2d7ae52d",
+      "revId": "9b9511706c7a1c8b339a1ee369cbd8df5b12beda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
