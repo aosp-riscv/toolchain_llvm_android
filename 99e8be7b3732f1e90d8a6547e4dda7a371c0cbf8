@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdbb496c_2fefa124",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-09T18:57:36Z",
+      "side": 1,
+      "message": "Also a nice-to-have but not a blocker for the compiler update.",
+      "revId": "99e8be7b3732f1e90d8a6547e4dda7a371c0cbf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
