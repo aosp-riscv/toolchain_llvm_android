@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b03d3eed_6334114c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-12T17:45:25Z",
+      "side": 1,
+      "message": "This unblocks local development.  As a follow up, if build servers have python3 now, we can remove the redirection to do_build.py, do_test_compiler.py etc.",
+      "revId": "41e3d765590aff3cf679d97f2de62da88ec5ef5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
