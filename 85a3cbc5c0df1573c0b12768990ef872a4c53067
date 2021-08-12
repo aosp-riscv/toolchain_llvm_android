@@ -16,6 +16,24 @@
       "message": "Just curious, do all the clang-tidy tests pass?",
       "revId": "85a3cbc5c0df1573c0b12768990ef872a4c53067",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3938eb15_e1e394c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-08-12T23:58:10Z",
+      "side": 1,
+      "message": "Yes, current 986 check-clang-tools tests all passed or marked as expected fails.\nI saw that check-clang still has 3 unexpected fails:\n  Clang :: CodeGenCXX/builtins.cpp\n  Clang :: CodeGenCXX/unknown-anytype.cpp\n  Clang :: Sema/builtin-setjmp.c",
+      "parentUuid": "bb222b1c_7f6c4691",
+      "revId": "85a3cbc5c0df1573c0b12768990ef872a4c53067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
