@@ -656,3 +656,10 @@ class LLVMBuilder(LLVMBaseBuilder):
 
     def test(self) -> None:
         self._ninja(["check-clang", "check-llvm", "check-clang-tools"])
+        # Known failed tests:
+        #   Clang :: CodeGenCXX/builtins.cpp
+        #   Clang :: CodeGenCXX/unknown-anytype.cpp
+        #   Clang :: Sema/builtin-setjmp.c
+        #   LLVM :: Bindings/Go/go.test (disabled by LLVM_INCLUDE_GO_TESTS=OFF)
+        #   LLVM :: CodeGen/X86/extractelement-fp.ll
+        #   LLVM :: CodeGen/X86/fp-round.ll

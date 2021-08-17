@@ -75,7 +75,7 @@ class Stage1Builder(base_builders.LLVMBuilder):
 
     @property
     def llvm_projects(self) -> Set[str]:
-        proj = {'clang', 'lld', 'libcxxabi', 'libcxx', 'compiler-rt'}
+        proj = {'clang', 'clang-tools-extra', 'lld', 'libcxxabi', 'libcxx', 'compiler-rt'}
         if self.build_lldb:
             proj.add('lldb')
         return proj
@@ -94,7 +94,7 @@ class Stage1Builder(base_builders.LLVMBuilder):
     def cmake_defines(self) -> Dict[str, str]:
         defines = super().cmake_defines
         defines['CLANG_ENABLE_ARCMT'] = 'OFF'
-        defines['CLANG_ENABLE_STATIC_ANALYZER'] = 'OFF'
+        defines['LLVM_INCLUDE_GO_TESTS'] = 'OFF'
 
         defines['LLVM_BUILD_TOOLS'] = 'ON'
 
@@ -178,6 +178,7 @@ class Stage2Builder(base_builders.LLVMBuilder):
         defines['OPENMP_ENABLE_OMPT_TOOLS'] = 'FALSE'
         defines['LIBOMP_ENABLE_SHARED'] = 'FALSE'
         defines['CLANG_PYTHON_BINDINGS_VERSIONS'] = '3'
+        defines['LLVM_INCLUDE_GO_TESTS'] = 'OFF'
 
         if (self.lto and
                 not self._config.target_os.is_darwin and
