@@ -16,6 +16,24 @@
       "message": "Can we just run the tests in stage1 build instead?",
       "revId": "83d2f5f8ba68486cdc8923531711833c2cbe69e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead6d2e3_a85a2c79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-08-17T23:22:10Z",
+      "side": 1,
+      "message": "Okay, now try to build and test in stage1.\nNow libraries are not built under this option because they are not tested yet.\nI also commented out the cmake CLANG_ENABLE_STATIC_ANALYZER definition,\nwhich does not seem to be needed for stage1.",
+      "parentUuid": "4c8e4e04_217fa7f7",
+      "revId": "83d2f5f8ba68486cdc8923531711833c2cbe69e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
