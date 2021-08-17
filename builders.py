@@ -75,6 +75,8 @@ class Stage1Builder(base_builders.LLVMBuilder):
 
     @property
     def llvm_projects(self) -> Set[str]:
+        if self.only_test_patches:
+            return {'clang', 'clang-tools-extra'}
         proj = {'clang', 'lld', 'libcxxabi', 'libcxx', 'compiler-rt'}
         if self.build_lldb:
             proj.add('lldb')
@@ -94,7 +96,7 @@ class Stage1Builder(base_builders.LLVMBuilder):
     def cmake_defines(self) -> Dict[str, str]:
         defines = super().cmake_defines
         defines['CLANG_ENABLE_ARCMT'] = 'OFF'
-        defines['CLANG_ENABLE_STATIC_ANALYZER'] = 'OFF'
+        defines['LLVM_INCLUDE_GO_TESTS'] = 'OFF'
 
         defines['LLVM_BUILD_TOOLS'] = 'ON'
 

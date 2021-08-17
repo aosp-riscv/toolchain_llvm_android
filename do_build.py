@@ -612,6 +612,12 @@ def parse_args():
         default=False,
         help='Don\'t strip binaries/libraries')
 
+    parser.add_argument(
+        '--only-test-patches',
+        action='store_true',
+        default=False,
+        help='Only clone sources, apply patches, and test stage1.')
+
     test_group = parser.add_mutually_exclusive_group()
     test_group.add_argument(
         '--run-tests',
@@ -699,8 +705,13 @@ def main():
     stage1.svn_revision = android_version.get_svn_revision()
     # Build lldb for lldb-tblgen. It will be used to build lldb-server and windows lldb.
     stage1.build_lldb = build_lldb
+    stage1.only_test_patches = args.only_test_patches
     stage1.build_android_targets = args.debug or instrumented
     stage1.build()
+    if args.only_test_patches:
+        logger().info('Only clone sources, apply patches, build stage1 and run tests')
+        stage1.test()
+        return 0
     set_default_toolchain(stage1.installed_toolchain)
 
     if build_lldb:
