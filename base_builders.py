@@ -22,6 +22,7 @@ import multiprocessing
 import os
 import shutil
 import subprocess
+import sys
 from typing import cast, Dict, List, Optional, Set, Sequence
 
 import android_version
@@ -405,6 +406,10 @@ class CMakeBuilder(Builder):
         ninja_cmd = [str(paths.NINJA_BIN_PATH)] + args
         utils.check_call(ninja_cmd, cwd=self.output_dir, env=self.env)
 
+    def _unchecked_ninja(self, args: list[str]) -> int:
+        ninja_cmd = [str(paths.NINJA_BIN_PATH)] + args
+        return utils.unchecked_call(ninja_cmd, cwd=self.output_dir, env=self.env)
+
     def _build_config(self) -> None:
         if self.remove_cmake_cache:
             self._rm_cmake_cache(self.output_dir)
@@ -655,4 +660,18 @@ class LLVMBuilder(LLVMBaseBuilder):
         return toolchains.Toolchain(self.install_dir, self.output_dir)
 
     def test(self) -> None:
-        self._ninja(["check-clang", "check-llvm", "check-clang-tools"])
+        # Run one check at a time to collect all failed checks.
+        # Known failed Tests:
+        #   Clang :: CodeGenCXX/builtins.cpp
+        #   Clang :: CodeGenCXX/unknown-anytype.cpp
+        #   Clang :: Sema/builtin-setjmp.c
+        #   LLVM :: Bindings/Go/go.test (disabled by LLVM_INCLUDE_GO_TESTS=OFF)
+        #   LLVM :: CodeGen/X86/extractelement-fp.ll
+        #   LLVM :: CodeGen/X86/fp-round.ll
+        failed = []
+        for check in ["check-clang-tools", "check-clang", "check-llvm"]:
+            if self._unchecked_ninja([check]):
+                failed.append(check)
+        if failed:
+            logger().info('test failed checks %s', failed)
+            sys.exit(1)
