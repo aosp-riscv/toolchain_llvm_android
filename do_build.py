@@ -612,6 +612,12 @@ def parse_args():
         default=False,
         help='Don\'t strip binaries/libraries')
 
+    parser.add_argument(
+        '--only-test-patches',
+        action='store_true',
+        default=False,
+        help='Only clone sources, apply patches, and ninja clang check.')
+
     test_group = parser.add_mutually_exclusive_group()
     test_group.add_argument(
         '--run-tests',
@@ -661,6 +667,15 @@ def parse_args():
     return parser.parse_args()
 
 
+def build_clang_and_check() -> None:
+    """Build from patched llvm-project and run checks."""
+    stage0 = builders.Stage0Builder()
+    stage0.build_name = 'stage0'
+    stage0.svn_revision = android_version.get_svn_revision()
+    stage0.build()
+    stage0.test()
+
+
 def main():
     args = parse_args()
     if args.skip_build:
@@ -690,6 +705,11 @@ def main():
     # Clone sources to be built and apply patches.
     if not args.skip_source_setup:
         source_manager.setup_sources(source_dir=paths.LLVM_PATH)
+
+    if args.only_test_patches:
+        logger().info('Only clone sources, apply patches, build stage0 and run tests')
+        build_clang_and_check()
+        return 0
 
     # Build the stage1 Clang for the build host
     instrumented = hosts.build_host().is_linux and args.build_instrumented

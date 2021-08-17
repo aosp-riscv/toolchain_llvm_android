@@ -60,6 +60,32 @@ class AsanMapFileBuilder(base_builders.Builder):
         mapfile.create_map_file(lib_file, map_file)
 
 
+class Stage0Builder(base_builders.LLVMBuilder):
+    """Only build host tools and run tests."""
+    name: str = 'stage0'
+    install_dir: Path = paths.OUT_DIR / 'stage0-install'
+    build_android_targets: bool = False
+    config_list: List[configs.Config] = [configs.host_config()]
+
+    @property
+    def llvm_targets(self) -> Set[str]:
+        return constants.HOST_TARGETS
+
+    @property
+    def llvm_projects(self) -> Set[str]:
+        return {'clang', 'clang-tools-extra', 'lit'}
+
+    @property
+    def ldflags(self) -> List[str]:
+        ldflags = super().ldflags
+        # Use -static-libstdc++ to statically link the c++ runtime [1].  This
+        # avoids specifying self.toolchain.lib_dir in rpath to find libc++ at
+        # runtime.
+        # [1] libc++ in our case, despite the flag saying -static-libstdc++.
+        ldflags.append('-static-libstdc++')
+        return ldflags
+
+
 class Stage1Builder(base_builders.LLVMBuilder):
     name: str = 'stage1'
     install_dir: Path = paths.OUT_DIR / 'stage1-install'

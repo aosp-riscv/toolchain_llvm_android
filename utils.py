@@ -46,7 +46,7 @@ def subprocess_run(cmd, *args, **kwargs):
     return subprocess.run(cmd, *args, **kwargs, text=True)
 
 
-def unchecked_call(cmd, *args, **kwargs):
+def unchecked_call(cmd, *args, **kwargs) -> int:
     """subprocess.call with logging."""
     return subprocess_run(cmd, *args, **kwargs).returncode
 
