@@ -134,10 +134,6 @@ def build_runtimes(build_lldb_server: bool):
     builders.AsanMapFileBuilder().build()
 
 
-def test_toolchain(builder: LLVMBuilder) -> None:
-    builder.test()
-
-
 def install_wrappers(llvm_install_path: Path, llvm_next=False) -> None:
     wrapper_path = paths.OUT_DIR / 'llvm_android_wrapper'
     wrapper_build_script = paths.TOOLCHAIN_UTILS_DIR / 'compiler_wrapper' / 'build.py'
@@ -612,16 +608,17 @@ def parse_args():
         default=False,
         help='Don\'t strip binaries/libraries')
 
-    test_group = parser.add_mutually_exclusive_group()
-    test_group.add_argument(
-        '--run-tests',
+    parser.add_argument(
+        '--stage1-extra-tools',
         action='store_true',
-        help='Run tests after building.')
-    test_group.add_argument(
-        '--no-run-tests',
-        dest='run_tests',
-        action='store_false',
-        help='Do not run tests after building.')
+        default=False,
+        help='Build and test clang-tools-extra in stage1.')
+
+    parser.add_argument(
+        '--skip-tests',
+        action='store_true',
+        default=False,
+        help='Skip clang/llvm check tests after stage1 and stage2.')
 
     build_group = parser.add_mutually_exclusive_group()
     build_group.add_argument(
@@ -683,9 +680,9 @@ def main():
 
     logging.basicConfig(level=logging.DEBUG)
 
-    logger().info('do_build=%r do_stage1=%r do_stage2=%r do_runtimes=%r do_package=%r need_windows=%r lto=%r' %
+    logger().info('do_build=%r do_stage1=%r do_stage2=%r build_lldb=%r do_runtimes=%r do_package=%r need_windows=%r lto=%r' %
                   (not args.skip_build, BuilderRegistry.should_build('stage1'), BuilderRegistry.should_build('stage2'),
-                  do_runtimes, do_package, need_windows, args.lto))
+                  build_lldb, do_runtimes, do_package, need_windows, args.lto))
 
     # Clone sources to be built and apply patches.
     if not args.skip_source_setup:
@@ -699,8 +696,13 @@ def main():
     stage1.svn_revision = android_version.get_svn_revision()
     # Build lldb for lldb-tblgen. It will be used to build lldb-server and windows lldb.
     stage1.build_lldb = build_lldb
+    stage1.build_extra_tools = args.stage1_extra_tools
     stage1.build_android_targets = args.debug or instrumented
     stage1.build()
+    # stage1 test is off by default, turned on by --stage1-extra-tools,
+    # and suppressed by --skip-tests.
+    if not args.skip_tests and args.stage1_extra_tools:
+         stage1.test()
     set_default_toolchain(stage1.installed_toolchain)
 
     if build_lldb:
@@ -772,8 +774,9 @@ def main():
             build_lldb=build_lldb,
             swig_builder=swig_builder)
 
-    if args.run_tests and need_host:
-        test_toolchain(stage2)
+    # stage2 test is on by default, unless --skip-tests or skip stage2.
+    if not args.skip_tests and need_host and BuilderRegistry.should_build('stage2'):
+        stage2.test()
 
     if do_package and need_host:
         package_toolchain(
