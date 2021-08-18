@@ -144,11 +144,6 @@ class Stage2Builder(base_builders.LLVMBuilder):
     @property
     def env(self) -> Dict[str, str]:
         env = super().env
-        # Point CMake to the libc++ from stage1.  It is possible that once built,
-        # the newly-built libc++ may override this because of the rpath pointing to
-        # $ORIGIN/../lib64.  That'd be fine because both libraries are built from
-        # the same sources.
-        env['LD_LIBRARY_PATH'] = str(self.toolchain.lib_dir)
         return env
 
     @property
