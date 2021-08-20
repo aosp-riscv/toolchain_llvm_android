@@ -396,6 +396,12 @@
         "end_version": 435105
     },
     {
+        "comment": "[UPSTREAM] [hwasan] Prevent reordering of tag checks.",
+        "rel_patch_path": "cherry/0deedaa23f71587d121a5ffab40571fd4a64599a.patch",
+        "start_version": 428724,
+        "end_version": 435678
+    },
+    {
         "comment": "[UPSTREAM] Remove unused imports.",
         "rel_patch_path": "cherry/d42be2d63ccf0cb38d218ee67746d6e108685a71.patch",
         "start_version": 428724,
