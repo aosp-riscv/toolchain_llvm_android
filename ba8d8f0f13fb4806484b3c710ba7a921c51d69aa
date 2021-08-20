@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44dc2004_18aa776a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-20T21:42:16Z",
+      "side": 1,
+      "message": "Bleh. Patches don\u0027t apply on TOT. I\u0027ll check if they apply for the testing merge, but otherwise I\u0027m not sure when I\u0027ll get to resolving these conflicts. I figured it was straightforward enough to enable this quickly for Yi\u0027s update.",
+      "revId": "ba8d8f0f13fb4806484b3c710ba7a921c51d69aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
