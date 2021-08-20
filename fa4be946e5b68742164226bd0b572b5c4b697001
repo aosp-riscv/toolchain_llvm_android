@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1adc25e3_43637259",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-20T21:45:40Z",
+      "side": 1,
+      "message": "The general direction of the patch LGTM but I have some thoughts on the defaults. \n We shouldn\u0027t run stage1 tests by default.  It is mainly for quicker iteration and should be an opt-in.  How about adding an option rather than a flag:\n  --run-tests\u003d\u003cnone|stage1|stage2\u003e (default: stage2)",
+      "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e920ee11_960c5cd9",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-20T21:45:40Z",
+      "side": 1,
+      "message": "Can we add a \u0027need_tests\u0027 property to Stage1Builder or LLVMBuilder and add \u0027clang-tools-extra\u0027 here only if stage1 tests are needed.",
+      "range": {
+        "startLine": 78,
+        "startChar": 25,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711344ac_d580f832",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-20T21:45:40Z",
+      "side": 1,
+      "message": "Set this in LLVMBuilder to avoid repeating here and for stage2.  That\u0027d control the Windows build as well but I don\u0027t think this test would run on Windows without us already fixing for Linux.",
+      "range": {
+        "startLine": 97,
+        "startChar": 17,
+        "endLine": 97,
+        "endChar": 38
+      },
+      "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c13847e8_e22f170f",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-20T21:45:40Z",
+      "side": 1,
+      "message": "Similarly set CLANG_ENABLE_STATIC_ANALYZER to OFF if need_tests property is false.",
+      "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
