@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf8470fe_6d3f942e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-08-21T00:16:15Z",
+      "side": 1,
+      "message": "Done. Since we have already several other skip-* options, I think one --skip-tests is enough. Default has only stage2 test, which can be skipped with --skip-tests.\nWhen we need only stage1, we can use -skip\u003dstage2 with otional --skip-tests.",
+      "parentUuid": "1adc25e3_43637259",
+      "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e920ee11_960c5cd9",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-08-20T21:45:40Z",
       "side": 1,
       "message": "Can we add a \u0027need_tests\u0027 property to Stage1Builder or LLVMBuilder and add \u0027clang-tools-extra\u0027 here only if stage1 tests are needed.",
+      "range": {
+        "startLine": 78,
+        "startChar": 25,
+        "endLine": 78,
+        "endChar": 44
+      },
+      "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45e1f258_117306f6",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-08-21T00:16:15Z",
+      "side": 1,
+      "message": "Done. I added a stage1-extra-tools option, which will enable stage1 test too. But the test can be turned off with --skip-tests.",
+      "parentUuid": "e920ee11_960c5cd9",
       "range": {
         "startLine": 78,
         "startChar": 25,
@@ -77,6 +119,48 @@
       "writtenOn": "2021-08-20T21:45:40Z",
       "side": 1,
       "message": "Similarly set CLANG_ENABLE_STATIC_ANALYZER to OFF if need_tests property is false.",
+      "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7bf408d_f80c2dc3",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-08-21T00:16:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "711344ac_d580f832",
+      "range": {
+        "startLine": 97,
+        "startChar": 17,
+        "endLine": 97,
+        "endChar": 38
+      },
+      "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfdf9a4f_6bbe7dee",
+        "filename": "builders.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-08-21T00:16:15Z",
+      "side": 1,
+      "message": "Done, set if stage1 does not build extra tools.",
+      "parentUuid": "c13847e8_e22f170f",
       "revId": "fa4be946e5b68742164226bd0b572b5c4b697001",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
