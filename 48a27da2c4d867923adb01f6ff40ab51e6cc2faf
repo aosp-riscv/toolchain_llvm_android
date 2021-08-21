@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d764384_f37da1a3",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-21T00:24:43Z",
+      "side": 1,
+      "message": "Let\u0027s call it \u0027--run-tests-stage1\u0027 with help message \u0027Run tests on stage1, (including clang-tidy and static analyzer tests)\u0027",
+      "range": {
+        "startLine": 612,
+        "startChar": 9,
+        "endLine": 612,
+        "endChar": 29
+      },
+      "revId": "48a27da2c4d867923adb01f6ff40ab51e6cc2faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a517dac_13308d00",
+        "filename": "do_build.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-21T00:24:43Z",
+      "side": 1,
+      "message": "I\u0027m tempted to better format this by splitting this out across multiple lines.  But will take care of it in a follow-up.",
+      "revId": "48a27da2c4d867923adb01f6ff40ab51e6cc2faf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
