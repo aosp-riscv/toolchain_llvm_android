@@ -1,0 +1,2279 @@
+From 20f8115d18716d84f241f46f60344f0784225de2 Mon Sep 17 00:00:00 2001
+From: Chih-Hung Hsieh <chh@google.com>
+Date: Sat, 21 Aug 2021 22:45:48 -0700
+Subject: [PATCH] WIP skip-headers default true
+
+* Add options:
+  * A hidden always-show-warnings to override the final
+    filtering of diagnostics.
+  * A skip-headers (default true) to save about 50% clang-tidy
+    run-time by skipping checks/diagnostics on header files
+    that are not selected by --header-filter or --system-headers.
+* Add/modify tests in clang-tools-extra/test/clang-tidy/*
+  to show the expected output of --skip-headers and
+  --always-show-warnings.
+* Factor out LocationFilter in ClangTidyDiagnosticComsumer.cpp.
+  Its skipLocation function is used to decide if a tidy check matcher,
+  diagnostic, or AST node traversal should be skipped.
+  * Add a LocFilter to Tidy's MatchFinderOptions.
+    In MatchASTVisitor, skip a Decl or Stmt node if the
+    MatchFinderOptions has a LocFilter that decides to skip
+    the node location.
+* Add an AllFileFinder for checks that need to match all source files.
+  ForwardDeclarationNamespaceCheck and UnusedUsingDeclsCheck are
+  registered as AllFileCheck, to avoid missing or incorrect warnings
+  on main source files.
+  Their check functions call ClangTidyCheck::skipLocation
+  to skip diagnostics on header files.
+* Call skipLocation in PPCallbacks checkers to skip checks/diagnostics
+  on header files.
+
+Change-Id: I8528986af63cbfa04b4f875b029c27eb9b6abc30
+---
+ clang-tools-extra/clang-tidy/ClangTidy.cpp    |  48 ++++-
+ clang-tools-extra/clang-tidy/ClangTidyCheck.h |   5 +
+ .../ClangTidyDiagnosticConsumer.cpp           | 132 +++++++++++--
+ .../clang-tidy/ClangTidyDiagnosticConsumer.h  |  35 +++-
+ .../clang-tidy/ClangTidyModule.cpp            |  18 +-
+ .../clang-tidy/ClangTidyModule.h              |  25 ++-
+ .../clang-tidy/ClangTidyOptions.cpp           |   7 +
+ .../clang-tidy/ClangTidyOptions.h             |   9 +
+ .../altera/KernelNameRestrictionCheck.cpp     |   2 +
+ .../bugprone/BugproneTidyModule.cpp           |   2 +-
+ .../ForwardDeclarationNamespaceCheck.cpp      |   3 +
+ .../bugprone/LambdaFunctionNameCheck.cpp      |   3 +
+ .../bugprone/MacroParenthesesCheck.cpp        |   2 +
+ .../MacroRepeatedSideEffectsCheck.cpp         |   2 +
+ .../bugprone/SuspiciousIncludeCheck.cpp       |   2 +
+ .../clang-tidy/cert/SetLongJmpCheck.cpp       |   2 +
+ .../cppcoreguidelines/MacroUsageCheck.cpp     |   2 +
+ .../AvoidUnderscoreInGoogletestNameCheck.cpp  |   2 +
+ .../clang-tidy/google/TodoCommentCheck.cpp    |   2 +
+ .../google/UpgradeGoogletestCaseCheck.cpp     |   2 +
+ .../clang-tidy/llvm/IncludeOrderCheck.cpp     |   5 +
+ .../RestrictSystemLibcHeadersCheck.cpp        |   2 +
+ .../clang-tidy/misc/MiscTidyModule.cpp        |   2 +-
+ .../clang-tidy/misc/UnusedUsingDeclsCheck.cpp |   3 +-
+ .../modernize/DeprecatedHeadersCheck.cpp      |   2 +
+ ...ReplaceDisallowCopyAndAssignMacroCheck.cpp |   3 +
+ .../clang-tidy/modernize/UseNullptrCheck.cpp  |   6 +
+ .../RestrictSystemIncludesCheck.cpp           |   2 +
+ .../portability/RestrictSystemIncludesCheck.h |   2 +
+ .../readability/ElseAfterReturnCheck.cpp      |   3 +
+ .../RedundantPreprocessorCheck.cpp            |   8 +
+ .../readability/SimplifyBooleanExprCheck.cpp  |   3 +-
+ .../clang-tidy/tool/ClangTidyMain.cpp         |  19 ++
+ .../clang-tidy/utils/HeaderGuard.cpp          |   5 +
+ .../clang-tidy/utils/IncludeInserter.cpp      |   3 +
+ .../utils/RenamerClangTidyCheck.cpp           |   4 +
+ .../a.h                                       |   9 +
+ .../b.h                                       |   9 +
+ .../Inputs/modernize-pass-by-value/header.h   |   7 +
+ .../checkers/Inputs/skip-headers/a.h          |   4 +
+ .../checkers/Inputs/skip-headers/b.h          |   4 +
+ .../checkers/Inputs/skip-headers/c.h          |   9 +
+ .../checkers/Inputs/skip-headers/c1.h         |  10 +
+ .../checkers/Inputs/skip-headers/my_header1.h |   3 +
+ .../checkers/Inputs/skip-headers/my_header2.h |   6 +
+ .../checkers/Inputs/unused-using-decls.h      |   8 +
+ .../abseil-no-internal-dependencies.cpp       |   4 +-
+ .../abseil-upgrade-duration-conversions.cpp   |   3 +-
+ ...e-forward-declaration-namespace-header.cpp | 175 ++++++++++++++++++
+ ...bugprone-forward-declaration-namespace.cpp |   3 +-
+ .../checkers/bugprone-reserved-identifier.cpp |  13 +-
+ .../checkers/bugprone-suspicious-include.cpp  |   3 +-
+ ...pcoreguidelines-interfaces-global-init.cpp |   3 +-
+ ...elines-macro-usage-command-line-macros.cpp |  11 +-
+ .../clang-tidy/checkers/google-namespaces.cpp |  41 +++-
+ .../checkers/google-objc-function-naming.m    |   3 +-
+ .../google-upgrade-googletest-case.cpp        |   6 +-
+ .../checkers/llvm-include-order.cpp           |   3 +-
+ .../llvm-prefer-register-over-unsigned.cpp    |   3 +-
+ .../llvmlibc-implementation-in-namespace.cpp  |   3 +-
+ .../llvmlibc-restrict-system-libc-headers.cpp |   6 +-
+ .../clang-tidy/checkers/misc-no-recursion.cpp |   3 +-
+ .../checkers/misc-unused-using-decls.cpp      |  28 ++-
+ .../modernize-deprecated-headers-cxx03.cpp    |   3 +-
+ .../modernize-deprecated-headers-cxx11.cpp    |   3 +-
+ .../modernize-pass-by-value-header.cpp        |  86 ++++++++-
+ ...ability-restrict-system-includes-allow.cpp |   6 +-
+ ...lity-restrict-system-includes-disallow.cpp |   6 +-
+ ...ol-expr-chained-conditional-assignment.cpp |   5 +-
+ ...y-bool-expr-chained-conditional-return.cpp |   5 +-
+ ...readability-simplify-bool-expr-members.cpp |   3 +-
+ .../readability-simplify-bool-expr.cpp        |   3 +-
+ .../clang-tidy/checkers/skip-headers-1.cpp    |  56 ++++++
+ .../clang-tidy/checkers/skip-headers-2.cpp    |  39 ++++
+ .../clang-tidy/checkers/skip-headers-3.cpp    |  30 +++
+ .../clang-tidy/checkers/skip-headers-4.cpp    |  40 ++++
+ .../infrastructure/file-filter-symlinks.cpp   |  12 +-
+ .../clang-tidy/infrastructure/file-filter.cpp |  16 +-
+ .../clang-tidy/infrastructure/line-filter.cpp |   2 +-
+ .../clang/ASTMatchers/ASTMatchFinder.h        |   7 +
+ clang/lib/ASTMatchers/ASTMatchFinder.cpp      |  11 ++
+ 81 files changed, 993 insertions(+), 97 deletions(-)
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/Inputs/bugprone-forward-declaration-namespace/a.h
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/Inputs/bugprone-forward-declaration-namespace/b.h
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/a.h
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/b.h
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/c.h
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/c1.h
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/my_header1.h
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/my_header2.h
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/bugprone-forward-declaration-namespace-header.cpp
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/skip-headers-1.cpp
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/skip-headers-2.cpp
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/skip-headers-3.cpp
+ create mode 100644 clang-tools-extra/test/clang-tidy/checkers/skip-headers-4.cpp
+
+diff --git a/clang-tools-extra/clang-tidy/ClangTidy.cpp b/clang-tools-extra/clang-tidy/ClangTidy.cpp
+index 73d66b980a5e..24adfeb26c4a 100644
+--- a/clang-tools-extra/clang-tidy/ClangTidy.cpp
++++ b/clang-tools-extra/clang-tidy/ClangTidy.cpp
+@@ -307,20 +307,26 @@ private:
+ 
+ class ClangTidyASTConsumer : public MultiplexConsumer {
+ public:
+-  ClangTidyASTConsumer(std::vector<std::unique_ptr<ASTConsumer>> Consumers,
+-                       std::unique_ptr<ClangTidyProfiling> Profiling,
+-                       std::unique_ptr<ast_matchers::MatchFinder> Finder,
+-                       std::vector<std::unique_ptr<ClangTidyCheck>> Checks)
++  ClangTidyASTConsumer(
++      std::vector<std::unique_ptr<ASTConsumer>> Consumers,
++      std::unique_ptr<ClangTidyProfiling> Profiling,
++      std::unique_ptr<ast_matchers::MatchFinder> Finder,
++      std::unique_ptr<ast_matchers::MatchFinder> AllFileFinder,
++      std::vector<std::unique_ptr<ClangTidyCheck>> Checks,
++      std::vector<std::unique_ptr<ClangTidyCheck>> AllFileChecks)
+       : MultiplexConsumer(std::move(Consumers)),
+         Profiling(std::move(Profiling)), Finder(std::move(Finder)),
+-        Checks(std::move(Checks)) {}
++        AllFileFinder(std::move(AllFileFinder)), Checks(std::move(Checks)),
++        AllFileChecks(std::move(AllFileChecks)) {}
+ 
+ private:
+   // Destructor order matters! Profiling must be destructed last.
+   // Or at least after Finder.
+   std::unique_ptr<ClangTidyProfiling> Profiling;
+   std::unique_ptr<ast_matchers::MatchFinder> Finder;
++  std::unique_ptr<ast_matchers::MatchFinder> AllFileFinder;
+   std::vector<std::unique_ptr<ClangTidyCheck>> Checks;
++  std::vector<std::unique_ptr<ClangTidyCheck>> AllFileChecks;
+ };
+ 
+ } // namespace
+@@ -403,22 +409,38 @@ ClangTidyASTConsumerFactory::CreateASTConsumer(
+ 
+   std::vector<std::unique_ptr<ClangTidyCheck>> Checks =
+       CheckFactories->createChecks(&Context);
++  std::vector<std::unique_ptr<ClangTidyCheck>> AllFileChecks =
++      CheckFactories->createAllFileChecks(&Context);
+ 
+-  llvm::erase_if(Checks, [&](std::unique_ptr<ClangTidyCheck> &Check) {
++  auto EraseFilter = [&](std::unique_ptr<ClangTidyCheck> &Check) {
+     return !Check->isLanguageVersionSupported(Context.getLangOpts());
+-  });
++  };
++  llvm::erase_if(Checks, EraseFilter);
++  llvm::erase_if(AllFileChecks, EraseFilter);
+ 
+   ast_matchers::MatchFinder::MatchFinderOptions FinderOptions;
++  ast_matchers::MatchFinder::MatchFinderOptions AllFileFinderOptions;
+ 
+   std::unique_ptr<ClangTidyProfiling> Profiling;
+   if (Context.getEnableProfiling()) {
+     Profiling = std::make_unique<ClangTidyProfiling>(
+         Context.getProfileStorageParams());
++    // Two Finders share the same Profiling->Records.
+     FinderOptions.CheckProfiling.emplace(Profiling->Records);
++    AllFileFinderOptions.CheckProfiling.emplace(Profiling->Records);
++  }
++
++  // LocationFilter is not for AllFileFinder.
++  if (*Context.getOptions().SkipHeaders) {
++    std::unique_ptr<ClangTidyLocationFilter> LocationFilter(
++        ClangTidyDiagnosticConsumer::newLocationFilter(&Context));
++    FinderOptions.Filter = std::move(LocationFilter);
+   }
+ 
+   std::unique_ptr<ast_matchers::MatchFinder> Finder(
+       new ast_matchers::MatchFinder(std::move(FinderOptions)));
++  std::unique_ptr<ast_matchers::MatchFinder> AllFileFinder(
++      new ast_matchers::MatchFinder(std::move(AllFileFinderOptions)));
+ 
+   Preprocessor *PP = &Compiler.getPreprocessor();
+   Preprocessor *ModuleExpanderPP = PP;
+@@ -434,10 +456,16 @@ ClangTidyASTConsumerFactory::CreateASTConsumer(
+     Check->registerMatchers(&*Finder);
+     Check->registerPPCallbacks(*SM, PP, ModuleExpanderPP);
+   }
++  for (auto &Check : AllFileChecks) {
++    Check->registerMatchers(&*AllFileFinder);
++    Check->registerPPCallbacks(*SM, PP, ModuleExpanderPP);
++  }
+ 
+   std::vector<std::unique_ptr<ASTConsumer>> Consumers;
+   if (!Checks.empty())
+     Consumers.push_back(Finder->newASTConsumer());
++  if (!AllFileChecks.empty())
++    Consumers.push_back(AllFileFinder->newASTConsumer());
+ 
+ #if CLANG_TIDY_ENABLE_STATIC_ANALYZER
+   AnalyzerOptionsRef AnalyzerOptions = Compiler.getAnalyzerOpts();
+@@ -458,7 +486,7 @@ ClangTidyASTConsumerFactory::CreateASTConsumer(
+ #endif // CLANG_TIDY_ENABLE_STATIC_ANALYZER
+   return std::make_unique<ClangTidyASTConsumer>(
+       std::move(Consumers), std::move(Profiling), std::move(Finder),
+-      std::move(Checks));
++      std::move(AllFileFinder), std::move(Checks), std::move(AllFileChecks));
+ }
+ 
+ std::vector<std::string> ClangTidyASTConsumerFactory::getCheckNames() {
+@@ -484,6 +512,10 @@ ClangTidyOptions::OptionMap ClangTidyASTConsumerFactory::getCheckOptions() {
+       CheckFactories->createChecks(&Context);
+   for (const auto &Check : Checks)
+     Check->storeOptions(Options);
++  std::vector<std::unique_ptr<ClangTidyCheck>> AllFileChecks =
++      CheckFactories->createAllFileChecks(&Context);
++  for (const auto &Check : AllFileChecks)
++    Check->storeOptions(Options);
+   return Options;
+ }
+ 
+diff --git a/clang-tools-extra/clang-tidy/ClangTidyCheck.h b/clang-tools-extra/clang-tidy/ClangTidyCheck.h
+index 20e9b8e47e6f..a96c302e727a 100644
+--- a/clang-tools-extra/clang-tidy/ClangTidyCheck.h
++++ b/clang-tools-extra/clang-tidy/ClangTidyCheck.h
+@@ -132,6 +132,11 @@ public:
+   /// whether it has the default value or it has been overridden.
+   virtual void storeOptions(ClangTidyOptions::OptionMap &Options) {}
+ 
++  /// Returns true if the Location should have warnings suppressed.
++  static bool skipLocation(SourceLocation Location) {
++    return ClangTidyDiagnosticConsumer::skipLocation(Location);
++  }
++
+   /// Provides access to the ``ClangTidyCheck`` options via check-local
+   /// names.
+   ///
+diff --git a/clang-tools-extra/clang-tidy/ClangTidyDiagnosticConsumer.cpp b/clang-tools-extra/clang-tidy/ClangTidyDiagnosticConsumer.cpp
+index 1457f145f552..221e459383f9 100644
+--- a/clang-tools-extra/clang-tidy/ClangTidyDiagnosticConsumer.cpp
++++ b/clang-tools-extra/clang-tidy/ClangTidyDiagnosticConsumer.cpp
+@@ -38,6 +38,91 @@
+ using namespace clang;
+ using namespace tidy;
+ 
++namespace clang {
++namespace tidy {
++
++class ClangTidyLocationFilterImpl : ClangTidyLocationFilter {
++public:
++  ClangTidyLocationFilterImpl(ClangTidyContext *Context);
++  ~ClangTidyLocationFilterImpl();
++  virtual bool skipLocation(SourceLocation Location) const override;
++
++private:
++  friend class ClangTidyDiagnosticConsumer;
++  /// Returns true if the Location with FileID is in a skipped system header.
++  bool isSkippedSystemHeader(SourceLocation Location, FileID FileID,
++                             const FileEntry *File,
++                             const SourceManager &Sources) const;
++
++  /// Returns true if the Location with FileID is in user code.
++  bool isUserCode(SourceLocation Location, FileID FileID, const FileEntry *File,
++                  const SourceManager &Sources) const;
++
++  ClangTidyContext *Context;
++  mutable FileID LastSkippedSystemFileID;
++  mutable FileID LastSkippedFileID;
++  mutable FileID LastAcceptedFileID;
++  std::unique_ptr<llvm::Regex> HeaderFilterRegex;
++};
++
++} // end namespace tidy
++} // end namespace clang
++
++ClangTidyLocationFilterImpl::~ClangTidyLocationFilterImpl() = default;
++
++ClangTidyLocationFilterImpl::ClangTidyLocationFilterImpl(
++    ClangTidyContext *Context)
++    : Context(Context), LastSkippedSystemFileID(FileID::getSentinel()),
++      LastSkippedFileID(FileID::getSentinel()),
++      LastAcceptedFileID(FileID::getSentinel()),
++      HeaderFilterRegex(std::make_unique<llvm::Regex>(
++          *Context->getOptions().HeaderFilterRegex)) {}
++
++bool ClangTidyLocationFilterImpl::skipLocation(SourceLocation Location) const {
++  if (!Location.isValid())
++    return false;
++  SourceManager &Sources = Context->getSourceManager();
++  FileID FID = Sources.getDecomposedExpansionLoc(Location).first;
++  // Do not skip built-in and command line yet.
++  const FileEntry *File = Sources.getFileEntryForID(FID);
++  if (!File)
++    return false;
++  return isSkippedSystemHeader(Location, FID, File, Sources) ||
++         !isUserCode(Location, FID, File, Sources);
++}
++
++bool ClangTidyLocationFilterImpl::isSkippedSystemHeader(
++    SourceLocation Location, FileID FID, const FileEntry *File,
++    const SourceManager &Sources) const {
++  if (!File)
++    return false;
++  if (FID == LastSkippedSystemFileID)
++    return true;
++  if (!*Context->getOptions().SystemHeaders &&
++      Sources.isInSystemHeader(Location)) {
++    LastSkippedSystemFileID = FID;
++    return true;
++  }
++  return false;
++}
++
++bool ClangTidyLocationFilterImpl::isUserCode(
++    SourceLocation Location, FileID FID, const FileEntry *File,
++    const SourceManager &Sources) const {
++  assert(File);
++  if (FID == LastSkippedFileID)
++    return false;
++  if (FID == LastAcceptedFileID)
++    return true;
++  bool IsUserCode = Sources.isInMainFile(Location) ||
++                    HeaderFilterRegex->match(File->getName());
++  if (IsUserCode)
++    LastAcceptedFileID = FID;
++  else
++    LastSkippedFileID = FID;
++  return IsUserCode;
++}
++
+ namespace {
+ class ClangTidyDiagnosticRenderer : public DiagnosticRenderer {
+ public:
+@@ -276,13 +361,35 @@ std::string ClangTidyContext::getCheckName(unsigned DiagnosticID) const {
+   return "";
+ }
+ 
++// Global LocationFilter is non-null if --skip-header is enabled.
++std::unique_ptr<ClangTidyLocationFilter>
++    ClangTidyDiagnosticConsumer::LocationFilter;
++
+ ClangTidyDiagnosticConsumer::ClangTidyDiagnosticConsumer(
+     ClangTidyContext &Ctx, DiagnosticsEngine *ExternalDiagEngine,
+     bool RemoveIncompatibleErrors, bool GetFixesFromNotes)
+     : Context(Ctx), ExternalDiagEngine(ExternalDiagEngine),
+       RemoveIncompatibleErrors(RemoveIncompatibleErrors),
+-      GetFixesFromNotes(GetFixesFromNotes), LastErrorRelatesToUserCode(false),
+-      LastErrorPassesLineFilter(false), LastErrorWasIgnored(false) {}
++      GetFixesFromNotes(GetFixesFromNotes),
++      LocationFilterImpl(newLocationFilterImpl(&Ctx)),
++      LastErrorRelatesToUserCode(false), LastErrorPassesLineFilter(false),
++      LastErrorWasIgnored(false) {
++  if (*Ctx.getOptions().SkipHeaders)
++    LocationFilter =
++        std::unique_ptr<ClangTidyLocationFilter>(newLocationFilter(&Ctx));
++}
++
++ClangTidyLocationFilterImpl *
++ClangTidyDiagnosticConsumer::newLocationFilterImpl(ClangTidyContext *Context) {
++  return new ClangTidyLocationFilterImpl(Context);
++}
++
++ClangTidyLocationFilter *
++ClangTidyDiagnosticConsumer::newLocationFilter(ClangTidyContext *Context) {
++  return new ClangTidyLocationFilterImpl(Context);
++}
++
++ClangTidyDiagnosticConsumer::~ClangTidyDiagnosticConsumer() = default;
+ 
+ void ClangTidyDiagnosticConsumer::finalizeLastError() {
+   if (!Errors.empty()) {
+@@ -580,21 +687,19 @@ void ClangTidyDiagnosticConsumer::forwardDiagnostic(const Diagnostic &Info) {
+ void ClangTidyDiagnosticConsumer::checkFilters(SourceLocation Location,
+                                                const SourceManager &Sources) {
+   // Invalid location may mean a diagnostic in a command line, don't skip these.
+-  if (!Location.isValid()) {
++  if (!Location.isValid() || *Context.getOptions().ShowAllWarnings) {
+     LastErrorRelatesToUserCode = true;
+     LastErrorPassesLineFilter = true;
+     return;
+   }
+ 
+-  if (!*Context.getOptions().SystemHeaders &&
+-      Sources.isInSystemHeader(Location))
+-    return;
+-
+   // FIXME: We start with a conservative approach here, but the actual type of
+   // location needed depends on the check (in particular, where this check wants
+   // to apply fixes).
+   FileID FID = Sources.getDecomposedExpansionLoc(Location).first;
+   const FileEntry *File = Sources.getFileEntryForID(FID);
++  if (LocationFilterImpl->isSkippedSystemHeader(Location, FID, File, Sources))
++    return;
+ 
+   // -DMACRO definitions on the command line have locations in a virtual buffer
+   // that doesn't have a FileEntry. Don't skip these as well.
+@@ -605,22 +710,15 @@ void ClangTidyDiagnosticConsumer::checkFilters(SourceLocation Location,
+   }
+ 
+   StringRef FileName(File->getName());
+-  LastErrorRelatesToUserCode = LastErrorRelatesToUserCode ||
+-                               Sources.isInMainFile(Location) ||
+-                               getHeaderFilter()->match(FileName);
++  LastErrorRelatesToUserCode =
++      LastErrorRelatesToUserCode ||
++      LocationFilterImpl->isUserCode(Location, FID, File, Sources);
+ 
+   unsigned LineNumber = Sources.getExpansionLineNumber(Location);
+   LastErrorPassesLineFilter =
+       LastErrorPassesLineFilter || passesLineFilter(FileName, LineNumber);
+ }
+ 
+-llvm::Regex *ClangTidyDiagnosticConsumer::getHeaderFilter() {
+-  if (!HeaderFilter)
+-    HeaderFilter =
+-        std::make_unique<llvm::Regex>(*Context.getOptions().HeaderFilterRegex);
+-  return HeaderFilter.get();
+-}
+-
+ void ClangTidyDiagnosticConsumer::removeIncompatibleErrors() {
+   // Each error is modelled as the set of intervals in which it applies
+   // replacements. To detect overlapping replacements, we use a sweep line
+diff --git a/clang-tools-extra/clang-tidy/ClangTidyDiagnosticConsumer.h b/clang-tools-extra/clang-tidy/ClangTidyDiagnosticConsumer.h
+index 13372cc626b9..75f1a848560b 100644
+--- a/clang-tools-extra/clang-tidy/ClangTidyDiagnosticConsumer.h
++++ b/clang-tools-extra/clang-tidy/ClangTidyDiagnosticConsumer.h
+@@ -11,7 +11,9 @@
+ 
+ #include "ClangTidyOptions.h"
+ #include "ClangTidyProfiling.h"
++#include "clang/ASTMatchers/ASTMatchFinder.h"
+ #include "clang/Basic/Diagnostic.h"
++#include "clang/Basic/SourceManager.h"
+ #include "clang/Tooling/Core/Diagnostic.h"
+ #include "llvm/ADT/DenseMap.h"
+ #include "llvm/Support/Regex.h"
+@@ -20,10 +22,6 @@ namespace clang {
+ 
+ class ASTContext;
+ class CompilerInstance;
+-class SourceManager;
+-namespace ast_matchers {
+-class MatchFinder;
+-}
+ namespace tooling {
+ class CompilationDatabase;
+ }
+@@ -104,6 +102,11 @@ public:
+   configurationDiag(StringRef Message,
+                     DiagnosticIDs::Level Level = DiagnosticIDs::Warning);
+ 
++  /// Returns the \c SourceManager of the used \c DiagnosticsEngine.
++  SourceManager &getSourceManager() const {
++    return DiagEngine->getSourceManager();
++  }
++
+   /// Sets the \c SourceManager of the used \c DiagnosticsEngine.
+   ///
+   /// This is called from the \c ClangTidyCheck base class.
+@@ -212,6 +215,11 @@ private:
+   bool AllowEnablingAnalyzerAlphaCheckers;
+ };
+ 
++typedef ast_matchers::MatchFinder::MatchFinderOptions::LocFilter
++    ClangTidyLocationFilter;
++
++class ClangTidyLocationFilterImpl;
++
+ /// Check whether a given diagnostic should be suppressed due to the presence
+ /// of a "NOLINT" suppression comment.
+ /// This is exposed so that other tools that present clang-tidy diagnostics
+@@ -244,6 +252,7 @@ public:
+                               DiagnosticsEngine *ExternalDiagEngine = nullptr,
+                               bool RemoveIncompatibleErrors = true,
+                               bool GetFixesFromNotes = false);
++  ~ClangTidyDiagnosticConsumer();
+ 
+   // FIXME: The concept of converting between FixItHints and Replacements is
+   // more generic and should be pulled out into a more useful Diagnostics
+@@ -254,15 +263,21 @@ public:
+   // Retrieve the diagnostics that were captured.
+   std::vector<ClangTidyError> take();
+ 
++  /// Returns true if the Location should have warnings suppressed.
++  static bool skipLocation(SourceLocation Location) {
++    return LocationFilter && LocationFilter->skipLocation(Location);
++  }
++
++  static ClangTidyLocationFilter *newLocationFilter(ClangTidyContext *Context);
++
++  static ClangTidyLocationFilterImpl *
++  newLocationFilterImpl(ClangTidyContext *Context);
++
+ private:
+   void finalizeLastError();
+   void removeIncompatibleErrors();
+   void removeDuplicatedDiagnosticsOfAliasCheckers();
+ 
+-  /// Returns the \c HeaderFilter constructed for the options set in the
+-  /// context.
+-  llvm::Regex *getHeaderFilter();
+-
+   /// Updates \c LastErrorRelatesToUserCode and LastErrorPassesLineFilter
+   /// according to the diagnostic \p Location.
+   void checkFilters(SourceLocation Location, const SourceManager &Sources);
+@@ -275,10 +290,12 @@ private:
+   bool RemoveIncompatibleErrors;
+   bool GetFixesFromNotes;
+   std::vector<ClangTidyError> Errors;
+-  std::unique_ptr<llvm::Regex> HeaderFilter;
++  std::unique_ptr<ClangTidyLocationFilterImpl> LocationFilterImpl;
+   bool LastErrorRelatesToUserCode;
+   bool LastErrorPassesLineFilter;
+   bool LastErrorWasIgnored;
++
++  static std::unique_ptr<ClangTidyLocationFilter> LocationFilter;
+ };
+ 
+ } // end namespace tidy
+diff --git a/clang-tools-extra/clang-tidy/ClangTidyModule.cpp b/clang-tools-extra/clang-tidy/ClangTidyModule.cpp
+index c72bcd3e188c..0d85ad663a2f 100644
+--- a/clang-tools-extra/clang-tidy/ClangTidyModule.cpp
++++ b/clang-tools-extra/clang-tidy/ClangTidyModule.cpp
+@@ -17,20 +17,34 @@ namespace clang {
+ namespace tidy {
+ 
+ void ClangTidyCheckFactories::registerCheckFactory(StringRef Name,
+-                                                   CheckFactory Factory) {
++                                                   CheckFactory Factory,
++                                                   bool IsAllFileCheck) {
+   Factories.insert_or_assign(Name, std::move(Factory));
++  IsAllFileChecks.insert_or_assign(Name, IsAllFileCheck);
+ }
+ 
+ std::vector<std::unique_ptr<ClangTidyCheck>>
+ ClangTidyCheckFactories::createChecks(ClangTidyContext *Context) {
+   std::vector<std::unique_ptr<ClangTidyCheck>> Checks;
+   for (const auto &Factory : Factories) {
+-    if (Context->isCheckEnabled(Factory.getKey()))
++    if (Context->isCheckEnabled(Factory.getKey()) &&
++        !IsAllFileChecks[Factory.getKey()])
+       Checks.emplace_back(Factory.getValue()(Factory.getKey(), Context));
+   }
+   return Checks;
+ }
+ 
++std::vector<std::unique_ptr<ClangTidyCheck>>
++ClangTidyCheckFactories::createAllFileChecks(ClangTidyContext *Context) {
++  std::vector<std::unique_ptr<ClangTidyCheck>> AllFileChecks;
++  for (const auto &Factory : Factories) {
++    if (Context->isCheckEnabled(Factory.getKey()) &&
++        IsAllFileChecks[Factory.getKey()])
++      AllFileChecks.emplace_back(Factory.getValue()(Factory.getKey(), Context));
++  }
++  return AllFileChecks;
++}
++
+ ClangTidyOptions ClangTidyModule::getModuleOptions() {
+   return ClangTidyOptions();
+ }
+diff --git a/clang-tools-extra/clang-tidy/ClangTidyModule.h b/clang-tools-extra/clang-tidy/ClangTidyModule.h
+index dd21a8dbc6a4..da795aa834ad 100644
+--- a/clang-tools-extra/clang-tidy/ClangTidyModule.h
++++ b/clang-tools-extra/clang-tidy/ClangTidyModule.h
+@@ -33,7 +33,8 @@ public:
+   /// Registers check \p Factory with name \p Name.
+   ///
+   /// For all checks that have default constructors, use \c registerCheck.
+-  void registerCheckFactory(llvm::StringRef Name, CheckFactory Factory);
++  void registerCheckFactory(llvm::StringRef Name, CheckFactory Factory,
++                            bool IsAllFileCheck = false);
+ 
+   /// Registers the \c CheckType with the name \p Name.
+   ///
+@@ -53,27 +54,37 @@ public:
+   /// class MyModule : public ClangTidyModule {
+   ///   void addCheckFactories(ClangTidyCheckFactories &Factories) override {
+   ///     Factories.registerCheck<MyTidyCheck>("myproject-my-check");
++  ///     // or Factories.registerCheck<MyTidyCheck>("my-check", true);
++  ///     // for a check that needs to match all Decls in header files.
+   ///   }
+   /// };
+   /// \endcode
+-  template <typename CheckType> void registerCheck(llvm::StringRef CheckName) {
+-    registerCheckFactory(CheckName,
+-                         [](llvm::StringRef Name, ClangTidyContext *Context) {
+-                           return std::make_unique<CheckType>(Name, Context);
+-                         });
++  template <typename CheckType>
++  void registerCheck(llvm::StringRef CheckName, bool IsAllFileCheck = false) {
++    registerCheckFactory(
++        CheckName,
++        [](llvm::StringRef Name, ClangTidyContext *Context) {
++          return std::make_unique<CheckType>(Name, Context);
++        },
++        IsAllFileCheck);
+   }
+ 
+   /// Create instances of checks that are enabled.
+   std::vector<std::unique_ptr<ClangTidyCheck>>
+   createChecks(ClangTidyContext *Context);
+ 
++  /// Create instances of all-file checks that are enabled.
++  std::vector<std::unique_ptr<ClangTidyCheck>>
++  createAllFileChecks(ClangTidyContext *Context);
++
+   typedef llvm::StringMap<CheckFactory> FactoryMap;
+   FactoryMap::const_iterator begin() const { return Factories.begin(); }
+   FactoryMap::const_iterator end() const { return Factories.end(); }
+   bool empty() const { return Factories.empty(); }
+ 
+ private:
+-  FactoryMap Factories;
++  FactoryMap Factories; // has both normal checks and all-file checks
++  llvm::StringMap<bool> IsAllFileChecks; // check name -> is all-file check
+ };
+ 
+ /// A clang-tidy module groups a number of \c ClangTidyChecks and gives
+diff --git a/clang-tools-extra/clang-tidy/ClangTidyOptions.cpp b/clang-tools-extra/clang-tidy/ClangTidyOptions.cpp
+index 1e62d1c5f5ed..bd93d1a2e24c 100644
+--- a/clang-tools-extra/clang-tidy/ClangTidyOptions.cpp
++++ b/clang-tools-extra/clang-tidy/ClangTidyOptions.cpp
+@@ -89,6 +89,9 @@ template <> struct MappingTraits<ClangTidyOptions> {
+     IO.mapOptional("Checks", Options.Checks);
+     IO.mapOptional("WarningsAsErrors", Options.WarningsAsErrors);
+     IO.mapOptional("HeaderFilterRegex", Options.HeaderFilterRegex);
++    // SystemHeaders not mapped?
++    // ShowAllWarnings is hidden debug only option.
++    IO.mapOptional("SkipHeaders", Options.SkipHeaders);
+     IO.mapOptional("AnalyzeTemporaryDtors", Ignored); // legacy compatibility
+     IO.mapOptional("FormatStyle", Options.FormatStyle);
+     IO.mapOptional("User", Options.User);
+@@ -111,6 +114,8 @@ ClangTidyOptions ClangTidyOptions::getDefaults() {
+   Options.Checks = "";
+   Options.WarningsAsErrors = "";
+   Options.HeaderFilterRegex = "";
++  Options.ShowAllWarnings = false;
++  Options.SkipHeaders = false;
+   Options.SystemHeaders = false;
+   Options.FormatStyle = "none";
+   Options.User = llvm::None;
+@@ -147,6 +152,8 @@ ClangTidyOptions &ClangTidyOptions::mergeWith(const ClangTidyOptions &Other,
+   mergeCommaSeparatedLists(Checks, Other.Checks);
+   mergeCommaSeparatedLists(WarningsAsErrors, Other.WarningsAsErrors);
+   overrideValue(HeaderFilterRegex, Other.HeaderFilterRegex);
++  overrideValue(ShowAllWarnings, Other.ShowAllWarnings);
++  overrideValue(SkipHeaders, Other.SkipHeaders);
+   overrideValue(SystemHeaders, Other.SystemHeaders);
+   overrideValue(FormatStyle, Other.FormatStyle);
+   overrideValue(User, Other.User);
+diff --git a/clang-tools-extra/clang-tidy/ClangTidyOptions.h b/clang-tools-extra/clang-tidy/ClangTidyOptions.h
+index d8a4a14f5b52..0287f80e4211 100644
+--- a/clang-tools-extra/clang-tidy/ClangTidyOptions.h
++++ b/clang-tools-extra/clang-tidy/ClangTidyOptions.h
+@@ -79,6 +79,15 @@ struct ClangTidyOptions {
+   /// Output warnings from system headers matching \c HeaderFilterRegex.
+   llvm::Optional<bool> SystemHeaders;
+ 
++  /// Show all warnings, including warnings from all header files.
++  /// This overrides HeaderFilterRegex and SystemHeaders.
++  /// This is an option intended for testing/debugging clang-tidy.
++  llvm::Optional<bool> ShowAllWarnings;
++
++  /// Do not check included files, except files matching the --header-filter
++  /// and system files when --system-headers is used.
++  llvm::Optional<bool> SkipHeaders;
++
+   /// Format code around applied fixes with clang-format using this
+   /// style.
+   ///
+diff --git a/clang-tools-extra/clang-tidy/altera/KernelNameRestrictionCheck.cpp b/clang-tools-extra/clang-tidy/altera/KernelNameRestrictionCheck.cpp
+index f7c71cca7159..e3a8d975368c 100644
+--- a/clang-tools-extra/clang-tidy/altera/KernelNameRestrictionCheck.cpp
++++ b/clang-tools-extra/clang-tidy/altera/KernelNameRestrictionCheck.cpp
+@@ -64,6 +64,8 @@ void KernelNameRestrictionPPCallbacks::InclusionDirective(
+     SourceLocation HashLoc, const Token &, StringRef FileName, bool,
+     CharSourceRange, const FileEntry *, StringRef, StringRef, const Module *,
+     SrcMgr::CharacteristicKind) {
++  if (Check.skipLocation(HashLoc))
++    return;
+   IncludeDirective ID = {HashLoc, FileName};
+   IncludeDirectives.push_back(std::move(ID));
+ }
+diff --git a/clang-tools-extra/clang-tidy/bugprone/BugproneTidyModule.cpp b/clang-tools-extra/clang-tidy/bugprone/BugproneTidyModule.cpp
+index 595a30e8d8ce..e855017c24ad 100644
+--- a/clang-tools-extra/clang-tidy/bugprone/BugproneTidyModule.cpp
++++ b/clang-tools-extra/clang-tidy/bugprone/BugproneTidyModule.cpp
+@@ -96,7 +96,7 @@ public:
+     CheckFactories.registerCheck<FoldInitTypeCheck>(
+         "bugprone-fold-init-type");
+     CheckFactories.registerCheck<ForwardDeclarationNamespaceCheck>(
+-        "bugprone-forward-declaration-namespace");
++        "bugprone-forward-declaration-namespace", true);
+     CheckFactories.registerCheck<ForwardingReferenceOverloadCheck>(
+         "bugprone-forwarding-reference-overload");
+     CheckFactories.registerCheck<ImplicitWideningOfMultiplicationResultCheck>(
+diff --git a/clang-tools-extra/clang-tidy/bugprone/ForwardDeclarationNamespaceCheck.cpp b/clang-tools-extra/clang-tidy/bugprone/ForwardDeclarationNamespaceCheck.cpp
+index 7f851f0ba023..d02db58c1e9a 100644
+--- a/clang-tools-extra/clang-tidy/bugprone/ForwardDeclarationNamespaceCheck.cpp
++++ b/clang-tools-extra/clang-tidy/bugprone/ForwardDeclarationNamespaceCheck.cpp
+@@ -130,6 +130,9 @@ void ForwardDeclarationNamespaceCheck::onEndOfTranslationUnit() {
+           CurDecl->getLocation().isInvalid()) {
+         continue;
+       }
++      if (skipLocation(CurDecl->getLocation())) {
++        continue; // Skip if --skip-headers and CurDecl's file is skipped.
++      }
+       // Compare with all other declarations with the same name.
+       for (const auto *Decl : Declarations) {
+         if (Decl == CurDecl) {
+diff --git a/clang-tools-extra/clang-tidy/bugprone/LambdaFunctionNameCheck.cpp b/clang-tools-extra/clang-tidy/bugprone/LambdaFunctionNameCheck.cpp
+index ba6f6bae6df1..88f8269fe879 100644
+--- a/clang-tools-extra/clang-tidy/bugprone/LambdaFunctionNameCheck.cpp
++++ b/clang-tools-extra/clang-tidy/bugprone/LambdaFunctionNameCheck.cpp
+@@ -6,6 +6,7 @@
+ //
+ //===----------------------------------------------------------------------===//
+ 
++#include "../ClangTidyDiagnosticConsumer.h"
+ #include "LambdaFunctionNameCheck.h"
+ #include "clang/AST/ASTContext.h"
+ #include "clang/ASTMatchers/ASTMatchFinder.h"
+@@ -35,6 +36,8 @@ public:
+   void MacroExpands(const Token &MacroNameTok,
+                     const MacroDefinition &MD, SourceRange Range,
+                     const MacroArgs *Args) override {
++    if (ClangTidyDiagnosticConsumer::skipLocation(MacroNameTok.getLocation()))
++      return;
+     bool HasFile = false;
+     bool HasLine = false;
+     for (const auto& T : MD.getMacroInfo()->tokens()) {
+diff --git a/clang-tools-extra/clang-tidy/bugprone/MacroParenthesesCheck.cpp b/clang-tools-extra/clang-tidy/bugprone/MacroParenthesesCheck.cpp
+index 303119d8ec81..87029ec36267 100644
+--- a/clang-tools-extra/clang-tidy/bugprone/MacroParenthesesCheck.cpp
++++ b/clang-tools-extra/clang-tidy/bugprone/MacroParenthesesCheck.cpp
+@@ -23,6 +23,8 @@ public:
+ 
+   void MacroDefined(const Token &MacroNameTok,
+                     const MacroDirective *MD) override {
++    if (Check->skipLocation(MacroNameTok.getLocation()))
++      return;
+     replacementList(MacroNameTok, MD->getMacroInfo());
+     argument(MacroNameTok, MD->getMacroInfo());
+   }
+diff --git a/clang-tools-extra/clang-tidy/bugprone/MacroRepeatedSideEffectsCheck.cpp b/clang-tools-extra/clang-tidy/bugprone/MacroRepeatedSideEffectsCheck.cpp
+index 245c03fe8e9c..e6e0a187eb7f 100644
+--- a/clang-tools-extra/clang-tidy/bugprone/MacroRepeatedSideEffectsCheck.cpp
++++ b/clang-tools-extra/clang-tidy/bugprone/MacroRepeatedSideEffectsCheck.cpp
+@@ -41,6 +41,8 @@ void MacroRepeatedPPCallbacks::MacroExpands(const Token &MacroNameTok,
+                                             const MacroDefinition &MD,
+                                             SourceRange Range,
+                                             const MacroArgs *Args) {
++  if (Check.skipLocation(MacroNameTok.getLocation()))
++    return;
+   // Ignore macro argument expansions.
+   if (!Range.getBegin().isFileID())
+     return;
+diff --git a/clang-tools-extra/clang-tidy/bugprone/SuspiciousIncludeCheck.cpp b/clang-tools-extra/clang-tidy/bugprone/SuspiciousIncludeCheck.cpp
+index a3e5c0e26d17..26bcae506550 100644
+--- a/clang-tools-extra/clang-tidy/bugprone/SuspiciousIncludeCheck.cpp
++++ b/clang-tools-extra/clang-tidy/bugprone/SuspiciousIncludeCheck.cpp
+@@ -77,6 +77,8 @@ void SuspiciousIncludePPCallbacks::InclusionDirective(
+     SrcMgr::CharacteristicKind FileType) {
+   if (IncludeTok.getIdentifierInfo()->getPPKeywordID() == tok::pp_import)
+     return;
++  if (Check.skipLocation(HashLoc))
++    return;
+ 
+   SourceLocation DiagLoc = FilenameRange.getBegin().getLocWithOffset(1);
+ 
+diff --git a/clang-tools-extra/clang-tidy/cert/SetLongJmpCheck.cpp b/clang-tools-extra/clang-tidy/cert/SetLongJmpCheck.cpp
+index 99f138087abe..4b973be18009 100644
+--- a/clang-tools-extra/clang-tidy/cert/SetLongJmpCheck.cpp
++++ b/clang-tools-extra/clang-tidy/cert/SetLongJmpCheck.cpp
+@@ -31,6 +31,8 @@ public:
+ 
+   void MacroExpands(const Token &MacroNameTok, const MacroDefinition &MD,
+                     SourceRange Range, const MacroArgs *Args) override {
++    if (Check.skipLocation(MacroNameTok.getLocation()))
++      return;
+     const auto *II = MacroNameTok.getIdentifierInfo();
+     if (!II)
+       return;
+diff --git a/clang-tools-extra/clang-tidy/cppcoreguidelines/MacroUsageCheck.cpp b/clang-tools-extra/clang-tidy/cppcoreguidelines/MacroUsageCheck.cpp
+index a6f6ca4c1abd..d76bbdc8a6dd 100644
+--- a/clang-tools-extra/clang-tidy/cppcoreguidelines/MacroUsageCheck.cpp
++++ b/clang-tools-extra/clang-tidy/cppcoreguidelines/MacroUsageCheck.cpp
+@@ -37,6 +37,8 @@ public:
+         IgnoreCommandLineMacros(IgnoreCommandLine) {}
+   void MacroDefined(const Token &MacroNameTok,
+                     const MacroDirective *MD) override {
++    if (Check->skipLocation(MacroNameTok.getLocation()))
++      return;
+     if (SM.isWrittenInBuiltinFile(MD->getLocation()) ||
+         MD->getMacroInfo()->isUsedForHeaderGuard() ||
+         MD->getMacroInfo()->getNumTokens() == 0)
+diff --git a/clang-tools-extra/clang-tidy/google/AvoidUnderscoreInGoogletestNameCheck.cpp b/clang-tools-extra/clang-tidy/google/AvoidUnderscoreInGoogletestNameCheck.cpp
+index 783db8c0131b..937366a825c9 100644
+--- a/clang-tools-extra/clang-tidy/google/AvoidUnderscoreInGoogletestNameCheck.cpp
++++ b/clang-tools-extra/clang-tidy/google/AvoidUnderscoreInGoogletestNameCheck.cpp
+@@ -43,6 +43,8 @@ public:
+   void MacroExpands(const Token &MacroNameToken,
+                     const MacroDefinition &MacroDefinition, SourceRange Range,
+                     const MacroArgs *Args) override {
++    if (Check->skipLocation(MacroNameToken.getLocation()))
++      return;
+     IdentifierInfo *NameIdentifierInfo = MacroNameToken.getIdentifierInfo();
+     if (!NameIdentifierInfo)
+       return;
+diff --git a/clang-tools-extra/clang-tidy/google/TodoCommentCheck.cpp b/clang-tools-extra/clang-tidy/google/TodoCommentCheck.cpp
+index ec099f0e400c..5f693ece949f 100644
+--- a/clang-tools-extra/clang-tidy/google/TodoCommentCheck.cpp
++++ b/clang-tools-extra/clang-tidy/google/TodoCommentCheck.cpp
+@@ -22,6 +22,8 @@ public:
+         TodoMatch("^// *TODO *(\\(.*\\))?:?( )?(.*)$") {}
+ 
+   bool HandleComment(Preprocessor &PP, SourceRange Range) override {
++    if (Check.skipLocation(Range.getBegin()))
++      return false;
+     StringRef Text =
+         Lexer::getSourceText(CharSourceRange::getCharRange(Range),
+                              PP.getSourceManager(), PP.getLangOpts());
+diff --git a/clang-tools-extra/clang-tidy/google/UpgradeGoogletestCaseCheck.cpp b/clang-tools-extra/clang-tidy/google/UpgradeGoogletestCaseCheck.cpp
+index d943b7a1a270..142eea3a0b24 100644
+--- a/clang-tools-extra/clang-tidy/google/UpgradeGoogletestCaseCheck.cpp
++++ b/clang-tools-extra/clang-tidy/google/UpgradeGoogletestCaseCheck.cpp
+@@ -94,6 +94,8 @@ private:
+                  SourceLocation Loc, CheckAction Action) {
+     if (!ReplacementFound)
+       return;
++    if (Check->skipLocation(Loc))
++      return;
+ 
+     std::string Name = PP->getSpelling(MacroNameTok);
+ 
+diff --git a/clang-tools-extra/clang-tidy/llvm/IncludeOrderCheck.cpp b/clang-tools-extra/clang-tidy/llvm/IncludeOrderCheck.cpp
+index c962fb3bc25b..0f1c21d472fe 100644
+--- a/clang-tools-extra/clang-tidy/llvm/IncludeOrderCheck.cpp
++++ b/clang-tools-extra/clang-tidy/llvm/IncludeOrderCheck.cpp
+@@ -80,6 +80,8 @@ void IncludeOrderPPCallbacks::InclusionDirective(
+     bool IsAngled, CharSourceRange FilenameRange, const FileEntry *File,
+     StringRef SearchPath, StringRef RelativePath, const Module *Imported,
+     SrcMgr::CharacteristicKind FileType) {
++  if (Check.skipLocation(HashLoc))
++    return;
+   // We recognize the first include as a special main module header and want
+   // to leave it in the top position.
+   IncludeDirective ID = {HashLoc, FilenameRange, std::string(FileName),
+@@ -148,6 +150,9 @@ void IncludeOrderPPCallbacks::EndOfMainFile() {
+       if (I == E)
+         continue;
+ 
++      if (Check.skipLocation(FileDirectives[I].Loc))
++        continue;
++
+       // Emit a warning.
+       auto D = Check.diag(FileDirectives[I].Loc,
+                           "#includes are not sorted properly");
+diff --git a/clang-tools-extra/clang-tidy/llvmlibc/RestrictSystemLibcHeadersCheck.cpp b/clang-tools-extra/clang-tidy/llvmlibc/RestrictSystemLibcHeadersCheck.cpp
+index e64338756a25..78f26ebd2c59 100644
+--- a/clang-tools-extra/clang-tidy/llvmlibc/RestrictSystemLibcHeadersCheck.cpp
++++ b/clang-tools-extra/clang-tidy/llvmlibc/RestrictSystemLibcHeadersCheck.cpp
+@@ -49,6 +49,8 @@ void RestrictedIncludesPPCallbacks::InclusionDirective(
+     bool IsAngled, CharSourceRange FilenameRange, const FileEntry *File,
+     StringRef SearchPath, StringRef RelativePath, const Module *Imported,
+     SrcMgr::CharacteristicKind FileType) {
++  if (Check.skipLocation(HashLoc))
++    return;
+   // Compiler provided headers are allowed (e.g stddef.h).
+   if (SrcMgr::isSystem(FileType) && SearchPath == CompilerIncudeDir)
+     return;
+diff --git a/clang-tools-extra/clang-tidy/misc/MiscTidyModule.cpp b/clang-tools-extra/clang-tidy/misc/MiscTidyModule.cpp
+index e06768c548bd..15da6f7574f3 100644
+--- a/clang-tools-extra/clang-tidy/misc/MiscTidyModule.cpp
++++ b/clang-tools-extra/clang-tidy/misc/MiscTidyModule.cpp
+@@ -55,7 +55,7 @@ public:
+     CheckFactories.registerCheck<UnusedParametersCheck>(
+         "misc-unused-parameters");
+     CheckFactories.registerCheck<UnusedUsingDeclsCheck>(
+-        "misc-unused-using-decls");
++        "misc-unused-using-decls", true);
+   }
+ };
+ 
+diff --git a/clang-tools-extra/clang-tidy/misc/UnusedUsingDeclsCheck.cpp b/clang-tools-extra/clang-tidy/misc/UnusedUsingDeclsCheck.cpp
+index ca96ab67090c..6a7feb8029cc 100644
+--- a/clang-tools-extra/clang-tidy/misc/UnusedUsingDeclsCheck.cpp
++++ b/clang-tools-extra/clang-tidy/misc/UnusedUsingDeclsCheck.cpp
+@@ -179,7 +179,8 @@ void UnusedUsingDeclsCheck::removeFromFoundDecls(const Decl *D) {
+ 
+ void UnusedUsingDeclsCheck::onEndOfTranslationUnit() {
+   for (const auto &Context : Contexts) {
+-    if (!Context.IsUsed) {
++    if (!Context.IsUsed &&
++        !skipLocation(Context.FoundUsingDecl->getLocation())) {
+       diag(Context.FoundUsingDecl->getLocation(), "using decl %0 is unused")
+           << Context.FoundUsingDecl;
+       // Emit a fix and a fix description of the check;
+diff --git a/clang-tools-extra/clang-tidy/modernize/DeprecatedHeadersCheck.cpp b/clang-tools-extra/clang-tidy/modernize/DeprecatedHeadersCheck.cpp
+index af12fec75ddc..4c416d7ddb05 100644
+--- a/clang-tools-extra/clang-tidy/modernize/DeprecatedHeadersCheck.cpp
++++ b/clang-tools-extra/clang-tidy/modernize/DeprecatedHeadersCheck.cpp
+@@ -94,6 +94,8 @@ void IncludeModernizePPCallbacks::InclusionDirective(
+     bool IsAngled, CharSourceRange FilenameRange, const FileEntry *File,
+     StringRef SearchPath, StringRef RelativePath, const Module *Imported,
+     SrcMgr::CharacteristicKind FileType) {
++  if (Check.skipLocation(HashLoc))
++    return;
+   // FIXME: Take care of library symbols from the global namespace.
+   //
+   // Reasonable options for the check:
+diff --git a/clang-tools-extra/clang-tidy/modernize/ReplaceDisallowCopyAndAssignMacroCheck.cpp b/clang-tools-extra/clang-tidy/modernize/ReplaceDisallowCopyAndAssignMacroCheck.cpp
+index 9752fd0a9e95..9e5074e3b6d3 100644
+--- a/clang-tools-extra/clang-tidy/modernize/ReplaceDisallowCopyAndAssignMacroCheck.cpp
++++ b/clang-tools-extra/clang-tidy/modernize/ReplaceDisallowCopyAndAssignMacroCheck.cpp
+@@ -27,6 +27,9 @@ public:
+ 
+   void MacroExpands(const Token &MacroNameTok, const MacroDefinition &MD,
+                     SourceRange Range, const MacroArgs *Args) override {
++    if (Check.skipLocation(MacroNameTok.getLocation()))
++      return;
++
+     IdentifierInfo *Info = MacroNameTok.getIdentifierInfo();
+     if (!Info || !Args || Args->getNumMacroArguments() != 1)
+       return;
+diff --git a/clang-tools-extra/clang-tidy/modernize/UseNullptrCheck.cpp b/clang-tools-extra/clang-tidy/modernize/UseNullptrCheck.cpp
+index 5ca2be2eb556..3821ab6364a0 100644
+--- a/clang-tools-extra/clang-tidy/modernize/UseNullptrCheck.cpp
++++ b/clang-tools-extra/clang-tidy/modernize/UseNullptrCheck.cpp
+@@ -217,6 +217,12 @@ public:
+       return true;
+     }
+ 
++    // When Stmt S does not have a "valid" location,
++    // skipLocation won't skip it.
++    // So we need to check here if C should be skipped.
++    if (Check.skipLocation(C->getBeginLoc()))
++      return true;
++
+     auto* CastSubExpr = C->getSubExpr()->IgnoreParens();
+     // Ignore cast expressions which cast nullptr literal.
+     if (isa<CXXNullPtrLiteralExpr>(CastSubExpr)) {
+diff --git a/clang-tools-extra/clang-tidy/portability/RestrictSystemIncludesCheck.cpp b/clang-tools-extra/clang-tidy/portability/RestrictSystemIncludesCheck.cpp
+index f6163989a461..7143b044ac32 100644
+--- a/clang-tools-extra/clang-tidy/portability/RestrictSystemIncludesCheck.cpp
++++ b/clang-tools-extra/clang-tidy/portability/RestrictSystemIncludesCheck.cpp
+@@ -25,6 +25,8 @@ void RestrictedIncludesPPCallbacks::InclusionDirective(
+     bool IsAngled, CharSourceRange FilenameRange, const FileEntry *File,
+     StringRef SearchPath, StringRef RelativePath, const Module *Imported,
+     SrcMgr::CharacteristicKind FileType) {
++  if (Check.skipLocation(HashLoc))
++    return;
+   if (!Check.contains(FileName) && SrcMgr::isSystem(FileType)) {
+     SmallString<256> FullPath;
+     llvm::sys::path::append(FullPath, SearchPath);
+diff --git a/clang-tools-extra/clang-tidy/portability/RestrictSystemIncludesCheck.h b/clang-tools-extra/clang-tidy/portability/RestrictSystemIncludesCheck.h
+index 80eddf7bcee7..3774aaaef822 100644
+--- a/clang-tools-extra/clang-tidy/portability/RestrictSystemIncludesCheck.h
++++ b/clang-tools-extra/clang-tidy/portability/RestrictSystemIncludesCheck.h
+@@ -74,7 +74,9 @@ private:
+   using FileIncludes = llvm::SmallVector<IncludeDirective, 8>;
+   llvm::SmallDenseMap<FileID, FileIncludes> IncludeDirectives;
+ 
++protected:
+   RestrictSystemIncludesCheck &Check;
++private:
+   const SourceManager &SM;
+ };
+ 
+diff --git a/clang-tools-extra/clang-tidy/readability/ElseAfterReturnCheck.cpp b/clang-tools-extra/clang-tidy/readability/ElseAfterReturnCheck.cpp
+index 0558b4101637..1ea9e4bb56cd 100644
+--- a/clang-tools-extra/clang-tidy/readability/ElseAfterReturnCheck.cpp
++++ b/clang-tools-extra/clang-tidy/readability/ElseAfterReturnCheck.cpp
+@@ -6,6 +6,7 @@
+ //
+ //===----------------------------------------------------------------------===//
+ 
++#include "../ClangTidyDiagnosticConsumer.h"
+ #include "ElseAfterReturnCheck.h"
+ #include "clang/AST/ASTContext.h"
+ #include "clang/ASTMatchers/ASTMatchFinder.h"
+@@ -29,6 +30,8 @@ public:
+       const SourceManager &SM)
+       : Collections(Collections), SM(SM) {}
+   void Endif(SourceLocation Loc, SourceLocation IfLoc) override {
++    if (ClangTidyDiagnosticConsumer::skipLocation(Loc))
++      return;
+     if (!SM.isWrittenInSameFile(Loc, IfLoc))
+       return;
+     SmallVectorImpl<SourceRange> &Collection = Collections[SM.getFileID(Loc)];
+diff --git a/clang-tools-extra/clang-tidy/readability/RedundantPreprocessorCheck.cpp b/clang-tools-extra/clang-tidy/readability/RedundantPreprocessorCheck.cpp
+index 46dd82bd118d..7732a58c052c 100644
+--- a/clang-tools-extra/clang-tidy/readability/RedundantPreprocessorCheck.cpp
++++ b/clang-tools-extra/clang-tidy/readability/RedundantPreprocessorCheck.cpp
+@@ -37,6 +37,8 @@ public:
+ 
+   void If(SourceLocation Loc, SourceRange ConditionRange,
+           ConditionValueKind ConditionValue) override {
++    if (Check.skipLocation(Loc))
++      return;
+     StringRef Condition =
+         Lexer::getSourceText(CharSourceRange::getTokenRange(ConditionRange),
+                              PP.getSourceManager(), PP.getLangOpts());
+@@ -45,6 +47,8 @@ public:
+ 
+   void Ifdef(SourceLocation Loc, const Token &MacroNameTok,
+              const MacroDefinition &MacroDefinition) override {
++    if (Check.skipLocation(Loc))
++      return;
+     std::string MacroName = PP.getSpelling(MacroNameTok);
+     checkMacroRedundancy(Loc, MacroName, IfdefStack, DK_Ifdef, DK_Ifdef, true);
+     checkMacroRedundancy(Loc, MacroName, IfndefStack, DK_Ifdef, DK_Ifndef,
+@@ -53,6 +57,8 @@ public:
+ 
+   void Ifndef(SourceLocation Loc, const Token &MacroNameTok,
+               const MacroDefinition &MacroDefinition) override {
++    if (Check.skipLocation(Loc))
++      return;
+     std::string MacroName = PP.getSpelling(MacroNameTok);
+     checkMacroRedundancy(Loc, MacroName, IfndefStack, DK_Ifndef, DK_Ifndef,
+                          true);
+@@ -61,6 +67,8 @@ public:
+   }
+ 
+   void Endif(SourceLocation Loc, SourceLocation IfLoc) override {
++    if (Check.skipLocation(Loc))
++      return;
+     if (!IfStack.empty() && IfLoc == IfStack.back().Loc)
+       IfStack.pop_back();
+     if (!IfdefStack.empty() && IfLoc == IfdefStack.back().Loc)
+diff --git a/clang-tools-extra/clang-tidy/readability/SimplifyBooleanExprCheck.cpp b/clang-tools-extra/clang-tidy/readability/SimplifyBooleanExprCheck.cpp
+index 4ea8ef65d3f8..fbedd3ff582d 100644
+--- a/clang-tools-extra/clang-tidy/readability/SimplifyBooleanExprCheck.cpp
++++ b/clang-tools-extra/clang-tidy/readability/SimplifyBooleanExprCheck.cpp
+@@ -345,7 +345,8 @@ class SimplifyBooleanExprCheck::Visitor : public RecursiveASTVisitor<Visitor> {
+       : Check(Check), Result(Result) {}
+ 
+   bool VisitBinaryOperator(BinaryOperator *Op) {
+-    Check->reportBinOp(Result, Op);
++    if (!Check->skipLocation(Op->getBeginLoc()))
++      Check->reportBinOp(Result, Op);
+     return true;
+   }
+ 
+diff --git a/clang-tools-extra/clang-tidy/tool/ClangTidyMain.cpp b/clang-tools-extra/clang-tidy/tool/ClangTidyMain.cpp
+index 6147d90eb10b..84ea8bc83972 100644
+--- a/clang-tools-extra/clang-tidy/tool/ClangTidyMain.cpp
++++ b/clang-tools-extra/clang-tidy/tool/ClangTidyMain.cpp
+@@ -95,10 +95,23 @@ option in .clang-tidy file, if any.
+                                          cl::init(""),
+                                          cl::cat(ClangTidyCategory));
+ 
++static cl::opt<bool> ShowAllWarnings("show-all-warnings",
++                                     cl::desc("Display all warning messages."),
++                                     cl::init(false), cl::Hidden,
++                                     cl::cat(ClangTidyCategory));
++
++static cl::opt<bool> SkipHeaders("skip-headers", cl::desc(R"(
++Do not check included header files, but
++files matching the --header-filter pattern are still checked.
++System headers are still checked if --system-headers is true.
++)"),
++                                 cl::init(true), cl::cat(ClangTidyCategory));
++
+ static cl::opt<bool>
+     SystemHeaders("system-headers",
+                   cl::desc("Display the errors from system headers."),
+                   cl::init(false), cl::cat(ClangTidyCategory));
++
+ static cl::opt<std::string> LineFilter("line-filter", cl::desc(R"(
+ List of files with line ranges to filter the
+ warnings. Can be used together with
+@@ -300,6 +313,8 @@ static std::unique_ptr<ClangTidyOptionsProvider> createOptionsProvider(
+   DefaultOptions.Checks = DefaultChecks;
+   DefaultOptions.WarningsAsErrors = "";
+   DefaultOptions.HeaderFilterRegex = HeaderFilter;
++  DefaultOptions.ShowAllWarnings = ShowAllWarnings;
++  DefaultOptions.SkipHeaders = SkipHeaders;
+   DefaultOptions.SystemHeaders = SystemHeaders;
+   DefaultOptions.FormatStyle = FormatStyle;
+   DefaultOptions.User = llvm::sys::Process::GetEnv("USER");
+@@ -314,6 +329,10 @@ static std::unique_ptr<ClangTidyOptionsProvider> createOptionsProvider(
+     OverrideOptions.WarningsAsErrors = WarningsAsErrors;
+   if (HeaderFilter.getNumOccurrences() > 0)
+     OverrideOptions.HeaderFilterRegex = HeaderFilter;
++  if (ShowAllWarnings.getNumOccurrences() > 0)
++    OverrideOptions.ShowAllWarnings = ShowAllWarnings;
++  if (SkipHeaders.getNumOccurrences() > 0)
++    OverrideOptions.SkipHeaders = SkipHeaders;
+   if (SystemHeaders.getNumOccurrences() > 0)
+     OverrideOptions.SystemHeaders = SystemHeaders;
+   if (FormatStyle.getNumOccurrences() > 0)
+diff --git a/clang-tools-extra/clang-tidy/utils/HeaderGuard.cpp b/clang-tools-extra/clang-tidy/utils/HeaderGuard.cpp
+index 1cae618dfd09..30f69fb069f4 100644
+--- a/clang-tools-extra/clang-tidy/utils/HeaderGuard.cpp
++++ b/clang-tools-extra/clang-tidy/utils/HeaderGuard.cpp
+@@ -79,6 +79,9 @@ public:
+       if (!MI->isUsedForHeaderGuard())
+         continue;
+ 
++      if (Check->skipLocation(MI->getDefinitionLoc()))
++        continue;
++
+       const FileEntry *FE =
+           SM.getFileEntryForID(SM.getFileID(MI->getDefinitionLoc()));
+       std::string FileName = cleanPath(FE->getName());
+@@ -214,6 +217,8 @@ public:
+       SourceLocation StartLoc = SM.getLocForStartOfFile(FID);
+       if (StartLoc.isInvalid())
+         continue;
++      if (Check->skipLocation(StartLoc))
++        continue;
+ 
+       std::string CPPVar = Check->getHeaderGuard(FileName);
+       std::string CPPVarUnder = CPPVar + '_'; // Allow a trailing underscore.
+diff --git a/clang-tools-extra/clang-tidy/utils/IncludeInserter.cpp b/clang-tools-extra/clang-tidy/utils/IncludeInserter.cpp
+index 5fc6020d4265..022bbe4e359c 100644
+--- a/clang-tools-extra/clang-tidy/utils/IncludeInserter.cpp
++++ b/clang-tools-extra/clang-tidy/utils/IncludeInserter.cpp
+@@ -6,6 +6,7 @@
+ //
+ //===----------------------------------------------------------------------===//
+ 
++#include "../ClangTidyDiagnosticConsumer.h"
+ #include "IncludeInserter.h"
+ #include "clang/Lex/PPCallbacks.h"
+ #include "clang/Lex/Preprocessor.h"
+@@ -28,6 +29,8 @@ public:
+                           StringRef /*SearchPath*/, StringRef /*RelativePath*/,
+                           const Module * /*ImportedModule*/,
+                           SrcMgr::CharacteristicKind /*FileType*/) override {
++    if (ClangTidyDiagnosticConsumer::skipLocation(HashLocation))
++      return;
+     Inserter->addInclude(FileNameRef, IsAngled, HashLocation,
+                          IncludeToken.getEndLoc());
+   }
+diff --git a/clang-tools-extra/clang-tidy/utils/RenamerClangTidyCheck.cpp b/clang-tools-extra/clang-tidy/utils/RenamerClangTidyCheck.cpp
+index 2bb97eca14ab..9cf33358ea77 100644
+--- a/clang-tools-extra/clang-tidy/utils/RenamerClangTidyCheck.cpp
++++ b/clang-tools-extra/clang-tidy/utils/RenamerClangTidyCheck.cpp
+@@ -73,6 +73,8 @@ public:
+   /// MacroDefined calls checkMacro for macros in the main file
+   void MacroDefined(const Token &MacroNameTok,
+                     const MacroDirective *MD) override {
++    if (Check->skipLocation(MacroNameTok.getLocation()))
++      return;
+     if (MD->getMacroInfo()->isBuiltinMacro())
+       return;
+     if (PP->getSourceManager().isWrittenInBuiltinFile(
+@@ -88,6 +90,8 @@ public:
+   void MacroExpands(const Token &MacroNameTok, const MacroDefinition &MD,
+                     SourceRange /*Range*/,
+                     const MacroArgs * /*Args*/) override {
++    if (Check->skipLocation(MacroNameTok.getLocation()))
++      return;
+     Check->expandMacro(MacroNameTok, MD.getMacroInfo());
+   }
+ 
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/bugprone-forward-declaration-namespace/a.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/bugprone-forward-declaration-namespace/a.h
+new file mode 100644
+index 000000000000..d0d602cd1c2f
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/bugprone-forward-declaration-namespace/a.h
+@@ -0,0 +1,9 @@
++namespace {
++// This is a declaration in a wrong namespace.
++class T_A;
++} // namespace
++
++namespace na {
++// This is a declaration in a wrong namespace.
++class T_A;
++} // namespace na
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/bugprone-forward-declaration-namespace/b.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/bugprone-forward-declaration-namespace/b.h
+new file mode 100644
+index 000000000000..9fde97ae8f85
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/bugprone-forward-declaration-namespace/b.h
+@@ -0,0 +1,9 @@
++namespace nb {
++class T_B;
++}
++
++namespace nb {
++class T_B {
++  int x;
++};
++} // namespace nb
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/modernize-pass-by-value/header.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/modernize-pass-by-value/header.h
+index c2103cb3fc7a..ce5e1b1089af 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/Inputs/modernize-pass-by-value/header.h
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/modernize-pass-by-value/header.h
+@@ -8,3 +8,10 @@ struct A {
+   A(const ThreadId &tid) : threadid(tid) {}
+   ThreadId threadid;
+ };
++
++struct Movable {
++  int a, b, c;
++  Movable() = default;
++  Movable(const Movable &) {}
++  Movable(Movable &&) {}
++};
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/a.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/a.h
+new file mode 100644
+index 000000000000..9af024ea4d5a
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/a.h
+@@ -0,0 +1,4 @@
++class A {
++#include "b.h"
++  void fooA(int x) { x = 1; };
++};
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/b.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/b.h
+new file mode 100644
+index 000000000000..712b57c0b89d
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/b.h
+@@ -0,0 +1,4 @@
++class B {
++  // expect a warning on fooB
++  void fooB(int x) { x = 2; };
++};
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/c.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/c.h
+new file mode 100644
+index 000000000000..bda6943c8f85
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/c.h
+@@ -0,0 +1,9 @@
++template <class T>
++class C {
++public:
++  template <class R>
++  explicit C(const R r, int *x = 0) : p(x) {}
++
++private:
++  int *p;
++};
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/c1.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/c1.h
+new file mode 100644
+index 000000000000..548b61ad594a
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/c1.h
+@@ -0,0 +1,10 @@
++#ifndef C1_H_
++#define C1_H_
++
++struct C1 {
++  static int foo1(int n = 1ll);
++  int foo2(int n = 2ll);
++  int foo3(int n);
++};
++
++#endif // C1_H_
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/my_header1.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/my_header1.h
+new file mode 100644
+index 000000000000..c657c8ccaab0
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/my_header1.h
+@@ -0,0 +1,3 @@
++// no header guard
++
++#include "my_header2.h"
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/my_header2.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/my_header2.h
+new file mode 100644
+index 000000000000..277f01d619f5
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/skip-headers/my_header2.h
+@@ -0,0 +1,6 @@
++// bad header guard
++#ifndef SOME_MACRO
++
++int abc = 123; // bad definition in .h file
++
++#endif
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/Inputs/unused-using-decls.h b/clang-tools-extra/test/clang-tidy/checkers/Inputs/unused-using-decls.h
+index 8245cb19feb0..be2661e35a51 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/Inputs/unused-using-decls.h
++++ b/clang-tools-extra/test/clang-tidy/checkers/Inputs/unused-using-decls.h
+@@ -9,3 +9,11 @@ public:
+     S();
+   }
+ };
++
++QC1 *foo();
++
++namespace Q2 {
++class QC2 {};
++} // namespace Q2
++using Q2::QC2;
++// not used QC2 should have warning only when .h file is selected with --header-filter
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/abseil-no-internal-dependencies.cpp b/clang-tools-extra/test/clang-tidy/checkers/abseil-no-internal-dependencies.cpp
+index 2949d7fdd027..549694c3c2f4 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/abseil-no-internal-dependencies.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/abseil-no-internal-dependencies.cpp
+@@ -1,5 +1,5 @@
+-// RUN: %check_clang_tidy %s abseil-no-internal-dependencies %t,  -- -- -I %S/Inputs
+-// RUN: clang-tidy -checks='-*, abseil-no-internal-dependencies' -header-filter='.*' %s -- -I %S/Inputs 2>&1 | FileCheck %s
++// RUN: %check_clang_tidy %s abseil-no-internal-dependencies %t,  -- --skip-headers=0 -- -I %S/Inputs
++// RUN: clang-tidy --skip-headers=0 -checks='-*, abseil-no-internal-dependencies' -header-filter='.*' %s -- -I %S/Inputs 2>&1 | FileCheck %s
+ 
+ #include "absl/strings/internal-file.h"
+ #include "absl/flags/internal-file.h"
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/abseil-upgrade-duration-conversions.cpp b/clang-tools-extra/test/clang-tidy/checkers/abseil-upgrade-duration-conversions.cpp
+index 32e65a63eb1c..e7635ef3f77b 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/abseil-upgrade-duration-conversions.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/abseil-upgrade-duration-conversions.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy -std=c++11-or-later %s abseil-upgrade-duration-conversions %t -- -- -I%S/Inputs
++// RUN: %check_clang_tidy -std=c++11-or-later %s abseil-upgrade-duration-conversions %t -- --skip-headers=0 -- -I%S/Inputs
++// RUN: %check_clang_tidy -std=c++11-or-later %s abseil-upgrade-duration-conversions %t -- --skip-headers -- -I%S/Inputs
+ 
+ using int64_t = long long;
+ 
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/bugprone-forward-declaration-namespace-header.cpp b/clang-tools-extra/test/clang-tidy/checkers/bugprone-forward-declaration-namespace-header.cpp
+new file mode 100644
+index 000000000000..7bbd97f993ba
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/bugprone-forward-declaration-namespace-header.cpp
+@@ -0,0 +1,175 @@
++// Same output with skip-headers=0, skip-headers=1, or skip-headers
++//
++// With --skip-headers=0 and no --header-filter, there should be no warning
++// shown for a.h or b.h. But there seems to be a bug and we are seeing the A1 warnings.
++// RUN: %check_clang_tidy -check-suffixes=ALL,A1 %s bugprone-forward-declaration-namespace %t -- --skip-headers=0 \
++// RUN:   -- -I%S/Inputs/bugprone-forward-declaration-namespace
++// RUN: %check_clang_tidy -check-suffixes=ALL %s bugprone-forward-declaration-namespace %t -- --skip-headers=1 \
++// RUN:   -- -I%S/Inputs/bugprone-forward-declaration-namespace
++// RUN: %check_clang_tidy -check-suffixes=ALL %s bugprone-forward-declaration-namespace %t -- --skip-headers \
++// RUN:   -- -I%S/Inputs/bugprone-forward-declaration-namespace
++//
++// Same output with header-filter=b.h because there is no warning on b.h
++// RUN: %check_clang_tidy -check-suffixes=ALL %s bugprone-forward-declaration-namespace %t -- --skip-headers \
++// RUN:   --header-filter=b.h -- -I%S/Inputs/bugprone-forward-declaration-namespace
++//
++// With --header-filter, we should see all warnings from a.h.
++// RUN: %check_clang_tidy -check-suffixes=ALL,A,A1 %s bugprone-forward-declaration-namespace %t -- --skip-headers=0 \
++// RUN:   --header-filter=.* -- -I%S/Inputs/bugprone-forward-declaration-namespace
++// RUN: %check_clang_tidy -check-suffixes=ALL,A,A1 %s bugprone-forward-declaration-namespace %t -- --skip-headers \
++// RUN:   --header-filter=.* -- -I%S/Inputs/bugprone-forward-declaration-namespace
++// RUN: %check_clang_tidy -check-suffixes=ALL,A,A1 %s bugprone-forward-declaration-namespace %t -- --skip-headers=0 \
++// RUN:   --header-filter=a.h -- -I%S/Inputs/bugprone-forward-declaration-namespace
++// RUN: %check_clang_tidy -check-suffixes=ALL,A,A1 %s bugprone-forward-declaration-namespace %t -- --skip-headers \
++// RUN:   --header-filter=a.h -- -I%S/Inputs/bugprone-forward-declaration-namespace
++
++#include "a.h"
++
++class T_A;
++
++class T_A {
++  int x;
++};
++
++class NESTED;
++// CHECK-NOTES-ALL-DAG: :[[@LINE-1]]:7: warning: no definition found for 'NESTED', but a definition with the same name 'NESTED' found in another namespace '(anonymous namespace)::nq::(anonymous)'
++// CHECK-NOTES-ALL-DAG: note: a definition of 'NESTED' is found here
++
++namespace {
++namespace nq {
++namespace {
++class NESTED {};
++} // namespace
++} // namespace nq
++} // namespace
++
++namespace na {
++class T_B;
++// CHECK-NOTES-ALL-DAG: :[[@LINE-1]]:7: warning: declaration 'T_B' is never referenced, but a declaration with the same name found in another namespace 'nb'
++// CHECK-NOTES-ALL-DAG: note: a declaration of 'T_B' is found here
++// CHECK-NOTES-ALL-DAG: :[[@LINE-3]]:7: warning: no definition found for 'T_B', but a definition with the same name 'T_B' found in another namespace 'nb'
++// CHECK-NOTES-ALL-DAG: note: a definition of 'T_B' is found here
++} // namespace na
++
++#include "b.h"
++
++namespace na {
++class T_B;
++// CHECK-NOTES-ALL-DAG: :[[@LINE-1]]:7: warning: declaration 'T_B' is never referenced, but a declaration with the same name found in another namespace 'nb'
++// CHECK-NOTES-ALL-DAG: note: a declaration of 'T_B' is found here
++// CHECK-NOTES-ALL-DAG: :[[@LINE-3]]:7: warning: no definition found for 'T_B', but a definition with the same name 'T_B' found in another namespace 'nb'
++// CHECK-NOTES-ALL-DAG: note: a definition of 'T_B' is found here
++} // namespace na
++
++// A simple forward declaration. Although it is never used, but no declaration
++// with the same name is found in other namespace.
++class OUTSIDER;
++
++namespace na {
++// This class is referenced declaration, we don't generate warning.
++class OUTSIDER_1;
++} // namespace na
++
++void f(na::OUTSIDER_1);
++
++namespace nc {
++// This class is referenced as friend in OOP.
++class OUTSIDER_1;
++
++class OOP {
++  friend struct OUTSIDER_1;
++};
++} // namespace nc
++
++namespace nd {
++class OUTSIDER_1;
++void f(OUTSIDER_1 *);
++} // namespace nd
++
++namespace nb {
++class OUTSIDER_1;
++// CHECK-NOTES-ALL-DAG: :[[@LINE-1]]:7: warning: declaration 'OUTSIDER_1' is never referenced, but a declaration with the same name found in another namespace 'na'
++// CHECK-NOTES-ALL-DAG: note: a declaration of 'OUTSIDER_1' is found here
++} // namespace nb
++
++namespace na {
++template <typename T>
++class T_C;
++}
++
++namespace nb {
++// FIXME: this is an error, but we don't consider template class declaration
++// now.
++template <typename T>
++class T_C;
++} // namespace nb
++
++namespace na {
++template <typename T>
++class T_C {
++  int x;
++};
++} // namespace na
++
++namespace na {
++
++template <typename T>
++class T_TEMP {
++  template <typename _Tp1>
++  struct rebind { typedef T_TEMP<_Tp1> other; };
++};
++
++// We ignore class template specialization.
++template class T_TEMP<char>;
++} // namespace na
++
++namespace nb {
++
++template <typename T>
++class T_TEMP_1 {
++  template <typename _Tp1>
++  struct rebind { typedef T_TEMP_1<_Tp1> other; };
++};
++
++// We ignore class template specialization.
++extern template class T_TEMP_1<char>;
++} // namespace nb
++
++namespace nd {
++class D;
++// CHECK-NOTES-ALL-DAG: :[[@LINE-1]]:7: warning: declaration 'D' is never referenced, but a declaration with the same name found in another namespace 'nd::ne'
++// CHECK-NOTES-ALL-DAG: note: a declaration of 'D' is found here
++} // namespace nd
++
++namespace nd {
++namespace ne {
++class D;
++}
++} // namespace nd
++
++int f(nd::ne::D &d);
++
++// This should be ignored by the check.
++template <typename... Args>
++class Observer {
++  class Impl;
++};
++
++template <typename... Args>
++class Observer<Args...>::Impl {
++};
++
++// Depending on test platforms, sometimes the warnings from .h files appear
++// after the main file warnings. Use -DAG suffix to match different orders.
++//
++// Warnings on namespace { class T_A; }
++// CHECK-NOTES-A-DAG: warning: declaration 'T_A' is never referenced, but a declaration with the same name found in another namespace 'na' [bugprone-forward-declaration-namespace]
++// CHECK-NOTES-A-DAG: note: a declaration of 'T_A' is found here
++// CHECK-NOTES-A1-DAG: warning: no definition found for 'T_A', but a definition with the same name 'T_A' found in another namespace '(global)' [bugprone-forward-declaration-namespace]
++// CHECK-NOTES-A1-DAG: note: a definition of 'T_A' is found here
++//
++// Warnings on namespace na { class T_A; }
++// CHECK-NOTES-A-DAG: warning: declaration 'T_A' is never referenced, but a declaration with the same name found in another namespace '(anonymous)'
++// CHECK-NOTES-A-DAG: note: a declaration of 'T_A' is found here
++// CHECK-NOTES-A1-DAG: warning: no definition found for 'T_A', but a definition with the same name 'T_A' found in another namespace '(global)'
++// CHECK-NOTES-A1-DAG: note: a definition of 'T_A' is found here
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/bugprone-forward-declaration-namespace.cpp b/clang-tools-extra/test/clang-tidy/checkers/bugprone-forward-declaration-namespace.cpp
+index e0b2258778fe..5736781432a4 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/bugprone-forward-declaration-namespace.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/bugprone-forward-declaration-namespace.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s bugprone-forward-declaration-namespace %t
++// RUN: %check_clang_tidy %s bugprone-forward-declaration-namespace %t -- --skip-headers=0
++// RUN: %check_clang_tidy %s bugprone-forward-declaration-namespace %t -- --skip-headers
+ 
+ namespace {
+ // This is a declaration in a wrong namespace.
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/bugprone-reserved-identifier.cpp b/clang-tools-extra/test/clang-tidy/checkers/bugprone-reserved-identifier.cpp
+index 555c673a3f43..27d4a01cb7aa 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/bugprone-reserved-identifier.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/bugprone-reserved-identifier.cpp
+@@ -1,4 +1,9 @@
+-// RUN: %check_clang_tidy %s bugprone-reserved-identifier %t -- -- \
++// RUN: %check_clang_tidy -check-suffixes=,DEFAULT \
++// RUN:   %s bugprone-reserved-identifier %t -- --skip-headers=0 -- \
++// RUN:   -I%S/Inputs/bugprone-reserved-identifier \
++// RUN:   -isystem %S/Inputs/bugprone-reserved-identifier/system
++// RUN: %check_clang_tidy -check-suffixes=,SKIPHEADER \
++// RUN:   %s bugprone-reserved-identifier %t -- --skip-headers -- \
+ // RUN:   -I%S/Inputs/bugprone-reserved-identifier \
+ // RUN:   -isystem %S/Inputs/bugprone-reserved-identifier/system
+ 
+@@ -204,3 +209,9 @@ void function_() {}
+ using alias_ = int;
+ template <typename templateParam_>
+ struct S_ {};
++
++// Warnings in included files are suppressed by default.
++// CHECK-MESSAGES-DEFAULT: Suppressed {{.*}} warnings
++//
++// With --skip-headers, warnings in header files are skip, not suppressed.
++// CHECK-MESSAGES-SKIPHEADER-NOT: Suppressed {{.*}} warnings
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/bugprone-suspicious-include.cpp b/clang-tools-extra/test/clang-tidy/checkers/bugprone-suspicious-include.cpp
+index 9f4dd1288704..8b74edfb7559 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/bugprone-suspicious-include.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/bugprone-suspicious-include.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s bugprone-suspicious-include %t -- -- -isystem %S/Inputs/Headers -fmodules
++// RUN: %check_clang_tidy %s bugprone-suspicious-include %t -- --skip-headers=0 -- -isystem %S/Inputs/Headers -fmodules
++// RUN: %check_clang_tidy %s bugprone-suspicious-include %t -- --skip-headers -- -isystem %S/Inputs/Headers -fmodules
+ 
+ // clang-format off
+ 
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/cppcoreguidelines-interfaces-global-init.cpp b/clang-tools-extra/test/clang-tidy/checkers/cppcoreguidelines-interfaces-global-init.cpp
+index 51f79e522c0c..af2c57c47944 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/cppcoreguidelines-interfaces-global-init.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/cppcoreguidelines-interfaces-global-init.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s cppcoreguidelines-interfaces-global-init %t
++// RUN: %check_clang_tidy %s cppcoreguidelines-interfaces-global-init %t -- --skip-headers=0
++// RUN: %check_clang_tidy %s cppcoreguidelines-interfaces-global-init %t -- --skip-headers
+ 
+ constexpr int makesInt() { return 3; }
+ constexpr int takesInt(int i) { return i + 1; }
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/cppcoreguidelines-macro-usage-command-line-macros.cpp b/clang-tools-extra/test/clang-tidy/checkers/cppcoreguidelines-macro-usage-command-line-macros.cpp
+index 339b5fbd7184..519493645ca1 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/cppcoreguidelines-macro-usage-command-line-macros.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/cppcoreguidelines-macro-usage-command-line-macros.cpp
+@@ -1,6 +1,11 @@
+-// RUN: %check_clang_tidy -check-suffixes=NORMAL %s cppcoreguidelines-macro-usage %t -- -- -D_ZZZ_IM_A_MACRO
+-// RUN: %check_clang_tidy -check-suffixes=NORMAL %s cppcoreguidelines-macro-usage %t -- -config='{CheckOptions: [{key: cppcoreguidelines-macro-usage.IgnoreCommandLineMacros, value: true}]}' -- -D_ZZZ_IM_A_MACRO
+-// RUN: %check_clang_tidy -check-suffixes=NORMAL,CL %s cppcoreguidelines-macro-usage %t -- -config='{CheckOptions: [{key: cppcoreguidelines-macro-usage.IgnoreCommandLineMacros, value: false}]}' -- -D_ZZZ_IM_A_MACRO
++// RUN: %check_clang_tidy -check-suffixes=NORMAL %s cppcoreguidelines-macro-usage %t -- --skip-headers=0 -- -D_ZZZ_IM_A_MACRO
++// RUN: %check_clang_tidy -check-suffixes=NORMAL %s cppcoreguidelines-macro-usage %t -- --skip-headers=0 -config='{CheckOptions: [{key: cppcoreguidelines-macro-usage.IgnoreCommandLineMacros, value: true}]}' -- -D_ZZZ_IM_A_MACRO
++// RUN: %check_clang_tidy -check-suffixes=NORMAL,CL %s cppcoreguidelines-macro-usage %t -- --skip-headers=0 -config='{CheckOptions: [{key: cppcoreguidelines-macro-usage.IgnoreCommandLineMacros, value: false}]}' -- -D_ZZZ_IM_A_MACRO
++//
++// Should work with --skip-header too.
++// RUN: %check_clang_tidy -check-suffixes=NORMAL %s cppcoreguidelines-macro-usage %t -- --skip-headers -- -D_ZZZ_IM_A_MACRO
++// RUN: %check_clang_tidy -check-suffixes=NORMAL %s cppcoreguidelines-macro-usage %t -- --skip-headers -config='{CheckOptions: [{key: cppcoreguidelines-macro-usage.IgnoreCommandLineMacros, value: true}]}' -- -D_ZZZ_IM_A_MACRO
++// RUN: %check_clang_tidy -check-suffixes=NORMAL,CL %s cppcoreguidelines-macro-usage %t -- --skip-headers -config='{CheckOptions: [{key: cppcoreguidelines-macro-usage.IgnoreCommandLineMacros, value: false}]}' -- -D_ZZZ_IM_A_MACRO
+ 
+ // CHECK-MESSAGES-CL: warning: macro '_ZZZ_IM_A_MACRO' used to declare a constant; consider using a 'constexpr' constant
+ 
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/google-namespaces.cpp b/clang-tools-extra/test/clang-tidy/checkers/google-namespaces.cpp
+index 9bda3c0451b3..57460cb064e6 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/google-namespaces.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/google-namespaces.cpp
+@@ -1,6 +1,32 @@
+-// RUN: clang-tidy %s -checks='-*,google-build-namespaces,google-build-using-namespace' -header-filter='.*' -- | FileCheck %s -implicit-check-not="{{warning|error}}:"
++// RUN: clang-tidy %s --skip-headers=0 -checks='-*,google-build-namespaces,google-build-using-namespace' -header-filter='.*' -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes CHECK,CHECK1 -implicit-check-not="{{warning|error}}:"
++
++// RUN: clang-tidy %s --skip-headers=0 -checks='-*,google-build-namespaces,google-build-using-namespace' -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes CHECK,CHECK0 -implicit-check-not="{{warning|error}}:"
++//
++// RUN: clang-tidy %s --skip-headers -checks='-*,google-build-namespaces,google-build-using-namespace' -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes CHECK,CHECK2 -implicit-check-not="{{warning|error}}:"
++//
++// -header-filter overrides --skip-header
++// RUN: clang-tidy %s --skip-headers -header-filter='.*' -checks='-*,google-build-namespaces,google-build-using-namespace' -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes CHECK,CHECK1 -implicit-check-not="{{warning|error}}:"
++//
++// --show-all-warnings is like -header-filter=.* + -system-headers
++// RUN: clang-tidy %s --skip-headers=0 --show-all-warnings -checks='-*,google-build-namespaces,google-build-using-namespace' -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes CHECK,CHECK1 -implicit-check-not="{{warning|error}}:"
++
++// --skip-header skips 1 warning in the header file.
++// CHECK0: 7 warnings generated
++// CHECK1: 7 warnings generated
++// CHECK2: 6 warnings generated
++
+ #include "Inputs/google-namespaces.h"
+-// CHECK: warning: do not use unnamed namespaces in header files [google-build-namespaces]
++// with -header-filter, warning in .h file is shown
++// CHECK1: warning: do not use unnamed namespaces in header files [google-build-namespaces]
++// without -header-filter, warning in .h files are not shown
++// CHECK0-NOT: warning: do not use unnamed namespaces in header files [google-build-namespaces]
++// with --skip-header, no warning in .h file is detected at all
++// CHECK2-NOT: warning: do not use unnamed namespaces in header files [google-build-namespaces]
+ 
+ using namespace spaaaace;
+ // CHECK: :[[@LINE-1]]:1: warning: do not use namespace using-directives; use using-declarations instead [google-build-using-namespace]
+@@ -50,3 +76,14 @@ namespace foo_literals {}
+ 
+ using namespace foo_literals;
+ // CHECK: :[[@LINE-1]]:1: warning: do not use namespace using-directives; use using-declarations instead [google-build-using-namespace]
++
++// If -header-filter= is not used and there is some warning in .h file,
++// give a reminder to use -header-filter.
++// CHECK0: Use -header-filter={{.*}} to display errors{{.*}}
++//
++// If -header-filter= is used, no summary of this message.
++// CHECK1-NOT: Use -header-filter={{.*}} to display errors{{.*}}
++//
++// With --skip-header, no warning in .h file is detected or hidden,
++// no need to give a reminder to use -header-filter.
++// CHECK2-NOT: Use -header-filter={{.*}} to display errors{{.*}}
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/google-objc-function-naming.m b/clang-tools-extra/test/clang-tidy/checkers/google-objc-function-naming.m
+index 01433d9fa1ad..cf4d95a0408b 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/google-objc-function-naming.m
++++ b/clang-tools-extra/test/clang-tidy/checkers/google-objc-function-naming.m
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s google-objc-function-naming %t -- -- -isystem %S/Inputs/Headers
++// RUN: %check_clang_tidy %s google-objc-function-naming %t -- --skip-headers=0 -- -isystem %S/Inputs/Headers
++// RUN: %check_clang_tidy %s google-objc-function-naming %t -- --skip-headers -- -isystem %S/Inputs/Headers
+ 
+ #include <stdio.h>
+ 
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/google-upgrade-googletest-case.cpp b/clang-tools-extra/test/clang-tidy/checkers/google-upgrade-googletest-case.cpp
+index ce70e7918352..7fe794284946 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/google-upgrade-googletest-case.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/google-upgrade-googletest-case.cpp
+@@ -1,5 +1,7 @@
+-// RUN: %check_clang_tidy %s google-upgrade-googletest-case %t -- -- -I%S/Inputs
+-// RUN: %check_clang_tidy -check-suffix=NOSUITE %s google-upgrade-googletest-case %t -- -- -DNOSUITE -I%S/Inputs/gtest/nosuite
++// RUN: %check_clang_tidy %s google-upgrade-googletest-case %t -- --skip-headers=0 -- -I%S/Inputs
++// RUN: %check_clang_tidy -check-suffix=NOSUITE %s google-upgrade-googletest-case %t -- --skip-headers=0 -- -DNOSUITE -I%S/Inputs/gtest/nosuite
++// RUN: %check_clang_tidy %s google-upgrade-googletest-case %t -- --skip-headers -- -I%S/Inputs
++// RUN: %check_clang_tidy -check-suffix=NOSUITE %s google-upgrade-googletest-case %t -- --skip-headers -- -DNOSUITE -I%S/Inputs/gtest/nosuite
+ 
+ #include "gtest/gtest.h"
+ 
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/llvm-include-order.cpp b/clang-tools-extra/test/clang-tidy/checkers/llvm-include-order.cpp
+index 6dd3d6ace458..a091645f4947 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/llvm-include-order.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/llvm-include-order.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s llvm-include-order %t -- -- -isystem %S/Inputs/Headers
++// RUN: %check_clang_tidy %s llvm-include-order %t -- --skip-headers=0 -- -isystem %S/Inputs/Headers
++// RUN: %check_clang_tidy %s llvm-include-order %t -- --skip-headers -- -isystem %S/Inputs/Headers
+ 
+ // CHECK-MESSAGES: [[@LINE+2]]:1: warning: #includes are not sorted properly
+ #include "j.h"
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/llvm-prefer-register-over-unsigned.cpp b/clang-tools-extra/test/clang-tidy/checkers/llvm-prefer-register-over-unsigned.cpp
+index 22af2ac6ae99..dae7e45b8a16 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/llvm-prefer-register-over-unsigned.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/llvm-prefer-register-over-unsigned.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s llvm-prefer-register-over-unsigned %t
++// RUN: %check_clang_tidy %s llvm-prefer-register-over-unsigned %t -- --skip-headers=0
++// RUN: %check_clang_tidy %s llvm-prefer-register-over-unsigned %t -- --skip-headers
+ 
+ namespace llvm {
+ class Register {
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/llvmlibc-implementation-in-namespace.cpp b/clang-tools-extra/test/clang-tidy/checkers/llvmlibc-implementation-in-namespace.cpp
+index e75556a623b6..cbe25d00c9d8 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/llvmlibc-implementation-in-namespace.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/llvmlibc-implementation-in-namespace.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s llvmlibc-implementation-in-namespace %t
++// RUN: %check_clang_tidy %s llvmlibc-implementation-in-namespace %t -- --skip-headers=0
++// RUN: %check_clang_tidy %s llvmlibc-implementation-in-namespace %t -- --skip-headers
+ 
+ #define MACRO_A "defining macros outside namespace is valid"
+ 
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/llvmlibc-restrict-system-libc-headers.cpp b/clang-tools-extra/test/clang-tidy/checkers/llvmlibc-restrict-system-libc-headers.cpp
+index 52e25faf190f..b97fa3fc7897 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/llvmlibc-restrict-system-libc-headers.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/llvmlibc-restrict-system-libc-headers.cpp
+@@ -1,5 +1,9 @@
+ // RUN: %check_clang_tidy %s llvmlibc-restrict-system-libc-headers %t \
+-// RUN:   -- -- -isystem %S/Inputs/llvmlibc/system \
++// RUN:   -- --skip-headers=0 -- -isystem %S/Inputs/llvmlibc/system \
++// RUN:   -resource-dir %S/Inputs/llvmlibc/resource
++//
++// RUN: %check_clang_tidy %s llvmlibc-restrict-system-libc-headers %t \
++// RUN:   -- --skip-headers -- -isystem %S/Inputs/llvmlibc/system \
+ // RUN:   -resource-dir %S/Inputs/llvmlibc/resource
+ 
+ #include <stdio.h>
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/misc-no-recursion.cpp b/clang-tools-extra/test/clang-tidy/checkers/misc-no-recursion.cpp
+index e323c8a36a2b..fa86fe79bd68 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/misc-no-recursion.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/misc-no-recursion.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s misc-no-recursion %t
++// RUN: %check_clang_tidy %s misc-no-recursion %t -- --skip-headers=0
++// RUN: %check_clang_tidy %s misc-no-recursion %t -- --skip-headers
+ 
+ // We don't have the definition of this function,
+ // so we can't tell anything about it..
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/misc-unused-using-decls.cpp b/clang-tools-extra/test/clang-tidy/checkers/misc-unused-using-decls.cpp
+index 297649e0abce..2b0cae6d5e63 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/misc-unused-using-decls.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/misc-unused-using-decls.cpp
+@@ -1,4 +1,13 @@
+-// RUN: %check_clang_tidy %s misc-unused-using-decls %t -- --fix-notes -- -fno-delayed-template-parsing -isystem %S/Inputs/
++// Setup header directory
++// RUN: rm -rf %theaders
++// RUN: mkdir %theaders
++// RUN: cp -R %S/Inputs/unused-using-decls.h %theaders
++
++// RUN: %check_clang_tidy %s misc-unused-using-decls %t -- --skip-headers=0 \
++// RUN:   --fix-notes -- -fno-delayed-template-parsing -I%theaders
++//
++// RUN: %check_clang_tidy %s misc-unused-using-decls %t -- --skip-headers \
++// RUN:   --fix-notes -- -fno-delayed-template-parsing -I%theaders
+ 
+ // ----- Definitions -----
+ template <typename T> class vector {};
+@@ -66,7 +75,24 @@ enum Color4 { Blue };
+ 
+ }  // namespace n
+ 
++namespace Q1 {
++class QC1;
++}
++using Q1::QC1;
++// Do not give warning about unused QC1!  It is used in .h file.
++// CHECK-MESSAGES-NOT: warning: using decl 'QC1' is unused
++
+ #include "unused-using-decls.h"
++// FIXME: here we should have a warning on unused using decl 'QC2'
++
++namespace Q3 {
++class QC3;
++}
++using Q3::QC3; // QC3 should be removed
++// CHECK-MESSAGES: warning: using decl 'QC3' is unused
++// CHECK-MESSAGES: note: remove the using
++// CHECK-FIXES: {{^}}// QC3 should be removed
++
+ namespace ns {
+ template <typename T>
+ class AA {
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/modernize-deprecated-headers-cxx03.cpp b/clang-tools-extra/test/clang-tidy/checkers/modernize-deprecated-headers-cxx03.cpp
+index 4511f46d57b3..bfb63e99e043 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/modernize-deprecated-headers-cxx03.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/modernize-deprecated-headers-cxx03.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy -std=c++98 %s modernize-deprecated-headers %t -- -extra-arg-before=-isystem%S/Inputs/modernize-deprecated-headers
++// RUN: %check_clang_tidy -std=c++98 %s modernize-deprecated-headers %t -- --skip-headers=0 -extra-arg-before=-isystem%S/Inputs/modernize-deprecated-headers
++// RUN: %check_clang_tidy -std=c++98 %s modernize-deprecated-headers %t -- --skip-headers -extra-arg-before=-isystem%S/Inputs/modernize-deprecated-headers
+ 
+ #include <assert.h>
+ // CHECK-MESSAGES: :[[@LINE-1]]:10: warning: inclusion of deprecated C++ header 'assert.h'; consider using 'cassert' instead [modernize-deprecated-headers]
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/modernize-deprecated-headers-cxx11.cpp b/clang-tools-extra/test/clang-tidy/checkers/modernize-deprecated-headers-cxx11.cpp
+index c3374a9123bd..333519ddbff6 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/modernize-deprecated-headers-cxx11.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/modernize-deprecated-headers-cxx11.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy -std=c++11-or-later %s modernize-deprecated-headers %t -- -extra-arg-before=-isystem%S/Inputs/modernize-deprecated-headers
++// RUN: %check_clang_tidy -std=c++11-or-later %s modernize-deprecated-headers %t -- --skip-headers=0 -extra-arg-before=-isystem%S/Inputs/modernize-deprecated-headers
++// RUN: %check_clang_tidy -std=c++11-or-later %s modernize-deprecated-headers %t -- --skip-headers -extra-arg-before=-isystem%S/Inputs/modernize-deprecated-headers
+ 
+ #include <assert.h>
+ // CHECK-MESSAGES: :[[@LINE-1]]:10: warning: inclusion of deprecated C++ header 'assert.h'; consider using 'cassert' instead [modernize-deprecated-headers]
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/modernize-pass-by-value-header.cpp b/clang-tools-extra/test/clang-tidy/checkers/modernize-pass-by-value-header.cpp
+index 992ad27c61fd..f6a6bb2142f5 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/modernize-pass-by-value-header.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/modernize-pass-by-value-header.cpp
+@@ -1,9 +1,83 @@
++// Reuse some tests from modernize-pass-by-value.cpp,
++// to show that header file warnings can be skipped by skip-headers,
++// but fix to header files is already suppressed by -header-filter.
++//
++// (1) -fix --skip-headers=0, suppress warning and fix in .h file
++//          showmain,noheader fixmain, nofixheader
++// (2) -fix --skip-headers=1, skip warning and fix in .h file
++//          showmain,skipheader fixmain, nofixheader
++// (3) -fix --skip-headers=0 -header-filter=.* , show and fix warnings in .h file
++//          showmain,showheader fixmain, fixheader
++// (4) -fix --skip-headers=1 -header-filter=.* , show and fix warnings in .h file
++//          showmain,showheader fixmain, fixheader
++//
++// (1)
+ // RUN: cp %S/Inputs/modernize-pass-by-value/header.h %T/pass-by-value-header.h
+-// RUN: clang-tidy %s -checks='-*,modernize-pass-by-value' -header-filter='.*' -fix -- -std=c++11 -I %T | FileCheck %s -check-prefix=CHECK-MESSAGES -implicit-check-not="{{warning|error}}:"
+-// RUN: FileCheck -input-file=%T/pass-by-value-header.h %s -check-prefix=CHECK-FIXES
+-// FIXME: Make the test work in all language modes.
++// RUN: cp %S/modernize-pass-by-value-header.cpp %T/pass-by-value-header.cpp
++// RUN: clang-tidy %T/pass-by-value-header.cpp -checks='-*,modernize-pass-by-value' \
++// RUN: --skip-headers=0 -fix -- -std=c++11 2>&1 \
++// RUN: | FileCheck %s -check-prefixes=SHOWMAIN,NOHEADER
++// RUN: FileCheck -input-file=%T/pass-by-value-header.h %s -check-prefix=NOFIXHEADER
++// RUN: FileCheck -input-file=%T/pass-by-value-header.cpp %s -check-prefix=FIXMAIN
++//
++// (2)
++// RUN: cp %S/Inputs/modernize-pass-by-value/header.h %T/pass-by-value-header.h
++// RUN: cp %S/modernize-pass-by-value-header.cpp %T/pass-by-value-header.cpp
++// RUN: clang-tidy %T/pass-by-value-header.cpp -checks='-*,modernize-pass-by-value' \
++// RUN: --skip-headers -fix -- -std=c++11 2>&1 \
++// RUN: | FileCheck %s -check-prefixes=SHOWMAIN,SKIPHEADER
++// RUN: FileCheck -input-file=%T/pass-by-value-header.h %s -check-prefix=NOFIXHEADER
++// RUN: FileCheck -input-file=%T/pass-by-value-header.cpp %s -check-prefix=FIXMAIN
++//
++// (3)
++// RUN: cp %S/Inputs/modernize-pass-by-value/header.h %T/pass-by-value-header.h
++// RUN: cp %S/modernize-pass-by-value-header.cpp %T/pass-by-value-header.cpp
++// RUN: clang-tidy %T/pass-by-value-header.cpp -checks='-*,modernize-pass-by-value' \
++// RUN: --header-filter=.* --skip-headers=0 -fix -- -std=c++11 2>&1 \
++// RUN: | FileCheck %s -check-prefixes=SHOWMAIN,SHOWHEADER
++// RUN: FileCheck -input-file=%T/pass-by-value-header.h %s -check-prefix=FIXHEADER
++// RUN: FileCheck -input-file=%T/pass-by-value-header.cpp %s -check-prefix=FIXMAIN
++//
++// (4)
++// RUN: cp %S/Inputs/modernize-pass-by-value/header.h %T/pass-by-value-header.h
++// RUN: cp %S/modernize-pass-by-value-header.cpp %T/pass-by-value-header.cpp
++// RUN: clang-tidy %T/pass-by-value-header.cpp -checks='-*,modernize-pass-by-value' \
++// RUN: --header-filter=.* --skip-headers -fix -- -std=c++11 2>&1 \
++// RUN: | FileCheck %s -check-prefixes=SHOWMAIN,SHOWHEADER
++// RUN: FileCheck -input-file=%T/pass-by-value-header.h %s -check-prefix=FIXHEADER
++// RUN: FileCheck -input-file=%T/pass-by-value-header.cpp %s -check-prefix=FIXMAIN
+ 
+ #include "pass-by-value-header.h"
+-// CHECK-MESSAGES: :8:5: warning: pass by value and use std::move [modernize-pass-by-value]
+-// CHECK-FIXES: #include <utility>
+-// CHECK-FIXES: A(ThreadId tid) : threadid(std::move(tid)) {}
++// FIXHEADER: #include <utility>
++// FIXHEADER: struct A
++// FIXHEADER: A(ThreadId tid) : threadid(std::move(tid)) {}
++// NOFIXHEADER-NOT: #include <utility>
++// NOFIXHEADER: struct A
++// NOFIXHEADER: A(const ThreadId &tid) : threadid(tid) {}
++// NOFIXHEADER-NOT: A(ThreadId tid) : threadid(std::move(tid)) {}
++
++// Test that both declaration and definition are updated.
++struct D {
++  D(const Movable &M);
++  // FIXMAIN: D(Movable M);
++  Movable M;
++};
++// NOTE! Use DAG tage because header file warnings may shown after
++// main file warnings on Linux,  but before main file warnings on Windows.
++// SHOWHEADER-DAG: :8:5: warning: pass by value and use std::move [modernize-pass-by-value]
++// NOHEADER-NOT:   :8:5: warning: pass by value and use std::move [modernize-pass-by-value]
++// SKIPHEADER-NOT: :8:5: warning: pass by value and use std::move [modernize-pass-by-value]
++
++D::D(const Movable &M) : M(M) {}
++// SHOWMAIN-DAG: :[[@LINE-1]]:6: warning: pass by value and use std::move
++// FIXMAIN: D::D(Movable M) : M(std::move(M)) {}
++
++// no more warning or error
++// SHOWMAIN-NOT:   {{warning|error}}:
++// SHOWHEADER-NOT: {{warning|error}}:
++// NOHEADER-NOT:   {{warning|error}}:
++// SKIPHEADER-NOT: {{warning|error}}:
++//
++// NOHEADER: Suppressed {{.*}} warnings
++// SKIPHEADER-NOT: Suppressed {{.*}} warnings
++// SHOWHEADER-NOT: Suppressed {{.*}} warnings
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/portability-restrict-system-includes-allow.cpp b/clang-tools-extra/test/clang-tidy/checkers/portability-restrict-system-includes-allow.cpp
+index a74b94b604ac..1c241be4e8d7 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/portability-restrict-system-includes-allow.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/portability-restrict-system-includes-allow.cpp
+@@ -1,5 +1,9 @@
+ // RUN: %check_clang_tidy %s portability-restrict-system-includes %t \
+-// RUN:     -- -config="{CheckOptions: [{key: portability-restrict-system-includes.Includes, value: '*,-stddef.h'}]}" \
++// RUN:     -- -config="{CheckOptions: [{key: portability-restrict-system-includes.Includes, value: '*,-stddef.h'}]}" --skip-headers=0 \
++// RUN:     -- -isystem %S/Inputs/portability-restrict-system-includes/system
++//
++// RUN: %check_clang_tidy %s portability-restrict-system-includes %t \
++// RUN:     -- -config="{CheckOptions: [{key: portability-restrict-system-includes.Includes, value: '*,-stddef.h'}]}" --skip-headers \
+ // RUN:     -- -isystem %S/Inputs/portability-restrict-system-includes/system
+ 
+ // Test block-list functionality: allow all but stddef.h.
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/portability-restrict-system-includes-disallow.cpp b/clang-tools-extra/test/clang-tidy/checkers/portability-restrict-system-includes-disallow.cpp
+index 1d1e8a4e6706..9abff352eb6b 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/portability-restrict-system-includes-disallow.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/portability-restrict-system-includes-disallow.cpp
+@@ -1,5 +1,9 @@
+ // RUN: %check_clang_tidy %s portability-restrict-system-includes %t \
+-// RUN:     -- -config="{CheckOptions: [{key: portability-restrict-system-includes.Includes, value: '-*,stddef.h'}]}" \
++// RUN:     -- -config="{CheckOptions: [{key: portability-restrict-system-includes.Includes, value: '-*,stddef.h'}]}" --skip-headers=0 \
++// RUN:     -- -isystem %S/Inputs/portability-restrict-system-includes/system
++//
++// RUN: %check_clang_tidy %s portability-restrict-system-includes %t \
++// RUN:     -- -config="{CheckOptions: [{key: portability-restrict-system-includes.Includes, value: '-*,stddef.h'}]}" --skip-headers \
+ // RUN:     -- -isystem %S/Inputs/portability-restrict-system-includes/system
+ 
+ // Test allow-list functionality: disallow all but stddef.h.
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-chained-conditional-assignment.cpp b/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-chained-conditional-assignment.cpp
+index 7dcbca5cd9be..b24d233a8828 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-chained-conditional-assignment.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-chained-conditional-assignment.cpp
+@@ -1,4 +1,7 @@
+-// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- -config="{CheckOptions: [{key: "readability-simplify-boolean-expr.ChainedConditionalAssignment", value: true}]}" --
++// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- --skip-headers=0 \
++// RUN: -config="{CheckOptions: [{key: "readability-simplify-boolean-expr.ChainedConditionalAssignment", value: true}]}" --
++// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- --skip-headers \
++// RUN: -config="{CheckOptions: [{key: "readability-simplify-boolean-expr.ChainedConditionalAssignment", value: true}]}" --
+ 
+ void chained_conditional_compound_assignment(int i) {
+   bool b;
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-chained-conditional-return.cpp b/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-chained-conditional-return.cpp
+index 7e97e9f717fb..f7c36cd8ac70 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-chained-conditional-return.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-chained-conditional-return.cpp
+@@ -1,4 +1,7 @@
+-// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- -config="{CheckOptions: [{key: "readability-simplify-boolean-expr.ChainedConditionalReturn", value: true}]}" --
++// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- --skip-headers=0 \
++// RUN: -config="{CheckOptions: [{key: "readability-simplify-boolean-expr.ChainedConditionalReturn", value: true}]}" --
++// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- --skip-headers \
++// RUN: -config="{CheckOptions: [{key: "readability-simplify-boolean-expr.ChainedConditionalReturn", value: true}]}" --
+ 
+ bool chained_conditional_compound_return(int i) {
+   if (i < 0) {
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-members.cpp b/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-members.cpp
+index e72091121e89..4d3bd11e7330 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-members.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr-members.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t
++// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- --skip-headers=0
++// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- --skip-headers
+ 
+ class A {
+ public:
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr.cpp b/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr.cpp
+index a00b733ec1ea..bbbdc389f1dc 100644
+--- a/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr.cpp
++++ b/clang-tools-extra/test/clang-tidy/checkers/readability-simplify-bool-expr.cpp
+@@ -1,4 +1,5 @@
+-// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t
++// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- --skip-headers=0
++// RUN: %check_clang_tidy %s readability-simplify-boolean-expr %t -- --skip-headers
+ 
+ bool a1 = false;
+ 
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/skip-headers-1.cpp b/clang-tools-extra/test/clang-tidy/checkers/skip-headers-1.cpp
+new file mode 100644
+index 000000000000..70d4ca47e88b
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/skip-headers-1.cpp
+@@ -0,0 +1,56 @@
++// Test --skip-headers, --show-all-warnings, and --header-filter.
++//
++// Default shows no warning in .h files, with hint to use --header-filter
++// RUN: clang-tidy %s -checks='*' --skip-headers=0 -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,NOHEADER,MAIN,HINT
++//
++// --skip-headers skips all included files warnings; without hint
++// RUN: clang-tidy %s -checks='*' --skip-headers -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,NOHEADER,MAIN,NOHINT
++//
++// --show-all-warnings reports all warnings, even without --header-filters
++// RUN: clang-tidy %s -checks='*' --show-all-warnings --skip-headers=0 -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,HEADER,MAIN,NOHINT
++//
++// --header-filter='.*' is like --show-all-warnings
++// RUN: clang-tidy %s -checks='*' --header-filter='.*' --skip-headers=0 -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,HEADER,MAIN,NOHINT
++//
++// With --show-all-warnings and --skip-headers,
++// no warnings should be reported from header files.
++// RUN: clang-tidy %s -checks='*' --skip-headers --show-all-warnings -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,NOHEADER,MAIN,NOHINT
++//
++// --header-filter='header1.h' shows only warnings in header1.h
++// RUN: clang-tidy %s -checks='*' --header-filter='header1.h' --skip-headers=0 -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,H1,MAIN,HINT
++//
++// RUN: clang-tidy %s -checks='*' --header-filter='header1.h' --skip-headers -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,H1,MAIN,NOHINT
++//
++// --header-filter='header2.h' shows only warnings in header2.h
++// RUN: clang-tidy %s -checks='*' --header-filter='header2.h' --skip-headers=0 -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,H2,MAIN,HINT
++//
++// RUN: clang-tidy %s -checks='*' --header-filter='header2.h' --skip-headers -- \
++// RUN: 2>&1 | FileCheck %s -check-prefixes COUNTER,H2,MAIN,NOHINT
++
++// All options have warning count reported:
++// COUNTER: {{[0-9]+}} warnings generated.
++
++#include "Inputs/skip-headers/my_header1.h"
++// H1: my_header1.h:1:1: warning: header is missing header guard
++// HEADER: my_header1.h:1:1: warning: header is missing header guard
++// H2-NOT: my_header1.h
++// NOHEADER-NOT: my_header1.h
++
++// H2: my_header2.h:1:1: warning: header is missing header guard
++// HEADER: my_header2.h:1:1: warning: header is missing header guard
++// H1-NOT: my_header2.h
++// NOHEADER-NOT: my_header2.h
++
++int xyz = 135;
++// MAIN: skip-headers-1.cpp:{{[0-9]+}}:{{[0-9]+}}: warning:
++
++// HINT: Use -header-filter={{.*}} to display errors{{.*}}
++// NOHINT-NOT: Use -header-filter=
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/skip-headers-2.cpp b/clang-tools-extra/test/clang-tidy/checkers/skip-headers-2.cpp
+new file mode 100644
+index 000000000000..d22085df1299
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/skip-headers-2.cpp
+@@ -0,0 +1,39 @@
++// Test --skip-headers, --show-all-warnings, and --header-filter
++// with nested Decls. Users should be able to select exactly
++// which .h file to check for warnings.
++// Here a.h includes/uses b.h. Maintainers of a.h wants to check/see
++// warnings in a.h but not b.h. So they use --header-filer=a.h --skip-headers.
++//
++// RUN: clang-tidy %s --skip-headers=0 --show-all-warnings \
++// RUN: -checks='-*,readability-convert-member-functions-to-static' -- \
++// RUN: | FileCheck %s -check-prefixes WARNA,WARNB,WARNMAIN
++//
++// RUN: clang-tidy %s --skip-headers=1 --show-all-warnings \
++// RUN: -checks='-*,readability-convert-member-functions-to-static' -- \
++// RUN: | FileCheck %s -check-prefixes WARNMAIN,NOWARNA,NOWARNB
++//
++// RUN: clang-tidy %s --skip-headers=1 --show-all-warnings --header-filter=a.h \
++// RUN: -checks='-*,readability-convert-member-functions-to-static' -- \
++// RUN: | FileCheck %s -check-prefixes WARNMAIN,WARNA,NOWARNB
++//
++// RUN: clang-tidy %s --skip-headers=1 --show-all-warnings --header-filter=.* \
++// RUN: -checks='-*,readability-convert-member-functions-to-static' -- \
++// RUN: | FileCheck %s -check-prefixes WARNMAIN,WARNA,WARNB
++//
++// Current limitation of --skip-haders: b.h is skipped if a.h is skipped.
++// RUN: clang-tidy %s --skip-headers=1 --show-all-warnings --header-filter=b.h \
++// RUN: -checks='-*,readability-convert-member-functions-to-static' -- \
++// RUN: | FileCheck %s -check-prefixes WARNMAIN,NOWARNA,NOWARNB
++
++#include "Inputs/skip-headers/a.h"
++
++// WARNA: warning: method 'fooA' can be made static
++// NOWARNA-NOT: warning: method 'fooA' can be made static
++
++// WARNB: warning: method 'fooB' can be made static
++// NOWARNB-NOT: warning: method 'fooB' can be made static
++
++class C {
++  void foo(int x) { x = 3; };
++  // WARNMAIN: warning: method 'foo' can be made static
++};
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/skip-headers-3.cpp b/clang-tools-extra/test/clang-tidy/checkers/skip-headers-3.cpp
+new file mode 100644
+index 000000000000..247fafb466d1
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/skip-headers-3.cpp
+@@ -0,0 +1,30 @@
++// Test --skip-headers, which should skip statements and expressions
++// in a called function of header files even if the calling function
++// is in the main file.
++//
++// RUN: clang-tidy %s --skip-headers=0 --show-all-warnings \
++// RUN: -checks='-*,cert-dcl16-c' \
++// RUN: | FileCheck %s -check-prefixes WARNC,MAIN
++//
++// RUN: clang-tidy %s --skip-headers --show-all-warnings \
++// RUN: -checks='-*,cert-dcl16-c' --header-filter=c1.h \
++// RUN: | FileCheck %s -check-prefixes MAIN,WARNC
++//
++// RUN: clang-tidy %s --skip-headers --show-all-warnings \
++// RUN: -checks='-*,cert-dcl16-c' \
++// RUN: | FileCheck %s -check-prefixes MAIN,NOWARNC
++
++#include "Inputs/skip-headers/c1.h"
++// WARNC: c1.h:5:27: warning: integer literal has suffix 'll', which is not uppercase [cert-dcl16-c]
++// WARNC: c1.h:6:20: warning: integer literal has suffix 'll', which is not uppercase [cert-dcl16-c]
++// NOWARNC-NOT: c1.h:5:27: warning: integer literal has suffix 'll', which is not uppercase [cert-dcl16-c]
++// NOWARNC-NOT: c1.h:6:20: warning: integer literal has suffix 'll', which is not uppercase [cert-dcl16-c]
++
++void foo(int x = 3ll, C1 *p = nullptr) {
++  // MAIN: skip-headers-3.cpp:[[@LINE-1]]:18: warning: integer literal has suffix 'll', which is not uppercase [cert-dcl16-c]
++  C1::foo1();
++  p->foo2();
++  p->foo3(x);
++}
++
++// MAIN-NOT: warning: integer literal has suffix 'll', which is not uppercase [cert-dcl16-c]
+diff --git a/clang-tools-extra/test/clang-tidy/checkers/skip-headers-4.cpp b/clang-tools-extra/test/clang-tidy/checkers/skip-headers-4.cpp
+new file mode 100644
+index 000000000000..1ce4a5d311c0
+--- /dev/null
++++ b/clang-tools-extra/test/clang-tidy/checkers/skip-headers-4.cpp
+@@ -0,0 +1,40 @@
++// When the statement of a template function call does not have a
++// "valid" source location and its default argument value cast expression
++// is in an included header file, the warning on the expression should
++// be suppressed by --skip-headers.
++//
++// RUN: clang-tidy %s --skip-headers=0 \
++// RUN: -checks='-*,modernize-use-nullptr' -- \
++// RUN: | FileCheck %s -check-prefixes MAIN,NOWARNC
++//
++// RUN: clang-tidy %s --skip-headers --show-all-warnings \
++// RUN: -checks='-*,modernize-use-nullptr' -- \
++// RUN: | FileCheck %s -check-prefixes MAIN,NOWARNC
++//
++// RUN: clang-tidy %s --skip-headers=0 \
++// RUN: -checks='-*,modernize-use-nullptr' -header-filter=c.h -- \
++// RUN: | FileCheck %s -check-prefixes MAIN,WARNC
++//
++// RUN: clang-tidy %s --skip-headers --show-all-warnings \
++// RUN: -checks='-*,modernize-use-nullptr' -header-filter=c.h -- \
++// RUN: | FileCheck %s -check-prefixes MAIN,WARNC
++
++#include "Inputs/skip-headers/c.h"
++// WARNC: c.h:5:34: warning: use nullptr [modernize-use-nullptr]
++// NOWARNC-NOT: c.h:5:34: warning: use nullptr [modernize-use-nullptr]
++// NOWARNC-NOT: c.h:
++
++template <class T>
++class D {
++public:
++  template <class R>
++  explicit D(const R r, int *x = 0) : p(x) {}
++  // MAIN: :[[@LINE-1]]:34: warning: use nullptr [modernize-use-nullptr]
++private:
++  int *p;
++};
++
++C<int> x = C<int>(2);
++D<int> y = D<int>(4);
++
++// MAIN-NOT: warning:
+diff --git a/clang-tools-extra/test/clang-tidy/infrastructure/file-filter-symlinks.cpp b/clang-tools-extra/test/clang-tidy/infrastructure/file-filter-symlinks.cpp
+index 7efa7d070f69..51ab8d495a45 100644
+--- a/clang-tools-extra/test/clang-tidy/infrastructure/file-filter-symlinks.cpp
++++ b/clang-tools-extra/test/clang-tidy/infrastructure/file-filter-symlinks.cpp
+@@ -5,12 +5,12 @@
+ // RUN: echo 'class A { A(int); };' > %t/dir1/header.h
+ // RUN: ln -s %t/dir1/header.h %t/dir1/header_alias.h
+ //
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='dir1/dir2/\.\./header_alias\.h' %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER_ALIAS %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='dir1/dir2/\.\./header_alias\.h' -quiet %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER_ALIAS %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='header_alias\.h' %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER_ALIAS %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='header_alias\.h' -quiet %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER_ALIAS %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='header\.h' %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='header\.h' -quiet %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='dir1/dir2/\.\./header_alias\.h' %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER_ALIAS %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='dir1/dir2/\.\./header_alias\.h' -quiet %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER_ALIAS %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='header_alias\.h' %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER_ALIAS %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='header_alias\.h' -quiet %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER_ALIAS %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='header\.h' %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='header\.h' -quiet %s -- -I %t 2>&1 | FileCheck --check-prefix=CHECK_HEADER %s
+ 
+ // Check that `-header-filter` operates on the same file paths as paths in
+ // diagnostics printed by ClangTidy.
+diff --git a/clang-tools-extra/test/clang-tidy/infrastructure/file-filter.cpp b/clang-tools-extra/test/clang-tidy/infrastructure/file-filter.cpp
+index 9ee5cad979f6..cd9d96481ad7 100644
+--- a/clang-tools-extra/test/clang-tidy/infrastructure/file-filter.cpp
++++ b/clang-tools-extra/test/clang-tidy/infrastructure/file-filter.cpp
+@@ -1,14 +1,14 @@
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='' %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='' -quiet %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK-QUIET %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='.*' %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK2 %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='.*' -quiet %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK2-QUIET %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='header2\.h' %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK3 %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='header2\.h' -quiet %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK3-QUIET %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='' %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='' -quiet %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK-QUIET %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='.*' %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK2 %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='.*' -quiet %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK2-QUIET %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='header2\.h' %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK3 %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='header2\.h' -quiet %s -- -I %S/Inputs/file-filter -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK3-QUIET %s
+ // FIXME: "-I %S/Inputs/file-filter/system/.." must be redundant.
+ //       On Win32, file-filter/system\system-header1.h precedes
+ //       file-filter\header*.h due to code order between '/' and '\\'.
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='.*' -system-headers %s -- -I %S/Inputs/file-filter/system/.. -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK4 %s
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -header-filter='.*' -system-headers -quiet %s -- -I %S/Inputs/file-filter/system/.. -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK4-QUIET %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='.*' -system-headers %s -- -I %S/Inputs/file-filter/system/.. -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK4 %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -header-filter='.*' -system-headers -quiet %s -- -I %S/Inputs/file-filter/system/.. -isystem %S/Inputs/file-filter/system 2>&1 | FileCheck --check-prefix=CHECK4-QUIET %s
+ 
+ #include "header1.h"
+ // CHECK-NOT: warning:
+diff --git a/clang-tools-extra/test/clang-tidy/infrastructure/line-filter.cpp b/clang-tools-extra/test/clang-tidy/infrastructure/line-filter.cpp
+index ad980cfa478b..c8c3b08d4f82 100644
+--- a/clang-tools-extra/test/clang-tidy/infrastructure/line-filter.cpp
++++ b/clang-tools-extra/test/clang-tidy/infrastructure/line-filter.cpp
+@@ -1,4 +1,4 @@
+-// RUN: clang-tidy -checks='-*,google-explicit-constructor' -line-filter='[{"name":"line-filter.cpp","lines":[[18,18],[22,22]]},{"name":"header1.h","lines":[[1,2]]},{"name":"header2.h"},{"name":"header3.h"}]' -header-filter='header[12]\.h$' %s -- -I %S/Inputs/line-filter 2>&1 | FileCheck %s
++// RUN: clang-tidy --skip-headers=0 -checks='-*,google-explicit-constructor' -line-filter='[{"name":"line-filter.cpp","lines":[[18,18],[22,22]]},{"name":"header1.h","lines":[[1,2]]},{"name":"header2.h"},{"name":"header3.h"}]' -header-filter='header[12]\.h$' %s -- -I %S/Inputs/line-filter 2>&1 | FileCheck %s
+ 
+ #include "header1.h"
+ // CHECK-NOT: header1.h:{{.*}} warning
+diff --git a/clang/include/clang/ASTMatchers/ASTMatchFinder.h b/clang/include/clang/ASTMatchers/ASTMatchFinder.h
+index 91024f9425e0..e1622be8e53e 100644
+--- a/clang/include/clang/ASTMatchers/ASTMatchFinder.h
++++ b/clang/include/clang/ASTMatchers/ASTMatchFinder.h
+@@ -133,11 +133,18 @@ public:
+       /// Per bucket timing information.
+       llvm::StringMap<llvm::TimeRecord> &Records;
+     };
++    struct LocFilter {
++      virtual bool skipLocation(SourceLocation) const = 0;
++      virtual ~LocFilter();
++    };
+ 
+     /// Enables per-check timers.
+     ///
+     /// It prints a report after match.
+     llvm::Optional<Profiling> CheckProfiling;
++
++    /// Check if MatchASTVisitor should skip node at a location.
++    std::unique_ptr<LocFilter> Filter;
+   };
+ 
+   MatchFinder(MatchFinderOptions Options = MatchFinderOptions());
+diff --git a/clang/lib/ASTMatchers/ASTMatchFinder.cpp b/clang/lib/ASTMatchers/ASTMatchFinder.cpp
+index 5d6cea54b8ec..40eff252a6c3 100644
+--- a/clang/lib/ASTMatchers/ASTMatchFinder.cpp
++++ b/clang/lib/ASTMatchers/ASTMatchFinder.cpp
+@@ -1202,6 +1202,8 @@ bool MatchASTVisitor::TraverseDecl(Decl *DeclNode) {
+   if (!DeclNode) {
+     return true;
+   }
++  if (Options.Filter && Options.Filter->skipLocation(DeclNode->getLocation()))
++    return true;
+ 
+   bool ScopedTraversal =
+       TraversingASTNodeNotSpelledInSource || DeclNode->isImplicit();
+@@ -1232,6 +1234,13 @@ bool MatchASTVisitor::TraverseStmt(Stmt *StmtNode, DataRecursionQueue *Queue) {
+   if (!StmtNode) {
+     return true;
+   }
++  // When a function call is in the main file or wanted header files,
++  // the call site maybe in the Decl that is not to be skipped.
++  // But the statements of the called function or parameter default expressions
++  // should be skipped. So here we need to call skipLocation here.
++  if (Options.Filter && Options.Filter->skipLocation(StmtNode->getBeginLoc()))
++    return true;
++
+   bool ScopedTraversal = TraversingASTNodeNotSpelledInSource ||
+                          TraversingASTChildrenNotSpelledInSource;
+ 
+@@ -1454,5 +1463,7 @@ MatchFinder::MatchCallback::getCheckTraversalKind() const {
+   return llvm::None;
+ }
+ 
++MatchFinder::MatchFinderOptions::LocFilter::~LocFilter() = default;
++
+ } // end namespace ast_matchers
+ } // end namespace clang
+-- 
+2.33.0.rc2.250.ged5fa647cd-goog
+
