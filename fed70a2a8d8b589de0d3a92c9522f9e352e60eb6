@@ -16,6 +16,23 @@
       "message": "thanks!",
       "revId": "fed70a2a8d8b589de0d3a92c9522f9e352e60eb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7293744a_0615d057",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-23T21:21:23Z",
+      "side": 1,
+      "message": "Bypass reason: This change fixes the llvm-toolchain build but needs time to pass the aosp-master-plus-llvm failures since it builds infrequently and no build with the libxml2 upgrade is available yet.  Bypassing to fix the build breaks in the meantime.",
+      "revId": "fed70a2a8d8b589de0d3a92c9522f9e352e60eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
