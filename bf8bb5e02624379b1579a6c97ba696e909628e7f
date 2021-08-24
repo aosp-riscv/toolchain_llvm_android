@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78074e6c_42f9b086",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-24T17:35:51Z",
+      "side": 1,
+      "message": "do you want to use need_tests in the if statement below?",
+      "range": {
+        "startLine": 779,
+        "startChar": 4,
+        "endLine": 779,
+        "endChar": 14
+      },
+      "revId": "bf8bb5e02624379b1579a6c97ba696e909628e7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
