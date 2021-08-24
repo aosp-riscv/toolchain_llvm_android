@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad95acb0_15aea57c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-24T19:48:20Z",
+      "side": 1,
+      "message": "the llvm-toolchain presubmit targets passed.  This change shouldn\u0027t affect the aosp_blueline target in master-plus-llvm.",
+      "revId": "8beb65560ab759eae0246afa316742deb13871d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
