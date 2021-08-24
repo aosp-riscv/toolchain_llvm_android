@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "604b2683_85eb6249",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-24T16:39:05Z",
+      "side": 1,
+      "message": "Should we turn off tests for the broken configurations instead?  I see that darwin, linux_debug and clang_pgo (which builds an instrumented clang) are broken.",
+      "revId": "c2ec8874d40e064f9ca0c806db1a4360cea19f21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
