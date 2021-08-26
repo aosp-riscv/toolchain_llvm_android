@@ -34,6 +34,24 @@
       "parentUuid": "a5ef01c5_e39280ec",
       "revId": "54611b789ee33c2a27a126c9e5dcee9ec1abcb25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b8c4a22_6e24d512",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-26T16:59:45Z",
+      "side": 1,
+      "message": "Wow I somehow missed that, although I think I might have confused myself looking at the left side too.",
+      "parentUuid": "019a5866_cdd17253",
+      "revId": "54611b789ee33c2a27a126c9e5dcee9ec1abcb25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
