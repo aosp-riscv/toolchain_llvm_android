@@ -16,6 +16,24 @@
       "message": "You probably want to add another line in front of \"Bug: \", since this is a git commit message, and there\u0027s usually a blank line after the subject. Do you also want a \"Test: \" line too?",
       "revId": "54611b789ee33c2a27a126c9e5dcee9ec1abcb25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "019a5866_cdd17253",
+        "filename": "merge_from_upstream.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-08-26T10:09:59Z",
+      "side": 1,
+      "message": "Already have \"\\n\\n\" in L104.",
+      "parentUuid": "a5ef01c5_e39280ec",
+      "revId": "54611b789ee33c2a27a126c9e5dcee9ec1abcb25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
