@@ -1,0 +1,169 @@
+From 9237eda3040738e98e985b39ce6a3c1fc71eaa56 Mon Sep 17 00:00:00 2001
+From: Jon Roelofs <jonathan_roelofs@apple.com>
+Date: Wed, 1 Sep 2021 16:49:20 -0700
+Subject: [PATCH] Revert "[AArch64][GlobalISel] Legalize bswap <2 x i16>"
+
+This reverts commit 5cd63e9ec2a385de2682949c0bbe928afaf35c91.
+
+https://bugs.llvm.org/show_bug.cgi?id=51707
+
+The sequence feeding in/out of the rev32/ushr isn't quite right:
+
+ _swap:
+         ldr     h0, [x0]
+         ldr     h1, [x0, #2]
+-        mov     v0.h[1], v1.h[0]
++        mov     v0.s[1], v1.s[0]
+         rev32   v0.8b, v0.8b
+         ushr    v0.2s, v0.2s, #16
+-        mov     h1, v0.h[1]
++        mov     s1, v0.s[1]
+         str     h0, [x0]
+         str     h1, [x0, #2]
+         ret
+---
+ .../AArch64/GISel/AArch64LegalizerInfo.cpp    | 45 +------------------
+ .../AArch64/GISel/AArch64LegalizerInfo.h      |  2 -
+ .../AArch64/GlobalISel/legalize-bswap.mir     | 27 -----------
+ .../GlobalISel/legalizer-info-validation.mir  |  4 +-
+ 4 files changed, 3 insertions(+), 75 deletions(-)
+
+diff --git a/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.cpp b/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.cpp
+index 91c3306b54b5..990359fa7bcb 100644
+--- a/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.cpp
++++ b/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.cpp
+@@ -110,8 +110,7 @@ AArch64LegalizerInfo::AArch64LegalizerInfo(const AArch64Subtarget &ST)
+   getActionDefinitionsBuilder(G_BSWAP)
+       .legalFor({s32, s64, v4s32, v2s32, v2s64})
+       .widenScalarToNextPow2(0)
+-      .clampScalar(0, s32, s64)
+-      .customIf(typeIs(0, v2s16)); // custom lower as G_REV32 + G_LSHR
++      .clampScalar(0, s32, s64);
+ 
+   getActionDefinitionsBuilder({G_ADD, G_SUB, G_MUL, G_AND, G_OR, G_XOR})
+       .legalFor({s32, s64, v2s32, v4s32, v4s16, v8s16, v16s8, v8s8})
+@@ -791,8 +790,6 @@ bool AArch64LegalizerInfo::legalizeCustom(LegalizerHelper &Helper,
+   case TargetOpcode::G_LOAD:
+   case TargetOpcode::G_STORE:
+     return legalizeLoadStore(MI, MRI, MIRBuilder, Observer);
+-  case TargetOpcode::G_BSWAP:
+-    return legalizeBSwap(MI, MRI, MIRBuilder);
+   case TargetOpcode::G_SHL:
+   case TargetOpcode::G_ASHR:
+   case TargetOpcode::G_LSHR:
+@@ -1047,46 +1044,6 @@ bool AArch64LegalizerInfo::legalizeLoadStore(
+   return true;
+ }
+ 
+-bool AArch64LegalizerInfo::legalizeBSwap(MachineInstr &MI,
+-                                         MachineRegisterInfo &MRI,
+-                                         MachineIRBuilder &MIRBuilder) const {
+-  assert(MI.getOpcode() == TargetOpcode::G_BSWAP);
+-
+-  // The <2 x half> case needs special lowering because there isn't an
+-  // instruction that does that directly. Instead, we widen to <8 x i8>
+-  // and emit a G_REV32 followed by a G_LSHR knowing that instruction selection
+-  // will later match them as:
+-  //
+-  //   rev32.8b v0, v0
+-  //   ushr.2s v0, v0, #16
+-  //
+-  // We could emit those here directly, but it seems better to keep things as
+-  // generic as possible through legalization, and avoid committing layering
+-  // violations by legalizing & selecting here at the same time.
+-
+-  Register ValReg = MI.getOperand(1).getReg();
+-  assert(LLT::fixed_vector(2, 16) == MRI.getType(ValReg));
+-  const LLT v2s32 = LLT::fixed_vector(2, 32);
+-  const LLT v8s8 = LLT::fixed_vector(8, 8);
+-  const LLT s32 = LLT::scalar(32);
+-
+-  auto Undef = MIRBuilder.buildUndef(v8s8);
+-  auto Insert =
+-      MIRBuilder
+-          .buildInstr(TargetOpcode::INSERT_SUBREG, {v8s8}, {Undef, ValReg})
+-          .addImm(AArch64::ssub);
+-  auto Rev32 = MIRBuilder.buildInstr(AArch64::G_REV32, {v8s8}, {Insert});
+-  auto Bitcast = MIRBuilder.buildBitcast(v2s32, Rev32);
+-  auto Amt = MIRBuilder.buildConstant(v2s32, 16);
+-  auto UShr =
+-      MIRBuilder.buildInstr(TargetOpcode::G_LSHR, {v2s32}, {Bitcast, Amt});
+-  auto Zero = MIRBuilder.buildConstant(s32, 0);
+-  auto Extract = MIRBuilder.buildExtractVectorElement(s32, UShr, Zero);
+-  MIRBuilder.buildBitcast({MI.getOperand(0).getReg()}, Extract);
+-  MI.eraseFromParent();
+-  return true;
+-}
+-
+ bool AArch64LegalizerInfo::legalizeVaArg(MachineInstr &MI,
+                                          MachineRegisterInfo &MRI,
+                                          MachineIRBuilder &MIRBuilder) const {
+diff --git a/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.h b/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.h
+index 78fc24559d71..35456d95dc2b 100644
+--- a/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.h
++++ b/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.h
+@@ -35,8 +35,6 @@ public:
+                          MachineInstr &MI) const override;
+ 
+ private:
+-  bool legalizeBSwap(MachineInstr &MI, MachineRegisterInfo &MRI,
+-                     MachineIRBuilder &MIRBuilder) const;
+   bool legalizeVaArg(MachineInstr &MI, MachineRegisterInfo &MRI,
+                      MachineIRBuilder &MIRBuilder) const;
+   bool legalizeLoadStore(MachineInstr &MI, MachineRegisterInfo &MRI,
+diff --git a/llvm/test/CodeGen/AArch64/GlobalISel/legalize-bswap.mir b/llvm/test/CodeGen/AArch64/GlobalISel/legalize-bswap.mir
+index ab8e33ddbcf7..ad61ecd19dba 100644
+--- a/llvm/test/CodeGen/AArch64/GlobalISel/legalize-bswap.mir
++++ b/llvm/test/CodeGen/AArch64/GlobalISel/legalize-bswap.mir
+@@ -25,33 +25,6 @@ body:             |
+     RET_ReallyLR implicit $w0
+ ...
+ ---
+-name:            bswap_2xi16
+-tracksRegLiveness: true
+-body:             |
+-  bb.1:
+-    liveins: $s0
+-
+-    ; CHECK-LABEL: name: bswap_2xi16
+-    ; CHECK: liveins: $s0
+-    ; CHECK: [[COPY:%[0-9]+]]:_(<2 x s16>) = COPY $s0
+-    ; CHECK: [[DEF:%[0-9]+]]:_(<8 x s8>) = G_IMPLICIT_DEF
+-    ; CHECK: [[INSERT_SUBREG:%[0-9]+]]:_(<8 x s8>) = INSERT_SUBREG [[DEF]](<8 x s8>), [[COPY]](<2 x s16>), %subreg.ssub
+-    ; CHECK: [[REV32_:%[0-9]+]]:_(<8 x s8>) = G_REV32 [[INSERT_SUBREG]]
+-    ; CHECK: [[BITCAST:%[0-9]+]]:_(<2 x s32>) = G_BITCAST [[REV32_]](<8 x s8>)
+-    ; CHECK: [[C:%[0-9]+]]:_(s32) = G_CONSTANT i32 16
+-    ; CHECK: [[BUILD_VECTOR:%[0-9]+]]:_(<2 x s32>) = G_BUILD_VECTOR [[C]](s32), [[C]](s32)
+-    ; CHECK: [[LSHR:%[0-9]+]]:_(<2 x s32>) = G_LSHR [[BITCAST]], [[BUILD_VECTOR]](<2 x s32>)
+-    ; CHECK: [[C1:%[0-9]+]]:_(s64) = G_CONSTANT i64 0
+-    ; CHECK: [[EVEC:%[0-9]+]]:_(s32) = G_EXTRACT_VECTOR_ELT [[LSHR]](<2 x s32>), [[C1]](s64)
+-    ; CHECK: [[BITCAST1:%[0-9]+]]:_(<2 x s16>) = G_BITCAST [[EVEC]](s32)
+-    ; CHECK: $s0 = COPY [[BITCAST1]](<2 x s16>)
+-    ; CHECK: RET_ReallyLR
+-    %0:_(<2 x s16>) = COPY $s0
+-    %1:_(<2 x s16>) = G_BSWAP %0
+-    $s0 = COPY %1(<2 x s16>)
+-    RET_ReallyLR
+-...
+----
+ name:            bswap_s32_legal
+ tracksRegLiveness: true
+ body:             |
+diff --git a/llvm/test/CodeGen/AArch64/GlobalISel/legalizer-info-validation.mir b/llvm/test/CodeGen/AArch64/GlobalISel/legalizer-info-validation.mir
+index 4b2629b78099..3dd305c2b15f 100644
+--- a/llvm/test/CodeGen/AArch64/GlobalISel/legalizer-info-validation.mir
++++ b/llvm/test/CodeGen/AArch64/GlobalISel/legalizer-info-validation.mir
+@@ -564,8 +564,8 @@
+ # DEBUG-NEXT: .. type index coverage check SKIPPED: user-defined predicate detected
+ # DEBUG-NEXT: .. imm index coverage check SKIPPED: user-defined predicate detected
+ # DEBUG-NEXT: G_BSWAP (opcode {{[0-9]+}}): 1 type index, 0 imm indices
+-# DEBUG-NEXT: .. type index coverage check SKIPPED: user-defined predicate detected
+-# DEBUG-NEXT: .. imm index coverage check SKIPPED: user-defined predicate detected
++# DEBUG-NEXT: .. the first uncovered type index: 1, OK
++# DEBUG-NEXT: .. the first uncovered imm index: 0, OK
+ # DEBUG-NEXT: G_BITREVERSE (opcode {{[0-9]+}}): 1 type index, 0 imm indices
+ # DEBUG-NEXT: .. the first uncovered type index: 1, OK
+ # DEBUG-NEXT: .. the first uncovered imm index: 0, OK
+-- 
+2.33.0.259.gc128427fd7-goog
+

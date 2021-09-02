@@ -66,6 +66,12 @@
         "end_version": 436353
     },
     {
+        "comment": "[UPSTREAM] Revert \"[AArch64][GlobalISel] Legalize bswap <2 x i16>\"",
+        "rel_patch_path": "cherry/9237eda3040738e98e985b39ce6a3c1fc71eaa56.patch",
+        "start_version": 433403,
+        "end_version": 436960
+    },
+    {
         "comment": "Revert two changes that break Android builds.",
         "rel_patch_path": "Revert-two-changes-that-break-Android-builds.v6.patch",
         "start_version": 428724,
