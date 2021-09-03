@@ -16,6 +16,23 @@
       "message": "Empty commit - no need for presubmit.",
       "revId": "fbff87f27b20544650a7dc05d56c7e7ebaa01868",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "327f079d_cee9744e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-09-03T21:01:26Z",
+      "side": 1,
+      "message": "I think that empty commits automatically bypass presubmit (based on something I saw last week).",
+      "revId": "fbff87f27b20544650a7dc05d56c7e7ebaa01868",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
