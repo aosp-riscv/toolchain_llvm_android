@@ -16,6 +16,24 @@
       "message": "Just trying to get an opt binary to try something. Marco, I\u0027ll follow up once this is \"ready\".",
       "revId": "c50711a96f06281ef37208572f7abff79eaecfe6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "506d83d1_ae8b9e8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-09-14T20:42:12Z",
+      "side": 1,
+      "message": "If this is for testing, I have a locally-built `opt` that I can upload to gerrit.",
+      "parentUuid": "7c7bfb08_481ce569",
+      "revId": "c50711a96f06281ef37208572f7abff79eaecfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
