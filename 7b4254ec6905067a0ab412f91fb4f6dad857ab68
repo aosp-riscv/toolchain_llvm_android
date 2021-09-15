@@ -24,6 +24,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7437f7d_28695e75",
+        "filename": "kythe_vnames.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-09-15T22:22:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d208b7c9_f683f9e2",
+      "range": {
+        "startLine": 5,
+        "startChar": 15,
+        "endLine": 5,
+        "endChar": 37
+      },
+      "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f48818a_bed2abc7",
+        "filename": "kythe_vnames.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-09-15T22:22:25Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "d208b7c9_f683f9e2",
+      "range": {
+        "startLine": 5,
+        "startChar": 15,
+        "endLine": 5,
+        "endChar": 37
+      },
+      "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b71d914_49077951",
@@ -37,6 +85,30 @@
       "writtenOn": "2021-09-15T22:19:59Z",
       "side": 1,
       "message": "This is fine to keep, but what paths do you expect to capture here?",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 3
+      },
+      "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350f047b_704e0516",
+        "filename": "kythe_vnames.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-09-15T22:22:25Z",
+      "side": 1,
+      "message": "I copied this from https://cs.android.com/android/platform/superproject/+/master:build/soong/vnames.json?q\u003dvnames.json.  Is this not required?",
+      "parentUuid": "8b71d914_49077951",
       "range": {
         "startLine": 9,
         "startChar": 2,
