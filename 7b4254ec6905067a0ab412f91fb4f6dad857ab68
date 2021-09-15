@@ -117,6 +117,30 @@
       },
       "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bcf68ec_d25b8a80",
+        "filename": "kythe_vnames.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1055203
+      },
+      "writtenOn": "2021-09-15T22:36:37Z",
+      "side": 1,
+      "message": "In that case `out` is their generated output directory (which is why include it as the root). And this second regex matches all \"normal\" files. \n\nIn your case, if I\u0027m understanding correctly, everything should be matched by your first expression. It would be fine to keep because it would be a no-op but removing it improves clarity I think.",
+      "parentUuid": "350f047b_704e0516",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 3
+      },
+      "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
