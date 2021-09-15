@@ -1,0 +1,15 @@
+[
+  {
+    "pattern": "toolchain/llvm-project/(.*)",
+    "vname": {
+      "root": "toolchain/llvm-project",
+      "path": "@1@"
+    }
+  },
+  {
+    "pattern": "(.*)",
+    "vname": {
+      "path": "@1@"
+    }
+  }
+]
