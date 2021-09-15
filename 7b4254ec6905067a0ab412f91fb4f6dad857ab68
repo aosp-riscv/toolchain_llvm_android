@@ -189,6 +189,30 @@
       },
       "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "510ce18a_bb1f5103",
+        "filename": "kythe_vnames.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1055203
+      },
+      "writtenOn": "2021-09-15T23:17:43Z",
+      "side": 1,
+      "message": "To be clear, since out and prebuilts are not in the repository, they have a root. In addition to other details, that tells clients/UI to get file contents from Kythe, not the repository.",
+      "parentUuid": "c0c3370d_26175cc2",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 3
+      },
+      "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
