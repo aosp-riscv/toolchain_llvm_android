@@ -141,6 +141,30 @@
       },
       "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6427be_852ae928",
+        "filename": "kythe_vnames.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-09-15T22:52:29Z",
+      "side": 1,
+      "message": "There are also files from:\n- clang\u0027s builtin headers and C++ headers (with prefix prebuilts/..)\n- generated headers (with prefix out/)\n\nTo handle these sources, IIUC, we want this snippet as well - correct?\n\n(We don\u0027t want to index the former but want to get xrefs for the latter.  We also have a generated_root entry for `out` in the ingestion config in google3.)",
+      "parentUuid": "3bcf68ec_d25b8a80",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 3
+      },
+      "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
