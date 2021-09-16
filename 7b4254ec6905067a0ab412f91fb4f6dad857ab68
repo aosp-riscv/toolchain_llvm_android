@@ -213,6 +213,30 @@
       },
       "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "648e78da_a199dc7c",
+        "filename": "kythe_vnames.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-09-16T17:24:36Z",
+      "side": 1,
+      "message": "Thanks for the updated mappings Salvatore!\n\nOne other note.  The files under `prebuilts` are part of git repositories as well.  They are included in the \"AOSP\" superproject in http://cs.android.com.  It\u0027s not included in the \"Android LLVM\" project at http://cs.android.com though.  In that case, it\u0027d be hard for kythe to serve the prebuilts files from their corresponding projects - correct?  This is not a big deal though - the main functionality we want is to cross-reference across code in toolchain/llvm-project.",
+      "parentUuid": "510ce18a_bb1f5103",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 3
+      },
+      "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
