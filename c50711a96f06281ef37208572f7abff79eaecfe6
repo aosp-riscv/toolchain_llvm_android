@@ -34,6 +34,23 @@
       "parentUuid": "7c7bfb08_481ce569",
       "revId": "c50711a96f06281ef37208572f7abff79eaecfe6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6acfcc3e_d7a6bc7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001525
+      },
+      "writtenOn": "2021-09-16T18:37:22Z",
+      "side": 1,
+      "message": "I suspect this might not actually help me. I started trying to follow the code by hand, and found some places where it calls through function pointers, so it\u0027s not possible to statically determine what code will actually be called at run time.\n(this is in boringssl, in case I didn\u0027t mention that yet)",
+      "revId": "c50711a96f06281ef37208572f7abff79eaecfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
