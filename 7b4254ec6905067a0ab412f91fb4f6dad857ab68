@@ -237,6 +237,30 @@
       },
       "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc0df15_bad7a4ae",
+        "filename": "kythe_vnames.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1055203
+      },
+      "writtenOn": "2021-09-16T17:32:55Z",
+      "side": 1,
+      "message": "We don\u0027t support cross-repo xrefs yet so we wouldn\u0027t be able to link from the llvm repo to the main AOSP repo. It is something we have talked about, but the use cases and desired behavior vary from one project to another so we haven\u0027t developed an approach that works well yet.",
+      "parentUuid": "648e78da_a199dc7c",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 3
+      },
+      "revId": "7b4254ec6905067a0ab412f91fb4f6dad857ab68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
