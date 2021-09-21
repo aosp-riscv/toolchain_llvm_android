@@ -16,6 +16,24 @@
       "message": "Trivial change in patchset 4 (fix description for stage2 test).\n\nFrom presubmit run, here are the steps taking \u003e 1 minute:\n0:38:22 stage2_Linux\n0:12:21 stage1_test\n0:06:59 stage1_Linux\n0:03:42 lldb-server_Android-I386 (platform\u003dFalse static\u003dTrue None)\n0:03:37 lldb-server_Android-X86_64 (platform\u003dFalse static\u003dTrue None)\n0:03:35 lldb-server_Android-ARM (platform\u003dFalse static\u003dTrue None)\n0:03:35 lldb-server_Android-AARCH64 (platform\u003dFalse static\u003dTrue None)\n\nNothing surprising, but having the record helps investigate when times do regress.",
       "revId": "078eb19a00526a0880a7316bc0ae8d594cc88053",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c975ec89_45200e8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-09-21T16:20:08Z",
+      "side": 1,
+      "message": "\u003e 0:12:21 stage1_test\n\nShould be stage2_test.",
+      "parentUuid": "da5c0ad9_443c0569",
+      "revId": "078eb19a00526a0880a7316bc0ae8d594cc88053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
