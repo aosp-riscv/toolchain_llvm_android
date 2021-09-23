@@ -155,6 +155,9 @@ def setup_sources(source_dir):
     logger().info(patch_output)
     write_source_info(tmp_source_dir, patch_output)
 
+    # Remove the .git directory to make source sync faster.
+    shutil.rmtree(tmp_source_dir / '.git')
+
     # Copy tmp_source_dir to source_dir if they are different.  This avoids
     # invalidating prior build outputs.
     if not os.path.exists(source_dir):
