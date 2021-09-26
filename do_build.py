@@ -565,11 +565,23 @@ def parse_args():
         default=False,
         help='Build debuggable Clang and LLVM tools (only affects stage2)')
 
-    parser.add_argument(
+    pgo_group = parser.add_mutually_exclusive_group()
+    pgo_group.add_argument(
         '--build-instrumented',
         action='store_true',
         default=False,
-        help='Build LLVM tools with PGO instrumentation')
+        help='Build with PGO instrumentation')
+
+    pgo_group.add_argument(
+        '--build-csir-instrumented',
+        action='store_true',
+        default=False,
+        help='Build with Context Sensitive PGO instrumentation')
+
+    parser.add_argument(
+        '--profdata',
+        action='store',
+        help='Build with the given PGO profdata instead of the default')
 
     # Options to skip build or packaging (can't skip both, or the script does
     # nothing).
@@ -661,6 +673,10 @@ def main():
     timer.Timer.register_atexit(dist_dir / 'build_times.txt')
 
     args = parse_args()
+
+    if args.build_csir_instrumented and not args.profdata:
+        raise RuntimeError('Building Context Sensitive PGO requires IR PGO profile.')
+
     if args.skip_build:
         # Skips all builds
         BuilderRegistry.add_filter(lambda name: False)
@@ -690,7 +706,7 @@ def main():
         source_manager.setup_sources(source_dir=paths.LLVM_PATH)
 
     # Build the stage1 Clang for the build host
-    instrumented = hosts.build_host().is_linux and args.build_instrumented
+    instrumented = hosts.build_host().is_linux and (args.build_instrumented or args.build_csir_instrumented)
 
     stage1 = builders.Stage1Builder()
     stage1.build_name = 'stage1'
@@ -714,10 +730,12 @@ def main():
         swig_builder = None
 
     if need_host:
-        if not args.no_pgo:
-            profdata = extract_profdata()
-        else:
+        if args.no_pgo:
             profdata = None
+        elif args.profdata:
+            profdata = args.profdata
+        else:
+            profdata = extract_profdata()
 
         stage2 = builders.Stage2Builder()
         stage2.build_name = args.build_name
@@ -725,8 +743,9 @@ def main():
         stage2.debug_build = args.debug
         stage2.enable_assertions = args.enable_assertions
         stage2.lto = args.lto
-        stage2.build_instrumented = instrumented
-        stage2.profdata_file = profdata if profdata else None
+        stage2.build_instrumented = args.build_instrumented
+        stage2.build_csir_instrumented = args.build_csir_instrumented
+        stage2.profdata_file = profdata
 
         libxml2_builder = builders.LibXml2Builder()
         libxml2_builder.build()
@@ -759,7 +778,7 @@ def main():
         stage2.build_tags = stage2_tags
 
         stage2.build()
-        if not (stage2.build_instrumented or stage2.debug_build):
+        if not (stage2.build_instrumented or stage2.build_csir_instrumented or stage2.debug_build):
             set_default_toolchain(stage2.installed_toolchain)
 
         Builder.output_toolchain = stage2.installed_toolchain
@@ -779,7 +798,8 @@ def main():
     # on instrumented builds.
     need_tests = not args.skip_tests and need_host and \
             BuilderRegistry.should_build('stage2') and \
-            (not args.build_instrumented)
+            (not args.build_instrumented) and \
+            (not args.build_csir_instrumented)
     if need_tests:
         # http://b/197645198 Temporarily skip tests on [Darwin|Debug] builds
         if not (hosts.build_host().is_darwin or args.debug):
