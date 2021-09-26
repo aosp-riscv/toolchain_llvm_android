@@ -51,18 +51,19 @@ class ClangProfileHandler(object):
     def getProfileFileEnvVar(self):
         return ('LLVM_PROFILE_FILE', self.profiles_format)
 
-    def mergeProfiles(self):
+    def mergeProfiles(self, profdata_filename):
         stage1_install = paths.OUT_DIR / 'stage1-install'
         profdata_tool = stage1_install / 'bin' / 'llvm-profdata'
 
         profdata_dir = paths.OUT_DIR
-        profdata_filename = paths.pgo_profdata_filename()
         utils.check_call([
             str(profdata_tool), 'merge', '-o',
             str(profdata_dir / profdata_filename),
             str(self.profiles_dir)
         ])
 
+    def compressProfile(self, profdata_filename):
+        profdata_dir = paths.OUT_DIR
         dist_dir = Path(os.environ.get('DIST_DIR', paths.OUT_DIR))
         utils.check_call([
             'tar', '-cjC',
@@ -362,16 +363,37 @@ def main():
     link_clang(Path(args.android_path), clang_path)
 
     if args.build_only:
-        profiler = ClangProfileHandler() if args.profile else None
-
         targets = [args.target] if args.target else TARGETS
-        for target in targets:
-            build_target(Path(args.android_path), clang_version, target, args.jobs,
-                         args.redirect_stderr, args.with_tidy, profiler)
+        if not args.profile:
+            for target in targets:
+                build_target(Path(args.android_path), clang_version, target, args.jobs,
+                             args.redirect_stderr, args.with_tidy)
+        else:
+            profiler = ClangProfileHandler()
 
-        if profiler is not None:
+            if profiler.profiles_dir.exists():
+                shutil.rmtree(profiler.profiles_dir)
+
+            for target in targets:
+                build_target(Path(args.android_path), clang_version, target, args.jobs,
+                             args.redirect_stderr, args.with_tidy, profiler)
             invoke_llvm_tools(profiler)
-            profiler.mergeProfiles()
+            ir_profdata_file = paths.OUT_DIR / 'intermediate_ir.profdata'
+            profiler.mergeProfiles(ir_profdata_file)
+
+            # Rebuild with CSIR.
+            cmd = [paths.SCRIPTS_DIR / 'build.py', '--no-build=windows,lldb',
+                   '--skip-source-setup', '--skip=stage1',
+                   '--build-csir-instrumented', '--profdata=' + str(ir_profdata_file)]
+            utils.check_call(cmd)
+
+            for target in targets:
+                build_target(Path(args.android_path), clang_version, target, args.jobs,
+                             args.redirect_stderr, args.with_tidy, profiler)
+            invoke_llvm_tools(profiler)
+
+            profiler.mergeProfiles(paths.pgo_profdata_filename())
+            profiler.compressProfile(paths.pgo_profdata_filename())
 
     else:
         devices = get_connected_device_list()

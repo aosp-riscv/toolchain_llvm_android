@@ -135,6 +135,7 @@ class Stage2Builder(base_builders.LLVMBuilder):
     remove_install_dir: bool = True
     debug_build: bool = False
     build_instrumented: bool = False
+    build_cs_instrumented: bool = False
     profdata_file: Optional[Path] = None
     lto: bool = True
 
@@ -163,7 +164,7 @@ class Stage2Builder(base_builders.LLVMBuilder):
     @property
     def ldflags(self) -> List[str]:
         ldflags = super().ldflags
-        if self.build_instrumented:
+        if self.build_instrumented or self.build_csir_instrumented:
             # Building libcxx, libcxxabi with instrumentation causes linker errors
             # because these are built with -nodefaultlibs and prevent libc symbols
             # needed by libclang_rt.profile from being resolved.  Manually adding
@@ -191,6 +192,7 @@ class Stage2Builder(base_builders.LLVMBuilder):
         if (self.lto and
                 not self._config.target_os.is_darwin and
                 not self.build_instrumented and
+                not self.build_csir_instrumented and
                 not self.debug_build):
             defines['LLVM_ENABLE_LTO'] = 'Thin'
 
@@ -204,15 +206,16 @@ class Stage2Builder(base_builders.LLVMBuilder):
         if self.debug_build:
             defines['CMAKE_BUILD_TYPE'] = 'Debug'
 
-        if self.build_instrumented:
-            defines['LLVM_BUILD_INSTRUMENTED'] = 'ON'
+        if self.build_instrumented or self.build_csir_instrumented:
+            defines['LLVM_BUILD_INSTRUMENTED'] = 'IR' if self.build_instrumented else 'CSIR'
 
             # llvm-profdata is only needed to finish CMake configuration
             # (tools/clang/utils/perf-training/CMakeLists.txt) and not needed for
             # build
             llvm_profdata = self.toolchain.path / 'bin' / 'llvm-profdata'
             defines['LLVM_PROFDATA'] = str(llvm_profdata)
-        elif self.profdata_file:
+
+        if self.profdata_file and not self.build_instrumented:
             defines['LLVM_PROFDATA_FILE'] = str(self.profdata_file)
 
         # Make libc++.so a symlink to libc++.so.x instead of a linker script that
