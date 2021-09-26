@@ -1,0 +1,65 @@
+From 70b25c3b33106f11fa9ce7a5b0423597cd24e281 Mon Sep 17 00:00:00 2001
+From: Yi Kong <yikong@google.com>
+Date: Sun, 26 Sep 2021 17:43:19 +0800
+Subject: [PATCH] Add build option to specify profdata type
+
+There is an option to generate IR profile but no way to use it. Add an
+option to choose which type of profdata is given, default to frontend
+profile to maintain current behaviour if option is not set.
+---
+ llvm/cmake/modules/HandleLLVMOptions.cmake | 36 ++++++++++++++++------
+ 1 file changed, 27 insertions(+), 9 deletions(-)
+
+diff --git a/llvm/cmake/modules/HandleLLVMOptions.cmake b/llvm/cmake/modules/HandleLLVMOptions.cmake
+index 1d5552de7626..3e24f31b5f74 100644
+--- a/llvm/cmake/modules/HandleLLVMOptions.cmake
++++ b/llvm/cmake/modules/HandleLLVMOptions.cmake
+@@ -1037,18 +1037,36 @@ if (CLANG_CL AND (LLVM_BUILD_INSTRUMENTED OR LLVM_USE_SANITIZER))
+     CMAKE_SHARED_LINKER_FLAGS)
+ endif()
+ 
++set(LLVM_PROFDATA_TYPE OFF CACHE STRING "The type of PGO profile used to build LLVM and tools. May be specified as IR or Frontend")
++mark_as_advanced(LLVM_PROFDATA_TYPE)
++string(TOUPPER "${LLVM_PROFDATA_TYPE}" uppercase_LLVM_PROFDATA_TYPE)
+ if(LLVM_PROFDATA_FILE AND EXISTS ${LLVM_PROFDATA_FILE})
+-  if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" )
+-    append("-fprofile-instr-use=\"${LLVM_PROFDATA_FILE}\""
+-      CMAKE_CXX_FLAGS
+-      CMAKE_C_FLAGS)
+-    if(NOT LINKER_IS_LLD_LINK)
+-      append("-fprofile-instr-use=\"${LLVM_PROFDATA_FILE}\""
+-        CMAKE_EXE_LINKER_FLAGS
+-        CMAKE_SHARED_LINKER_FLAGS)
++  if (uppercase_LLVM_PROFDATA_TYPE STREQUAL "IR")
++    if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" )
++      append("-fprofile-use=\"${LLVM_PROFDATA_FILE}\""
++        CMAKE_CXX_FLAGS
++        CMAKE_C_FLAGS)
++      if(NOT LINKER_IS_LLD_LINK)
++        append("-fprofile-use=\"${LLVM_PROFDATA_FILE}\""
++          CMAKE_EXE_LINKER_FLAGS
++          CMAKE_SHARED_LINKER_FLAGS)
++      endif()
++    else()
++      message(FATAL_ERROR "LLVM_PROFDATA_FILE can only be specified when compiling with clang")
+     endif()
+   else()
+-    message(FATAL_ERROR "LLVM_PROFDATA_FILE can only be specified when compiling with clang")
++    if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" )
++      append("-fprofile-instr-use=\"${LLVM_PROFDATA_FILE}\""
++        CMAKE_CXX_FLAGS
++        CMAKE_C_FLAGS)
++      if(NOT LINKER_IS_LLD_LINK)
++        append("-fprofile-instr-use=\"${LLVM_PROFDATA_FILE}\""
++          CMAKE_EXE_LINKER_FLAGS
++          CMAKE_SHARED_LINKER_FLAGS)
++      endif()
++    else()
++      message(FATAL_ERROR "LLVM_PROFDATA_FILE can only be specified when compiling with clang")
++    endif()
+   endif()
+ endif()
+ 
+-- 
+2.33.0.685.g46640cef36-goog
+
