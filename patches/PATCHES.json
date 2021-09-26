@@ -118,5 +118,11 @@
         "rel_patch_path": "Undef-FS-macro-for-Android-x86_64.patch",
         "start_version": 412851,
         "end_version": null
+    },
+    {
+        "comment": "Add build option to specify profdata type",
+        "rel_patch_path": "Add-build-option-to-specify-profdata-type.patch",
+        "start_version": 433403,
+        "end_version": null
     }
 ]
