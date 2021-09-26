@@ -45,24 +45,29 @@ DISABLED_WARNINGS = [
 class ClangProfileHandler(object):
 
     def __init__(self):
-        self.profiles_dir = paths.OUT_DIR / 'clang-profiles'
-        self.profiles_format = os.path.join(self.profiles_dir, '%4m.profraw')
+        self.ir_profiles_dir = paths.OUT_DIR / 'clang-ir-profiles'
+        self.csir_profiles_dir = paths.OUT_DIR / 'clang-csir-profiles'
 
-    def getProfileFileEnvVar(self):
-        return ('LLVM_PROFILE_FILE', self.profiles_format)
+    def getProfileFileEnvVar(self, profiles_dir):
+        profiles_format = os.path.join(profiles_dir, '%4m.profraw')
+        return ('LLVM_PROFILE_FILE', profiles_format)
 
-    def mergeProfiles(self):
+    def mergeProfiles(self, profiles_dir, profdata_out_file, additional_profdata = None):
         stage1_install = paths.OUT_DIR / 'stage1-install'
         profdata_tool = stage1_install / 'bin' / 'llvm-profdata'
 
         profdata_dir = paths.OUT_DIR
-        profdata_filename = paths.pgo_profdata_filename()
-        utils.check_call([
+        cmd = [
             str(profdata_tool), 'merge', '-o',
-            str(profdata_dir / profdata_filename),
-            str(self.profiles_dir)
-        ])
+            str(profdata_out_file),
+            str(profiles_dir)
+        ]
+        if additional_profdata:
+            cmd.append(str(additional_profdata))
+        utils.check_call(cmd)
 
+    def compressProfile(self, profdata_filename):
+        profdata_dir = paths.OUT_DIR
         dist_dir = Path(os.environ.get('DIST_DIR', paths.OUT_DIR))
         utils.check_call([
             'tar', '-cjC',
@@ -200,7 +205,7 @@ def extract_clang_version(clang_install: Path) -> version.Version:
     return version.Version(version_file)
 
 
-def invoke_llvm_tools(profiler: ClangProfileHandler):
+def invoke_llvm_tools(profiler: ClangProfileHandler, profiles_dir):
     """Collect profiles from llvm tools.
 
     For now, just use '--help' to invoke the tools.
@@ -211,7 +216,7 @@ def invoke_llvm_tools(profiler: ClangProfileHandler):
     # build.py instead of calling its internal functions.
     stage2_install = paths.OUT_DIR / 'stage2-install'
     env = dict(os.environ)
-    key, val = profiler.getProfileFileEnvVar()
+    key, val = profiler.getProfileFileEnvVar(profiles_dir)
     env[key] = val
 
     for tool in (stage2_install / 'bin').iterdir():
@@ -226,7 +231,8 @@ def invoke_llvm_tools(profiler: ClangProfileHandler):
 def build_target(android_base: Path, clang_version: version.Version,
                  target: str, modules: List[str],
                  max_jobs: int, redirect_stderr: bool, with_tidy: bool,
-                 profiler: Optional[ClangProfileHandler]=None) -> None:
+                 profiler: Optional[ClangProfileHandler]=None,
+                 profiles_dir : str=None) -> None:
     jobs = '-j{}'.format(max(1, min(max_jobs, multiprocessing.cpu_count())))
     try:
         env_out = subprocess.check_output(
@@ -276,7 +282,7 @@ def build_target(android_base: Path, clang_version: version.Version,
 
         # Set the environment variable specifying where the profile file gets
         # written.
-        key, val = profiler.getProfileFileEnvVar()
+        key, val = profiler.getProfileFileEnvVar(profiles_dir)
         env[key] = val
 
     modulesList = ' '.join(modules)
@@ -377,17 +383,44 @@ def main():
     link_clang(Path(args.android_path), clang_path)
 
     if args.build_only:
-        profiler = ClangProfileHandler() if args.profile else None
-
         targets = [args.target] if args.target else TARGETS
-        for target in targets:
-            build_target(Path(args.android_path), clang_version, target,
-                         modules, args.jobs,
-                         args.redirect_stderr, args.with_tidy, profiler)
+        if not args.profile:
+            for target in targets:
+                build_target(Path(args.android_path), clang_version, target, modules, args.jobs,
+                             args.redirect_stderr, args.with_tidy)
+        else:
+            profiler = ClangProfileHandler()
 
-        if profiler is not None:
-            invoke_llvm_tools(profiler)
-            profiler.mergeProfiles()
+            if profiler.ir_profiles_dir.exists():
+                shutil.rmtree(profiler.ir_profiles_dir)
+            if profiler.csir_profiles_dir.exists():
+                shutil.rmtree(profiler.csir_profiles_dir)
+
+            for target in targets:
+                build_target(Path(args.android_path), clang_version, target, modules, args.jobs,
+                             args.redirect_stderr, args.with_tidy, profiler,
+                             profiler.ir_profiles_dir)
+            invoke_llvm_tools(profiler, profiler.ir_profiles_dir)
+            ir_profdata_file = paths.OUT_DIR / 'intermediate_ir.profdata'
+            profiler.mergeProfiles(profiler.ir_profiles_dir, ir_profdata_file)
+
+            # Rebuild with CSIR.
+            os.rename(paths.OUT_DIR / 'stage2', paths.OUT_DIR / 'ir-pass')
+            os.rename(paths.OUT_DIR / 'stage2-install', paths.OUT_DIR / 'ir-pass-install')
+            cmd = [paths.SCRIPTS_DIR / 'build.py', '--no-build=windows,lldb',
+                   '--skip-source-setup', '--skip=stage1', '--skip-tests', '--lto',
+                   '--build-csir-instrumented', '--profdata=' + str(ir_profdata_file)]
+            utils.check_call(cmd)
+
+            for target in targets:
+                build_target(Path(args.android_path), clang_version, target, modules, args.jobs,
+                             args.redirect_stderr, args.with_tidy, profiler,
+                             profiler.csir_profiles_dir)
+            invoke_llvm_tools(profiler, profiler.csir_profiles_dir)
+            profiler.mergeProfiles(profiler.csir_profiles_dir,
+                                   paths.OUT_DIR / paths.pgo_profdata_filename(),
+                                   additional_profdata=ir_profdata_file)
+            profiler.compressProfile(paths.pgo_profdata_filename())
 
     else:
         devices = get_connected_device_list()
