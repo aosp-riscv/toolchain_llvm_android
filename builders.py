@@ -15,13 +15,14 @@
 #
 """Builder instances for various targets."""
 
-import contextlib
 from pathlib import Path
+from typing import cast, Dict, Iterator, List, Optional, Set
+import contextlib
 import os
 import re
 import shutil
 import textwrap
-from typing import cast, Dict, Iterator, List, Optional, Set
+import timer
 
 import base_builders
 import configs
@@ -29,7 +30,6 @@ import constants
 import hosts
 import mapfile
 import paths
-import toolchains
 import utils
 
 class AsanMapFileBuilder(base_builders.Builder):
@@ -295,7 +295,7 @@ class BuiltinsBuilder(base_builders.LLVMRuntimeBuilder):
         sarch = 'i686' if arch == hosts.Arch.I386 else arch.value
         filename = 'libclang_rt.builtins-' + sarch + '-android.a'
         filename_exported = 'libclang_rt.builtins-' + sarch + '-android-exported.a'
-        src_path = self.output_dir / 'lib' / 'android' / filename
+        src_path = self.output_dir / 'lib' / 'linux' / filename
 
         if self.is_exported:
             # This special copy exports its symbols and is only intended for use
@@ -496,6 +496,7 @@ class LibUnwindBuilder(base_builders.LLVMRuntimeBuilder):
         # dlpi_adds/dlpi_subs fields, which were only added to Bionic in
         # Android R. See llvm.org/pr46743.
         defines['LIBUNWIND_USE_FRAME_HEADER_CACHE'] = 'TRUE' if self.is_exported else 'FALSE'
+        defines['LIBUNWIND_TARGET_TRIPLE'] = self._config.llvm_triple
         return defines
 
     def install_config(self) -> None:
@@ -538,6 +539,13 @@ class LibOMPBuilder(base_builders.LLVMRuntimeBuilder):
     @property
     def is_shared(self) -> bool:
         return cast(Dict[str, bool], self._config.extra_config)['is_shared']
+
+    @property
+    def ldflags(self) -> List[str]:
+        libs = super().ldflags
+        if self._config.api_level < 21:
+            libs += ['-landroid_support']
+        return libs
 
     @property
     def output_dir(self) -> Path:
@@ -735,8 +743,9 @@ class LldbServerBuilder(base_builders.LLVMRuntimeBuilder):
         defines['LLVM_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'llvm-tblgen')
         defines['CLANG_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'clang-tblgen')
         defines['LLDB_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'lldb-tblgen')
-        triple = self._config.target_arch.llvm_triple
+        triple = self._config.llvm_triple
         defines['LLVM_HOST_TRIPLE'] = triple.replace('i686', 'i386')
+        defines['LLDB_ENABLE_LUA'] = 'OFF'
         return defines
 
     def install_config(self) -> None:
@@ -765,6 +774,7 @@ class LibCxxAbiBuilder(base_builders.LLVMRuntimeBuilder):
 
         if self.enable_assertions:
             defines['LIBCXXABI_ENABLE_ASSERTIONS'] = 'ON'
+        defines['LIBCXXABI_TARGET_TRIPLE'] = self._config.llvm_triple
 
         return defines
 
@@ -887,6 +897,7 @@ class PlatformLibcxxAbiBuilder(base_builders.LLVMRuntimeBuilder):
         defines: Dict[str, str] = super().cmake_defines
         defines['LIBCXXABI_LIBCXX_INCLUDES'] = self.toolchain.libcxx_headers
         defines['LIBCXXABI_ENABLE_SHARED'] = 'OFF'
+        defines['LIBCXXABI_TARGET_TRIPLE'] = self._config.llvm_triple
         return defines
 
     def _is_64bit(self) -> bool:
@@ -933,6 +944,7 @@ class LibCxxBuilder(base_builders.LLVMRuntimeBuilder):
         defines['LIBCXX_HAS_WIN32_THREAD_API'] = 'ON'
         defines['LIBCXX_TEST_COMPILER_FLAGS'] = defines['CMAKE_CXX_FLAGS']
         defines['LIBCXX_TEST_LINKER_FLAGS'] = defines['CMAKE_EXE_LINKER_FLAGS']
+        defines['LIBCXX_TARGET_TRIPLE'] = self._config.llvm_triple
 
         # Use cxxabi header from the source directory since it gets installed
         # into install_dir only during libcxx's install step.  But use the
