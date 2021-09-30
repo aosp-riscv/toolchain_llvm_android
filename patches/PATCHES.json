@@ -78,6 +78,18 @@
         "end_version": 438570
     },
     {
+        "comment": "[UPSTREAM] [OpenMP][libomptarget] Change device vector elements to unique_ptr type",
+        "rel_patch_path": "cherry/c3aecf87d5b97c3d3580457164e7fe4a19c4221a.patch",
+        "start_version": 437112,
+        "end_version": 437297
+    },
+    {
+        "comment": "[UPSTREAM] Revert [Coroutines] [Clang] Look up coroutine component in std namespace first",
+        "rel_patch_path": "cherry/79f8b5f0d00fd10fee8aee3c3c58e17a8fea8946.patch",
+        "start_version": 437112,
+        "end_version": 437168
+    },
+    {
         "comment": "Revert two changes that break Android builds.",
         "rel_patch_path": "Revert-two-changes-that-break-Android-builds.v6.patch",
         "start_version": 428724,
@@ -99,13 +111,13 @@
         "comment": "Revert \"[Sema] Introduce BuiltinAttr, per-declaration builtin-ness\"",
         "rel_patch_path": "Revert-Sema-Introduce-BuiltinAttr-per-declaration-bu.v3.patch",
         "start_version": 428724,
-        "end_version": null
+        "end_version": 437112
     },
     {
         "comment": "Mark XFAIL tests",
         "rel_patch_path": "Mark-XFAIL-tests.patch",
         "start_version": 428724,
-        "end_version": null
+        "end_version": 437112
     },
     {
         "comment": "Ensure that we use our toolchain's lipo, and not the system version",
@@ -117,6 +129,24 @@
         "comment": "Undef FS macro for Android x86_64",
         "rel_patch_path": "Undef-FS-macro-for-Android-x86_64.patch",
         "start_version": 412851,
+        "end_version": null
+    },
+    {
+        "comment": "Fix Android libunwind link error",
+        "rel_patch_path": "Fix-Android-libunwind-link-error.patch",
+        "start_version": 437112,
+        "end_version": null
+    },
+    {
+        "comment": "WIP XFAIL for next version r437112",
+        "rel_patch_path": "WIP-XFAIL-for-next-version-r437112.patch",
+        "start_version": 437112,
+        "end_version": null
+    },
+    {
+        "comment": "Use malloc free for KMP on Android",
+        "rel_patch_path": "Use-malloc-free-for-KMP-on-Android.patch",
+        "start_version": 437112,
         "end_version": null
     }
 ]

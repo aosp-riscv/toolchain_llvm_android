@@ -21,8 +21,10 @@ import os
 import re
 import shutil
 import textwrap
+import timer
 from typing import cast, Dict, Iterator, List, Optional, Set
 
+import android_version
 import base_builders
 import configs
 import constants
@@ -298,6 +300,8 @@ class BuiltinsBuilder(base_builders.LLVMRuntimeBuilder):
         filename = 'libclang_rt.builtins-' + sarch + '-android.a'
         filename_exported = 'libclang_rt.builtins-' + sarch + '-android-exported.a'
         src_path = self.output_dir / 'lib' / 'android' / filename
+        if android_version.get_svn_revision() >= "r437112":
+            src_path = self.output_dir / 'lib' / 'linux' / filename
 
         if self.is_exported:
             # This special copy exports its symbols and is only intended for use
@@ -498,6 +502,8 @@ class LibUnwindBuilder(base_builders.LLVMRuntimeBuilder):
         # dlpi_adds/dlpi_subs fields, which were only added to Bionic in
         # Android R. See llvm.org/pr46743.
         defines['LIBUNWIND_USE_FRAME_HEADER_CACHE'] = 'TRUE' if self.is_exported else 'FALSE'
+        if android_version.get_svn_revision() >= "r437112":
+            defines['LIBUNWIND_TARGET_TRIPLE'] = self._config.target_arch.llvm_triple
         return defines
 
     def install_config(self) -> None:
@@ -733,6 +739,7 @@ class LldbServerBuilder(base_builders.LLVMRuntimeBuilder):
         defines['LLDB_TABLEGEN'] = str(self.toolchain.build_path / 'bin' / 'lldb-tblgen')
         triple = self._config.target_arch.llvm_triple
         defines['LLVM_HOST_TRIPLE'] = triple.replace('i686', 'i386')
+        defines['LLDB_ENABLE_LUA'] = 'OFF'
         return defines
 
     def install_config(self) -> None:
@@ -761,6 +768,8 @@ class LibCxxAbiBuilder(base_builders.LLVMRuntimeBuilder):
 
         if self.enable_assertions:
             defines['LIBCXXABI_ENABLE_ASSERTIONS'] = 'ON'
+        if android_version.get_svn_revision() >= "r437112":
+            defines['LIBCXXABI_TARGET_TRIPLE'] = self._config.target_arch.llvm_triple
 
         return defines
 
@@ -883,6 +892,8 @@ class PlatformLibcxxAbiBuilder(base_builders.LLVMRuntimeBuilder):
         defines: Dict[str, str] = super().cmake_defines
         defines['LIBCXXABI_LIBCXX_INCLUDES'] = self.toolchain.libcxx_headers
         defines['LIBCXXABI_ENABLE_SHARED'] = 'OFF'
+        if android_version.get_svn_revision() >= "r437112":
+            defines['LIBCXXABI_TARGET_TRIPLE'] = self._config.target_arch.llvm_triple
         return defines
 
     def _is_64bit(self) -> bool:
@@ -929,6 +940,8 @@ class LibCxxBuilder(base_builders.LLVMRuntimeBuilder):
         defines['LIBCXX_HAS_WIN32_THREAD_API'] = 'ON'
         defines['LIBCXX_TEST_COMPILER_FLAGS'] = defines['CMAKE_CXX_FLAGS']
         defines['LIBCXX_TEST_LINKER_FLAGS'] = defines['CMAKE_EXE_LINKER_FLAGS']
+        if android_version.get_svn_revision() >= "r437112":
+            defines['LIBCXX_TARGET_TRIPLE'] = self._config.target_arch.llvm_triple
 
         # Use cxxabi header from the source directory since it gets installed
         # into install_dir only during libcxx's install step.  But use the
