@@ -346,8 +346,15 @@ class AndroidARMConfig(AndroidConfig):
     def cflags(self) -> List[str]:
         cflags = super().cflags
         cflags.append('-march=armv7-a')
+        cflags.append('-flto=thin')
         return cflags
 
+    @property
+    def ldflags(self) -> List[str]:
+        """Returns a list of flags for static linker."""
+        ldflags = super().ldflags
+        ldflags.append('-flto=thin')
+        return ldflags
 
 class AndroidAArch64Config(AndroidConfig):
     """Configs for android arm64 targets."""
