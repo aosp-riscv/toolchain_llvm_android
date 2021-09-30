@@ -199,8 +199,10 @@ def normalize_llvm_host_libs(install_dir: Path, host: hosts.Host, version: Versi
                }
 
     def getVersions(libname: str) -> Tuple[str, str]:
+        if libname == 'libclang_cxx':
+            return version.major, version.major
         if not libname.startswith('libc++'):
-            return version.short_version(), version.major
+            return version.long_version(), version.major
         else:
             return '1.0', '1'
 
@@ -208,13 +210,17 @@ def normalize_llvm_host_libs(install_dir: Path, host: hosts.Host, version: Versi
     for libname, libformat in libs.items():
         short_version, major = getVersions(libname)
 
-        soname_lib = os.path.join(libdir, libformat.format(version=major))
+        soname_version = '13' if libname == 'libclang' else major
+        soname_lib = os.path.join(libdir, libformat.format(version=soname_version))
         if libname.startswith('libclang'):
-            real_lib = soname_lib[:-3]
-        else:
-            real_lib = os.path.join(libdir, libformat.format(version=short_version))
+            soname_lib = soname_lib[:-3]
 
-        if libname not in ('libLLVM',):
+        real_lib = os.path.join(libdir, libformat.format(version=short_version))
+
+        print(real_lib)
+        print(soname_lib)
+
+        if libname not in ('libLLVM', 'libclang_cxx'):
             # Rename the library to match its SONAME
             if not os.path.isfile(real_lib):
                 raise RuntimeError(real_lib + ' must be a regular file')
