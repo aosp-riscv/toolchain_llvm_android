@@ -199,6 +199,14 @@ def normalize_llvm_host_libs(install_dir: Path, host: hosts.Host, version: Versi
                }
 
     def getVersions(libname: str) -> Tuple[str, str]:
+        if android_version.get_svn_revision() >= "r437112":
+            # try these for the next revision
+            if libname == 'libclang_cxx':
+                return version.major, version.major
+            if not libname.startswith('libc++'):
+                return version.long_version(), version.major
+            else:
+                return '1.0', '1'
         if not libname.startswith('libc++'):
             return version.short_version(), version.major
         else:
@@ -208,13 +216,27 @@ def normalize_llvm_host_libs(install_dir: Path, host: hosts.Host, version: Versi
     for libname, libformat in libs.items():
         short_version, major = getVersions(libname)
 
-        soname_lib = os.path.join(libdir, libformat.format(version=major))
-        if libname.startswith('libclang'):
-            real_lib = soname_lib[:-3]
-        else:
+        if android_version.get_svn_revision() >= "r437112":
+            # Try this for the next revision.
+            soname_version = '13' if libname == 'libclang' else major
+            soname_lib = os.path.join(libdir, libformat.format(version=soname_version))
+            if libname.startswith('libclang'):
+                soname_lib = soname_lib[:-3]
             real_lib = os.path.join(libdir, libformat.format(version=short_version))
+            print(real_lib)
+            print(soname_lib)
+        else:
+            soname_lib = os.path.join(libdir, libformat.format(version=major))
+            if libname.startswith('libclang'):
+                real_lib = soname_lib[:-3]
+            else:
+                real_lib = os.path.join(libdir, libformat.format(version=short_version))
 
-        if libname not in ('libLLVM',):
+        preseved_libnames = ('libLLVM',)
+        if android_version.get_svn_revision() >= "r437112":
+            preseved_libnames = ('libLLVM', 'libclang_cxx')
+
+        if libname not in preserved_libnames:
             # Rename the library to match its SONAME
             if not os.path.isfile(real_lib):
                 raise RuntimeError(real_lib + ' must be a regular file')
