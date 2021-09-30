@@ -1,0 +1,35 @@
+From b9265bd38afea3560aadb1aaf7503e21f4e06339 Mon Sep 17 00:00:00 2001
+From: Chih-Hung Hsieh <chh@google.com>
+Date: Fri, 1 Oct 2021 12:42:04 -0700
+Subject: [PATCH] Fix Android libunwind link error
+
+Change-Id: I45f5a4428662772c6ee3625a851ec96b81b16d24
+---
+ libunwind/src/config.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libunwind/src/config.h b/libunwind/src/config.h
+index 2ab9d2f5e0c9..61eecbe987ab 100644
+--- a/libunwind/src/config.h
++++ b/libunwind/src/config.h
+@@ -144,7 +144,7 @@
+ #define _LIBUNWIND_REMEMBER_CLEANUP_NEEDED
+ #endif
+ 
+-#if defined(NDEBUG) && defined(_LIBUNWIND_IS_BAREMETAL)
++#if defined(NDEBUG) && (defined(_LIBUNWIND_IS_BAREMETAL) || defined(__ANDROID__))
+ #define _LIBUNWIND_ABORT(msg)                                                  \
+   do {                                                                         \
+     abort();                                                                   \
+@@ -158,7 +158,7 @@
+   } while (0)
+ #endif
+ 
+-#if defined(NDEBUG) && defined(_LIBUNWIND_IS_BAREMETAL)
++#if defined(NDEBUG) && (defined(_LIBUNWIND_IS_BAREMETAL) || defined(__ANDROID__))
+ #define _LIBUNWIND_LOG0(msg)
+ #define _LIBUNWIND_LOG(msg, ...)
+ #else
+-- 
+2.33.0.800.g4c38ced690-goog
+
