@@ -99,6 +99,12 @@
         "comment": "Revert \"[Sema] Introduce BuiltinAttr, per-declaration builtin-ness\"",
         "rel_patch_path": "Revert-Sema-Introduce-BuiltinAttr-per-declaration-bu.v3.patch",
         "start_version": 428724,
+        "end_version": 437112
+    },
+    {
+        "comment": "Revert \"[Sema] Introduce BuiltinAttr, per-declaration builtin-ness\"",
+        "rel_patch_path": "Revert-Sema-Introduce-BuiltinAttr-per-declaration-bu.v4.patch",
+        "start_version": 437112,
         "end_version": null
     },
     {
