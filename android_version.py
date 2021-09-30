@@ -22,12 +22,13 @@ _version_read = False
 _patch_level = '2'
 _svn_revision = 'r433403'
 # svn_revision_next will be newer than the official svn_revision in the future.
-_svn_revision_next = 'r433403'
+_svn_revision_next = 'r437112'
 
 
 def set_llvm_next(llvm_next: bool):
     if _version_read:
         raise RuntimeError('set_llvm_next() after earlier read of versions')
+    # pylint:disable=global-statement
     global _llvm_next
     _llvm_next = llvm_next
 

@@ -1,0 +1,29 @@
+From 68476ba8f642223c0111aaa4c8af0824889907ab Mon Sep 17 00:00:00 2001
+From: Chih-Hung Hsieh <chh@google.com>
+Date: Fri, 1 Oct 2021 15:03:15 -0700
+Subject: [PATCH] Use malloc/free for KMP on Android
+
+Change-Id: I3189bf4cd5354be40b59e3ca20c1b14af825dc1e
+---
+ openmp/runtime/src/kmp_barrier.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/openmp/runtime/src/kmp_barrier.h b/openmp/runtime/src/kmp_barrier.h
+index ac28a13217e9..8408016cecc8 100644
+--- a/openmp/runtime/src/kmp_barrier.h
++++ b/openmp/runtime/src/kmp_barrier.h
+@@ -16,7 +16,10 @@
+ #include "kmp.h"
+ #include "kmp_i18n.h"
+ 
+-#if KMP_HAVE_XMMINTRIN_H && KMP_HAVE__MM_MALLOC
++#if __ANDROID__
++#define KMP_ALIGNED_ALLOCATE(size, alignment) malloc(size)
++#define KMP_ALIGNED_FREE(ptr) free(ptr)
++#elif KMP_HAVE_XMMINTRIN_H && KMP_HAVE__MM_MALLOC
+ #include <xmmintrin.h>
+ #define KMP_ALIGNED_ALLOCATE(size, alignment) _mm_malloc(size, alignment)
+ #define KMP_ALIGNED_FREE(ptr) _mm_free(ptr)
+-- 
+2.33.0.800.g4c38ced690-goog
+
