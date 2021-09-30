@@ -1,0 +1,49 @@
+From f0bf37bec380c975e8f74549265526fa613e2665 Mon Sep 17 00:00:00 2001
+From: Chih-Hung Hsieh <chh@google.com>
+Date: Thu, 14 Oct 2021 19:42:37 -0700
+Subject: [PATCH] Fix kmp_barrier.h undeclared KMP_INTERNAL-MALLOC error
+
+Change-Id: Ia00b06d4c578118674a04bf23b7a131779237b36
+---
+ openmp/runtime/src/kmp.h           | 5 ++++-
+ openmp/runtime/src/kmp_runtime.cpp | 1 +
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/openmp/runtime/src/kmp.h b/openmp/runtime/src/kmp.h
+index a815ee862a7e9..a696fc557588a 100644
+--- a/openmp/runtime/src/kmp.h
++++ b/openmp/runtime/src/kmp.h
+@@ -115,7 +115,6 @@ typedef unsigned int kmp_hwloc_depth_t;
+ #include "kmp_debug.h"
+ #include "kmp_lock.h"
+ #include "kmp_version.h"
+-#include "kmp_barrier.h"
+ #if USE_DEBUGGER
+ #include "kmp_debugger.h"
+ #endif
+@@ -2744,6 +2743,10 @@ typedef int (*launch_t)(int gtid);
+ #endif
+ #define KMP_INLINE_ARGV_ENTRIES (int)(KMP_INLINE_ARGV_BYTES / KMP_PTR_SKIP)
+ 
++// Forward declaration since we only need a pointer here.  Definition for this
++// class in kmp_barrier.h
++class distributedBarrier;
++
+ typedef struct KMP_ALIGN_CACHE kmp_base_team {
+   // Synchronization Data
+   // ---------------------------------------------------------------------------
+diff --git a/openmp/runtime/src/kmp_runtime.cpp b/openmp/runtime/src/kmp_runtime.cpp
+index 3bbf6e985b93c..4f50d6d16e331 100644
+--- a/openmp/runtime/src/kmp_runtime.cpp
++++ b/openmp/runtime/src/kmp_runtime.cpp
+@@ -13,6 +13,7 @@
+ #include "kmp.h"
+ #include "kmp_affinity.h"
+ #include "kmp_atomic.h"
++#include "kmp_barrier.h"
+ #include "kmp_environment.h"
+ #include "kmp_error.h"
+ #include "kmp_i18n.h"
+-- 
+2.33.0.1079.g6e70778dc9-goog
+
