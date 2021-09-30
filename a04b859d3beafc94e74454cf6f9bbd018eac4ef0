@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7830f809_de2ef40d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-09-30T03:37:30Z",
+      "side": 1,
+      "message": "go/abtd test run of the Kythe target passed.",
+      "revId": "a04b859d3beafc94e74454cf6f9bbd018eac4ef0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
