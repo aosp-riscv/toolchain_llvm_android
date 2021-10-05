@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d975bf1e_03a82925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-05T00:37:54Z",
+      "side": 1,
+      "message": "Removing reviewers, since this patch appears to still be broken.",
+      "revId": "bbc827e5df3a351f7c0a89e90de5e7401aa8a608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
