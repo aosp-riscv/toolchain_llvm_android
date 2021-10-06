@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d69cb20c_9e56d5e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-06T04:01:07Z",
+      "side": 1,
+      "message": "b/197147102 - Without this revert, bionic-compile-time-tests2-clang++ will fail to build build.  Can you try `mmma bionic/tests` without this patch?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 65
+      },
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4087731a_f8050cfa",
+        "filename": "builders.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-06T04:01:07Z",
+      "side": 1,
+      "message": "I was going to suggest an `android_version.is_llvm_next(): raise RuntimeError` here so we can remove the old setting when updating the main toolchain branch.  But it\u0027s probably unnecessary since we\u0027re going to update the main testing branch soon.  I\u0027ll leave it up to you.",
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccfc8e6b_68b1bc3b",
+        "filename": "builders.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-06T04:01:07Z",
+      "side": 1,
+      "message": "Do we need the version check here (and elsewhere in this CL)?",
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee2d21ad_68fca0b3",
+        "filename": "do_build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-06T04:01:07Z",
+      "side": 1,
+      "message": "Remove debug lines.",
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
