@@ -24,6 +24,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "703c8b43_0f087f84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-06T22:48:19Z",
+      "side": 1,
+      "message": "These are simple specializations for Android so should be easy to submit upstream.  If not, please create bugs to track submitting them upstream.",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 44
+      },
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4087731a_f8050cfa",
