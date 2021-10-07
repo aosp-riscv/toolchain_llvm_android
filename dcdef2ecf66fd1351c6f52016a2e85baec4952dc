@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4ba1dda_7eaa3802",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-07T05:02:03Z",
+      "side": 1,
+      "message": "Yes, bionic fortify_tests failed and I have to skip that module in go/aog/1844511, to test/debug other TH build/test failures. With this revert, we cannot pass many new clang upstream tests to build this next-llvm version. I\u0027m not sure if we should have this revert and mark those new upstream tests as expected fails, or no revert but find some other way to make fortify_tests work.",
+      "parentUuid": "d69cb20c_9e56d5e6",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 65
+      },
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "703c8b43_0f087f84",
         "filename": "/COMMIT_MSG",
         "patchSetId": 12
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-06T22:48:19Z",
       "side": 1,
       "message": "These are simple specializations for Android so should be easy to submit upstream.  If not, please create bugs to track submitting them upstream.",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 44
+      },
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115f685d_aca0041e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-07T05:02:03Z",
+      "side": 1,
+      "message": "Sure, will file bugs after tests.",
+      "parentUuid": "703c8b43_0f087f84",
       "range": {
         "startLine": 22,
         "startChar": 4,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "470353b5_5d421eb4",
+        "filename": "builders.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-07T05:02:03Z",
+      "side": 1,
+      "message": "Actually I don\u0027t know the reason to change the path from \u0027android\u0027 to \u0027linux\u0027.\nIf \u0027linux\u0027 works, it will be used for future versions when we remove the get_svn_revision() check, right?",
+      "parentUuid": "4087731a_f8050cfa",
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccfc8e6b_68b1bc3b",
@@ -83,6 +149,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96ac7cad_e5ececb9",
+        "filename": "builders.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-07T05:02:03Z",
+      "side": 1,
+      "message": "Maybe some of these checks are unnecessary. Before such checks were added, the current version build failed. These should be needed only before we move current version number to 437112.",
+      "parentUuid": "ccfc8e6b_68b1bc3b",
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee2d21ad_68fca0b3",
         "filename": "do_build.py",
         "patchSetId": 12
@@ -94,6 +178,24 @@
       "writtenOn": "2021-10-06T04:01:07Z",
       "side": 1,
       "message": "Remove debug lines.",
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c95c55_b311a2a1",
+        "filename": "do_build.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-07T05:02:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee2d21ad_68fca0b3",
       "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
