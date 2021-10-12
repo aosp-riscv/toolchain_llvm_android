@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e7c25c5_05674c94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-12T21:03:09Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/platform/bionic/+/1853700 is the new bionic test that was merged.  I don\u0027t think we should have disabled the fortify warnings in there.  We should revert this until b/197147102 is fixed.  If not, we\u0027re breaking Fortify checks for Android.\n\nIIUC, b/197147102 is going to be fixed in the next few weeks (but no ETA yet).  What are the tests that failed?  If it is not feasible to mark them individually XFAIL, we can consider removing `check-clang` for a short time before this is resolved.",
+      "parentUuid": "e4ba1dda_7eaa3802",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 65
+      },
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "703c8b43_0f087f84",
         "filename": "/COMMIT_MSG",
         "patchSetId": 12
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Sure, will file bugs after tests.",
       "parentUuid": "703c8b43_0f087f84",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 44
+      },
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6178c236_064b9917",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-12T21:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "115f685d_aca0041e",
       "range": {
         "startLine": 22,
         "startChar": 4,
@@ -161,6 +209,24 @@
       "side": 1,
       "message": "Maybe some of these checks are unnecessary. Before such checks were added, the current version build failed. These should be needed only before we move current version number to 437112.",
       "parentUuid": "ccfc8e6b_68b1bc3b",
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84e796a8_3b98732d",
+        "filename": "builders.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-12T21:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96ac7cad_e5ececb9",
       "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
