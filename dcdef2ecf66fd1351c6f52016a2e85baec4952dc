@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0800f74d_ab673d41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-12T21:48:37Z",
+      "side": 1,
+      "message": "This CL will be replaced by c/1849980, which will continue to revert that upstream change. The bionic files have already changed to work with c/1849980.",
+      "parentUuid": "0e7c25c5_05674c94",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 65
+      },
+      "revId": "dcdef2ecf66fd1351c6f52016a2e85baec4952dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "703c8b43_0f087f84",
