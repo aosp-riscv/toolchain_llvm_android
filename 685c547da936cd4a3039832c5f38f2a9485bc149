@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14028c13_fbb56d51",
+        "filename": "do_test_compiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-10-13T05:48:21Z",
+      "side": 1,
+      "message": "Can you use default\u003d\u0027dist\u0027 here? (Not sure how append action interacts with default)",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 61
+      },
+      "revId": "685c547da936cd4a3039832c5f38f2a9485bc149",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
