@@ -542,6 +542,13 @@ class LibOMPBuilder(base_builders.LLVMRuntimeBuilder):
         return cast(Dict[str, bool], self._config.extra_config)['is_shared']
 
     @property
+    def ldflags(self) -> List[str]:
+        libs = super().ldflags
+        if self._config.api_level < 21:
+            libs += ['-landroid_support']
+        return libs
+
+    @property
     def output_dir(self) -> Path:
         old_path = super().output_dir
         suffix = '-shared' if self.is_shared else '-static'
