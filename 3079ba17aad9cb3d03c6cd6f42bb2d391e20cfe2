@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9a4837_66faed01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-14T22:34:45Z",
+      "side": 1,
+      "message": "Switching to +1 instead because maybe we should just update to a minimum target API of 19 instead of 16.",
+      "revId": "3079ba17aad9cb3d03c6cd6f42bb2d391e20cfe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
