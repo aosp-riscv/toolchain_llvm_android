@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f82d91f_1fffad08",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-15T17:17:03Z",
+      "side": 1,
+      "message": "This is not tied to LLVM\u0027s major revision.  Since libclang\u0027s interface is supposed to be stable, its version is fixed to 13 until the next ABI-breaking change: https://github.com/llvm/llvm-project/blob/ccbfcfda1e21f95498ec9b00504b929fcc297a13/clang/tools/libclang/CMakeLists.txt#L1.\n\nThis line will fail when such a change happens, though.  But we should avoid these \"accepted\" manual interventions if we are going to increase the cadence of updates.  Currently, the install dir has:\n\u003e libclang.so            libclang.so.13         libclang.so.14.0.4git\n\nWe can search for `libclang.so.[0-9]+` to infer this version rather than hardcoding it.",
+      "parentUuid": "3a5a8e06_8bf2e5b1",
+      "range": {
+        "startLine": 210,
+        "startChar": 25,
+        "endLine": 210,
+        "endChar": 29
+      },
+      "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "828b1bdc_104463ab",
         "filename": "patches/Fix-Android-libunwind-link-error.patch",
         "patchSetId": 4
