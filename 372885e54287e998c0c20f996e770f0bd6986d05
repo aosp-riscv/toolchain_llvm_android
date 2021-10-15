@@ -61,6 +61,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c7c007e_d7551f71",
+        "filename": "patches/Fix-Android-libunwind-link-error.patch",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-15T17:06:44Z",
+      "side": 1,
+      "message": "Hmm, I didn\u0027t see the definition for API \u003c 23.  If we always have stderr available, not sure why it errors out.  What error do you get?  Are we using libunwind.a in a link step that doesn\u0027t have `-lc`?",
+      "parentUuid": "5e4e8bf2_dc04f324",
+      "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60cbe6a9_02ee3032",
         "filename": "patches/Fix-kmp_barrier.h-undeclared-KMP_INTERNAL-MALLOC-err.patch",
         "patchSetId": 4
@@ -90,6 +108,24 @@
       "side": 1,
       "message": "Yes, we still get the undefined error without this patch.\nNow even PS5 has Pirama\u0027s c/1858465, we still need this patch.",
       "parentUuid": "60cbe6a9_02ee3032",
+      "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d60c5c01_3030912c",
+        "filename": "patches/Fix-kmp_barrier.h-undeclared-KMP_INTERNAL-MALLOC-err.patch",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-15T17:06:44Z",
+      "side": 1,
+      "message": "Is it the same error as before?  In https://github.com/llvm/llvm-project/blob/ff4c98c05559e498300bd3ad55272ac2a8d10dbc/openmp/runtime/src/kmp_barrier.h#L19, I\u0027d expect `KMP_HAVE_POSIX_MEMALIGN` to be defined when we move to API level 19.",
+      "parentUuid": "3c177e39_3076bfb0",
       "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
