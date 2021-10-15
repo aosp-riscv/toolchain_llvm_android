@@ -103,6 +103,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f70bb3ee_7da2a768",
+        "filename": "patches/Fix-Android-libunwind-link-error.patch",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-15T22:52:46Z",
+      "side": 1,
+      "message": "FAILED: lib/linux/libclang_rt.ubsan_standalone-arm-android.so\nI added more info in b/203004257",
+      "parentUuid": "6c7c007e_d7551f71",
+      "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60cbe6a9_02ee3032",
         "filename": "patches/Fix-kmp_barrier.h-undeclared-KMP_INTERNAL-MALLOC-err.patch",
         "patchSetId": 4
@@ -150,6 +168,24 @@
       "side": 1,
       "message": "Is it the same error as before?  In https://github.com/llvm/llvm-project/blob/ff4c98c05559e498300bd3ad55272ac2a8d10dbc/openmp/runtime/src/kmp_barrier.h#L19, I\u0027d expect `KMP_HAVE_POSIX_MEMALIGN` to be defined when we move to API level 19.",
       "parentUuid": "3c177e39_3076bfb0",
+      "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "887afe70_eae0650f",
+        "filename": "patches/Fix-kmp_barrier.h-undeclared-KMP_INTERNAL-MALLOC-err.patch",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-15T22:52:46Z",
+      "side": 1,
+      "message": "The error was as before at line 43, not 19. My old patch at line 19 was just to simplify the macro test conditions and use malloc/free for Android.\nWithout that or Pirama\u0027s new patch, we still get the following error:\n\nIn file included from .../out/llvm-project/openmp/runtime/src/kmp_ftn_cdecl.cpp:13:\nIn file included from .../out/llvm-project/openmp/runtime/src/kmp.h:118:\n.../out/llvm-project/openmp/runtime/src/kmp_barrier.h:111:51: error: use of undeclared identifier \u0027KMP_INTERNAL_MALLOC\u0027\n    distributedBarrier *d \u003d (distributedBarrier *)KMP_ALIGNED_ALLOCATE(\n                                                  ^\n.../out/llvm-project/openmp/runtime/src/kmp_barrier.h:43:47: note: expanded from macro \u0027KMP_ALIGNED_ALLOCATE\u0027\n#define KMP_ALIGNED_ALLOCATE(size, alignment) KMP_INTERNAL_MALLOC(size)\n                                              ^\n.../out/llvm-project/openmp/runtime/src/kmp_barrier.h:131:52: error: use of undeclared identifier \u0027KMP_INTERNAL_FREE\u0027\n  static void deallocate(distributedBarrier *db) { KMP_ALIGNED_FREE(db); }\n                                                   ^\n.../out/llvm-project/openmp/runtime/src/kmp_barrier.h:44:31: note: expanded from macro \u0027KMP_ALIGNED_FREE\u0027\n#define KMP_ALIGNED_FREE(ptr) KMP_INTERNAL_FREE(ptr)\n                              ^\n2 errors generated.",
+      "parentUuid": "d60c5c01_3030912c",
       "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
