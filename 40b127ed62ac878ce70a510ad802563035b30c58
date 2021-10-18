@@ -22,6 +22,30 @@
       },
       "revId": "40b127ed62ac878ce70a510ad802563035b30c58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37a3917_1c2dd409",
+        "filename": "builders.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-18T22:41:16Z",
+      "side": 1,
+      "message": "ok, will pick up c/1861271 when it is merged.",
+      "parentUuid": "bbfceb97_8738b722",
+      "range": {
+        "startLine": 187,
+        "startChar": 1,
+        "endLine": 188,
+        "endChar": 49
+      },
+      "revId": "40b127ed62ac878ce70a510ad802563035b30c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
