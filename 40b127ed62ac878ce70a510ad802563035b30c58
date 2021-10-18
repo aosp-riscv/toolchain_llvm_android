@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbfceb97_8738b722",
+        "filename": "builders.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-18T20:48:18Z",
+      "side": 1,
+      "message": "I think we should submit the openmp changes as a separate change.\n\n\nThat said, we need bit more cleanup.  These CMake variables can be deleted now.  We also want to install openmp headers omp.h and omp-tools.h to lib64/clang/13.0.4/include.  I was writing a separate change but something like the following should work:\n\n```\n@@ -563,6 +561,11 @@ class LibOMPBuilder(base_builders.LLVMRuntimeBuilder):\n         dst_dir.mkdir(parents\u003dTrue, exist_ok\u003dTrue)\n         shutil.copy2(src_lib, dst_dir / libname)\n \n+        # install omp.h, omp-tools.h (it\u0027s enough to do for just one config).\n+        if self._config.target_arch \u003d\u003d hosts.Arch.AARCH64:\n+            for header in [\u0027omp.h\u0027, \u0027omp-tools.h\u0027]:\n+                shutil.copy2(self.output_dir / \u0027runtime\u0027 / \u0027src\u0027 / header,\n+                             self.output_toolchain.clang_builtin_header_dir)\n+\n\n \n class LibNcursesBuilder(base_builders.AutoconfBuilder, base_builders.LibInfo):\n     name: str \u003d \u0027libncurses\u0027\ndiff --git a/toolchains.py b/toolchains.py\nindex 1595e12..8716d7b 100644\n--- a/toolchains.py\n+++ b/toolchains.py\n@@ -132,6 +132,10 @@ class Toolchain:\n     def clang_lib_dir(self) -\u003e Path:\n         return self.lib_dir / \u0027clang\u0027 / self.version.long_version()\n \n+    @property\n+    def clang_builtin_header_dir(self) -\u003e Path:\n+        return self.lib_dir / \u0027include\u0027\n+\n```",
+      "range": {
+        "startLine": 187,
+        "startChar": 1,
+        "endLine": 188,
+        "endChar": 49
+      },
+      "revId": "40b127ed62ac878ce70a510ad802563035b30c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
