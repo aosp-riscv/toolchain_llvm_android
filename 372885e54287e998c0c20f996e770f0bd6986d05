@@ -119,6 +119,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c984b1d3_44b310e7",
+        "filename": "patches/Fix-Android-libunwind-link-error.patch",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-18T20:29:35Z",
+      "side": 1,
+      "message": "Replaced this patch with Pirama\u0027s new changes.",
+      "parentUuid": "f70bb3ee_7da2a768",
+      "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60cbe6a9_02ee3032",
