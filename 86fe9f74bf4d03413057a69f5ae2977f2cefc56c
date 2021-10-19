@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba3108bd_86be491e",
+        "filename": "builders.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-19T17:19:57Z",
+      "side": 1,
+      "message": "Hmm, the include dir should already exist.  If it\u0027s absent, then the directory is wrong.  Checking at https://source.corp.google.com/android/toolchain/llvm_android/toolchains.py;l\u003d136?q\u003dclang_builtin_header_dir\u0026ct\u003dos\u0026sq\u003dpackage:%5Eandroid$, it should actually be: `return self.clang_lib_dir / \u0027include\u0027`.",
+      "range": {
+        "startLine": 568,
+        "startChar": 0,
+        "endLine": 568,
+        "endChar": 57
+      },
+      "revId": "86fe9f74bf4d03413057a69f5ae2977f2cefc56c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
