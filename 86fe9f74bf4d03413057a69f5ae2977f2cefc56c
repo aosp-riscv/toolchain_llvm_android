@@ -46,6 +46,30 @@
       },
       "revId": "86fe9f74bf4d03413057a69f5ae2977f2cefc56c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16f8b5af_5332d8d1",
+        "filename": "builders.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-19T17:59:26Z",
+      "side": 1,
+      "message": "We should put it in the same place as before.  The following should fix it in toolchains.py:\n\n    @property\n    def clang_builtin_header_dir(self) -\u003e Path:\n        return self.clang_lib_dir / \u0027include\u0027",
+      "parentUuid": "5757174d_eaf37863",
+      "range": {
+        "startLine": 568,
+        "startChar": 0,
+        "endLine": 568,
+        "endChar": 57
+      },
+      "revId": "86fe9f74bf4d03413057a69f5ae2977f2cefc56c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
