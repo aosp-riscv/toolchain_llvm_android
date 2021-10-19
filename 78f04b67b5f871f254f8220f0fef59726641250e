@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8423f566_ca312ec5",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-19T07:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f39a7842_f90e168a",
+      "revId": "78f04b67b5f871f254f8220f0fef59726641250e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "101c76e5_b6306177",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-10-19T04:03:35Z",
       "side": 1,
       "message": "The Windows build has:\n\u003e -DLIBCXXABI_TARGET_TRIPLE\u003d\u003cbound method Config.llvm_triple of \u003cconfigs.MinGWConfig object at 0x7f8d2d57ef10\u003e\u003e\n\nTo fix this, add @property decorator here, like in the overridden function.",
+      "revId": "78f04b67b5f871f254f8220f0fef59726641250e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "147bac58_d9e91951",
+        "filename": "configs.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-19T07:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "101c76e5_b6306177",
       "revId": "78f04b67b5f871f254f8220f0fef59726641250e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
