@@ -22,6 +22,30 @@
       },
       "revId": "86fe9f74bf4d03413057a69f5ae2977f2cefc56c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5757174d_eaf37863",
+        "filename": "builders.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-10-19T17:46:44Z",
+      "side": 1,
+      "message": "The directory is now lib64/include but the previous releases used lib64/clang/13.0.3/include. Was it intentional of the new release to put in the new place or an error in self.clang_lib_dir?",
+      "parentUuid": "ba3108bd_86be491e",
+      "range": {
+        "startLine": 568,
+        "startChar": 0,
+        "endLine": 568,
+        "endChar": 57
+      },
+      "revId": "86fe9f74bf4d03413057a69f5ae2977f2cefc56c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
