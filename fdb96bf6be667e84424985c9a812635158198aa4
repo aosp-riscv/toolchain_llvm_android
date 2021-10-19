@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c597c38_ad1b7a17",
+        "filename": "do_build.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-19T22:13:46Z",
+      "side": 1,
+      "message": "This function, and this check in particular, has become crufty.   I\u0027ll clean this up after the update.",
+      "revId": "fdb96bf6be667e84424985c9a812635158198aa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
