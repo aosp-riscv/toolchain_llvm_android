@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe723c4_968f7263",
+        "filename": "do_build.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-19T19:09:44Z",
+      "side": 1,
+      "message": "Let\u0027s defer this to a follow-up change.",
+      "parentUuid": "9f82d91f_1fffad08",
+      "range": {
+        "startLine": 210,
+        "startChar": 25,
+        "endLine": 210,
+        "endChar": 29
+      },
+      "revId": "372885e54287e998c0c20f996e770f0bd6986d05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "828b1bdc_104463ab",
