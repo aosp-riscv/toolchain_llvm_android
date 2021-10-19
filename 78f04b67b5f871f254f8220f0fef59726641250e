@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4b3997a_dfba33d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-19T04:03:35Z",
+      "side": 1,
+      "message": "Thanks for working through the issues here.  I think we\u0027re very close to merging this.",
+      "revId": "78f04b67b5f871f254f8220f0fef59726641250e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f39a7842_f90e168a",
+        "filename": "builders.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-19T04:03:35Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need this now.",
+      "revId": "78f04b67b5f871f254f8220f0fef59726641250e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "101c76e5_b6306177",
+        "filename": "configs.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-19T04:03:35Z",
+      "side": 1,
+      "message": "The Windows build has:\n\u003e -DLIBCXXABI_TARGET_TRIPLE\u003d\u003cbound method Config.llvm_triple of \u003cconfigs.MinGWConfig object at 0x7f8d2d57ef10\u003e\u003e\n\nTo fix this, add @property decorator here, like in the overridden function.",
+      "revId": "78f04b67b5f871f254f8220f0fef59726641250e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8bf6eb0_269eb472",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-19T04:03:35Z",
+      "side": 1,
+      "message": "Did we move all the XFAIL tests into the above patch?  Are all of them related to b/197147102?",
+      "range": {
+        "startLine": 159,
+        "startChar": 23,
+        "endLine": 159,
+        "endChar": 29
+      },
+      "revId": "78f04b67b5f871f254f8220f0fef59726641250e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
