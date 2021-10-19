@@ -16,6 +16,24 @@
       "message": "Pirama,this change seems to cause new missing omp.h file:\nexternal/ComputeLibrary/src/runtime/OMP/OMPScheduler.cpp:31:10: fatal error: \u0027omp.h\u0027 file not found\n#include \u003comp.h\u003e\n\nShould we revert this or fix external/ComputeLibrary?\n",
       "revId": "34a137c8d1ac1a73b509fbf6224b8b447aa28693",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d61916_00f454fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-19T06:18:03Z",
+      "side": 1,
+      "message": "This CL updates builders.py:564 to copy omp.h to the installed toolchain.  I must have missed something there - can you debug why omp.h is not installed at that line?",
+      "parentUuid": "e63e3d30_8544703c",
+      "revId": "34a137c8d1ac1a73b509fbf6224b8b447aa28693",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
