@@ -68,14 +68,6 @@ class Toolchain:
         return self.path / 'bin' / 'lld-link'
 
     @property
-    def rc(self) -> Path:
-        """
-        Returns the path to MinGW windres.
-        llvm-rc is not feature complete yet.
-        """
-        return paths.MINGW_ROOT / 'bin' / 'x86_64-w64-mingw32-windres'
-
-    @property
     def ranlib(self) -> Path:
         """Returns the path to llvm-ranlib."""
         return self.path / 'bin' / 'llvm-ranlib'
@@ -114,6 +106,11 @@ class Toolchain:
     def strip(self) -> Path:
         """Returns the path to llvm-strip."""
         return self.path / 'bin' / 'llvm-strip'
+
+    @property
+    def windres(self) -> Path:
+        """Returns the path to llvm-windres."""
+        return self.path / 'bin' / 'llvm-windres'
 
     @property
     def lib_dir(self) -> Path:
