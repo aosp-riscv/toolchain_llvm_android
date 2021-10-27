@@ -61,6 +61,7 @@ def parse_start_version(start_version: str) -> int:
 class PatchItem:
     comment: str
     rel_patch_path: str
+    bugs_tests: Optional[List(str)]
     start_version: int
     end_version: Optional[int]
 
@@ -69,8 +70,9 @@ class PatchItem:
         return PatchItem(
             comment=d['comment'],
             rel_patch_path=d['rel_patch_path'],
+            bugs_tests=d['bugs_tests'],
             start_version=d['start_version'],
-            end_version=d['end_version'])
+            end_version= d['end_version'])
 
     def to_dict(self) -> Dict[str, Any]:
         return dataclasses.asdict(self, dict_factory=collections.OrderedDict)
@@ -134,7 +136,8 @@ def generate_patch_files(sha_list: List[str], start_version: int) -> PatchList:
         comment = '[UPSTREAM] ' + commit_subject.strip()
         rel_patch_path = f'cherry/{sha}.patch'
         end_version = sha_to_revision(sha)
-        result.append(PatchItem(comment, rel_patch_path, start_version, end_version))
+        bugs_tests = None
+        result.append(PatchItem(comment, rel_patch_path, bugs_tests, start_version, end_version))
     return result
 
 
