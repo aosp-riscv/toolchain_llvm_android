@@ -70,6 +70,24 @@
       "parentUuid": "a9d6ef99_4d12af84",
       "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95c321b6_c46489d6",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-27T23:08:49Z",
+      "side": 1,
+      "message": "@manojgupta/@gbiv: Any thoughts about renaming the existing `comment` field? I can put this on the meeting agenda for our next cross-team meeting too.",
+      "parentUuid": "74559abf_26625b61",
+      "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
