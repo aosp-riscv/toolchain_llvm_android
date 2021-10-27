@@ -78,6 +78,30 @@
         "end_version": 436438
     },
     {
+        "comment": "[UPSTREAM] Add missing `REQUIRES: asserts` to combine-icmp-to-lhs-known-bits.mir",
+        "rel_patch_path": "cherry/bd22a99c57b472774a8addcaeef503540abe7b57.patch",
+        "start_version": 437112,
+        "end_version": 437145
+    },
+    {
+        "comment": "[UPSTREAM] Revert [Coroutines] [Clang] Look up coroutine component in std namespace first",
+        "rel_patch_path": "cherry/79f8b5f0d00fd10fee8aee3c3c58e17a8fea8946.patch",
+        "start_version": 437112,
+        "end_version": 437168
+    },
+    {
+        "comment": "[UPSTREAM] [OpenMP][libomptarget] Change device vector elements to unique_ptr type",
+        "rel_patch_path": "cherry/c3aecf87d5b97c3d3580457164e7fe4a19c4221a.patch",
+        "start_version": 437112,
+        "end_version": 437297
+    },
+    {
+        "comment": "[UPSTREAM] [MergeICmps] Don't reorder unmerged comparisons",
+        "rel_patch_path": "cherry/f2fa6ad0476b318fdba46f09a2d59187228431ee.patch",
+        "start_version": 437112,
+        "end_version": 438499
+    },
+    {
         "comment": "[UPSTREAM] Don't fold (select C, (gep Ptr, Idx), Ptr) if C is vector but Idx is scalar",
         "rel_patch_path": "cherry/d0746f2e9bbf08f52196ae12f25d0ef7edcbbe4c.patch",
         "start_version": 433403,
@@ -96,30 +120,10 @@
         "end_version": 440947
     },
     {
-        "comment": "[UPSTREAM] [OpenMP][libomptarget] Change device vector elements to unique_ptr type",
-        "rel_patch_path": "cherry/c3aecf87d5b97c3d3580457164e7fe4a19c4221a.patch",
+        "comment": "[UPSTREAM] [LowerTypeTests] Emit cfi_jt aliases regardless of function export",
+        "rel_patch_path": "cherry/3ccd041af920125595a992becd0e1e4083ce562b.patch",
         "start_version": 437112,
-        "end_version": 437297
-    },
-    {
-        "comment": "[UPSTREAM] Revert [Coroutines] [Clang] Look up coroutine component in std namespace first",
-        "rel_patch_path": "cherry/79f8b5f0d00fd10fee8aee3c3c58e17a8fea8946.patch",
-        "start_version": 437112,
-        "end_version": 437168
-    },
-    {
-        "comment": "[UPSTREAM] Add missing `REQUIRES: asserts` to combine-icmp-to-lhs-known-bits.mir",
-        "rel_patch_path": "cherry/bd22a99c57b472774a8addcaeef503540abe7b57.patch",
-        "bugs_tests": ["check-llvm, combine-icmp-to-lhs-known-bits.mir"],
-        "start_version": 437112,
-        "end_version": 437145
-    },
-    {
-        "comment": "[UPSTREAM] [MergeICmps] Don't reorder unmerged comparisons",
-        "rel_patch_path": "cherry/f2fa6ad0476b318fdba46f09a2d59187228431ee.patch",
-        "bugs_tests": ["idmap2_tests, SIGSEGV in idmap2/libidmap2/XmlParser.cpp"],
-        "start_version": 437112,
-        "end_version": 438499
+        "end_version": 441985
     },
     {
         "comment": "Revert two changes that break Android builds.",
@@ -148,7 +152,6 @@
     {
         "comment": "Revert \"[Sema] Introduce BuiltinAttr, per-declaration builtin-ness\"",
         "rel_patch_path": "Revert-Sema-Introduce-BuiltinAttr-per-declaration-bu.v4.patch",
-        "bugs_tests": ["b/197147102, bionic/tests/clang_fortify_tests.cpp"],
         "start_version": 437112,
         "end_version": null
     },
