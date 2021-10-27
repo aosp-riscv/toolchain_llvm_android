@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbdd6d52_8f3180f8",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-27T22:40:21Z",
+      "side": 1,
+      "message": "Do we have to accept `null` here or could these be omitted? I\u0027m not that skilled at json parsing to know if we could just make this optional somehow. This is also where my CL doing something similar got stuck, as I was trying to ensure that my change was a nop to the `PATCHES.json` file.",
+      "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
