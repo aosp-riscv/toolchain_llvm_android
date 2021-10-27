@@ -52,6 +52,24 @@
       "parentUuid": "af7de9b0_3c834a91",
       "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74559abf_26625b61",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-27T23:04:50Z",
+      "side": 1,
+      "message": "As I think more about it, is there a better name for this field?  Sadly, \u0027comment\u0027 is already in use (and is shared with ChromeOS scripts as well), but `comment` should really be `title` or `subject`.\n\nDoes `notes` or `related_info` sound better?\n\n(If we do this, we can do it as a follow up, esp. after aosp/1871921 is merged.",
+      "parentUuid": "a9d6ef99_4d12af84",
+      "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
