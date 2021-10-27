@@ -16,6 +16,23 @@
       "message": "done, but not sure I inserted in the right order in a way that won\u0027t cause issues in the future.",
       "revId": "df62baf19708498ef46694cc6cb95632fbd561a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4603230a_4075075d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-27T19:40:08Z",
+      "side": 1,
+      "message": "You got it in the right spot. Thanks for hand-merging the rest of the patch to ensure we don\u0027t get a lot of churn here.",
+      "revId": "df62baf19708498ef46694cc6cb95632fbd561a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
