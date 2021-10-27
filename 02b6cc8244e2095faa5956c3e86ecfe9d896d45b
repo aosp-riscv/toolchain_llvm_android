@@ -88,6 +88,24 @@
       "parentUuid": "74559abf_26625b61",
       "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "403f473f_b9498dad",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1130573
+      },
+      "writtenOn": "2021-10-27T23:18:55Z",
+      "side": 1,
+      "message": "comment is just a string field. In theory, we can just append the bug information to it via a command line option rather than creating a new string field?\n\nDiscussing in meeting sgtm.",
+      "parentUuid": "95c321b6_c46489d6",
+      "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
