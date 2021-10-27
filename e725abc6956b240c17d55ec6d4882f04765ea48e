@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8738d6a_edb913e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-27T19:24:16Z",
+      "side": 1,
+      "message": "Use `--reason` flag or update commit message to:\n\n\"Cherry pick CLs for: \u003creason\u003e\".\n\nI\u0027ll update the script to mark this flag as required.",
+      "range": {
+        "startLine": 7,
+        "startChar": 31,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "e725abc6956b240c17d55ec6d4882f04765ea48e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f8a57fe4_721e7cee",
@@ -14,6 +37,24 @@
       "writtenOn": "2021-10-27T19:21:41Z",
       "side": 1,
       "message": "Not sure why cherrypick_cl.py created such a large diff...",
+      "revId": "e725abc6956b240c17d55ec6d4882f04765ea48e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f011f8a_273ac640",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-27T19:24:16Z",
+      "side": 1,
+      "message": "Looks like cherrypick_cl.py re-orders the patches, which should be ok.\n\nBut it does not retain the `bug_tests` list that  chh@ added to track test failures caused by these cherry picks.  PatchItem in cherrypick_cl.py needs to be updated to pass this field through.\n\nCan you either fix the script or manually add your patch this once?",
+      "parentUuid": "f8a57fe4_721e7cee",
       "revId": "e725abc6956b240c17d55ec6d4882f04765ea48e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
