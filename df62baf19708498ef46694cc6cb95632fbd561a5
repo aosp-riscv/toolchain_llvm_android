@@ -33,6 +33,23 @@
       "message": "You got it in the right spot. Thanks for hand-merging the rest of the patch to ensure we don\u0027t get a lot of churn here.",
       "revId": "df62baf19708498ef46694cc6cb95632fbd561a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b67bcf_371af648",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-10-27T22:47:01Z",
+      "side": 1,
+      "message": "I\u0027m going to rebase this on top of aosp/1872664, so that we can be confident this wont get re-sorted correctly if the hand placement was incorrect, which would be needless churn.",
+      "revId": "df62baf19708498ef46694cc6cb95632fbd561a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
