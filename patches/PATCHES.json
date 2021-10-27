@@ -122,6 +122,12 @@
         "end_version": 438499
     },
     {
+        "comment": "[UPSTREAM] [LowerTypeTests] Emit cfi_jt aliases regardless of function export",
+        "rel_patch_path": "cherry/3ccd041af920125595a992becd0e1e4083ce562b.patch",
+        "start_version": 437112,
+        "end_version": 441985
+    },
+    {
         "comment": "Revert two changes that break Android builds.",
         "rel_patch_path": "Revert-two-changes-that-break-Android-builds.v6.patch",
         "start_version": 428724,
