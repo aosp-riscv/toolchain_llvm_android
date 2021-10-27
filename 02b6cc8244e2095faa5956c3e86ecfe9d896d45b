@@ -34,6 +34,24 @@
       "parentUuid": "dbdd6d52_8f3180f8",
       "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d6ef99_4d12af84",
+        "filename": "patches/PATCHES.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-27T22:48:54Z",
+      "side": 1,
+      "message": "That\u0027s fine with me. I guess that being more explicit here also makes it more likely that someone will use this field (which is a helpful thing, tbh).",
+      "parentUuid": "af7de9b0_3c834a91",
+      "revId": "02b6cc8244e2095faa5956c3e86ecfe9d896d45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
