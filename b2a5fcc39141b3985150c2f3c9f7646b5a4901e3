@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8abe3f39_7578ad5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-10-28T00:37:43Z",
+      "side": 1,
+      "message": "Thanks for updating these configs Chih-hung!",
+      "revId": "b2a5fcc39141b3985150c2f3c9f7646b5a4901e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
