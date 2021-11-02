@@ -188,6 +188,15 @@
         "end_version": null
     },
     {
+        "comment": "Revert [SimpifyCFG] Speculate a store preceded by a local non-escaping load",
+        "rel_patch_path": "Revert-SimpifyCFG-Speculate-a-store-preceded-by-a-lo.patch",
+        "bugs_tests": [
+            "b/204131517, system/netd/bpf_progs/netd.c -O2"
+        ],
+        "start_version": 437112,
+        "end_version": null
+    },
+    {
         "comment": "Mark XFAIL tests",
         "rel_patch_path": "Mark-XFAIL-tests.patch",
         "bugs_tests": null,
