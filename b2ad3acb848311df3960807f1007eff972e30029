@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6521101_89b624f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2021-11-03T02:39:36Z",
+      "side": 1,
+      "message": "A local built clang-14 with this change was tested in c/1874376, which passed the T\nH tests.\n",
+      "revId": "b2ad3acb848311df3960807f1007eff972e30029",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
