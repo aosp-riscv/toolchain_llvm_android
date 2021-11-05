@@ -835,6 +835,8 @@ class SysrootsBuilder(base_builders.Builder):
             platform_stubs = paths.OUT_DIR / 'platform_stubs' / arch.ndk_arch
             platform_stubs.mkdir(parents=True, exist_ok=True)
             libdir = sysroot / 'usr' / ('lib64' if arch == hosts.Arch.X86_64 else 'lib')
+            relax = '-mno-relax' if arch == hosts.Arch.RISCV64 else '-mrelax'
+
             libdir.mkdir(parents=True, exist_ok=True)
             with (platform_stubs / 'libc++.c').open('w') as f:
                 f.write(textwrap.dedent("""\
@@ -849,8 +851,8 @@ class SysrootsBuilder(base_builders.Builder):
                 """))
 
             utils.check_call([self.toolchain.cc,
-                              f'--target={arch.llvm_triple}',
-                              '-fuse-ld=lld', '-nostdlib', '-shared',
+                              f'--target={config.llvm_triple}',
+                              '-fuse-ld=lld', relax, '-nostdlib', '-shared',
                               '-Wl,-soname,libc++.so',
                               '-o{}'.format(libdir / 'libc++.so'),
                               str(platform_stubs / 'libc++.c')])
