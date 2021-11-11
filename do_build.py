@@ -131,7 +131,10 @@ def build_runtimes(build_lldb_server: bool):
     # Bug: http://b/64037266. `strtod_l` is missing in NDK r15. This will break
     # libcxx build.
     # build_libcxx(toolchain, version)
-    builders.AsanMapFileBuilder().build()
+
+    # Because of the address sanitizer is not supportted in llvm riscv target.
+    # asan static library is not existed
+    # builders.AsanMapFileBuilder().build()
 
 
 def install_wrappers(llvm_install_path: Path, llvm_next=False) -> None:
