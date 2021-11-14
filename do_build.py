@@ -132,9 +132,7 @@ def build_runtimes(build_lldb_server: bool):
     # libcxx build.
     # build_libcxx(toolchain, version)
 
-    # Because of the address sanitizer is not supportted in llvm riscv target.
-    # asan static library is not existed
-    # builders.AsanMapFileBuilder().build()
+    builders.AsanMapFileBuilder().build()
 
 
 def install_wrappers(llvm_install_path: Path, llvm_next=False) -> None:
