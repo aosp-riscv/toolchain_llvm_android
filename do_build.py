@@ -127,10 +127,10 @@ def build_runtimes(build_lldb_server: bool):
         builders.CompilerRTHostI386Builder().build()
     # Current libc.so is built with API level > 21. And to build libomp for non platform,
     # the API level is > 21. So here don't build openmp to avoid building fail
-    # builders.LibOMPBuilder().build()
+    builders.LibOMPBuilder().build()
     if build_lldb_server:
         builders.LldbServerBuilder().build()
-    # Bug: http://b/64037266. `strtod_l` is missing in NDK r15. This will break
+    # Bug: http://b/64037266. `strtod_l` is missing in NDK r15. This will brea
     # libcxx build.
     # build_libcxx(toolchain, version)
 
