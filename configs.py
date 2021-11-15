@@ -291,7 +291,7 @@ class AndroidConfig(_BaseConfig):
         cflags.append('-ffunction-sections')
         cflags.append('-fdata-sections')
         if self.ndk_arch == 'riscv64':
-            cflags.append('mno-relax')
+            cflags.append('-mno-relax')
         return cflags
 
     @property
