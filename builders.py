@@ -373,20 +373,22 @@ class CompilerRTBuilder(base_builders.LLVMRuntimeBuilder):
         # Still run `ninja install`.
         super().install_config()
 
-        # Install the fuzzer library to the old {arch}/libFuzzer.a path for
-        # backwards compatibility.
-        arch = self._config.target_arch
-        sarch = 'i686' if arch == hosts.Arch.I386 else arch.value
-        static_lib_filename = 'libclang_rt.fuzzer-' + sarch + '-android.a'
+        # llvm libfuzzer not support riscv64
+        if self._config.ndk_arch != 'riscv64':
+            # Install the fuzzer library to the old {arch}/libFuzzer.a path for
+            # backwards compatibility.
+            arch = self._config.target_arch
+            sarch = 'i686' if arch == hosts.Arch.I386 else arch.value
+            static_lib_filename = 'libclang_rt.fuzzer-' + sarch + '-android.a'
 
-        lib_dir = self.install_dir / 'lib' / 'linux'
-        arch_dir = lib_dir / arch.value
-        arch_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(lib_dir / static_lib_filename, arch_dir / 'libFuzzer.a')
+            lib_dir = self.install_dir / 'lib' / 'linux'
+            arch_dir = lib_dir / arch.value
+            arch_dir.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(lib_dir / static_lib_filename, arch_dir / 'libFuzzer.a')
 
-        if not self._config.platform:
-            dst_dir = self.output_toolchain.path / 'runtimes_ndk_cxx'
-            shutil.copytree(lib_dir, dst_dir, dirs_exist_ok=True)
+            if not self._config.platform:
+                dst_dir = self.output_toolchain.path / 'runtimes_ndk_cxx'
+                shutil.copytree(lib_dir, dst_dir, dirs_exist_ok=True)
 
     def install(self) -> None:
         # Install libfuzzer headers once for all configs.
