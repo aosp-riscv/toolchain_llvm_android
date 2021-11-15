@@ -328,6 +328,8 @@ class AndroidConfig(_BaseConfig):
         cflags.append(f'-B{toolchain_bin}')
         cflags.append('-ffunction-sections')
         cflags.append('-fdata-sections')
+        if self.ndk_arch == 'riscv64':
+            cflags.append('mno-relax')
         return cflags
 
     @property
@@ -348,6 +350,8 @@ class AndroidConfig(_BaseConfig):
     @property
     def cxxflags(self) -> List[str]:
         cxxflags = super().cxxflags
+        if self.ndk_arch == 'riscv64':
+            cxxflags.append('-mno-relax')
         if self.platform:
             # For the NDK, the sysroot has the C++ headers, but for the
             # platform, we need to add the headers manually.
