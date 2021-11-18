@@ -853,7 +853,7 @@ class SysrootsBuilder(base_builders.Builder):
                 """))
 
             utils.check_call([self.toolchain.cc,
-                              f'--target={config.llvm_triple}',
+                              f'--target={arch.llvm_triple}',
                               '-fuse-ld=lld', relax, '-nostdlib', '-shared',
                               '-Wl,-soname,libc++.so',
                               '-o{}'.format(libdir / 'libc++.so'),
