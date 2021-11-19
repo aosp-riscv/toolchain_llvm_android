@@ -365,7 +365,7 @@ class CompilerRTBuilder(base_builders.LLVMRuntimeBuilder):
         super().install_config()
 
         # llvm libfuzzer not support riscv64
-        if self._config.ndk_arch != 'riscv64':
+        if self._config.target_arch != hosts.Arch.RISCV64:
             # Install the fuzzer library to the old {arch}/libFuzzer.a path for
             # backwards compatibility.
             arch = self._config.target_arch
