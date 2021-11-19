@@ -395,6 +395,7 @@ class AndroidRISCV64Config(AndroidConfig):
     """Configs for android riscv64 targets."""
     target_arch: hosts.Arch = hosts.Arch.RISCV64
     _toolchain_path: Path = Path('x86/x86_64-linux-android-4.9/x86_64-linux-android')
+    _toolchain_lib: Path = (paths.NDK_BASE / 'toolchains')
 
 
 def _get_default_host_config() -> Config:
